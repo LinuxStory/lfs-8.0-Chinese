@@ -8,7 +8,6 @@ lfs 8.0 中文版
 ## 原著及早期翻译作品
 ### 原著
 - 原著链接：http://www.linuxfromscratch.org/lfs/view/8.0/
-- lfs 7.7：
 - 原作：Gerard Beekmans 
 - 原著版本：Revision 8.0, 28 February 2017
 
@@ -18,40 +17,46 @@ lfs 8.0 中文版
 - 译著版本：Revision 7.7 systemd, 2015
 - 最新 Revision 8.0 由 Linux Story 社区发起并组织翻译，成员包括：闻其详、陈毅钊、
 - Linux Story 通告地址 ：https://linuxstory.org/linux-from-scratch-8-0-released/
+- 本项目的经验及组织过程资产将保存在 https://pm.linuxstory.org
 - 预发布地址：http://linuxstory.org/lfs/LFS-BOOK-8.0/
 
-You can use the [editor on GitHub](https://github.com/LinuxStory/lfs-8.0-Chinese/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## 翻译作品
+翻译作品放在[GitBook](https://www.gitbook.com/book/linuxstory/advanced-bash-scripting-guide-in-chinese/details)上，欢迎阅读！
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 翻译校审流程
+### 初始化
+1. 首先fork项目
+2. 把fork过去的项目clone到本地
+3. 命令行下运行 `git checkout -b dev` 创建一个新分支
+4. 运行 `git remote add upstream https://github.com/LinuxStory/Advanced-Bash-Scripting-Guide-in-Chinese.git` 添加远端库
+5. 运行 `git remote update`更新
+6. 运行 `git fetch upstream master` 拉取更新到本地
+7. 运行 `git rebase upstream/master` 将更新合并到你的分支
 
-### Markdown
+初始化只需要做一遍，之后请在dev分支进行修改。
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+如果修改过程中项目有更新，请重复5、6、7步。
 
-```markdown
-Syntax highlighted code block
+### 翻译校审流程
+1. 保证在dev分支中
+2. 打开README.md，在翻译进度后加上你自己的github名
+	> 1\. Shell Programming! [@翻译人][@校审人]
+3. 本地提交修改，写明提交信息
+4. push到你fork的项目中，然后登录GitHub
+5. 在你fork的项目的首页可以看到一个 `pull request` 按钮，点击它，填写说明信息，然后提交即可
+	> 为了不重复工作，请等待我们确认了你的pull request(即你的名字出现在项目中时)，再进行翻译校审工作
+6. 进行翻译校审，重复3-5步提交翻译校审的作品
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+> 新手可以参阅针对github小白的[《翻译流程详解》](https://github.com/LinuxStory/Advanced-Bash-Scripting-Guide-in-Chinese/wiki/%E7%BF%BB%E8%AF%91%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3),妹子写的呦～
 
-1. Numbered
-2. List
+## 翻译校审建议
+1. 使用markdown进行翻译校审，文件名必须使用英文，单词之间请使用短横线“-”做连字符
+2. 翻译校审后的文档请放到source文件夹下的对应章节中，然后pull request即可
+3. 有任何问题欢迎随时发issue，并请参与翻译的同学保持邮箱畅通，每天最少检查一次邮件
+4. 术语尽量保证和已翻译的一致，也可以查询[微软术语搜索](http://www.microsoft.com/Language/zh-cn/Search.aspx)
+5.[Linux中国术语词典](https://github.com/LCTT/TranslateProject/blob/master/Dict.md)
+6. 你可以将你认为是术语的词汇加入术语表`TERM.md`中
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/LinuxStory/lfs-8.0-Chinese/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## 关于版权
+根据原著作者的要求，翻译成果属于公有领域(CC0)，翻译参与人员及原著作者享有署名权
