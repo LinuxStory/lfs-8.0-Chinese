@@ -20,8 +20,11 @@ lfs 8.0 中文版
 - 本项目的经验及组织过程资产将保存在 https://pm.linuxstory.org
 - 预发布地址：http://linuxstory.org/lfs/LFS-BOOK-8.0/
 
+### 项目计划
+
+
 ## 翻译作品
-翻译作品放在[GitBook](https://www.gitbook.com/book/linuxstory/advanced-bash-scripting-guide-in-chinese/details)上，欢迎阅读！
+翻译作品放在[GitBook](https://www.gitbook.com/book/linuxstory/linux-from-scratch-8-0-book/)上，欢迎阅读！
 
 ## 翻译校审流程
 ### 初始化
@@ -55,8 +58,7 @@ lfs 8.0 中文版
 2. 翻译校审后的文档请放到source文件夹下的对应章节中，然后pull request即可
 3. 有任何问题欢迎随时发issue，并请参与翻译的同学保持邮箱畅通，每天最少检查一次邮件
 4. 术语尽量保证和已翻译的一致，也可以查询[微软术语搜索](http://www.microsoft.com/Language/zh-cn/Search.aspx)
-5.[Linux中国术语词典](https://github.com/LCTT/TranslateProject/blob/master/Dict.md)
-6. 你可以将你认为是术语的词汇加入术语表`TERM.md`中
+5. 请将翻译过程中用到的术语保存到[Linux Story术语词典](https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md)
 
 ## 关于版权
-根据原著作者的要求，翻译成果属于公有领域(CC0)，翻译参与人员及原著作者享有署名权
+根据原著作者的要求，翻译成果属于公有领域(CC0)，翻译参与人员及原著作者享有署名权，署名顺序将按加入项目的顺序排列。
