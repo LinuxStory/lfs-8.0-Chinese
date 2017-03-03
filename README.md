@@ -31,7 +31,7 @@ lfs 8.0 中文版
 1. 首先fork项目
 2. 把fork过去的项目clone到本地
 3. 命令行下运行 `git checkout -b dev` 创建一个新分支
-4. 运行 `git remote add upstream https://github.com/LinuxStory/Advanced-Bash-Scripting-Guide-in-Chinese.git` 添加远端库
+4. 运行 `git remote add upstream https://github.com/LinuxStory/lfs-8.0-Chinese.git` 添加远端库
 5. 运行 `git remote update`更新
 6. 运行 `git fetch upstream master` 拉取更新到本地
 7. 运行 `git rebase upstream/master` 将更新合并到你的分支
@@ -43,7 +43,7 @@ lfs 8.0 中文版
 ### 翻译校审流程
 1. 保证在dev分支中
 2. 打开README.md，在翻译进度后加上你自己的github名
-	> 1\. Shell Programming! [@翻译人][@校审人]
+	> 1\. 序言! [@翻译人][@校审人]
 3. 本地提交修改，写明提交信息
 4. push到你fork的项目中，然后登录GitHub
 5. 在你fork的项目的首页可以看到一个 `pull request` 按钮，点击它，填写说明信息，然后提交即可
