@@ -35,7 +35,8 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 ### 翻译标准化
 1. 可参考  CLReq https://www.w3.org/TR/clreq
 2. 简单约定：A)专有名词的大小写、连字符等请保持跟原名或注册商标一致；B)一般情况下使用中文全角标点，但是文件名，版本号等其中出现的符号用保持用原来英文半角符号。C）待补充
-3.
+3. 对于不确定的专有名词翻译，请及时拿出来讨论
+4. 项目中使用到的术语、专业名词，请更新到术语表中 https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md 
 
 
 ### 项目约定及建议
