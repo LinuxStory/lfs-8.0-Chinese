@@ -1,5 +1,5 @@
 # Linux From Scratch 8.0 in Chinese
-lfs 8.0 中文版
+lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 
 ## 联系/加入我们
 - 邮箱：ls#linuxstory.org(将#替换为@，并在邮件title标注 lfs 8.0)
@@ -35,6 +35,7 @@ lfs 8.0 中文版
 1. 建议大家每天抽出一小时或者每周抽出三小时（或更多），不要把工作留到最后，时间会很被动
 2. 先把 lfs 8.0 翻译完，然后是 lfs 8.0 systemd 版，最后视情况看要不要翻译 blfs
 3. 署名默认是署我们各自的本名和 github 地址，希望留ID 或其他网址可以单独标注
+4. 保持沟通，每天至少 check 一次邮件和微信
 
 ## 翻译作品
 翻译作品放在[GitBook](https://www.gitbook.com/book/linuxstory/linux-from-scratch-8-0-book/)上，欢迎阅读！（未发布）
