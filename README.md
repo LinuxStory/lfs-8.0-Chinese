@@ -1,4 +1,4 @@
-# Linux From Scratch 8.0 in Chinese
+# Linux From Scratch 8.0 (lfs 8.0 & lfs 8.0 systemd) in Chinese
 lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 
 ## 联系/加入我们
@@ -8,14 +8,15 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 ## 原著及早期翻译作品
 ### 原著
 - 原著链接：http://www.linuxfromscratch.org/lfs/view/8.0/
+- systemd版原著：http://www.linuxfromscratch.org/lfs/view/8.0-systemd/
 - 原作：Gerard Beekmans 
 - 原著版本：Revision 8.0, 28 February 2017
 
-### 译著
+### 旧版译著
 - lfs 7.7 连接：https://linux.cn/lfs/LFS-BOOK-7.7-systemd/
 - 译者：LCTT 团队
 - 译著版本：Revision 7.7 systemd, 2015
-- 最新 Revision 8.0 由 Linux Story 社区发起并组织翻译，成员包括：闻其详、华华、郭楚谋、陈毅钊、邹泳奎、绘卷、胡震宇、李楠、程昊淼、春雨、黄镇杰、王炯、刘桎、刘楊楊、傅奎、张添翼 以及 Linux Story 校稿团队。
+- 最新 Revision 8.0 由 Linux Story 社区发起并组织翻译，成员包括：闻其详、华华、郭楚谋、陈毅钊、邹泳奎、绘卷、胡震宇、李楠、程昊淼、春雨、黄镇杰、王炯、刘桎、刘楊楊、傅奎、张添翼、赵凤鸣 以及 Linux Story 校稿团队。
 - Linux Story 通告地址 ：https://linuxstory.org/linux-from-scratch-8-0-released/
 - 本项目的经验及组织过程资产将保存在 https://pm.linuxstory.org
 - 预发布地址：http://linuxstory.org/lfs/LFS-BOOK-8.0/
@@ -25,7 +26,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 2. Milestone：3月6日  intial 项目（请大家加入 Linux Story 的 github 账号）
 3. 3月7日-3月10日 任务认领及分配 （在认领章节后面加上自己的 github id）
 4. Milestone：3月11日 正式开始翻译各自认领的部分 （有问题可以随时联系pm）
-5. 3月11日-4月9日 第一阶段翻译 lfs 8.0
+5. 3月11日-4月9日 第一阶段翻译 lfs 8.0 
 6. Milestone：4月10日 第一次 online review meetup
 7. 4月11日-5月9日 第二阶段翻译，lfs 8.0 systemd ，同时查漏补缺，校稿工作同步进行
 8. 5月10日-5月15日 校稿验收 整理组织过程资产，把翻译过程中留下来的资料集中在一起，发给大家做经验
