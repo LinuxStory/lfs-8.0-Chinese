@@ -21,12 +21,12 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 - 本项目的经验及组织过程资产将保存在 https://pm.linuxstory.org
 - 预发布地址：http://linuxstory.org/lfs/LFS-BOOK-8.0/
 
-### 项目计划 （具体 schedule 可能会遂人力动态安排）
+### 项目计划 （具体 schedule 可能会随人力动态安排）
 1. 2月28日-3月5日 预备以及招募团队（已完成，但是还可以接纳新成员）
 2. Milestone：3月6日  intial 项目（请大家加入 Linux Story 的 github 账号）
 3. 3月7日-3月10日 任务认领及分配 （在认领章节后面加上自己的 github id）
-4. Milestone：3月11日 正式开始翻译各自认领的部分 （有问题可以随时联系pm）
-5. 3月11日-4月9日 第一阶段翻译 lfs 8.0 
+4. Milestone：3月11日 正式开始翻译各自认领的部分 （一般来说，认领了 lfs 8.0 也意味着认领了 lfs 8.0 systemd 的对应章节）
+5. 3月11日-4月9日 第一阶段翻译 lfs 8.0
 6. Milestone：4月10日 第一次 online review meetup
 7. 4月11日-5月9日 第二阶段翻译，lfs 8.0 systemd ，同时查漏补缺，校稿工作同步进行
 8. 5月10日-5月15日 校稿验收 整理组织过程资产，把翻译过程中留下来的资料集中在一起，发给大家做经验
