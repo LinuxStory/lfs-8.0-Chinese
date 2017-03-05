@@ -44,6 +44,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 2. 先把 lfs 8.0 翻译完，然后是 lfs 8.0 systemd 版，暂时不考虑 blfs
 3. 署名默认是署我们各自的本名和 github 地址，希望留ID 或其他网址可以单独标注
 4. 保持沟通，每天至少 check 一次邮件和微信
+5. 沟通形式，以邮件（单向）和 github issues（public） 为正式，微信为辅助即时通信
 
 ## 翻译作品
 翻译作品放在[GitBook](https://www.gitbook.com/book/linuxstory/linux-from-scratch-8-0-book/)上，欢迎阅读！（未发布）
