@@ -238,7 +238,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
             The Bash Shell Startup Files
             Creating the /etc/inputrc File
             Creating the /etc/shells File
-        8. Making the LFS System Bootable
+        8. Making the LFS System Bootable(GitHub username:qq296776435)
             Introduction
             Creating the /etc/fstab File
             Linux-4.9.9
