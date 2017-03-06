@@ -14,9 +14,8 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 
 ### 旧版译著
 - lfs 7.7 连接：https://linux.cn/lfs/LFS-BOOK-7.7-systemd/
-- 译者：LCTT 团队
-- 译著版本：Revision 7.7 systemd, 2015
-- 最新 Revision 8.0 由 Linux Story 社区发起并组织翻译，成员包括：闻其详、华华、郭楚谋、陈毅钊、邹泳奎、绘卷、胡震宇、李楠、程昊淼、春雨、黄镇杰、王炯、刘桎、刘楊楊、傅奎、张添翼、赵凤鸣 以及 Linux Story 校稿团队。
+- 译者及版本：LCTT 团队  Revision 7.7 systemd, 2015
+- 最新 Revision 8.0 由 Linux Story 社区发起并组织翻译，成员包括：闻其详、华华、郭楚谋、陈毅钊、邹泳奎、绘卷、胡震宇、李楠、程昊淼、春雨、黄镇杰、王炯、刘桎、刘楊楊、傅奎、张添翼、xinxinyuan 以及 Linux Story 校稿团队。
 - Linux Story 通告地址 ：https://linuxstory.org/linux-from-scratch-8-0-released/
 - 本项目的经验及组织过程资产将保存在 https://pm.linuxstory.org
 - 预发布地址：http://linuxstory.org/lfs/LFS-BOOK-8.0/
@@ -37,8 +36,10 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 2. 简单约定：A)专有名词的大小写、连字符等请保持跟原名或注册商标一致；B)一般情况下使用中文全角标点，但是文件名，版本号等其中出现的符号用保持用原来英文半角符号。C）待补充
 3. 对于不确定的专有名词翻译，请及时拿出来讨论
 4. 项目中使用到的术语、专业名词，请更新到术语表中 https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md 
-
-
+5. 编辑器请统一使用 UTF-8 无BOM，Windows 下尽量使用 Notepad++，Linux 和 Mac 不做约束
+6.
+### 校稿标准化
+1.
 ### 项目约定及建议
 1. 建议大家每天抽出一小时或者每周抽出三小时（或更多），不要把工作留到最后，时间会很被动
 2. 先把 lfs 8.0 翻译完，然后是 lfs 8.0 systemd 版，暂时不考虑 blfs
@@ -47,8 +48,9 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 5. 沟通形式，以邮件（单向）和 github issues（public） 为正式，微信为辅助即时通信
 
 ## 翻译作品
-翻译作品放在[GitBook](https://www.gitbook.com/book/linuxstory/linux-from-scratch-8-0-book/)上，欢迎阅读！（未发布）
-## 翻译校审流程
+翻译作品会放在[GitBook](https://www.gitbook.com/book/linuxstory/linux-from-scratch-8-0-book/)上，欢迎阅读！（未发布）
+
+## 翻译流程
 ### 初始化
 1. 首先fork项目
 2. 把fork过去的项目clone到本地
@@ -62,7 +64,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 
 如果修改过程中项目有更新，请重复5、6、7步。
 
-### 翻译校审流程
+### 校审流程 (TBD)
 1. 保证在dev分支中
 2. 打开README.md，在翻译进度后加上你自己的github名
 	> 1\. 序言! [@翻译人][@校审人]
