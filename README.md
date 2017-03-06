@@ -115,7 +115,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
             Setting Up the Environment
             About SBUs
             About the Test Suites
-        5. Constructing a Temporary System
+        5. Constructing a Temporary System ----------------------banner1024
             Introduction
             Toolchain Technical Notes
             General Compilation Instructions
