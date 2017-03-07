@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.2.&nbsp;General Network Configuration
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="udev.html" title=
+          "Overview of Device and Module Handling">Next</a>
+          <p>
+            Overview of Device and Module Handling
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-network" name="ch-scripts-network"></a>7.2. General
+        Network Configuration
+      </h1>
+      <p>
+        This section only applies if a network card is to be configured.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.2.1. Network Interface Configuration Files
+        </h2>
+        <p>
+          Starting with version 209, systemd ships a network configuration
+          daemon called <span class=
+          "command"><strong>systemd-networkd</strong></span> which can be
+          used for basic network configuration. Additionally, since version
+          213, DNS name resolution can be handled by <span class=
+          "command"><strong>systemd-resolved</strong></span> in place of a
+          static <code class="filename">/etc/resolv.conf</code> file. Both
+          services are enabled by default.
+        </p>
+        <p>
+          Configuration files for <span class=
+          "command"><strong>systemd-networkd</strong></span> (and
+          <span class="command"><strong>systemd-resolved</strong></span>) can
+          be placed in <code class="filename">/usr/lib/systemd/network</code>
+          or <code class="filename">/etc/systemd/network</code>. Files in
+          <code class="filename">/etc/systemd/network</code> have a higher
+          priority than the ones in <code class=
+          "filename">/usr/lib/systemd/network</code>. There are three types
+          of configuration files: <code class="filename">.link</code>,
+          <code class="filename">.netdev</code> and <code class=
+          "filename">.network</code> files. For detailed descriptions and
+          example contents of these configuration files, consult the
+          <code class="filename">systemd-link(5)</code>, <code class=
+          "filename">systemd-netdev(5)</code> and <code class=
+          "filename">systemd-network(5)</code> manual pages.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Udev may assign network card interface names based on system
+            physical characteristics such as enp2s1. If you are not sure what
+            your interface name is, you can always run <span class=
+            "command"><strong>ip link</strong></span> after you have booted
+            your system.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="systemd-networkd-static" name=
+            "systemd-networkd-static"></a>7.2.1.1. Static IP Configuration
+          </h3>
+          <p>
+            The command below creates a basic configuration file for a Static
+            IP setup (using both systemd-networkd and systemd-resolved):
+          </p>
+          <pre class="userinput">
+<kbd class=
+"command">cat &gt; /etc/systemd/network/10-eth0-static.network &lt;&lt; "EOF"
+<code class="literal">[Match]
+Name=eth0
+
+[Network]
+Address=192.168.0.2/24
+Gateway=192.168.0.1
+DNS=192.168.0.1
+Domains=<em class=
+"replaceable"><code>&lt;Your Domain Name&gt;</code></em></code>
+EOF</kbd>
+</pre>
+          <p>
+            Multiple DNS entries can be added if you have more than one DNS
+            server. Do not include DNS or Domains entries if you intend to
+            use a static <code class="filename">/etc/resolv.conf</code> file.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="systemd-networkd-dhcp" name=
+            "systemd-networkd-dhcp"></a>7.2.1.2. DHCP Configuration
+          </h3>
+          <p>
+            The command below creates a basic configuration file for an IPv4
+            DHCP setup:
+          </p>
+          <pre class="userinput">
+<kbd class=
+"command">cat &gt; /etc/systemd/network/10-eth0-dhcp.network &lt;&lt; "EOF"
+<code class="literal">[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+
+[DHCP]
+UseDomains=true</code>
+EOF</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="resolv.conf" name="resolv.conf"></a>7.2.2. Creating the
+          /etc/resolv.conf File
+        </h2>
+        <p>
+          If the system is going to be connected to the Internet, it will
+          need some means of Domain Name Service (DNS) name resolution to
+          resolve Internet domain names to IP addresses, and vice versa. This
+          is best achieved by placing the IP address of the DNS server,
+          available from the ISP or network administrator, into <code class=
+          "filename">/etc/resolv.conf</code>.
+        </p>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="resolv-conf-systemd-resoloved" name=
+            "resolv-conf-systemd-resoloved"></a>7.2.2.1. systemd-resolved
+            Configuration
+          </h3>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              If using another means to configure your network interfaces
+              (ex: ppp, network-manager, etc.), or if using any type of local
+              resolver (ex: bind, dnsmasq, etc.), or any other software that
+              generates an <code class="filename">/etc/resolv.conf</code>
+              (ex: resolvconf), the <span class=
+              "command"><strong>systemd-resolved</strong></span> service
+              should not be used.
+            </p>
+          </div>
+          <p>
+            When using <span class=
+            "command"><strong>systemd-resolved</strong></span> for DNS
+            configuration, it creates the file <code class=
+            "filename">/run/systemd/resolve/resolv.conf</code>. Create a
+            symlink in <code class="filename">/etc</code> to use the generatd
+            file:
+          </p>
+          <pre class="userinput">
+<kbd class=
+"command">ln -sfv /run/systemd/resolve/resolv.conf /etc/resolv.conf</kbd>
+</pre>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="resolv-conf-static" name="resolv-conf-static"></a>7.2.2.2.
+            Static resolv.conf Configuration
+          </h3>
+          <p>
+            If a static <code class="filename">/etc/resolv.conf</code> is
+            desired, create it by running the following command:
+          </p>
+          <pre class="userinput">
+<kbd class="command">cat &gt; /etc/resolv.conf &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/resolv.conf
+
+domain <em class="replaceable"><code>&lt;Your Domain Name&gt;</code></em>
+nameserver <em class=
+"replaceable"><code>&lt;IP address of your primary nameserver&gt;</code></em>
+nameserver <em class=
+"replaceable"><code>&lt;IP address of your secondary nameserver&gt;</code></em>
+
+# End /etc/resolv.conf</code>
+EOF</kbd>
+</pre>
+          <p>
+            The <code class="varname">domain</code> statement can be omitted
+            or replaced with a <code class="varname">search</code> statement.
+            See the man page for resolv.conf for more details.
+          </p>
+          <p>
+            Replace <em class="replaceable"><code>&lt;IP address of the
+            nameserver&gt;</code></em> with the IP address of the DNS most
+            appropriate for the setup. There will often be more than one
+            entry (requirements demand secondary servers for fallback
+            capability). If you only need or want one DNS server, remove the
+            second <span class="emphasis"><em>nameserver</em></span> line
+            from the file. The IP address may also be a router on the local
+            network.
+          </p>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              The Google Public IPv4 DNS addresses are <em class=
+              "parameter"><code>8.8.8.8</code></em> and <em class=
+              "parameter"><code>8.8.4.4</code></em> for IPv4, and <em class=
+              "parameter"><code>2001:4860:4860::8888</code></em> and
+              <em class="parameter"><code>2001:4860:4860::8844</code></em>
+              for IPv6.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-hostname" name="ch-scripts-hostname"></a>7.2.3.
+          Configuring the system hostname
+        </h2>
+        <p>
+          During the boot process, the file <code class=
+          "filename">/etc/hostname</code> is used for establishing the
+          system's hostname.
+        </p>
+        <p>
+          Create the <code class="filename">/etc/hostname</code> file and
+          enter a hostname by running:
+        </p>
+        <pre class="userinput">
+<kbd class="command">echo "<em class=
+"replaceable"><code>&lt;lfs&gt;</code></em>" &gt; /etc/hostname</kbd>
+</pre>
+        <p>
+          <em class="replaceable"><code>&lt;lfs&gt;</code></em> needs to be
+          replaced with the name given to the computer. Do not enter the
+          Fully Qualified Domain Name (FQDN) here. That information is put in
+          the <code class="filename">/etc/hosts</code> file.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-hosts" name="ch-scripts-hosts"></a>7.2.4.
+          Customizing the /etc/hosts File
+        </h2>
+        <p>
+          Decide on a fully-qualified domain name (FQDN), and possible
+          aliases for use in the <code class="filename">/etc/hosts</code>
+          file. If using static addresses, you'll also need to decide on an
+          IP address. The syntax for a hosts file entry is:
+        </p>
+        <pre class="screen">
+<code class="literal">IP_address myhost.example.org aliases</code>
+</pre>
+        <p>
+          Unless the computer is to be visible to the Internet (i.e., there
+          is a registered domain and a valid block of assigned IP
+          addresses&mdash;most users do not have this), make sure that the IP
+          address is in the private network IP address range. Valid ranges
+          are:
+        </p>
+        <pre class="screen">
+<code class="literal">Private Network Address Range      Normal Prefix
+10.0.0.1 - 10.255.255.254           8
+172.x.0.1 - 172.x.255.254           16
+192.168.y.1 - 192.168.y.254         24</code>
+</pre>
+        <p>
+          x can be any number in the range 16-31. y can be any number in the
+          range 0-255.
+        </p>
+        <p>
+          A valid private IP address could be 192.168.1.1. A valid FQDN for
+          this IP could be lfs.example.org.
+        </p>
+        <p>
+          Even if not using a network card, a valid FQDN is still required.
+          This is necessary for certain programs to operate correctly.
+        </p>
+        <p>
+          If using DHCP, DHCPv6, IPv6 Autoconfiguration, or if a network card
+          is not going to be configured, create the <code class=
+          "filename">/etc/hosts</code> file by running the following command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/hosts &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/hosts
+
+127.0.0.1 <em class=
+"replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> <em class=
+"replaceable"><code>&lt;HOSTNAME&gt;</code></em> localhost <em class=
+"replaceable"><code>[alias1] [alias2] ...</code></em>
+::1       <em class=
+"replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> <em class=
+"replaceable"><code>&lt;HOSTNAME&gt;</code></em> localhost <em class=
+"replaceable"><code>[alias1] [alias2] ...</code></em>
+
+# End /etc/hosts</code>
+EOF</kbd>
+</pre>
+        <p>
+          The ::1 entry is the IPv6 counterpart of 127.0.0.1 and represents
+          the IPv6 loopback interface.
+        </p>
+        <p>
+          If using a static address, create the <code class=
+          "filename">/etc/hosts</code> file by running this command instead:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/hosts &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/hosts
+
+127.0.0.1 localhost
+::1       localhost
+<em class="replaceable"><code>&lt;192.168.0.2&gt;</code></em> <em class=
+"replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> <em class=
+"replaceable"><code>&lt;HOSTNAME&gt;</code></em> <em class=
+"replaceable"><code>[alias1] [alias2] ...</code></em>
+
+# End /etc/hosts</code>
+EOF</kbd>
+</pre>
+        <p>
+          The <em class="replaceable"><code>&lt;192.168.0.2&gt;</code></em>,
+          <em class=
+          "replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em>, and
+          <em class="replaceable"><code>&lt;HOSTNAME&gt;</code></em> values
+          need to be changed for specific uses or requirements (if assigned
+          an IP address by a network/system administrator and the machine
+          will be connected to an existing network). The optional alias
+          name(s) can be omitted.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="udev.html" title=
+          "Overview of Device and Module Handling">Next</a>
+          <p>
+            Overview of Device and Module Handling
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

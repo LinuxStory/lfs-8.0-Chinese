@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.4.&nbsp;Binutils-2.27 - Pass 1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="generalinstructions.html" title=
+          "General Compilation Instructions">Prev</a>
+          <p>
+            General Compilation Instructions
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-pass1.html" title=
+          "GCC-6.3.0 - Pass 1">Next</a>
+          <p>
+            GCC-6.3.0 - Pass 1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-binutils-pass1" name=
+        "ch-tools-binutils-pass1"></a>5.4. Binutils-2.27 - Pass 1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Binutils package contains a linker, an assembler, and other
+          tools for handling object files.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">519 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.4.1. Installation of Cross Binutils
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Go back and re-read the notes in the previous section.
+            Understanding the notes labeled important will save you a lot of
+            problems later.
+          </p>
+        </div>
+        <p>
+          It is important that Binutils be the first package compiled because
+          both Glibc and GCC perform various tests on the available linker
+          and assembler to determine which of their own features to enable.
+        </p>
+        <p>
+          The Binutils documentation recommends building Binutils in a
+          dedicated build directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build
+cd       build</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            In order for the SBU values listed in the rest of the book to be
+            of any use, measure the time it takes to build this package from
+            the configuration, up to and including the first install. To
+            achieve this easily, wrap the commands in a <span class=
+            "command"><strong>time</strong></span> command like this:
+            <strong class="userinput"><code>time { ./configure ... &amp;&amp;
+            ... &amp;&amp; make install; }</code></strong>.
+          </p>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The approximate build SBU values and required disk space in
+            Chapter 5 does not include test suite data.
+          </p>
+        </div>
+        <p>
+          Now prepare Binutils for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">../configure --prefix=/tools            \
+             --with-sysroot=$LFS        \
+             --with-lib-path=/tools/lib \
+             --target=$LFS_TGT          \
+             --disable-nls              \
+             --disable-werror</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--prefix=/tools</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the configure script to prepare to install the
+                Binutils programs in the <code class="filename">/tools</code>
+                directory.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-sysroot=$LFS</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                For cross compilation, this tells the build system to look in
+                $LFS for the target system libraries as needed.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-lib-path=/tools/lib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This specifies which library path the linker should be
+                configured to use.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><code class=
+              "envar">--target=$LFS_TGT</code></span>
+            </dt>
+            <dd>
+              <p>
+                Because the machine description in the <code class=
+                "envar">LFS_TGT</code> variable is slightly different than
+                the value returned by the <span class=
+                "command"><strong>config.guess</strong></span> script, this
+                switch will tell the <span class=
+                "command"><strong>configure</strong></span> script to adjust
+                Binutil's build system for building a cross linker.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-nls</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This disables internationalization as i18n is not needed for
+                the temporary tools.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-werror</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This prevents the build from stopping in the event that there
+                are warnings from the host's compiler.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Continue with compiling the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Compilation is now complete. Ordinarily we would now run the test
+          suite, but at this early stage the test suite framework (Tcl,
+          Expect, and DejaGNU) is not yet in place. The benefits of running
+          the tests at this point are minimal since the programs from this
+          first pass will soon be replaced by those from the second.
+        </p>
+        <p>
+          If building on x86_64, create a symlink to ensure the sanity of the
+          toolchain:
+        </p>
+        <pre class="userinput">
+<kbd class="command">case $(uname -m) in
+  x86_64) mkdir -v /tools/lib &amp;&amp; ln -sv lib /tools/lib64 ;;
+esac</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter06/binutils.html#contents-binutils" title=
+          "6.13.2.&nbsp;Contents of Binutils">Section&nbsp;6.13.2,
+          &ldquo;Contents of Binutils.&rdquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="generalinstructions.html" title=
+          "General Compilation Instructions">Prev</a>
+          <p>
+            General Compilation Instructions
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-pass1.html" title=
+          "GCC-6.3.0 - Pass 1">Next</a>
+          <p>
+            GCC-6.3.0 - Pass 1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

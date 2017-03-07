@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Part&nbsp;II.&nbsp;Preparing for the Build
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter04/abouttestsuites.html" title=
+          "About the Test Suites">Prev</a>
+          <p>
+            About the Test Suites
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="introduction.html" title=
+          "Introduction">Next</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part2.html" title=
+          "Part&nbsp;II.&nbsp;Preparing for the Build">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <h1 class="chapter">
+        <a id="chapter-temporary-tools" name="chapter-temporary-tools"></a>5.
+        Constructing a Temporary System
+      </h1>
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="sect1">
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li class="sect1">
+            <a href="toolchaintechnotes.html">Toolchain Technical Notes</a>
+          </li>
+          <li class="sect1">
+            <a href="generalinstructions.html">General Compilation
+            Instructions</a>
+          </li>
+          <li class="sect1">
+            <a href="binutils-pass1.html">Binutils-2.27 - Pass 1</a>
+          </li>
+          <li class="sect1">
+            <a href="gcc-pass1.html">GCC-6.3.0 - Pass 1</a>
+          </li>
+          <li class="sect1">
+            <a href="linux-headers.html">Linux-4.9.9 API Headers</a>
+          </li>
+          <li class="sect1">
+            <a href="glibc.html">Glibc-2.25</a>
+          </li>
+          <li class="sect1">
+            <a href="gcc-libstdc++.html">Libstdc++-6.3.0</a>
+          </li>
+          <li class="sect1">
+            <a href="binutils-pass2.html">Binutils-2.27 - Pass 2</a>
+          </li>
+          <li class="sect1">
+            <a href="gcc-pass2.html">GCC-6.3.0 - Pass 2</a>
+          </li>
+          <li class="sect1">
+            <a href="tcl.html">Tcl-core-8.6.6</a>
+          </li>
+          <li class="sect1">
+            <a href="expect.html">Expect-5.45</a>
+          </li>
+          <li class="sect1">
+            <a href="dejagnu.html">DejaGNU-1.6</a>
+          </li>
+          <li class="sect1">
+            <a href="check.html">Check-0.11.0</a>
+          </li>
+          <li class="sect1">
+            <a href="ncurses.html">Ncurses-6.0</a>
+          </li>
+          <li class="sect1">
+            <a href="bash.html">Bash-4.4</a>
+          </li>
+          <li class="sect1">
+            <a href="bison.html">Bison-3.0.4</a>
+          </li>
+          <li class="sect1">
+            <a href="bzip2.html">Bzip2-1.0.6</a>
+          </li>
+          <li class="sect1">
+            <a href="coreutils.html">Coreutils-8.26</a>
+          </li>
+          <li class="sect1">
+            <a href="diffutils.html">Diffutils-3.5</a>
+          </li>
+          <li class="sect1">
+            <a href="file.html">File-5.30</a>
+          </li>
+          <li class="sect1">
+            <a href="findutils.html">Findutils-4.6.0</a>
+          </li>
+          <li class="sect1">
+            <a href="gawk.html">Gawk-4.1.4</a>
+          </li>
+          <li class="sect1">
+            <a href="gettext.html">Gettext-0.19.8.1</a>
+          </li>
+          <li class="sect1">
+            <a href="grep.html">Grep-3.0</a>
+          </li>
+          <li class="sect1">
+            <a href="gzip.html">Gzip-1.8</a>
+          </li>
+          <li class="sect1">
+            <a href="m4.html">M4-1.4.18</a>
+          </li>
+          <li class="sect1">
+            <a href="make.html">Make-4.2.1</a>
+          </li>
+          <li class="sect1">
+            <a href="patch.html">Patch-2.7.5</a>
+          </li>
+          <li class="sect1">
+            <a href="perl.html">Perl-5.24.1</a>
+          </li>
+          <li class="sect1">
+            <a href="sed.html">Sed-4.4</a>
+          </li>
+          <li class="sect1">
+            <a href="tar.html">Tar-1.29</a>
+          </li>
+          <li class="sect1">
+            <a href="texinfo.html">Texinfo-6.3</a>
+          </li>
+          <li class="sect1">
+            <a href="util-linux.html">Util-linux-2.29.1</a>
+          </li>
+          <li class="sect1">
+            <a href="xz.html">Xz-5.2.3</a>
+          </li>
+          <li class="sect1">
+            <a href="stripping.html">Stripping</a>
+          </li>
+          <li class="sect1">
+            <a href="changingowner.html">Changing Ownership</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter04/abouttestsuites.html" title=
+          "About the Test Suites">Prev</a>
+          <p>
+            About the Test Suites
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="introduction.html" title=
+          "Introduction">Next</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part2.html" title=
+          "Part&nbsp;II.&nbsp;Preparing for the Build">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

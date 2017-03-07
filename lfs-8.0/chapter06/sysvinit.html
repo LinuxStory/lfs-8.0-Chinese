@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.64.&nbsp;Sysvinit-2.88dsf
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysklogd.html" title=
+          "Sysklogd-1.5.1">Prev</a>
+          <p>
+            Sysklogd-1.5.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="eudev.html" title="Eudev-3.2.1">Next</a>
+          <p>
+            Eudev-3.2.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-sysvinit" name="ch-system-sysvinit"></a>6.64.
+        Sysvinit-2.88dsf
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Sysvinit package contains programs for controlling the startup,
+          running, and shutdown of the system.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">1.1 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.64.1. Installation of Sysvinit
+        </h2>
+        <p>
+          First, apply a patch that removes several programs installed by
+          other packages, clarifies a message, and fixes a compiler warning:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">patch -Np1 -i ../sysvinit-2.88dsf-consolidated-1.patch</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C src</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C src install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-sysvinit" name="contents-sysvinit"></a>6.64.2.
+          Contents of Sysvinit
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">bootlogd, fstab-decode, halt, init,
+              killall5, poweroff (link to halt), reboot (link to halt),
+              runlevel, shutdown, and telinit (link to init)</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="bootlogd" name="bootlogd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>bootlogd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Logs boot messages to a log file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fstab-decode" name="fstab-decode"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fstab-decode</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Run a command with fstab-encoded arguments
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="halt-sysv" name="halt-sysv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>halt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Normally invokes <span class=
+                    "command"><strong>shutdown</strong></span> with the
+                    <em class="parameter"><code>-h</code></em> option, except
+                    when already in run-level 0, then it tells the kernel to
+                    halt the system; it notes in the file <code class=
+                    "filename">/var/log/wtmp</code> that the system is being
+                    brought down
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="init-sysv" name="init-sysv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>init</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The first process to be started when the kernel has
+                    initialized the hardware which takes over the boot
+                    process and starts all the proceses specified in its
+                    configuration file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="killall5" name="killall5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>killall5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sends a signal to all processes, except the processes in
+                    its own session so it will not kill its parent shell
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="poweroff-sysv" name=
+                    "poweroff-sysv"></a><span class="term"><span class=
+                    "command"><strong>poweroff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells the kernel to halt the system and switch off the
+                    computer (see <span class=
+                    "command"><strong>halt</strong></span>)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="reboot-sysv" name="reboot-sysv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>reboot</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells the kernel to reboot the system (see <span class=
+                    "command"><strong>halt</strong></span>)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="runlevel-sysv" name=
+                    "runlevel-sysv"></a><span class="term"><span class=
+                    "command"><strong>runlevel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the previous and the current run-level, as noted
+                    in the last run-level record in <code class=
+                    "filename">/var/run/utmp</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="shutdown-sysv" name=
+                    "shutdown-sysv"></a><span class="term"><span class=
+                    "command"><strong>shutdown</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Brings the system down in a secure way, signaling all
+                    processes and notifying all logged-in users
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="telinit-sysv" name="telinit-sysv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>telinit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells <span class="command"><strong>init</strong></span>
+                    which run-level to change to
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysklogd.html" title=
+          "Sysklogd-1.5.1">Prev</a>
+          <p>
+            Sysklogd-1.5.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="eudev.html" title="Eudev-3.2.1">Next</a>
+          <p>
+            Eudev-3.2.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

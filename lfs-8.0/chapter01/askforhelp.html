@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      1.5.&nbsp;Help
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;1.&nbsp;Introduction
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="resources.html" title="Resources">Prev</a>
+          <p>
+            Resources
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../part2.html" title=
+          "Preparing for the Build">Next</a>
+          <p>
+            Preparing for the Build
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter01.html" title=
+          "Chapter&nbsp;1.&nbsp;Introduction">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-intro-askforhelp" name="ch-intro-askforhelp"></a>1.5. Help
+      </h1>
+      <p>
+        If an issue or a question is encountered while working through this
+        book, please check the FAQ page at <a class="ulink" href=
+        "http://www.linuxfromscratch.org/faq/#generalfaq">http://www.linuxfromscratch.org/faq/#generalfaq</a>.
+        Questions are often already answered there. If your question is not
+        answered on this page, try to find the source of the problem. The
+        following hint will give you some guidance for troubleshooting:
+        <a class="ulink" href=
+        "http://www.linuxfromscratch.org/hints/downloads/files/errors.txt">http://www.linuxfromscratch.org/hints/downloads/files/errors.txt</a>.
+      </p>
+      <p>
+        If you cannot find your problem listed in the FAQ, search the mailing
+        lists at <a class="ulink" href=
+        "http://www.linuxfromscratch.org/search.html">http://www.linuxfromscratch.org/search.html</a>.
+      </p>
+      <p>
+        We also have a wonderful LFS community that is willing to offer
+        assistance through the mailing lists and IRC (see the <a class="xref"
+        href="resources.html" title="1.4.&nbsp;Resources">Section&nbsp;1.4,
+        &ldquo;Resources&rdquo;</a> section of this book). However, we get
+        several support questions every day and many of them can be easily
+        answered by going to the FAQ and by searching the mailing lists
+        first. So, for us to offer the best assistance possible, you need to
+        do some research on your own first. That allows us to focus on the
+        more unusual support needs. If your searches do not produce a
+        solution, please include all relevant information (mentioned below)
+        in your request for help.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          1.5.1. Things to Mention
+        </h2>
+        <p>
+          Apart from a brief explanation of the problem being experienced,
+          the essential things to include in any request for help are:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                The version of the book being used (in this case <span class=
+                "phrase">8.0</span> )
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                The host distribution and version being used to create LFS
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                The output from the <a class="xref" href=
+                "../chapter02/hostreqs.html#version-check">Host System
+                Requirements</a> script
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                The package or section the problem was encountered in
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                The exact error message or symptom being received
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Note whether you have deviated from the book at all
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Deviating from this book does <span class=
+            "emphasis"><em>not</em></span> mean that we will not help you.
+            After all, LFS is about personal preference. Being upfront about
+            any changes to the established procedure helps us evaluate and
+            determine possible causes of your problem.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          1.5.2. Configure Script Problems
+        </h2>
+        <p>
+          If something goes wrong while running the <span class=
+          "command"><strong>configure</strong></span> script, review the
+          <code class="filename">config.log</code> file. This file may
+          contain errors encountered during <span class=
+          "command"><strong>configure</strong></span> which were not printed
+          to the screen. Include the <span class=
+          "emphasis"><em>relevant</em></span> lines if you need to ask for
+          help.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          1.5.3. Compilation Problems
+        </h2>
+        <p>
+          Both the screen output and the contents of various files are useful
+          in determining the cause of compilation problems. The screen output
+          from the <span class="command"><strong>configure</strong></span>
+          script and the <span class="command"><strong>make</strong></span>
+          run can be helpful. It is not necessary to include the entire
+          output, but do include enough of the relevant information. Below is
+          an example of the type of information to include from the screen
+          output from <span class="command"><strong>make</strong></span>:
+        </p>
+        <pre class="screen">
+<code class="computeroutput">gcc -DALIASPATH=\"/mnt/lfs/usr/share/locale:.\"
+-DLOCALEDIR=\"/mnt/lfs/usr/share/locale\"
+-DLIBDIR=\"/mnt/lfs/usr/lib\"
+-DINCLUDEDIR=\"/mnt/lfs/usr/include\" -DHAVE_CONFIG_H -I. -I.
+-g -O2 -c getopt1.c
+gcc -g -O2 -static -o make ar.o arscan.o commands.o dir.o
+expand.o file.o function.o getopt.o implicit.o job.o main.o
+misc.o read.o remake.o rule.o signame.o variable.o vpath.o
+default.o remote-stub.o version.o opt1.o
+-lutil job.o: In function `load_too_high':
+/lfs/tmp/make-3.79.1/job.c:1565: undefined reference
+to `getloadavg'
+collect2: ld returned 1 exit status
+make[2]: *** [make] Error 1
+make[2]: Leaving directory `/lfs/tmp/make-3.79.1'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/lfs/tmp/make-3.79.1'
+make: *** [all-recursive-am] Error 2</code>
+</pre>
+        <p>
+          In this case, many people would just include the bottom section:
+        </p>
+        <pre class="screen">
+<code class="computeroutput">make [2]: *** [make] Error 1</code>
+</pre>
+        <p>
+          This is not enough information to properly diagnose the problem
+          because it only notes that something went wrong, not <span class=
+          "emphasis"><em>what</em></span> went wrong. The entire section, as
+          in the example above, is what should be saved because it includes
+          the command that was executed and the associated error message(s).
+        </p>
+        <p>
+          An excellent article about asking for help on the Internet is
+          available online at <a class="ulink" href=
+          "http://catb.org/~esr/faqs/smart-questions.html">http://catb.org/~esr/faqs/smart-questions.html</a>.
+          Read and follow the hints in this document to increase the
+          likelihood of getting the help you need.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="resources.html" title="Resources">Prev</a>
+          <p>
+            Resources
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../part2.html" title=
+          "Preparing for the Build">Next</a>
+          <p>
+            Preparing for the Build
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter01.html" title=
+          "Chapter&nbsp;1.&nbsp;Introduction">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.7.&nbsp;Configuring the System Locale
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="console.html" title=
+          "Configuring the Linux Console">Prev</a>
+          <p>
+            Configuring the Linux Console
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inputrc.html" title=
+          "Creating the /etc/inputrc File">Next</a>
+          <p>
+            Creating the /etc/inputrc File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-locale" name="ch-scripts-locale"></a>7.7.
+        Configuring the System Locale
+      </h1>
+      <p>
+        The <code class="filename">/etc/locale.conf</code> below sets some
+        environment variables necessary for native language support. Setting
+        them properly results in:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              The output of programs translated into the native language
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Correct classification of characters into letters, digits and
+              other classes. This is necessary for <span class=
+              "command"><strong>bash</strong></span> to properly accept
+              non-ASCII characters in command lines in non-English locales
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              The correct alphabetical sorting order for the country
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Appropriate default paper size
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Correct formatting of monetary, time, and date values
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Replace <em class="replaceable"><code>&lt;ll&gt;</code></em> below
+        with the two-letter code for the desired language (e.g., <span class=
+        "quote">&ldquo;<span class="quote">en</span>&rdquo;</span>) and
+        <em class="replaceable"><code>&lt;CC&gt;</code></em> with the
+        two-letter code for the appropriate country (e.g., <span class=
+        "quote">&ldquo;<span class="quote">GB</span>&rdquo;</span>).
+        <em class="replaceable"><code>&lt;charmap&gt;</code></em> should be
+        replaced with the canonical charmap for your chosen locale. Optional
+        modifiers such as <span class="quote">&ldquo;<span class=
+        "quote">@euro</span>&rdquo;</span> may also be present.
+      </p>
+      <p>
+        The list of all locales supported by Glibc can be obtained by running
+        the following command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">locale -a</kbd>
+</pre>
+      <p>
+        Charmaps can have a number of aliases, e.g., <span class=
+        "quote">&ldquo;<span class="quote">ISO-8859-1</span>&rdquo;</span> is
+        also referred to as <span class="quote">&ldquo;<span class=
+        "quote">iso8859-1</span>&rdquo;</span> and <span class=
+        "quote">&ldquo;<span class="quote">iso88591</span>&rdquo;</span>.
+        Some applications cannot handle the various synonyms correctly (e.g.,
+        require that <span class="quote">&ldquo;<span class=
+        "quote">UTF-8</span>&rdquo;</span> is written as <span class=
+        "quote">&ldquo;<span class="quote">UTF-8</span>&rdquo;</span>, not
+        <span class="quote">&ldquo;<span class=
+        "quote">utf8</span>&rdquo;</span>), so it is safest in most cases to
+        choose the canonical name for a particular locale. To determine the
+        canonical name, run the following command, where <em class=
+        "replaceable"><code>&lt;locale name&gt;</code></em> is the output
+        given by <span class="command"><strong>locale -a</strong></span> for
+        your preferred locale (<span class="quote">&ldquo;<span class=
+        "quote">en_GB.iso88591</span>&rdquo;</span> in our example).
+      </p>
+      <pre class="userinput">
+<kbd class="command">LC_ALL=<em class=
+"replaceable"><code>&lt;locale name&gt;</code></em> locale charmap</kbd>
+</pre>
+      <p>
+        For the <span class="quote">&ldquo;<span class=
+        "quote">en_GB.iso88591</span>&rdquo;</span> locale, the above command
+        will print:
+      </p>
+      <pre class="screen">
+<code class="computeroutput">ISO-8859-1</code>
+</pre>
+      <p>
+        This results in a final locale setting of <span class=
+        "quote">&ldquo;<span class=
+        "quote">en_GB.ISO-8859-1</span>&rdquo;</span>. It is important that
+        the locale found using the heuristic above is tested prior to it
+        being added to the Bash startup files:
+      </p>
+      <pre class="userinput">
+<kbd class="command">LC_ALL=&lt;locale name&gt; locale language
+LC_ALL=&lt;locale name&gt; locale charmap
+LC_ALL=&lt;locale name&gt; locale int_curr_symbol
+LC_ALL=&lt;locale name&gt; locale int_prefix</kbd>
+</pre>
+      <p>
+        The above commands should print the language name, the character
+        encoding used by the locale, the local currency, and the prefix to
+        dial before the telephone number in order to get into the country. If
+        any of the commands above fail with a message similar to the one
+        shown below, this means that your locale was either not installed in
+        Chapter 6 or is not supported by the default installation of Glibc.
+      </p>
+      <pre class="screen">
+<code class=
+"computeroutput">locale: Cannot set LC_* to default locale: No such file or directory</code>
+</pre>
+      <p>
+        If this happens, you should either install the desired locale using
+        the <span class="command"><strong>localedef</strong></span> command,
+        or consider choosing a different locale. Further instructions assume
+        that there are no such error messages from Glibc.
+      </p>
+      <p>
+        Some packages beyond LFS may also lack support for your chosen
+        locale. One example is the X library (part of the X Window System),
+        which outputs the following error message if the locale does not
+        exactly match one of the character map names in its internal files:
+      </p>
+      <pre class="screen">
+<code class=
+"computeroutput">Warning: locale not supported by Xlib, locale set to C</code>
+</pre>
+      <p>
+        In several cases Xlib expects that the character map will be listed
+        in uppercase notation with canonical dashes. For instance,
+        "ISO-8859-1" rather than "iso88591". It is also possible to find an
+        appropriate specification by removing the charmap part of the locale
+        specification. This can be checked by running the <span class=
+        "command"><strong>locale charmap</strong></span> command in both
+        locales. For example, one would have to change
+        "de_DE.ISO-8859-15@euro" to "de_DE@euro" in order to get this locale
+        recognized by Xlib.
+      </p>
+      <p>
+        Other packages can also function incorrectly (but may not necessarily
+        display any error messages) if the locale name does not meet their
+        expectations. In those cases, investigating how other Linux
+        distributions support your locale might provide some useful
+        information.
+      </p>
+      <p>
+        Once the proper locale settings have been determined, create the
+        <code class="filename">/etc/locale.conf</code> file:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; /etc/locale.conf &lt;&lt; "EOF"
+<code class="literal">LANG=<em class=
+"replaceable"><code>&lt;ll&gt;_&lt;CC&gt;.&lt;charmap&gt;&lt;@modifiers&gt;</code></em></code>
+EOF</kbd>
+</pre>
+      <p>
+        Note that you can modify <code class=
+        "filename">/etc/locale.conf</code> with systemd <span class=
+        "command"><strong>localectl</strong></span> utility. To use
+        <span class="command"><strong>localectl</strong></span> for the
+        example above, run:
+      </p>
+      <pre class="userinput">
+<kbd class="command">localectl set-locale LANG="<em class=
+"replaceable"><code>&lt;ll&gt;_&lt;CC&gt;.&lt;charmap&gt;&lt;@modifiers&gt;</code></em>"</kbd>
+</pre>
+      <p>
+        You can also specify other language specific environment variables
+        such as <code class="envar">LANG</code>, <code class=
+        "envar">LC_CTYPE</code>, <code class="envar">LC_NUMERIC</code> or any
+        other environment variable from <span class=
+        "command"><strong>locale</strong></span> output. Just separate them
+        with a space. An example where <code class="envar">LANG</code> is set
+        as en_US.UTF-8 but <code class="envar">LC_CTYPE</code> is set as just
+        en_US is:
+      </p>
+      <pre class="userinput">
+<kbd class=
+"command">localectl set-locale LANG="en_US.UTF-8" LC_CTYPE="en_US"</kbd>
+</pre>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Please note that <span class=
+          "command"><strong>localectl</strong></span> command can be used
+          only on a system booted with systemd.
+        </p>
+      </div>
+      <p>
+        The <span class="quote">&ldquo;<span class=
+        "quote">C</span>&rdquo;</span> (default) and <span class=
+        "quote">&ldquo;<span class="quote">en_US</span>&rdquo;</span> (the
+        recommended one for United States English users) locales are
+        different. <span class="quote">&ldquo;<span class=
+        "quote">C</span>&rdquo;</span> uses the US-ASCII 7-bit character set,
+        and treats bytes with the high bit set as invalid characters. That's
+        why, e.g., the <span class="command"><strong>ls</strong></span>
+        command substitutes them with question marks in that locale. Also, an
+        attempt to send mail with such characters from Mutt or Pine results
+        in non-RFC-conforming messages being sent (the charset in the
+        outgoing mail is indicated as <span class="quote">&ldquo;<span class=
+        "quote">unknown 8-bit</span>&rdquo;</span>). So you can use the
+        <span class="quote">&ldquo;<span class="quote">C</span>&rdquo;</span>
+        locale only if you are sure that you will never need 8-bit
+        characters.
+      </p>
+      <p>
+        UTF-8 based locales are not supported well by many programs. Work is
+        in progress to document and, if possible, fix such problems, see
+        <a class="ulink" href=
+        "http://www.linuxfromscratch.org/blfs/view/8.0/introduction/locale-issues.html">
+        http://www.linuxfromscratch.org/blfs/view/8.0/introduction/locale-issues.html</a>.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="console.html" title=
+          "Configuring the Linux Console">Prev</a>
+          <p>
+            Configuring the Linux Console
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inputrc.html" title=
+          "Creating the /etc/inputrc File">Next</a>
+          <p>
+            Creating the /etc/inputrc File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

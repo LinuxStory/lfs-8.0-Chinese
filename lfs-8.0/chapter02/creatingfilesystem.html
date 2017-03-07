@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      2.5.&nbsp;Creating a File System on the Partition
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Preparing the Host System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="creatingpartition.html" title=
+          "Creating a New Partition">Prev</a>
+          <p>
+            Creating a New Partition
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aboutlfs.html" title=
+          "Setting The $LFS Variable">Next</a>
+          <p>
+            Setting The $LFS Variable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="space-creatingfilesystem" name=
+        "space-creatingfilesystem"></a>2.5. Creating a File System on the
+        Partition
+      </h1>
+      <p>
+        Now that a blank partition has been set up, the file system can be
+        created. LFS can use any file system recognized by the Linux kernel,
+        but the most common types are ext3 and ext4. The choice of file
+        system can be complex and depends on the characteristics of the files
+        and the size of the partition. For example:
+      </p>
+      <div class="variablelist">
+        <dl class="variablelist">
+          <dt>
+            <span class="term">ext2</span>
+          </dt>
+          <dd>
+            <p>
+              is suitable for small partitions that are updated infrequently
+              such as /boot.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">ext3</span>
+          </dt>
+          <dd>
+            <p>
+              is an upgrade to ext2 that includes a journal to help recover
+              the partition's status in the case of an unclean shutdown. It
+              is commonly used as a general purpose file system.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">ext4</span>
+          </dt>
+          <dd>
+            <p>
+              is the latest version of the ext file system family of
+              partition types. It provides several new capabilities including
+              nano-second timestamps, creation and use of very large files
+              (16 TB), and speed improvements.
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <p>
+        Other file systems, including FAT32, NTFS, ReiserFS, JFS, and XFS are
+        useful for specialized purposes. More information about these file
+        systems can be found at <a class="ulink" href=
+        "http://en.wikipedia.org/wiki/Comparison_of_file_systems">http://en.wikipedia.org/wiki/Comparison_of_file_systems</a>.
+      </p>
+      <p>
+        LFS assumes that the root file system (/) is of type ext4. To create
+        an <code class="systemitem">ext4</code> file system on the LFS
+        partition, run the following:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkfs -v -t ext4 /dev/<em class=
+"replaceable"><code>&lt;xxx&gt;</code></em></kbd>
+</pre>
+      <p>
+        If you are using an existing <code class="systemitem">swap</code>
+        partition, there is no need to format it. If a new <code class=
+        "systemitem">swap</code> partition was created, it will need to be
+        initialized with this command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkswap /dev/<em class=
+"replaceable"><code>&lt;yyy&gt;</code></em></kbd>
+</pre>
+      <p>
+        Replace <em class="replaceable"><code>&lt;yyy&gt;</code></em> with
+        the name of the <code class="systemitem">swap</code> partition.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="creatingpartition.html" title=
+          "Creating a New Partition">Prev</a>
+          <p>
+            Creating a New Partition
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aboutlfs.html" title=
+          "Setting The $LFS Variable">Next</a>
+          <p>
+            Setting The $LFS Variable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.70.&nbsp;Vim-8.0.069
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texinfo.html" title="Texinfo-6.3">Prev</a>
+          <p>
+            Texinfo-6.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aboutdebug.html" title=
+          "About Debugging Symbols">Next</a>
+          <p>
+            About Debugging Symbols
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-vim" name="ch-system-vim"></a>6.70. Vim-8.0.069
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Vim package contains a powerful text editor.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">1.3 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">141 MB</span>
+            </div>
+          </div>
+        </div>
+        <div class="admon tip">
+          <img alt="[Tip]" src="../images/tip.png" />
+          <h3>
+            Alternatives to Vim
+          </h3>
+          <p>
+            If you prefer another editor&mdash;such as Emacs, Joe, or
+            Nano&mdash;please refer to <a class="ulink" href=
+            "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/editors.html">
+            http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/editors.html</a>
+            for suggested installation instructions.
+          </p>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.70.1. Installation of Vim
+        </h2>
+        <p>
+          First, change the default location of the <code class=
+          "filename">vimrc</code> configuration file to <code class=
+          "filename">/etc</code>:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">echo '#define SYS_VIMRC_FILE "/etc/vimrc"' &gt;&gt; src/feature.h</kbd>
+</pre>
+        <p>
+          Prepare Vim for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -j1 test</kbd>
+</pre>
+        <p>
+          However, this test suite outputs a lot of binary data to the
+          screen, which can cause issues with the settings of the current
+          terminal. This can be resolved by redirecting the output to a log
+          file. A successful test will result in the words "ALL DONE" at
+          completion.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Many users are used to using <span class=
+          "command"><strong>vi</strong></span> instead of <span class=
+          "command"><strong>vim</strong></span>. To allow execution of
+          <span class="command"><strong>vim</strong></span> when users
+          habitually enter <span class="command"><strong>vi</strong></span>,
+          create a symlink for both the binary and the man page in the
+          provided languages:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sv vim /usr/bin/vi
+for L in  /usr/share/man/{,*/}man1/vim.1; do
+    ln -sv vim.1 $(dirname $L)/vi.1
+done</kbd>
+</pre>
+        <p>
+          By default, Vim's documentation is installed in <code class=
+          "filename">/usr/share/vim</code>. The following symlink allows the
+          documentation to be accessed via <code class=
+          "filename">/usr/share/doc/vim-8.0.069</code>, making it consistent
+          with the location of documentation for other packages:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sv ../vim/vim80/doc /usr/share/doc/vim-8.0.069</kbd>
+</pre>
+        <p>
+          If an X Window System is going to be installed on the LFS system,
+          it may be necessary to recompile Vim after installing X. Vim comes
+          with a GUI version of the editor that requires X and some
+          additional libraries to be installed. For more information on this
+          process, refer to the Vim documentation and the Vim installation
+          page in the BLFS book at <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/vim.html">http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/vim.html</a>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="conf-vim" name="conf-vim"></a>6.70.2. Configuring Vim
+        </h2>
+        <p>
+          By default, <span class="command"><strong>vim</strong></span> runs
+          in vi-incompatible mode. This may be new to users who have used
+          other editors in the past. The <span class=
+          "quote">&ldquo;<span class=
+          "quote">nocompatible</span>&rdquo;</span> setting is included below
+          to highlight the fact that a new behavior is being used. It also
+          reminds those who would change to <span class=
+          "quote">&ldquo;<span class="quote">compatible</span>&rdquo;</span>
+          mode that it should be the first setting in the configuration file.
+          This is necessary because it changes other settings, and overrides
+          must come after this setting. Create a default <span class=
+          "command"><strong>vim</strong></span> configuration file by running
+          the following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/vimrc &lt;&lt; "EOF"
+<code class="literal">" Begin /etc/vimrc
+
+set nocompatible
+set backspace=2
+set mouse=r
+syntax on
+if (&amp;term == "xterm") || (&amp;term == "putty")
+  set background=dark
+endif
+
+
+" End /etc/vimrc</code>
+EOF</kbd>
+</pre>
+        <p>
+          The <em class="parameter"><code>set nocompatible</code></em>
+          setting makes <span class="command"><strong>vim</strong></span>
+          behave in a more useful way (the default) than the vi-compatible
+          manner. Remove the <span class="quote">&ldquo;<span class=
+          "quote">no</span>&rdquo;</span> to keep the old <span class=
+          "command"><strong>vi</strong></span> behavior. The <em class=
+          "parameter"><code>set backspace=2</code></em> setting allows
+          backspacing over line breaks, autoindents, and the start of insert.
+          The <em class="parameter"><code>syntax on</code></em> parameter
+          enables vim's syntax highlighting. The <em class=
+          "parameter"><code>set mouse=r</code></em> setting enables proper
+          pasting of text with the mouse when working in chroot or over a
+          remote connection. Finally, the <span class=
+          "emphasis"><em>if</em></span> statement with the <em class=
+          "parameter"><code>set background=dark</code></em> setting corrects
+          <span class="command"><strong>vim</strong></span>'s guess about the
+          background color of some terminal emulators. This gives the
+          highlighting a better color scheme for use on the black background
+          of these programs.
+        </p>
+        <p>
+          Documentation for other available options can be obtained by
+          running the following command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">vim -c ':options'</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            By default, Vim only installs spell files for the English
+            language. To install spell files for your preferred language,
+            download the <code class="filename">*.spl</code> and optionally,
+            the <code class="filename">*.sug</code> files for your language
+            and character encoding from <a class="ulink" href=
+            "ftp://ftp.vim.org/pub/vim/runtime/spell/">ftp://ftp.vim.org/pub/vim/runtime/spell/</a>
+            and save them to <code class=
+            "filename">/usr/share/vim/vim80/spell/</code>.
+          </p>
+          <p>
+            To use these spell files, some configuration in <code class=
+            "filename">/etc/vimrc</code> is needed, e.g.:
+          </p>
+          <pre class="screen">
+<code class="literal">set spelllang=en,ru
+set spell</code>
+</pre>
+          <p>
+            For more information, see the appropriate README file located at
+            the URL above.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-vim" name="contents-vim"></a>6.70.3. Contents of
+          Vim
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">ex (link to vim), rview (link to vim),
+              rvim (link to vim), vi (link to vim), view (link to vim), vim,
+              vimdiff (link to vim), vimtutor, and xxd</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/share/vim</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ex" name="ex"></a><span class="term"><span class=
+                    "command"><strong>ex</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Starts <span class="command"><strong>vim</strong></span>
+                    in ex mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rview" name="rview"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rview</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a restricted version of <span class=
+                    "command"><strong>view</strong></span>; no shell commands
+                    can be started and <span class=
+                    "command"><strong>view</strong></span> cannot be
+                    suspended
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rvim" name="rvim"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rvim</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a restricted version of <span class=
+                    "command"><strong>vim</strong></span>; no shell commands
+                    can be started and <span class=
+                    "command"><strong>vim</strong></span> cannot be suspended
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vi" name="vi"></a><span class="term"><span class=
+                    "command"><strong>vi</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Link to <span class="command"><strong>vim</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="view" name="view"></a><span class=
+                    "term"><span class=
+                    "command"><strong>view</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Starts <span class="command"><strong>vim</strong></span>
+                    in read-only mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vim" name="vim"></a><span class=
+                    "term"><span class="command"><strong>vim</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is the editor
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vimdiff" name="vimdiff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>vimdiff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Edits two or three versions of a file with <span class=
+                    "command"><strong>vim</strong></span> and show
+                    differences
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vimtutor" name="vimtutor"></a><span class=
+                    "term"><span class=
+                    "command"><strong>vimtutor</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Teaches the basic keys and commands of <span class=
+                    "command"><strong>vim</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xxd" name="xxd"></a><span class=
+                    "term"><span class="command"><strong>xxd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a hex dump of the given file; it can also do the
+                    reverse, so it can be used for binary patching
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texinfo.html" title="Texinfo-6.3">Prev</a>
+          <p>
+            Texinfo-6.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aboutdebug.html" title=
+          "About Debugging Symbols">Next</a>
+          <p>
+            About Debugging Symbols
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

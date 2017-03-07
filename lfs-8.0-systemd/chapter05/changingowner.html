@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.37.&nbsp;Changing Ownership
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="stripping.html" title="Stripping">Prev</a>
+          <p>
+            Stripping
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../part3.html" title=
+          "Building the LFS System">Next</a>
+          <p>
+            Building the LFS System
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-changingowner" name=
+        "ch-tools-changingowner"></a>5.37. Changing Ownership
+      </h1>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          The commands in the remainder of this book must be performed while
+          logged in as user <code class="systemitem">root</code> and no
+          longer as user <code class="systemitem">lfs</code>. Also, double
+          check that <code class="envar">$LFS</code> is set in <code class=
+          "systemitem">root</code>'s environment.
+        </p>
+      </div>
+      <p>
+        Currently, the <code class="filename">$LFS/tools</code> directory is
+        owned by the user <code class="systemitem">lfs</code>, a user that
+        exists only on the host system. If the <code class=
+        "filename">$LFS/tools</code> directory is kept as is, the files are
+        owned by a user ID without a corresponding account. This is dangerous
+        because a user account created later could get this same user ID and
+        would own the <code class="filename">$LFS/tools</code> directory and
+        all the files therein, thus exposing these files to possible
+        malicious manipulation.
+      </p>
+      <p>
+        To avoid this issue, you could add the <code class=
+        "systemitem">lfs</code> user to the new LFS system later when
+        creating the <code class="filename">/etc/passwd</code> file, taking
+        care to assign it the same user and group IDs as on the host system.
+        Better yet, change the ownership of the <code class=
+        "filename">$LFS/tools</code> directory to user <code class=
+        "systemitem">root</code> by running the following command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">chown -R root:root $LFS/tools</kbd>
+</pre>
+      <p>
+        Although the <code class="filename">$LFS/tools</code> directory can
+        be deleted once the LFS system has been finished, it can be retained
+        to build additional LFS systems <span class="emphasis"><em>of the
+        same book version</em></span>. How best to backup <code class=
+        "filename">$LFS/tools</code> is a matter of personal preference.
+      </p>
+      <div class="admon caution">
+        <img alt="[Caution]" src="../images/caution.png" />
+        <h3>
+          Caution
+        </h3>
+        <p>
+          If you intend to keep the temporary tools for use in building
+          future LFS systems, <span class="emphasis"><em>now</em></span> is
+          the time to back them up. Subsequent commands in chapter 6 will
+          alter the tools currently in place, rendering them useless for
+          future builds.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="stripping.html" title="Stripping">Prev</a>
+          <p>
+            Stripping
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../part3.html" title=
+          "Building the LFS System">Next</a>
+          <p>
+            Building the LFS System
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

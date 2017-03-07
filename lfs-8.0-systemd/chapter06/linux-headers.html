@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.7.&nbsp;Linux-4.9.9 API Headers
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="createfiles.html" title=
+          "Creating Essential Files and Symlinks">Prev</a>
+          <p>
+            Creating Essential Files and Symlinks
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="man-pages.html" title=
+          "Man-pages-4.09">Next</a>
+          <p>
+            Man-pages-4.09
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-linux-headers" name=
+        "ch-system-linux-headers"></a>6.7. Linux-4.9.9 API Headers
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Linux API Headers (in linux-4.9.9.tar.xz) expose the kernel's
+          API for use by Glibc.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">767 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.7.1. Installation of Linux API Headers
+        </h2>
+        <p>
+          The Linux kernel needs to expose an Application Programming
+          Interface (API) for the system's C library (Glibc in LFS) to use.
+          This is done by way of sanitizing various C header files that are
+          shipped in the Linux kernel source tarball.
+        </p>
+        <p>
+          Make sure there are no stale files and dependencies lying around
+          from previous activity:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make mrproper</kbd>
+</pre>
+        <p>
+          Now extract the user-visible kernel headers from the source. They
+          are placed in an intermediate local directory and copied to the
+          needed location because the extraction process removes any existing
+          files in the target directory. There are also some hidden files
+          used by the kernel developers and not needed by LFS that are
+          removed from the intermediate directory.
+        </p>
+        <pre class="userinput">
+<kbd class="command">make INSTALL_HDR_PATH=dest headers_install
+find dest/include \( -name .install -o -name ..install.cmd \) -delete
+</kbd><kbd class="command">cp -rv dest/include/* /usr/include</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-linux-headers" name=
+          "contents-linux-headers"></a>6.7.2. Contents of Linux API Headers
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed headers:</strong>
+              <span class="segbody">/usr/include/asm/*.h,
+              /usr/include/asm-generic/*.h, /usr/include/drm/*.h,
+              /usr/include/linux/*.h, /usr/include/misc/*.h,
+              /usr/include/mtd/*.h, /usr/include/rdma/*.h,
+              /usr/include/scsi/*.h, /usr/include/sound/*.h,
+              /usr/include/video/*.h, and /usr/include/xen/*.h</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/asm,
+              /usr/include/asm-generic, /usr/include/drm, /usr/include/linux,
+              /usr/include/misc, /usr/include/mtd, /usr/include/rdma,
+              /usr/include/scsi, /usr/include/sound, /usr/include/video, and
+              /usr/include/xen</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asm" name="asm"></a><span class=
+                    "term"><code class="filename">/usr/include/asm/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API ASM Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asm-generic" name="asm-generic"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/include/asm-generic/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API ASM Generic Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="drm" name="drm"></a><span class=
+                    "term"><code class="filename">/usr/include/drm/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API DRM Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="linux" name="linux"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/include/linux/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API Linux Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mtd" name="mtd"></a><span class=
+                    "term"><code class="filename">/usr/include/mtd/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API MTD Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rdma" name="rdma"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/include/rdma/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API RDMA Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="scsi" name="scsi"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/include/scsi/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API SCSI Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sound" name="sound"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/include/sound/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API Sound Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="video" name="video"></a><span class=
+                    "term"><code class=
+                    "filename">/usr/include/video/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API Video Headers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xen" name="xen"></a><span class=
+                    "term"><code class="filename">/usr/include/xen/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API Xen Headers
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="createfiles.html" title=
+          "Creating Essential Files and Symlinks">Prev</a>
+          <p>
+            Creating Essential Files and Symlinks
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="man-pages.html" title=
+          "Man-pages-4.09">Next</a>
+          <p>
+            Man-pages-4.09
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

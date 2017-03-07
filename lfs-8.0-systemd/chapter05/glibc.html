@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.7.&nbsp;Glibc-2.25
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux-headers.html" title=
+          "Linux-4.9.9 API Headers">Prev</a>
+          <p>
+            Linux-4.9.9 API Headers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-libstdc++.html" title=
+          "Libstdc++-6.3.0">Next</a>
+          <p>
+            Libstdc++-6.3.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-glibc" name="ch-tools-glibc"></a>5.7. Glibc-2.25
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Glibc package contains the main C library. This library
+          provides the basic routines for allocating memory, searching
+          directories, opening and closing files, reading and writing files,
+          string handling, pattern matching, arithmetic, and so on.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">4.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">753 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.7.1. Installation of Glibc
+        </h2>
+        <p>
+          The Glibc documentation recommends building Glibc in a dedicated
+          build directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build
+cd       build</kbd>
+</pre>
+        <p>
+          Next, prepare Glibc for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">../configure                             \
+      --prefix=/tools                    \
+      --host=$LFS_TGT                    \
+      --build=$(../scripts/config.guess) \
+      --enable-kernel=2.6.32             \
+      --with-headers=/tools/include      \
+      libc_cv_forced_unwind=yes          \
+      libc_cv_c_cleanup=yes</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>--host=$LFS_TGT,
+              --build=$(../scripts/config.guess)</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The combined effect of these switches is that Glibc's build
+                system configures itself to cross-compile, using the
+                cross-linker and cross-compiler in <code class=
+                "filename">/tools</code>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-kernel=2.6.32</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells Glibc to compile the library with support for
+                2.6.32 and later Linux kernels. Workarounds for older kernels
+                are not enabled.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-headers=/tools/include</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells Glibc to compile itself against the headers
+                recently installed to the tools directory, so that it knows
+                exactly what features the kernel has and can optimize itself
+                accordingly.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>libc_cv_forced_unwind=yes</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The linker installed during <a class="xref" href=
+                "binutils-pass1.html" title=
+                "5.4.&nbsp;Binutils-2.27 - Pass 1">Section&nbsp;5.4,
+                &ldquo;Binutils-2.27 - Pass 1&rdquo;</a> was cross-compiled
+                and as such cannot be used until Glibc has been installed.
+                This means that the configure test for force-unwind support
+                will fail, as it relies on a working linker. The
+                libc_cv_forced_unwind=yes variable is passed in order to
+                inform <span class=
+                "command"><strong>configure</strong></span> that force-unwind
+                support is available without it having to run the test.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>libc_cv_c_cleanup=yes</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Similarly, we pass libc_cv_c_cleanup=yes through to the
+                <span class="command"><strong>configure</strong></span>
+                script so that the test is skipped and C cleanup handling
+                support is configured.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          During this stage the following warning might appear:
+        </p>
+        <div class="blockquote">
+          <blockquote class="blockquote">
+            <pre class="screen">
+<code class="computeroutput">configure: WARNING:
+*** These auxiliary programs are missing or
+*** incompatible versions: msgfmt
+*** some features will be disabled.
+*** Check the INSTALL file for required versions.</code>
+</pre>
+          </blockquote>
+        </div>
+        <p>
+          The missing or incompatible <span class=
+          "command"><strong>msgfmt</strong></span> program is generally
+          harmless. This <span class="command"><strong>msgfmt</strong></span>
+          program is part of the Gettext package which the host distribution
+          should provide.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            There have been reports that this package may fail when building
+            as a "parallel make". If this occurs, rerun the make command with
+            a "-j1" option.
+          </p>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <div class="admon caution">
+          <img alt="[Caution]" src="../images/caution.png" />
+          <h3>
+            Caution
+          </h3>
+          <p>
+            At this point, it is imperative to stop and ensure that the basic
+            functions (compiling and linking) of the new toolchain are
+            working as expected. To perform a sanity check, run the following
+            commands:
+          </p>
+          <pre class="userinput">
+<kbd class="command">echo 'int main(){}' &gt; dummy.c
+$LFS_TGT-gcc dummy.c
+readelf -l a.out | grep ': /tools'</kbd>
+</pre>
+          <p>
+            If everything is working correctly, there should be no errors,
+            and the output of the last command will be of the form:
+          </p>
+          <pre class="screen">
+<code class=
+"computeroutput">[Requesting program interpreter: /tools/lib/ld-linux.so.2]</code>
+</pre>
+          <p>
+            Note that for 64-bit machines, the interpreter name will be
+            <code class="filename">/tools/lib64/ld-linux-x86-64.so.2</code>.
+          </p>
+          <p>
+            If the output is not shown as above or there was no output at
+            all, then something is wrong. Investigate and retrace the steps
+            to find out where the problem is and correct it. This issue must
+            be resolved before continuing on.
+          </p>
+          <p>
+            Once all is well, clean up the test files:
+          </p>
+          <pre class="userinput">
+<kbd class="command">rm -v dummy.c a.out</kbd>
+</pre>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Building Binutils in the section after next will serve as an
+            additional check that the toolchain has been built properly. If
+            Binutils fails to build, it is an indication that something has
+            gone wrong with the previous Binutils, GCC, or Glibc
+            installations.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter06/glibc.html#contents-glibc" title=
+          "6.9.3.&nbsp;Contents of Glibc">Section&nbsp;6.9.3, &ldquo;Contents
+          of Glibc.&rdquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux-headers.html" title=
+          "Linux-4.9.9 API Headers">Prev</a>
+          <p>
+            Linux-4.9.9 API Headers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-libstdc++.html" title=
+          "Libstdc++-6.3.0">Next</a>
+          <p>
+            Libstdc++-6.3.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

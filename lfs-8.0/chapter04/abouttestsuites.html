@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      4.6.&nbsp;About the Test Suites
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;4.&nbsp;Final Preparations
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="aboutsbus.html" title="About SBUs">Prev</a>
+          <p>
+            About SBUs
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter05/chapter05.html" title=
+          "Constructing a Temporary System">Next</a>
+          <p>
+            Constructing a Temporary System
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter04.html" title=
+          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="prepare-abouttestsuites" name=
+        "prepare-abouttestsuites"></a>4.6. About the Test Suites
+      </h1>
+      <p>
+        Most packages provide a test suite. Running the test suite for a
+        newly built package is a good idea because it can provide a
+        <span class="quote">&ldquo;<span class="quote">sanity
+        check</span>&rdquo;</span> indicating that everything compiled
+        correctly. A test suite that passes its set of checks usually proves
+        that the package is functioning as the developer intended. It does
+        not, however, guarantee that the package is totally bug free.
+      </p>
+      <p>
+        Some test suites are more important than others. For example, the
+        test suites for the core toolchain packages&mdash;GCC, Binutils, and
+        Glibc&mdash;are of the utmost importance due to their central role in
+        a properly functioning system. The test suites for GCC and Glibc can
+        take a very long time to complete, especially on slower hardware, but
+        are strongly recommended.
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Experience has shown that there is little to be gained from running
+          the test suites in <a class="xref" href=
+          "../chapter05/chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
+          5</a>. There can be no escaping the fact that the host system
+          always exerts some influence on the tests in that chapter, often
+          causing inexplicable failures. Because the tools built in <a class=
+          "xref" href="../chapter05/chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
+          5</a> are temporary and eventually discarded, we do not recommend
+          running the test suites in <a class="xref" href=
+          "../chapter05/chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
+          5</a> for the average reader. The instructions for running those
+          test suites are provided for the benefit of testers and developers,
+          but they are strictly optional.
+        </p>
+      </div>
+      <p>
+        A common issue with running the test suites for Binutils and GCC is
+        running out of pseudo terminals (PTYs). This can result in a high
+        number of failing tests. This may happen for several reasons, but the
+        most likely cause is that the host system does not have the
+        <code class="systemitem">devpts</code> file system set up correctly.
+        This issue is discussed in greater detail at <a class="ulink" href=
+        "http://www.linuxfromscratch.org/lfs/faq.html#no-ptys">http://www.linuxfromscratch.org/lfs/faq.html#no-ptys</a>.
+      </p>
+      <p>
+        Sometimes package test suites will fail, but for reasons which the
+        developers are aware of and have deemed non-critical. Consult the
+        logs located at <a class="ulink" href=
+        "http://www.linuxfromscratch.org/lfs/build-logs/8.0/">http://www.linuxfromscratch.org/lfs/build-logs/8.0/</a>
+        to verify whether or not these failures are expected. This site is
+        valid for all tests throughout this book.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="aboutsbus.html" title="About SBUs">Prev</a>
+          <p>
+            About SBUs
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter05/chapter05.html" title=
+          "Constructing a Temporary System">Next</a>
+          <p>
+            Constructing a Temporary System
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter04.html" title=
+          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

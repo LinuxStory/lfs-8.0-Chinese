@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.22.&nbsp;Acl-2.2.52
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="attr.html" title="Attr-2.4.47">Prev</a>
+          <p>
+            Attr-2.4.47
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libcap.html" title="Libcap-2.25">Next</a>
+          <p>
+            Libcap-2.25
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-acl" name="ch-system-acl"></a>6.22. Acl-2.2.52
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Acl package contains utilities to administer Access Control
+          Lists, which are used to define more fine-grained discretionary
+          access rights for files and directories.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">4.8 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.22.1. Installation of Acl
+        </h2>
+        <p>
+          Modify the documentation directory so that it is a versioned
+          directory:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i -e 's|/@pkg_name@|&amp;-@pkg_version@|' include/builddefs.in</kbd>
+</pre>
+        <p>
+          Fix some broken tests:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i "s:| sed.*::g" test/{sbits-restore,cp,misc}.test</kbd>
+</pre>
+        <p>
+          Additionally, fix a bug that causes <span class=
+          "command"><strong>getfacl -e</strong></span> to segfault on overly
+          long group name:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i -e "/TABS-1;/a if (x &gt; (TABS-1)) x = (TABS-1);" \
+    libacl/__acl_to_any_text.c</kbd>
+</pre>
+        <p>
+          Prepare Acl for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr    \
+            --bindir=/bin    \
+            --disable-static \
+            --libexecdir=/usr/lib</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          The Acl tests need to be run on a filesystem that supports access
+          controls after <span class="application">Coreutils</span> has been
+          built with the Acl libraries. If desired, return to this package
+          and run <span class="command"><strong>make -j1
+          tests</strong></span> after <span class=
+          "application">Coreutils</span> has been built later in this
+          chapter.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install install-dev install-lib
+chmod -v 755 /usr/lib/libacl.so</kbd>
+</pre>
+        <p>
+          The shared library needs to be moved to <code class=
+          "filename">/lib</code>, and as a result the <code class=
+          "filename">.so</code> file in <code class=
+          "filename">/usr/lib</code> will need to be recreated:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/lib/libacl.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libacl.so) /usr/lib/libacl.so</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-acl" name="contents-acl"></a>6.22.2. Contents of
+          Acl
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">chacl, getfacl, and setacl</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed library:</strong>
+              <span class="segbody">libacl.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/acl and
+              /usr/share/doc/acl-2.2.52</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chacl" name="chacl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chacl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the access control list of a file or directory
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getfacl" name="getfacl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getfacl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Gets file access control lists
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setacl" name="setacl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setacl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets file access control lists
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libacl" name="libacl"></a><span class=
+                    "term"><code class="filename">libacl</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains the library functions for manipulating Access
+                    Control Lists
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="attr.html" title="Attr-2.4.47">Prev</a>
+          <p>
+            Attr-2.4.47
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libcap.html" title="Libcap-2.25">Next</a>
+          <p>
+            Libcap-2.25
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

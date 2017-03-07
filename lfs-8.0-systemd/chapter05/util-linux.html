@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.34.&nbsp;Util-linux-2.29.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texinfo.html" title="Texinfo-6.3">Prev</a>
+          <p>
+            Texinfo-6.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xz.html" title="Xz-5.2.3">Next</a>
+          <p>
+            Xz-5.2.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-util-linux" name="ch-tools-util-linux"></a>5.34.
+        Util-linux-2.29.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Util-linux package contains miscellaneous utility programs.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.9 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">118 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.34.1. Installation of Util-linux
+        </h2>
+        <p>
+          Prepare Util-linux for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/tools                   \
+            --without-python                  \
+            --disable-makeinstall-chown       \
+            --without-systemdsystemunitdir    \
+            --enable-libmount-force-mountinfo \
+            PKG_CONFIG=""</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure option:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--without-python</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch disables using <span class=
+                "application">Python</span> if it is installed on the host
+                system. It avoids trying to build unneeded bindings.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-makeinstall-chown</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch disables using the <span class=
+                "command"><strong>chown</strong></span> command during
+                installation. This is not needed when installing into the
+                /tools directory and avoids the necessity of installing as
+                root.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--without-systemdsystemunitdir</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                On systems that use systemd, the package tries to install a
+                systemd specific file to a non-existent directory in /tools.
+                This switch disables the unnecessary action.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><code class=
+              "envar">PKG_CONFIG=""</code></span>
+            </dt>
+            <dd>
+              <p>
+                Setting this environment variable prevents adding unneeded
+                features that may be available on the host. Note that the
+                location shown for setting this environment variable is
+                different from other LFS sections where variables are set
+                preceding the command. This location is shown to demonstrate
+                an alternative way of setting an environment variable when
+                using configure.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texinfo.html" title="Texinfo-6.3">Prev</a>
+          <p>
+            Texinfo-6.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xz.html" title="Xz-5.2.3">Next</a>
+          <p>
+            Xz-5.2.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

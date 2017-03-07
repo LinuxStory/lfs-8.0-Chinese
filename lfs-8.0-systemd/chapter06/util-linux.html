@@ -1,0 +1,1757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.65.&nbsp;Util-linux-2.29.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dbus.html" title="D-Bus-1.10.14">Prev</a>
+          <p>
+            D-Bus-1.10.14
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="man-db.html" title="Man-DB-2.7.6.1">Next</a>
+          <p>
+            Man-DB-2.7.6.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-util-linux" name="ch-system-util-linux"></a>6.65.
+        Util-linux-2.29.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Util-linux package contains miscellaneous utility programs.
+          Among them are utilities for handling file systems, consoles,
+          partitions, and messages.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">1.0 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">164 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.65.1. FHS compliance notes
+        </h2>
+        <p>
+          The FHS recommends using the <code class=
+          "filename">/var/lib/hwclock</code> directory instead of the usual
+          <code class="filename">/etc</code> directory as the location for
+          the <code class="filename">adjtime</code> file. First create a
+          directory to enable storage for the <span class=
+          "command"><strong>hwclock</strong></span> program:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv /var/lib/hwclock</kbd>
+</pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.65.2. Installation of Util-linux
+        </h2>
+        <p>
+          Prepare Util-linux for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --docdir=/usr/share/doc/util-linux-2.29.1 \
+            --disable-chfn-chsh  \
+            --disable-login      \
+            --disable-nologin    \
+            --disable-su         \
+            --disable-setpriv    \
+            --disable-runuser    \
+            --disable-pylibmount \
+            --disable-static     \
+            --without-python     \
+            --enable-libmount-force-mountinfo</kbd>
+</pre>
+        <p>
+          The --disable and --without options prevent warnings about building
+          components that require packages not in LFS or are inconsistent
+          with programs installed by other packages.
+        </p>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          If desired, run the test suite as a non-root user:
+        </p>
+        <div class="admon warning">
+          <img alt="[Warning]" src="../images/warning.png" />
+          <h3>
+            Warning
+          </h3>
+          <p>
+            Running the test suite as the root user can be harmful to your
+            system. To run it, the CONFIG_SCSI_DEBUG option for the kernel
+            must be available in the currently running system, and must be
+            built as a module. Building it into the kernel will prevent
+            booting. For complete coverage, other BLFS packages must be
+            installed. If desired, this test can be run after rebooting into
+            the completed LFS system and running:
+          </p>
+          <pre class="userinput">
+<kbd class="command">bash tests/run.sh --srcdir=$PWD --builddir=$PWD</kbd>
+</pre>
+        </div>
+        <pre class="userinput">
+<kbd class="command">chown -Rv nobody .
+su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            One test above, tests/ts/ipcs/limits2, will fail when the host is
+            using a recent kernel. The failure can safely be ignored.
+          </p>
+        </div>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-utillinux" name="contents-utillinux"></a>6.65.3.
+          Contents of Util-linux
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">addpart, agetty, blkdiscard, blkid,
+              blockdev, cal, cfdisk, chcpu, chrt, col, colcrt, colrm, column,
+              ctrlaltdel, delpart, dmesg, eject, fallocate, fdformat, fdisk,
+              findfs, findmnt, flock, fsck, fsck.cramfs, fsck.minix,
+              fsfreeze, fstrim, getopt, hexdump, hwclock, i386, ionice,
+              ipcmk, ipcrm, ipcs, isosize, kill, last, lastb (link to last),
+              ldattach, linux32, linux64, logger, look, losetup, lsblk,
+              lscpu, lsipc, lslocks, lslogins, mcookie, mesg, mkfs, mkfs.bfs,
+              mkfs.cramfs, mkfs.minix, mkswap, more, mount, mountpoint,
+              namei, nsenter, partx, pg, pivot_root, prlimit, raw,
+              readprofile, rename, renice, resizepart, rev, rtcwake, script,
+              scriptreplay, setarch, setsid, setterm, sfdisk, sulogin,
+              swaplabel, swapoff (link to swapon), swapon, switch_root,
+              tailf, taskset, ul, umount, uname26, unshare, utmpdump, uuidd,
+              uuidgen, wall, wdctl, whereis, wipefs, x86_64, and
+              zramctl</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libblkid.so, libfdisk.so, libmount.so,
+              libsmartcols.so, and libuuid.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/blkid,
+              /usr/include/libfdisk, /usr/include/libmount,
+              /usr/include/libsmartcols, /usr/include/uuid,
+              /usr/share/doc/util-linux-2.29.1, and /var/lib/hwclock</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="addpart" name="addpart"></a><span class=
+                    "term"><span class=
+                    "command"><strong>addpart</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Informs the Linux kernel of new partitions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="agetty" name="agetty"></a><span class=
+                    "term"><span class=
+                    "command"><strong>agetty</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Opens a tty port, prompts for a login name, and then
+                    invokes the <span class=
+                    "command"><strong>login</strong></span> program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="blkdiscard" name="blkdiscard"></a><span class=
+                    "term"><span class=
+                    "command"><strong>blkdiscard</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Discards sectors on a device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="blkid" name="blkid"></a><span class=
+                    "term"><span class=
+                    "command"><strong>blkid</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A command line utility to locate and print block device
+                    attributes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="blockdev" name="blockdev"></a><span class=
+                    "term"><span class=
+                    "command"><strong>blockdev</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Allows users to call block device ioctls from the command
+                    line
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cal" name="cal"></a><span class=
+                    "term"><span class="command"><strong>cal</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays a simple calendar
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cfdisk" name="cfdisk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cfdisk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Manipulates the partition table of the given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chcpu" name="chcpu"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chcpu</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Modifies the state of CPUs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chrt" name="chrt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chrt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Manipulates real-time attributes of a process
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="col" name="col"></a><span class=
+                    "term"><span class="command"><strong>col</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Filters out reverse line feeds
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="colcrt" name="colcrt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>colcrt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Filters <span class=
+                    "command"><strong>nroff</strong></span> output for
+                    terminals that lack some capabilities, such as
+                    overstriking and half-lines
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="colrm" name="colrm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>colrm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Filters out the given columns
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="column" name="column"></a><span class=
+                    "term"><span class=
+                    "command"><strong>column</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Formats a given file into multiple columns
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ctrlaltdel" name="ctrlaltdel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ctrlaltdel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets the function of the Ctrl+Alt+Del key combination to
+                    a hard or a soft reset
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="delpart" name="delpart"></a><span class=
+                    "term"><span class=
+                    "command"><strong>delpart</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Asks the Linux kernel to remove a partition
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmesg" name="dmesg"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dmesg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps the kernel boot messages
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="eject" name="eject"></a><span class=
+                    "term"><span class=
+                    "command"><strong>eject</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Ejects removable media
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fallocate" name="fallocate"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fallocate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Preallocates space to a file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fdformat" name="fdformat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fdformat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Low-level formats a floppy disk
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fdisk" name="fdisk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fdisk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Manipulates the partition table of the given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="findfs" name="findfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>findfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Finds a file system by label or Universally Unique
+                    Identifier (UUID)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="findmnt" name="findmnt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>findmnt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a command line interface to the libmount library for
+                    work with mountinfo, fstab and mtab files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="flock" name="flock"></a><span class=
+                    "term"><span class=
+                    "command"><strong>flock</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Acquires a file lock and then executes a command with the
+                    lock held
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck" name="fsck"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to check, and optionally repair, file systems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck.cramfs" name="fsck.cramfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck.cramfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Performs a consistency check on the Cramfs file system on
+                    the given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck.minix" name="fsck.minix"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck.minix</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Performs a consistency check on the Minix file system on
+                    the given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsfreeze" name="fsfreeze"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsfreeze</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a very simple wrapper around FIFREEZE/FITHAW ioctl
+                    kernel driver operations
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fstrim" name="fstrim"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fstrim</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Discards unused blocks on a mounted filesystem
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getopt" name="getopt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getopt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Parses options in the given command line
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hexdump" name="hexdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hexdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps the given file in hexadecimal or in another given
+                    format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hwclock" name="hwclock"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hwclock</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads or sets the system's hardware clock, also called
+                    the Real-Time Clock (RTC) or Basic Input-Output System
+                    (BIOS) clock
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="i386" name="i386"></a><span class=
+                    "term"><span class=
+                    "command"><strong>i386</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A symbolic link to setarch
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ionice" name="ionice"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ionice</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Gets or sets the io scheduling class and priority for a
+                    program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ipcmk" name="ipcmk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ipcmk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates various IPC resources
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ipcrm" name="ipcrm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ipcrm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Removes the given Inter-Process Communication (IPC)
+                    resource
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ipcs" name="ipcs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ipcs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Provides IPC status information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="isosize" name="isosize"></a><span class=
+                    "term"><span class=
+                    "command"><strong>isosize</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the size of an iso9660 file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kill" name="kill"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kill</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sends signals to processes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="last" name="last"></a><span class=
+                    "term"><span class=
+                    "command"><strong>last</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows which users last logged in (and out), searching
+                    back through the <code class=
+                    "filename">/var/log/wtmp</code> file; it also shows
+                    system boots, shutdowns, and run-level changes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lastb" name="lastb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lastb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows the failed login attempts, as logged in
+                    <code class="filename">/var/log/btmp</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ldattach" name="ldattach"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ldattach</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Attaches a line discipline to a serial line
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="linux32" name="linux32"></a><span class=
+                    "term"><span class=
+                    "command"><strong>linux32</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A symbolic link to setarch
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="linux64" name="linux64"></a><span class=
+                    "term"><span class=
+                    "command"><strong>linux64</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A symbolic link to setarch
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="logger" name="logger"></a><span class=
+                    "term"><span class=
+                    "command"><strong>logger</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Enters the given message into the system log
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="look" name="look"></a><span class=
+                    "term"><span class=
+                    "command"><strong>look</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays lines that begin with the given string
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="losetup" name="losetup"></a><span class=
+                    "term"><span class=
+                    "command"><strong>losetup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets up and controls loop devices
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lsblk" name="lsblk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lsblk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists information about all or selected block devices in
+                    a tree-like format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lscpu" name="lscpu"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lscpu</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints CPU architecture information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lsipc" name="lsipc"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lsipc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints information on IPC facilities currently employed
+                    in the system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lslocks" name="lslocks"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lslocks</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists local system locks
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lslogins" name="lslogins"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lslogins</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists information about users, groups and system accounts
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mcookie" name="mcookie"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mcookie</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates magic cookies (128-bit random hexadecimal
+                    numbers) for <span class=
+                    "command"><strong>xauth</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mesg" name="mesg"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mesg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Controls whether other users can send messages to the
+                    current user's terminal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs" name="mkfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Builds a file system on a device (usually a hard disk
+                    partition)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.bfs" name="mkfs.bfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.bfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a Santa Cruz Operations (SCO) bfs file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.cramfs" name="mkfs.cramfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.cramfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a cramfs file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.minix" name="mkfs.minix"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.minix</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a Minix file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkswap" name="mkswap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkswap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Initializes the given device or file to be used as a swap
+                    area
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="more" name="more"></a><span class=
+                    "term"><span class=
+                    "command"><strong>more</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A filter for paging through text one screen at a time
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mount" name="mount"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mount</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Attaches the file system on the given device to a
+                    specified directory in the file-system tree
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mountpoint" name="mountpoint"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mountpoint</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Checks if the directory is a mountpoint
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="namei" name="namei"></a><span class=
+                    "term"><span class=
+                    "command"><strong>namei</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows the symbolic links in the given pathnames
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nsenter" name="nsenter"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nsenter</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a program with namespaces of other processes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="partx" name="partx"></a><span class=
+                    "term"><span class=
+                    "command"><strong>partx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells the kernel about the presence and numbering of
+                    on-disk partitions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pg" name="pg"></a><span class="term"><span class=
+                    "command"><strong>pg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays a text file one screen full at a time
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pivot_root" name="pivot_root"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pivot_root</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes the given file system the new root file system of
+                    the current process
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="prlimit" name="prlimit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>prlimit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Get and set a process' resource limits
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="raw" name="raw"></a><span class=
+                    "term"><span class="command"><strong>raw</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Bind a Linux raw character device to a block device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="readprofile" name="readprofile"></a><span class=
+                    "term"><span class=
+                    "command"><strong>readprofile</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads kernel profiling information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rename" name="rename"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rename</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Renames the given files, replacing a given string with
+                    another
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="renice" name="renice"></a><span class=
+                    "term"><span class=
+                    "command"><strong>renice</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Alters the priority of running processes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="resizepart" name="resizepart"></a><span class=
+                    "term"><span class=
+                    "command"><strong>resizepart</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Asks the Linux kernel to resize a partition
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rev" name="rev"></a><span class=
+                    "term"><span class="command"><strong>rev</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reverses the lines of a given file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rtcwake" name="rtcwake"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rtcwake</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to enter a system sleep state until specified wakeup
+                    time
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="script" name="script"></a><span class=
+                    "term"><span class=
+                    "command"><strong>script</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes a typescript of a terminal session
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="scriptreplay" name="scriptreplay"></a><span class=
+                    "term"><span class=
+                    "command"><strong>scriptreplay</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Plays back typescripts using timing information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setarch" name="setarch"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setarch</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes reported architecture in a new program
+                    environment and sets personality flags
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setsid" name="setsid"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setsid</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs the given program in a new session
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setterm" name="setterm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setterm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets terminal attributes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sfdisk" name="sfdisk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sfdisk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A disk partition table manipulator
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sulogin" name="sulogin"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sulogin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Allows <code class="systemitem">root</code> to log in; it
+                    is normally invoked by <span class=
+                    "command"><strong>init</strong></span> when the system
+                    goes into single user mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="swaplabel" name="swaplabel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>swaplabel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Allows to change swaparea UUID and label
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="swapoff" name="swapoff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>swapoff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Disables devices and files for paging and swapping
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="swapon" name="swapon"></a><span class=
+                    "term"><span class=
+                    "command"><strong>swapon</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Enables devices and files for paging and swapping and
+                    lists the devices and files currently in use
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="switch_root" name="switch_root"></a><span class=
+                    "term"><span class=
+                    "command"><strong>switch_root</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Switches to another filesystem as the root of the mount
+                    tree
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tailf" name="tailf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tailf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tracks the growth of a log file; displays the last 10
+                    lines of a log file, then continues displaying any new
+                    entries in the log file as they are created
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="taskset" name="taskset"></a><span class=
+                    "term"><span class=
+                    "command"><strong>taskset</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Retrieves or sets a process' CPU affinity
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ul" name="ul"></a><span class="term"><span class=
+                    "command"><strong>ul</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A filter for translating underscores into escape
+                    sequences indicating underlining for the terminal in use
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="umount" name="umount"></a><span class=
+                    "term"><span class=
+                    "command"><strong>umount</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Disconnects a file system from the system's file tree
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="uname26" name="uname26"></a><span class=
+                    "term"><span class=
+                    "command"><strong>uname26</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A symbolic link to setarch
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="unshare" name="unshare"></a><span class=
+                    "term"><span class=
+                    "command"><strong>unshare</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a program with some namespaces unshared from parent
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="utmpdump" name="utmpdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>utmpdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the content of the given login file in a more
+                    user-friendly format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="uuidd" name="uuidd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>uuidd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A daemon used by the UUID library to generate time-based
+                    UUIDs in a secure and guranteed-unique fashion
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="uuidgen" name="uuidgen"></a><span class=
+                    "term"><span class=
+                    "command"><strong>uuidgen</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates new UUIDs. Each new UUID can reasonably be
+                    considered unique among all UUIDs created, on the local
+                    system and on other systems, in the past and in the
+                    future
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="wall" name="wall"></a><span class=
+                    "term"><span class=
+                    "command"><strong>wall</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the contents of a file or, by default, its
+                    standard input, on the terminals of all currently logged
+                    in users
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="wdctl" name="wdctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>wdctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows hardware watchdog status
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="whereis" name="whereis"></a><span class=
+                    "term"><span class=
+                    "command"><strong>whereis</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the location of the binary, source, and man page
+                    for the given command
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="wipefs" name="wipefs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>wipefs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Wipes a filesystem signature from a device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="x86_64" name="x86_64"></a><span class=
+                    "term"><span class=
+                    "command"><strong>x86_64</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A symbolic link to setarch
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="zramctl" name="zramctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>zramctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A program to set up and control zram (compressed ram
+                    disk) devices
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libblkid" name="libblkid"></a><span class=
+                    "term"><code class="filename">libblkid</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains routines for device identification and token
+                    extraction
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libfdisk" name="libfdisk"></a><span class=
+                    "term"><code class="filename">libfdisk</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains routines for manipulating partition tables
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libmount" name="libmount"></a><span class=
+                    "term"><code class="filename">libmount</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains routines for block device mounting and
+                    unmounting
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libsmartcols" name="libsmartcols"></a><span class=
+                    "term"><code class="filename">libsmartcols</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains routines for aiding screen output in tabular
+                    form
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libuuid" name="libuuid"></a><span class=
+                    "term"><code class="filename">libuuid</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains routines for generating unique identifiers for
+                    objects that may be accessible beyond the local system
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dbus.html" title="D-Bus-1.10.14">Prev</a>
+          <p>
+            D-Bus-1.10.14
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="man-db.html" title="Man-DB-2.7.6.1">Next</a>
+          <p>
+            Man-DB-2.7.6.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

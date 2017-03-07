@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.36.&nbsp;Stripping
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xz.html" title="Xz-5.2.3">Prev</a>
+          <p>
+            Xz-5.2.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="changingowner.html" title=
+          "Changing Ownership">Next</a>
+          <p>
+            Changing Ownership
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-stripping" name="ch-tools-stripping"></a>5.36.
+        Stripping
+      </h1>
+      <p>
+        The steps in this section are optional, but if the LFS partition is
+        rather small, it is beneficial to learn that unnecessary items can be
+        removed. The executables and libraries built so far contain about 70
+        MB of unneeded debugging symbols. Remove those symbols with:
+      </p>
+      <pre class="userinput">
+<kbd class="command">strip --strip-debug /tools/lib/*
+/usr/bin/strip --strip-unneeded /tools/{,s}bin/*</kbd>
+</pre>
+      <p>
+        These commands will skip a number of files, reporting that it does
+        not recognize their file format. Most of these are scripts instead of
+        binaries. Also use the system strip command to include the strip
+        binary in /tools.
+      </p>
+      <p>
+        Take care <span class="emphasis"><em>not</em></span> to use
+        <em class="parameter"><code>--strip-unneeded</code></em> on the
+        libraries. The static ones would be destroyed and the toolchain
+        packages would need to be built all over again.
+      </p>
+      <p>
+        To save more, remove the documentation:
+      </p>
+      <pre class="userinput">
+<kbd class="command">rm -rf /tools/{,share}/{info,man,doc}</kbd>
+</pre>
+      <p>
+        At this point, you should have at least 3 GB of free space in
+        <code class="envar">$LFS</code> that can be used to build and install
+        Glibc and Gcc in the next phase. If you can build and install Glibc,
+        you can build and install the rest too.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xz.html" title="Xz-5.2.3">Prev</a>
+          <p>
+            Xz-5.2.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="changingowner.html" title=
+          "Changing Ownership">Next</a>
+          <p>
+            Changing Ownership
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

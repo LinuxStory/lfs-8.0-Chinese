@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      3.1.&nbsp;Introduction
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;3.&nbsp;Packages and Patches
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter03.html" title=
+          "Packages and Patches">Prev</a>
+          <p>
+            Packages and Patches
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="packages.html" title="All Packages">Next</a>
+          <p>
+            All Packages
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter03.html" title=
+          "Chapter&nbsp;3.&nbsp;Packages and Patches">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="materials-introduction" name="materials-introduction"></a>3.1.
+        Introduction
+      </h1>
+      <p>
+        This chapter includes a list of packages that need to be downloaded
+        in order to build a basic Linux system. The listed version numbers
+        correspond to versions of the software that are known to work, and
+        this book is based on their use. We highly recommend against using
+        newer versions because the build commands for one version may not
+        work with a newer version. The newest package versions may also have
+        problems that require work-arounds. These work-arounds will be
+        developed and stabilized in the development version of the book.
+      </p>
+      <p>
+        Download locations may not always be accessible. If a download
+        location has changed since this book was published, Google (<a class=
+        "ulink" href="http://www.google.com/">http://www.google.com/</a>)
+        provides a useful search engine for most packages. If this search is
+        unsuccessful, try one of the alternative means of downloading
+        discussed at <a class="ulink" href=
+        "http://www.linuxfromscratch.org/lfs/packages.html#packages">http://www.linuxfromscratch.org/lfs/packages.html#packages</a>.
+      </p>
+      <p>
+        Downloaded packages and patches will need to be stored somewhere that
+        is conveniently available throughout the entire build. A working
+        directory is also required to unpack the sources and build them.
+        <code class="filename">$LFS/sources</code> can be used both as the
+        place to store the tarballs and patches and as a working directory.
+        By using this directory, the required elements will be located on the
+        LFS partition and will be available during all stages of the building
+        process.
+      </p>
+      <p>
+        To create this directory, execute the following command, as user
+        <code class="systemitem">root</code>, before starting the download
+        session:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkdir -v $LFS/sources</kbd>
+</pre>
+      <p>
+        Make this directory writable and sticky. <span class=
+        "quote">&ldquo;<span class="quote">Sticky</span>&rdquo;</span> means
+        that even if multiple users have write permission on a directory,
+        only the owner of a file can delete the file within a sticky
+        directory. The following command will enable the write and sticky
+        modes:
+      </p>
+      <pre class="userinput">
+<kbd class="command">chmod -v a+wt $LFS/sources</kbd>
+</pre>
+      <p>
+        An easy way to download all of the packages and patches is by using
+        <a class="ulink" href="../wget-list">wget-list</a> as an input to
+        <span class="command"><strong>wget</strong></span>. For example:
+      </p>
+      <pre class="userinput">
+<kbd class=
+"command">wget --input-file=wget-list --continue --directory-prefix=$LFS/sources</kbd>
+</pre>
+      <p>
+        Additionally, starting with LFS-7.0, there is a separate file,
+        <a class="ulink" href="../md5sums">md5sums</a>, which can be used to
+        verify that all the correct packages are available before proceeding.
+        Place that file in <code class="filename">$LFS/sources</code> and
+        run:
+      </p>
+      <pre class="userinput">
+<kbd class="command">pushd $LFS/sources
+md5sum -c md5sums
+popd</kbd>
+</pre>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter03.html" title=
+          "Packages and Patches">Prev</a>
+          <p>
+            Packages and Patches
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="packages.html" title="All Packages">Next</a>
+          <p>
+            All Packages
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter03.html" title=
+          "Chapter&nbsp;3.&nbsp;Packages and Patches">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.24.&nbsp;Gettext-0.19.8.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">Prev</a>
+          <p>
+            Gawk-4.1.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <p>
+            Grep-3.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-gettext" name="ch-tools-gettext"></a>5.24.
+        Gettext-0.19.8.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Gettext package contains utilities for internationalization and
+          localization. These allow programs to be compiled with NLS (Native
+          Language Support), enabling them to output messages in the user's
+          native language.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.9 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">164 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.24.1. Installation of Gettext
+        </h2>
+        <p>
+          For our temporary set of tools, we only need to build and install
+          three programs from Gettext.
+        </p>
+        <p>
+          Prepare Gettext for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd gettext-tools
+EMACS="no" ./configure --prefix=/tools --disable-shared</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure option:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>EMACS="no"</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This prevents the configure script from determining where to
+                install Emacs Lisp files as the test is known to hang on some
+                hosts.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-shared</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                We do not need to install any of the shared Gettext libraries
+                at this time, therefore there is no need to build them.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C gnulib-lib
+make -C intl pluralx.c
+make -C src msgfmt
+make -C src msgmerge
+make -C src xgettext</kbd>
+</pre>
+        <p>
+          As only three programs have been compiled, it is not possible to
+          run the test suite without compiling additional support libraries
+          from the Gettext package. It is therefore not recommended to
+          attempt to run the test suite at this stage.
+        </p>
+        <p>
+          Install the <span class="command"><strong>msgfmt</strong></span>,
+          <span class="command"><strong>msgmerge</strong></span> and
+          <span class="command"><strong>xgettext</strong></span> programs:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter06/gettext.html#contents-gettext" title=
+          "6.47.2.&nbsp;Contents of Gettext">Section&nbsp;6.47.2,
+          &ldquo;Contents of Gettext.&rdquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">Prev</a>
+          <p>
+            Gawk-4.1.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <p>
+            Grep-3.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

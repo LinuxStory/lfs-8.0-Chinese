@@ -1,0 +1,786 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.49.&nbsp;E2fsprogs-1.43.4
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="procps-ng.html" title=
+          "Procps-ng-3.3.12">Prev</a>
+          <p>
+            Procps-ng-3.3.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="coreutils.html" title=
+          "Coreutils-8.26">Next</a>
+          <p>
+            Coreutils-8.26
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-e2fsprogs" name="ch-system-e2fsprogs"></a>6.49.
+        E2fsprogs-1.43.4
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The E2fsprogs package contains the utilities for handling the
+          <code class="systemitem">ext2</code> file system. It also supports
+          the <code class="systemitem">ext3</code> and <code class=
+          "systemitem">ext4</code> journaling file systems.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">4.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">57 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.49.1. Installation of E2fsprogs
+        </h2>
+        <p>
+          The E2fsprogs documentation recommends that the package be built in
+          a subdirectory of the source tree:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build
+cd build</kbd>
+</pre>
+        <p>
+          Prepare E2fsprogs for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">LIBS=-L/tools/lib                    \
+CFLAGS=-I/tools/include              \
+PKG_CONFIG_PATH=/tools/lib/pkgconfig \
+../configure --prefix=/usr           \
+             --bindir=/bin           \
+             --with-root-prefix=""   \
+             --enable-elf-shlibs     \
+             --disable-libblkid      \
+             --disable-libuuid       \
+             --disable-uuidd         \
+             --disable-fsck</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the environment variable and configure
+            options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>PKG_CONFIG_PATH,
+              LIBS, CFLAGS</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                These variables enable e2fsprogs to be built using the
+                <a class="xref" href="../chapter05/util-linux.html" title=
+                "5.34.&nbsp;Util-linux-2.29.1">Section&nbsp;5.34,
+                &ldquo;Util-linux-2.29.1&rdquo;</a> package built earlier.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-root-prefix=""</code></em> and
+              <em class="parameter"><code>--bindir=/bin</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Certain programs (such as the <span class=
+                "command"><strong>e2fsck</strong></span> program) are
+                considered essential programs. When, for example,
+                <code class="filename">/usr</code> is not mounted, these
+                programs still need to be available. They belong in
+                directories like <code class="filename">/lib</code> and
+                <code class="filename">/sbin</code>. If this option is not
+                passed to E2fsprogs' configure, the programs are installed
+                into the <code class="filename">/usr</code> directory.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-elf-shlibs</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This creates the shared libraries which some programs in this
+                package use.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-*</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This prevents E2fsprogs from building and installing the
+                <code class="systemitem">libuuid</code> and <code class=
+                "systemitem">libblkid</code> libraries, the <code class=
+                "systemitem">uuidd</code> daemon, and the <span class=
+                "command"><strong>fsck</strong></span> wrapper, as Util-Linux
+                installs more recent versions.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To set up and run the test suite we need to first link some
+          libraries from /tools/lib to a location where the test programs
+          look. To run the tests, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sfv /tools/lib/lib{blk,uu}id.so.1 lib
+make LD_LIBRARY_PATH=/tools/lib check</kbd>
+</pre>
+        <p>
+          One of the E2fsprogs tests will attempt to allocate 256 MB of
+          memory. If you do not have significantly more RAM than this, be
+          sure to enable sufficient swap space for the test. See <a class=
+          "xref" href="../chapter02/creatingfilesystem.html" title=
+          "2.5.&nbsp;Creating a File System on the Partition">Section&nbsp;2.5,
+          &ldquo;Creating a File System on the Partition&rdquo;</a> and
+          <a class="xref" href="../chapter02/mounting.html" title=
+          "2.7.&nbsp;Mounting the New Partition">Section&nbsp;2.7,
+          &ldquo;Mounting the New Partition&rdquo;</a> for details on
+          creating and enabling swap space.
+        </p>
+        <p>
+          Install the binaries, documentation, and shared libraries:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Install the static libraries and headers:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install-libs</kbd>
+</pre>
+        <p>
+          Make the installed static libraries writable so debugging symbols
+          can be removed later:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">chmod -v u+w /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a</kbd>
+</pre>
+        <p>
+          This package installs a gzipped <code class="filename">.info</code>
+          file but doesn't update the system-wide <code class=
+          "filename">dir</code> file. Unzip this file and then update the
+          system <code class="filename">dir</code> file using the following
+          commands.
+        </p>
+        <pre class="userinput">
+<kbd class="command">gunzip -v /usr/share/info/libext2fs.info.gz
+install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info</kbd>
+</pre>
+        <p>
+          If desired, create and install some additional documentation by
+          issuing the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">makeinfo -o      doc/com_err.info ../lib/et/com_err.texinfo
+install -v -m644 doc/com_err.info /usr/share/info
+install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-e2fsprogs" name="contents-e2fsprogs"></a>6.49.2.
+          Contents of E2fsprogs
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">badblocks, chattr, compile_et, debugfs,
+              dumpe2fs,e2freefrag, e2fsck, e2image, e2label, e2undo,
+              e4defrag, filefrag, fsck.ext2, fsck.ext3, fsck.ext4,
+              fsck.ext4dev, logsave, lsattr, mk_cmds, mke2fs, mkfs.ext2,
+              mkfs.ext3, mkfs.ext4, mkfs.ext4dev, mklost+found, resize2fs,
+              and tune2fs</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libcom_err.so, libe2p.so, libext2fs.so,
+              and libss.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/e2p, /usr/include/et,
+              /usr/include/ext2fs, /usr/include/ss, /usr/share/et, and
+              /usr/share/ss</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="badblocks" name="badblocks"></a><span class=
+                    "term"><span class=
+                    "command"><strong>badblocks</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Searches a device (usually a disk partition) for bad
+                    blocks
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chattr" name="chattr"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chattr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the attributes of files on an <code class=
+                    "systemitem">ext2</code> file system; it also changes
+                    <code class="systemitem">ext3</code> file systems, the
+                    journaling version of <code class=
+                    "systemitem">ext2</code> file systems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="compile_et" name="compile_et"></a><span class=
+                    "term"><span class=
+                    "command"><strong>compile_et</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    An error table compiler; it converts a table of
+                    error-code names and messages into a C source file
+                    suitable for use with the <code class=
+                    "filename">com_err</code> library
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="debugfs" name="debugfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>debugfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A file system debugger; it can be used to examine and
+                    change the state of an <code class=
+                    "systemitem">ext2</code> file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dumpe2fs" name="dumpe2fs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dumpe2fs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the super block and blocks group information for
+                    the file system present on a given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="e2freefrag" name="e2freefrag"></a><span class=
+                    "term"><span class=
+                    "command"><strong>e2freefrag</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports free space fragmentation information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="e2fsck" name="e2fsck"></a><span class=
+                    "term"><span class=
+                    "command"><strong>e2fsck</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to check, and optionally repair <code class=
+                    "systemitem">ext2</code> file systems and <code class=
+                    "systemitem">ext3</code> file systems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="e2image" name="e2image"></a><span class=
+                    "term"><span class=
+                    "command"><strong>e2image</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to save critical <code class=
+                    "systemitem">ext2</code> file system data to a file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="e2label" name="e2label"></a><span class=
+                    "term"><span class=
+                    "command"><strong>e2label</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays or changes the file system label on the
+                    <code class="systemitem">ext2</code> file system present
+                    on a given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="e2undo" name="e2undo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>e2undo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Replays the undo log undo_log for an ext2/ext3/ext4
+                    filesystem found on a device [This can be used to undo a
+                    failed operation by an e2fsprogs program.]
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="e4defrag" name="e4defrag"></a><span class=
+                    "term"><span class=
+                    "command"><strong>e4defrag</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Online defragmenter for ext4 filesystems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="filefrag" name="filefrag"></a><span class=
+                    "term"><span class=
+                    "command"><strong>filefrag</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports on how badly fragmented a particular file might
+                    be
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck.ext2" name="fsck.ext2"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck.ext2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default checks <code class="systemitem">ext2</code>
+                    file systems and is a hard link to <span class=
+                    "command"><strong>e2fsck</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck.ext3" name="fsck.ext3"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck.ext3</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default checks <code class="systemitem">ext3</code>
+                    file systems and is a hard link to <span class=
+                    "command"><strong>e2fsck</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck.ext4" name="fsck.ext4"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck.ext4</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default checks <code class="systemitem">ext4</code>
+                    file systems and is a hard link to <span class=
+                    "command"><strong>e2fsck</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsck.ext4dev" name="fsck.ext4dev"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsck.ext4dev</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default checks <code class="systemitem">ext4</code>
+                    development file systems and is a hard link to
+                    <span class="command"><strong>e2fsck</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="logsave" name="logsave"></a><span class=
+                    "term"><span class=
+                    "command"><strong>logsave</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Saves the output of a command in a log file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lsattr" name="lsattr"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lsattr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists the attributes of files on a second extended file
+                    system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mk_cmds" name="mk_cmds"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mk_cmds</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts a table of command names and help messages into
+                    a C source file suitable for use with the <code class=
+                    "filename">libss</code> subsystem library
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mke2fs" name="mke2fs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mke2fs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates an <code class="systemitem">ext2</code> or
+                    <code class="systemitem">ext3</code> file system on the
+                    given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.ext2" name="mkfs.ext2"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.ext2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default creates <code class="systemitem">ext2</code>
+                    file systems and is a hard link to <span class=
+                    "command"><strong>mke2fs</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.ext3" name="mkfs.ext3"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.ext3</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default creates <code class="systemitem">ext3</code>
+                    file systems and is a hard link to <span class=
+                    "command"><strong>mke2fs</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.ext4" name="mkfs.ext4"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.ext4</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default creates <code class="systemitem">ext4</code>
+                    file systems and is a hard link to <span class=
+                    "command"><strong>mke2fs</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfs.ext4dev" name="mkfs.ext4dev"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfs.ext4dev</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    By default creates <code class="systemitem">ext4</code>
+                    development file systems and is a hard link to
+                    <span class="command"><strong>mke2fs</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mklost-found" name="mklost-found"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mklost+found</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to create a <code class="filename">lost+found</code>
+                    directory on an <code class="systemitem">ext2</code> file
+                    system; it pre-allocates disk blocks to this directory to
+                    lighten the task of <span class=
+                    "command"><strong>e2fsck</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="resize2fs" name="resize2fs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>resize2fs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Can be used to enlarge or shrink an <code class=
+                    "systemitem">ext2</code> file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tune2fs" name="tune2fs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tune2fs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Adjusts tunable file system parameters on an <code class=
+                    "systemitem">ext2</code> file system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcom_err" name="libcom_err"></a><span class=
+                    "term"><code class="filename">libcom_err</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The common error display routine
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libe2p" name="libe2p"></a><span class=
+                    "term"><code class="filename">libe2p</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used by <span class=
+                    "command"><strong>dumpe2fs</strong></span>, <span class=
+                    "command"><strong>chattr</strong></span>, and
+                    <span class="command"><strong>lsattr</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libext2fs" name="libext2fs"></a><span class=
+                    "term"><code class="filename">libext2fs</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains routines to enable user-level programs to
+                    manipulate an <code class="systemitem">ext2</code> file
+                    system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libss" name="libss"></a><span class=
+                    "term"><code class="filename">libss</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used by <span class=
+                    "command"><strong>debugfs</strong></span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="procps-ng.html" title=
+          "Procps-ng-3.3.12">Prev</a>
+          <p>
+            Procps-ng-3.3.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="coreutils.html" title=
+          "Coreutils-8.26">Next</a>
+          <p>
+            Coreutils-8.26
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
