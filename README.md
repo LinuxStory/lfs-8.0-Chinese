@@ -48,6 +48,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 4. 项目中使用到的术语、专业名词，请更新到术语表中 https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md 
 5. 编辑器请统一使用 UTF-8 无BOM，Windows 下尽量使用 Notepad++，Linux 和 Mac 不做约束
 6. 术语尽量保证和已翻译的一致，也可以查询[微软术语搜索](http://www.microsoft.com/Language/zh-cn/Search.aspx)
+7. 具体页面中出现的 "Prev","Next","Home","Up"统一翻译为：“上一页”“下一页”“首页”和“返回”
 
 ### 项目约定
 1. 建议大家每天抽出一小时或者每周抽出三小时（或更多），不要把工作留到最后，打铁趁热，一鼓作气
