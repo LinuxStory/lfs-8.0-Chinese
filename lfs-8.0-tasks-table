@@ -124,32 +124,32 @@ Table of Contents lfs-8.0 目录
             Expat-2.2.0                     (@Cabbagec)
             Inetutils-1.9.4                     (@Cabbagec)
             Perl-5.24.1                     (@Cabbagec)
-            XML::Parser-2.44
-            Intltool-0.51.0
-            Autoconf-2.69
-            Automake-1.15
-            Xz-5.2.3
-            Kmod-23
-            Gettext-0.19.8.1
-            Procps-ng-3.3.12
-            E2fsprogs-1.43.4
-            Coreutils-8.26
-            Diffutils-3.5
-            Gawk-4.1.4
-            Findutils-4.6.0
-            Groff-1.22.3
-            GRUB-2.02~beta3
-            Less-481
-            Gzip-1.8
-            IPRoute2-4.9.0
-            Kbd-2.0.4
-            Libpipeline-1.4.1
-            Make-4.2.1
-            Patch-2.7.5
-            Sysklogd-1.5.1
-            Sysvinit-2.88dsf
-            Eudev-3.2.1
-            Util-linux-2.29.1
+            XML::Parser-2.44                (@andyhuzhill)
+            Intltool-0.51.0               (@andyhuzhill)
+            Autoconf-2.69               (@andyhuzhill)
+            Automake-1.15               (@andyhuzhill)
+            Xz-5.2.3               (@andyhuzhill)
+            Kmod-23               (@andyhuzhill)
+            Gettext-0.19.8.1               (@andyhuzhill)
+            Procps-ng-3.3.12               (@andyhuzhill)
+            E2fsprogs-1.43.4               (@andyhuzhill)
+            Coreutils-8.26               (@andyhuzhill)
+            Diffutils-3.5                 (@zhaofengming)
+            Gawk-4.1.4                  (@zilu)
+            Findutils-4.6.0                   (@zilu)
+            Groff-1.22.3                  (@zilu)
+            GRUB-2.02~beta3                  (@zilu)
+            Less-481                  (@zilu)
+            Gzip-1.8                  (@zilu)
+            IPRoute2-4.9.0                  (@zilu)
+            Kbd-2.0.4                  (@zilu)
+            Libpipeline-1.4.1                  (@zilu)
+            Make-4.2.1                  (@zilu)
+            Patch-2.7.5                  (@zilu)
+            Sysklogd-1.5.1                (@zhaofengming)
+            Sysvinit-2.88dsf                (@zhaofengming)
+            Eudev-3.2.1                (@zhaofengming)
+            Util-linux-2.29.1                (@zhaofengming)
             Man-DB-2.7.6.1              (@heart4lor)
             Tar-1.29              (@heart4lor)
             Texinfo-6.3              (@heart4lor)
