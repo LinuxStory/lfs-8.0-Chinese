@@ -18,12 +18,12 @@ Table of Contents lfs-8.0 目录
         Structure
         Errata
     I. Introduction
-        1. Introduction
-            How to Build an LFS System
-            What's new since the last release
-            Changelog
-            Resources
-            Help
+        1. Introduction               （@heart4lor）
+            How to Build an LFS System               （@heart4lor）
+            What's new since the last release               （@heart4lor）
+            Changelog               （@heart4lor）
+            Resources               （@heart4lor）
+            Help               （@heart4lor）
     II. Preparing for the Build
         2. Preparing the Host System            （Yizhao）
             Introduction           （Yizhao）
@@ -167,16 +167,16 @@ Table of Contents lfs-8.0 目录
             The Bash Shell Startup Files            （@muzikmoe）
             Creating the /etc/inputrc File            （@muzikmoe）
             Creating the /etc/shells File            （@muzikmoe）
-        8. Making the LFS System Bootable             （@王炯）
-            Introduction             （@王炯）
-            Creating the /etc/fstab File             （@王炯）
-            Linux-4.9.9             （@王炯）
-            Using GRUB to Set Up the Boot Process             （@王炯）
-        9. The End
-            The End
-            Get Counted
-            Rebooting the System
-            What Now?
+        8. Making the LFS System Bootable             （@泳奎）
+            Introduction             （@泳奎）
+            Creating the /etc/fstab File             （@泳奎）
+            Linux-4.9.9             （@泳奎）
+            Using GRUB to Set Up the Boot Process             （@泳奎）
+        9. The End             （@王炯）
+            The End             （@王炯）
+            Get Counted             （@王炯）
+            Rebooting the System             （@王炯）
+            What Now?             （@王炯）
     IV. Appendices
         A. Acronyms and Terms
         B. Acknowledgments
