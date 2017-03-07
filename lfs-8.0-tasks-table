@@ -104,16 +104,16 @@ Table of Contents lfs-8.0 目录
             Bzip2-1.0.6              (@yedamao)
             Pkg-config-0.29.1              (@yedamao)
             Ncurses-6.0              (@yedamao)
-            Attr-2.4.47
-            Acl-2.2.52
-            Libcap-2.25
-            Sed-4.4
-            Shadow-4.4
-            Psmisc-22.21
-            Iana-Etc-2.30
-            M4-1.4.18
-            Bison-3.0.4
-            Flex-2.6.3
+            Attr-2.4.47                     (@banner1024)    
+            Acl-2.2.52                    (@banner1024)    
+            Libcap-2.25                    (@banner1024)    
+            Sed-4.4                    (@banner1024)    
+            Shadow-4.4                    (@banner1024)    
+            Psmisc-22.21                    (@banner1024)    
+            Iana-Etc-2.30                    (@banner1024)    
+            M4-1.4.18                    (@banner1024)    
+            Bison-3.0.4                    (@banner1024)    
+            Flex-2.6.3                    (@banner1024)    
             Grep-3.0
             Readline-7.0
             Bash-4.4
