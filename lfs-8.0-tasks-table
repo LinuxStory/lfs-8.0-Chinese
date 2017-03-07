@@ -18,70 +18,70 @@ Table of Contents lfs-8.0 目录
         Structure
         Errata
     I. Introduction
-        1. Introduction               （@heart4lor）
-            How to Build an LFS System               （@heart4lor）
-            What's new since the last release               （@heart4lor）
-            Changelog               （@heart4lor）
-            Resources               （@heart4lor）
-            Help               （@heart4lor）
+        1. Introduction               (@heart4lor)
+            How to Build an LFS System                   (@heart4lor)
+            What's new since the last release             (@heart4lor)
+            Changelog                     (@heart4lor)
+            Resources                 (@heart4lor)
+            Help                       (@heart4lor)
     II. Preparing for the Build
-        2. Preparing the Host System            （@Geno1024）
-            Introduction             （@Geno1024）
-            Host System Requirements             （@Geno1024）
-            Building LFS in Stages             （@Geno1024）
-            Creating a New Partition             （@Geno1024）
-            Creating a File System on the Partition             （@Geno1024）
-            Setting The $LFS Variable            （@Geno1024）
-            Mounting the New Partition             （@Geno1024）
+        2. Preparing the Host System                     (@Geno1024)
+            Introduction                     (@Geno1024)
+            Host System Requirements                (@Geno1024)
+            Building LFS in Stages                   (@Geno1024)
+            Creating a New Partition                    (@Geno1024)
+            Creating a File System on the Partition                      (@Geno1024)
+            Setting The $LFS Variable                (@Geno1024)
+            Mounting the New Partition              (@Geno1024)
         3. Packages and Patches
             Introduction
             All Packages
             Needed Patches
-        4. Final Preparations               （@Hirozy）
-            Introduction               （@Hirozy）
-            Creating the $LFS/tools Directory               （@Hirozy）
-            Adding the LFS User               （@Hirozy）
-            Setting Up the Environment               （@Hirozy）
-            About SBUs               （@Hirozy）
-            About the Test Suites               （@Hirozy）
-        5. Constructing a Temporary System         （@Gilbert-Wong）
-            Introduction        （@Gilbert-Wong）
-            Toolchain Technical Notes        （@Gilbert-Wong）
-            General Compilation Instructions
-            Binutils-2.27 - Pass 1
-            GCC-6.3.0 - Pass 1
-            Linux-4.9.9 API Headers
+        4. Final Preparations               (@Hirozy)
+            Introduction                  (@Hirozy)
+            Creating the $LFS/tools Directory                (@Hirozy)
+            Adding the LFS User                (@Hirozy)
+            Setting Up the Environment                (@Hirozy)
+            About SBUs               (@Hirozy)
+            About the Test Suites              (@Hirozy)
+        5. Constructing a Temporary System         (@Gilbert-Wong)
+            Introduction            (@Gilbert-Wong)
+            Toolchain Technical Notes            (@Gilbert-Wong)
+            General Compilation Instructions             (@mumuxme)
+            Binutils-2.27 - Pass 1             (@mumuxme)
+            GCC-6.3.0 - Pass 1             (@mumuxme)
+            Linux-4.9.9 API Headers             (@mumuxme)
             Glibc-2.25            （@Geno1024）
-            Libstdc++-6.3.0
-            Binutils-2.27 - Pass 2
-            GCC-6.3.0 - Pass 2
-            Tcl-core-8.6.6
-            Expect-5.45
-            DejaGNU-1.6
-            Check-0.11.0
-            Ncurses-6.0
-            Bash-4.4
-            Bison-3.0.4
-            Bzip2-1.0.6
-            Coreutils-8.26
-            Diffutils-3.5
-            File-5.30
-            Findutils-4.6.0
-            Gawk-4.1.4
-            Gettext-0.19.8.1
-            Grep-3.0
-            Gzip-1.8
-            M4-1.4.18
-            Make-4.2.1
-            Patch-2.7.5
-            Perl-5.24.1
-            Sed-4.4
-            Tar-1.29
-            Texinfo-6.3
-            Util-linux-2.29.1
-            Xz-5.2.3
-            Stripping
-            Changing Ownership
+            Libstdc++-6.3.0             (@mumuxme)
+            Binutils-2.27 - Pass 2             (@mumuxme)
+            GCC-6.3.0 - Pass 2             (@mumuxme)
+            Tcl-core-8.6.6             (@mumuxme)
+            Expect-5.45             (@mumuxme)
+            DejaGNU-1.6             (@mumuxme)
+            Check-0.11.0             (@mumuxme)
+            Ncurses-6.0             (@mumuxme)
+            Bash-4.4             (@mumuxme)
+            Bison-3.0.4             (@mumuxme)
+            Bzip2-1.0.6             (@mumuxme)
+            Coreutils-8.26             (@mumuxme)
+            Diffutils-3.5             (@mumuxme)
+            File-5.30             (@mumuxme)
+            Findutils-4.6.0             (@mumuxme)
+            Gawk-4.1.4             (@mumuxme)
+            Gettext-0.19.8.1             (@mumuxme)
+            Grep-3.0             (@mumuxme)
+            Gzip-1.8             (@mumuxme)
+            M4-1.4.18             (@mumuxme)
+            Make-4.2.1             (@mumuxme)
+            Patch-2.7.5             (@mumuxme)
+            Perl-5.24.1             (@mumuxme)
+            Sed-4.4             (@mumuxme)
+            Tar-1.29             (@mumuxme)
+            Texinfo-6.3             (@mumuxme)
+            Util-linux-2.29.1             (@mumuxme)
+            Xz-5.2.3             (@mumuxme)
+            Stripping             (@mumuxme)
+            Changing Ownership             (@mumuxme)
     III. Building the LFS System
         6. Installing Basic System Software
             Introduction
@@ -92,7 +92,7 @@ Table of Contents lfs-8.0 目录
             Creating Essential Files and Symlinks
             Linux-4.9.9 API Headers
             Man-pages-4.09
-            Glibc-2.25      （@Geno1024）
+            Glibc-2.25             (@Geno1024)
             Adjusting the Toolchain
             Zlib-1.2.11
             File-5.30
