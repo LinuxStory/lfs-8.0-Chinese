@@ -13,10 +13,10 @@ Table of Contents lfs-8.0 目录
         LFS Target Architectures                 (@bootingman)
         LFS and Standards            (@bootingman)
         Rationale for Packages in the Book            (@bootingman)
-        Prerequisites
-        Typography
-        Structure
-        Errata
+        Prerequisites             (@21vianetchinaedu)
+        Typography             (@21vianetchinaedu)
+        Structure             (@21vianetchinaedu)
+        Errata             (@21vianetchinaedu)
     I. Introduction
         1. Introduction               (@heart4lor)
             How to Build an LFS System                   (@heart4lor)
@@ -178,10 +178,10 @@ Table of Contents lfs-8.0 目录
             Rebooting the System             （@strange-jiong）
             What Now?             （@strange-jiong）
     IV. Appendices
-        A. Acronyms and Terms
-        B. Acknowledgments
-        C. Dependencies
-        D. Boot and sysconfig scripts version-20150222
+        A. Acronyms and Terms              (@21vianetchinaedu)
+        B. Acknowledgments             (@21vianetchinaedu)
+        C. Dependencies             (@21vianetchinaedu)
+        D. Boot and sysconfig scripts version-20150222             (@21vianetchinaedu)
             /etc/rc.d/init.d/rc
             /lib/lsb/init-functions
             /etc/rc.d/init.d/mountvirtfs
