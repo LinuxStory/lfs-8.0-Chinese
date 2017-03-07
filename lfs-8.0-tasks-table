@@ -93,17 +93,17 @@ Table of Contents lfs-8.0 目录
             Linux-4.9.9 API Headers              (@lzgh64)
             Man-pages-4.09              (@lzgh64)
             Glibc-2.25             (@Geno1024)
-            Adjusting the Toolchain
-            Zlib-1.2.11
-            File-5.30
-            Binutils-2.27
-            GMP-6.1.2
-            MPFR-3.1.5
-            MPC-1.0.3
-            GCC-6.3.0
-            Bzip2-1.0.6
-            Pkg-config-0.29.1
-            Ncurses-6.0
+            Adjusting the Toolchain              (@yedamao)
+            Zlib-1.2.11              (@yedamao)
+            File-5.30              (@yedamao)
+            Binutils-2.27              (@yedamao)
+            GMP-6.1.2              (@yedamao)
+            MPFR-3.1.5              (@yedamao)
+            MPC-1.0.3              (@yedamao)
+            GCC-6.3.0              (@yedamao)
+            Bzip2-1.0.6              (@yedamao)
+            Pkg-config-0.29.1              (@yedamao)
+            Ncurses-6.0              (@yedamao)
             Attr-2.4.47
             Acl-2.2.52
             Libcap-2.25
