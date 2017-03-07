@@ -34,9 +34,9 @@ Table of Contents lfs-8.0 目录
             Setting The $LFS Variable                (@Geno1024)
             Mounting the New Partition              (@Geno1024)
         3. Packages and Patches                  (loopio)
-            Introduction                 (loopio)
-            All Packages                 (loopio)
-            Needed Patches                 (loopio)
+            Introduction                 (@loopio)
+            All Packages                 (@loopio)
+            Needed Patches                 (@loopio)
         4. Final Preparations               (@Hirozy)
             Introduction                  (@Hirozy)
             Creating the $LFS/tools Directory                (@Hirozy)
@@ -182,7 +182,7 @@ Table of Contents lfs-8.0 目录
         B. Acknowledgments             (@21vianetchinaedu)
         C. Dependencies             (@21vianetchinaedu)
         D. Boot and sysconfig scripts version-20150222             (@21vianetchinaedu)
-            /etc/rc.d/init.d/rc
+            /etc/rc.d/init.d/rc                         
             /lib/lsb/init-functions
             /etc/rc.d/init.d/mountvirtfs
             /etc/rc.d/init.d/modules
@@ -209,8 +209,8 @@ Table of Contents lfs-8.0 目录
             /sbin/ifdown
             /lib/services/ipv4-static
             /lib/services/ipv4-static-route
-        E. Udev configuration rules
-            55-lfs.rules
-        F. LFS Licenses
-            Creative Commons License
-            The MIT License
+        E. Udev configuration rules                  (@qq296776435)
+            55-lfs.rules                  (@qq296776435)
+        F. LFS Licenses                  (@qq296776435)
+            Creative Commons License                  (@qq296776435)
+            The MIT License                  (@qq296776435)
