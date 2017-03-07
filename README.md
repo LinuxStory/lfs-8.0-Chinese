@@ -76,8 +76,9 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 ## 关于版权
 根据原著作者的要求，翻译成果属于公有领域(CC0)，翻译参与人员及原著作者享有署名权，署名顺序将按加入项目的顺序排列。
 
-## 学习资料
-1. 如果不太了解 github 使用？
+## 如果不太了解 lfs ？
+ - [维基百科上的介绍 Linux From Scratch](https://zh.wikipedia.org/wiki/Linux_From_Scratch)
+## 如果不太了解 github 使用？
 - [GitHub 入门使用教程-图文并茂](http://developer.51cto.com/art/201407/446249_all.htm) 很简洁的说明如何使用，看图即可明白。 
 - [GitHub help](https://help.github.com/) Sometimes you just need a little help. 中文翻译版在此[GitHub 帮助文档](https://github.com/waylau/github-help)。
 - [GitHub 之 fork 简介指南](https://linux.cn/article-4292-1.html) 帮你理解清楚什么是fork，fork 的工作流有哪些。
