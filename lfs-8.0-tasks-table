@@ -25,14 +25,14 @@ Table of Contents lfs-8.0 目录
             Resources               （@heart4lor）
             Help               （@heart4lor）
     II. Preparing for the Build
-        2. Preparing the Host System            （Yizhao）
-            Introduction           （Yizhao）
-            Host System Requirements           （Yizhao）
-            Building LFS in Stages           （Yizhao）
-            Creating a New Partition           （Yizhao）
-            Creating a File System on the Partition           （Yizhao）
-            Setting The $LFS Variable           （Yizhao）
-            Mounting the New Partition           （Yizhao）
+        2. Preparing the Host System            （@Geno1024）
+            Introduction             （@Geno1024）
+            Host System Requirements             （@Geno1024）
+            Building LFS in Stages             （@Geno1024）
+            Creating a New Partition             （@Geno1024）
+            Creating a File System on the Partition             （@Geno1024）
+            Setting The $LFS Variable            （@Geno1024）
+            Mounting the New Partition             （@Geno1024）
         3. Packages and Patches
             Introduction
             All Packages
@@ -44,14 +44,14 @@ Table of Contents lfs-8.0 目录
             Setting Up the Environment               （@Hirozy）
             About SBUs               （@Hirozy）
             About the Test Suites               （@Hirozy）
-        5. Constructing a Temporary System
-            Introduction
-            Toolchain Technical Notes
+        5. Constructing a Temporary System         （@Gilbert-Wong）
+            Introduction        （@Gilbert-Wong）
+            Toolchain Technical Notes        （@Gilbert-Wong）
             General Compilation Instructions
             Binutils-2.27 - Pass 1
             GCC-6.3.0 - Pass 1
             Linux-4.9.9 API Headers
-            Glibc-2.25
+            Glibc-2.25            （@Geno1024）
             Libstdc++-6.3.0
             Binutils-2.27 - Pass 2
             GCC-6.3.0 - Pass 2
@@ -92,7 +92,7 @@ Table of Contents lfs-8.0 目录
             Creating Essential Files and Symlinks
             Linux-4.9.9 API Headers
             Man-pages-4.09
-            Glibc-2.25
+            Glibc-2.25      （@Geno1024）
             Adjusting the Toolchain
             Zlib-1.2.11
             File-5.30
@@ -157,26 +157,26 @@ Table of Contents lfs-8.0 目录
             About Debugging Symbols
             Stripping Again
             Cleaning Up
-        7. System Configuration            （@muzikmoe）
-            Introduction            （@muzikmoe）
-            LFS-Bootscripts-20150222            （@muzikmoe）
-            Overview of Device and Module Handling            （@muzikmoe）
-            Managing Devices            （@muzikmoe）
+        7. System Configuration            （@fooozhe）
+            Introduction              （@fooozhe）
+            LFS-Bootscripts-20150222              （@fooozhe）
+            Overview of Device and Module Handling             （@fooozhe）
+            Managing Devices               （@fooozhe）
             General Network Configuration            （@muzikmoe）
             System V Bootscript Usage and Configuration            （@muzikmoe）
             The Bash Shell Startup Files            （@muzikmoe）
             Creating the /etc/inputrc File            （@muzikmoe）
             Creating the /etc/shells File            （@muzikmoe）
-        8. Making the LFS System Bootable             （@泳奎）
-            Introduction             （@泳奎）
-            Creating the /etc/fstab File             （@泳奎）
-            Linux-4.9.9             （@泳奎）
-            Using GRUB to Set Up the Boot Process             （@泳奎）
-        9. The End             （@王炯）
-            The End             （@王炯）
-            Get Counted             （@王炯）
-            Rebooting the System             （@王炯）
-            What Now?             （@王炯）
+        8. Making the LFS System Bootable             （@qq296776435）
+            Introduction            （@qq296776435）
+            Creating the /etc/fstab File             （@qq296776435）
+            Linux-4.9.9             （@qq296776435）
+            Using GRUB to Set Up the Boot Process            （@qq296776435）
+        9. The End             （@strange-jiong）
+            The End             （@strange-jiong）
+            Get Counted             （@strange-jiong）
+            Rebooting the System             （@strange-jiong）
+            What Now?             （@strange-jiong）
     IV. Appendices
         A. Acronyms and Terms
         B. Acknowledgments
