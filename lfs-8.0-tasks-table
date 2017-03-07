@@ -83,15 +83,15 @@ Table of Contents lfs-8.0 目录
             Stripping             (@mumuxme)
             Changing Ownership             (@mumuxme)
     III. Building the LFS System
-        6. Installing Basic System Software
-            Introduction
-            Preparing Virtual Kernel File Systems
-            Package Management
-            Entering the Chroot Environment
-            Creating Directories
-            Creating Essential Files and Symlinks
-            Linux-4.9.9 API Headers
-            Man-pages-4.09
+        6. Installing Basic System Software               (@lzgh64)
+            Introduction              (@lzgh64)
+            Preparing Virtual Kernel File Systems              (@lzgh64)
+            Package Management              (@lzgh64)
+            Entering the Chroot Environment              (@lzgh64)
+            Creating Directories              (@lzgh64)
+            Creating Essential Files and Symlinks              (@lzgh64)
+            Linux-4.9.9 API Headers              (@lzgh64)
+            Man-pages-4.09              (@lzgh64)
             Glibc-2.25             (@Geno1024)
             Adjusting the Toolchain
             Zlib-1.2.11
