@@ -33,10 +33,10 @@ Table of Contents lfs-8.0 目录
             Creating a File System on the Partition                      (@Geno1024)
             Setting The $LFS Variable                (@Geno1024)
             Mounting the New Partition              (@Geno1024)
-        3. Packages and Patches
-            Introduction
-            All Packages
-            Needed Patches
+        3. Packages and Patches                  (loopio)
+            Introduction                 (loopio)
+            All Packages                 (loopio)
+            Needed Patches                 (loopio)
         4. Final Preparations               (@Hirozy)
             Introduction                  (@Hirozy)
             Creating the $LFS/tools Directory                (@Hirozy)
