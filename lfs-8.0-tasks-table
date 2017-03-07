@@ -150,13 +150,13 @@ Table of Contents lfs-8.0 目录
             Sysvinit-2.88dsf
             Eudev-3.2.1
             Util-linux-2.29.1
-            Man-DB-2.7.6.1
-            Tar-1.29
-            Texinfo-6.3
-            Vim-8.0.069
-            About Debugging Symbols
-            Stripping Again
-            Cleaning Up
+            Man-DB-2.7.6.1              (@heart4lor)
+            Tar-1.29              (@heart4lor)
+            Texinfo-6.3              (@heart4lor)
+            Vim-8.0.069              (@heart4lor)
+            About Debugging Symbols              (@heart4lor)
+            Stripping Again              (@heart4lor)
+            Cleaning Up              (@heart4lor)
         7. System Configuration            （@fooozhe）
             Introduction              （@fooozhe）
             LFS-Bootscripts-20150222              （@fooozhe）
