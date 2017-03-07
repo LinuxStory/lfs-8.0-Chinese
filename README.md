@@ -35,6 +35,8 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 ## 任务分配 
 请大家在认领的章节后面加上自己的 github 用户名，并需要注意，为了提高效率，理论上，如果认领了lfs8.0的某章节，也需要认领 lfs 8.0 systemd 的对应章节。任务认领的时候，建议老手礼让新手，让新手优先认领比较容易（相对）的章节。
 
+请优先认领 lfs-8.0 ，届时也将以 lfs-8.0 任务分配表优先
+
 1. lfs-8.0 任务分配表 https://github.com/LinuxStory/lfs-8.0-Chinese/blob/master/lfs-8.0-tasks-table
 2. lfs-8.0-systemd 任务分配表 https://github.com/LinuxStory/lfs-8.0-Chinese/blob/master/lfs-8.0-systemd-tasks-table
 
