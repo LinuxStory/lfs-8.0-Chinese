@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      5.1.&nbsp;Introduction
+      5.1.&nbsp;简介
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,26 +19,26 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章&nbsp;构建临时系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter05.html" title=
-          "Constructing a Temporary System">Prev</a>
+          "构建临时系统">上一页</a>
           <p>
-            Constructing a Temporary System
+                构建临时系统
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="toolchaintechnotes.html" title=
-          "Toolchain Technical Notes">Next</a>
+          "工具链技术说明">下一页</a>
           <p>
-            Toolchain Technical Notes
+            工具链技术说明
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;构建临时系统">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -49,9 +49,14 @@
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-tools-introduction" name="ch-tools-introduction"></a>5.1.
-        Introduction
+        
       </h1>
       <p>
+        本章节向您展示如何构建一个最小型的linux系统。该系统将正好包含足够的
+        工具来构建<a class="xref" href="../chapter06/chapter06.html" title=
+        "第六章&nbsp;安装基础系统软件">第六章</a>所述的最终版LFS系统，同时还
+        提供了比最低限度环境更具备用户便利性的工作环境。
+
         This chapter shows how to build a minimal Linux system. This system
         will contain just enough tools to start constructing the final LFS
         system in <a class="xref" href="../chapter06/chapter06.html" title=
@@ -60,12 +65,20 @@
         minimum environment would.
       </p>
       <p>
+        构建该系统分两步。第一步，构建一个新的并且独立与主机的工具链（编译器，
+        汇编器，链接器，库和一些有用的工具）。第二步，使用这个工具链去构建其
+        它基础工具。
+
         There are two steps in building this minimal system. The first step
         is to build a new and host-independent toolchain (compiler,
         assembler, linker, libraries, and a few useful utilities). The second
         step uses this toolchain to build the other essential tools.
       </p>
       <p>
+        本章节编译好的文件将会被安装在<code class="filename">$LFS/tools</code>
+        路径下，这些文件会与下一章节安装好的文件以及宿主系统生成的目录分开。之
+        所以这么做是因为这些编译好的包是临时文件，我们并不想让这些文件污染即
+        将制作好的LFS系统。
         The files compiled in this chapter will be installed under the
         <code class="filename">$LFS/tools</code> directory to keep them
         separate from the files installed in the next chapter and the host
@@ -77,21 +90,21 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter05.html" title=
-          "Constructing a Temporary System">Prev</a>
+          "构建临时系统">上一页</a>
           <p>
-            Constructing a Temporary System
+            构建临时系统
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="toolchaintechnotes.html" title=
-          "Toolchain Technical Notes">Next</a>
+          "工具链技术说明">下一页</a>
           <p>
-            Toolchain Technical Notes
+            工具链技术说明
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "第五章&nbsp;构建临时系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
