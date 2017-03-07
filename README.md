@@ -61,32 +61,17 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 翻译作品将会放在[GitBook](https://www.gitbook.com/book/linuxstory/linux-from-scratch-8-0-book/)上，欢迎阅读！（未发布）
 
 ## 翻译流程
-### 初始化
-1. 首先fork项目
+1. 首先fork本项目
 2. 把fork过去的项目clone到本地
-3. 命令行下运行 `git checkout -b dev` 创建一个新分支
-4. 运行 `git remote add upstream https://github.com/LinuxStory/lfs-8.0-Chinese.git` 添加远端库
-5. 运行 `git remote update`更新
-6. 运行 `git fetch upstream master` 拉取更新到本地
-7. 运行 `git rebase upstream/master` 将更新合并到你的分支
+3. 在本地直接修改 html 文件来翻译
+4. 完成翻译后合并到主分支
 
-初始化只需要做一遍，之后请在dev分支进行修改。
-如果修改过程中项目有更新，请重复5、6、7步。
-以后大家在各自的 dev 分支中直接修改 html 文件
-
-### 校稿流程 (TBD)
-1. 保证在dev分支中
-2. 打开README.md，在翻译进度后加上你自己的github名
-	> 1\. 序言! [@翻译人][@校审人]
-3. 本地提交修改，写明提交信息
-4. push到你fork的项目中，然后登录GitHub
-5. 在你fork的项目的首页可以看到一个 `pull request` 按钮，点击它，填写说明信息，然后提交即可
-	> 为了不重复工作，请等待我们确认了你的pull request(即你的名字出现在项目中时)，再进行翻译校审工作
-6. 进行翻译校审，重复3-5步提交翻译校审的作品
-
+## 校稿流程 (TBD)
+1. 
 
 ## 项目进度
 1. 闻其详定期跟大家邮件和微信通报项目进度
+2. 任何问题请第一时间通报
 
 ## 关于版权
 根据原著作者的要求，翻译成果属于公有领域(CC0)，翻译参与人员及原著作者享有署名权，署名顺序将按加入项目的顺序排列。
