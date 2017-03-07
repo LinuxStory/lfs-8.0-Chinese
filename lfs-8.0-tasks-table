@@ -114,16 +114,16 @@ Table of Contents lfs-8.0 目录
             M4-1.4.18                    (@banner1024)    
             Bison-3.0.4                    (@banner1024)    
             Flex-2.6.3                    (@banner1024)    
-            Grep-3.0
-            Readline-7.0
-            Bash-4.4
-            Bc-1.06.95
-            Libtool-2.4.6
-            GDBM-1.12
-            Gperf-3.0.4
-            Expat-2.2.0
-            Inetutils-1.9.4
-            Perl-5.24.1
+            Grep-3.0                     (@Cabbagec)
+            Readline-7.0                     (@Cabbagec)
+            Bash-4.4                     (@Cabbagec)
+            Bc-1.06.95                     (@Cabbagec)
+            Libtool-2.4.6                     (@Cabbagec)
+            GDBM-1.12                     (@Cabbagec)
+            Gperf-3.0.4                     (@Cabbagec)
+            Expat-2.2.0                     (@Cabbagec)
+            Inetutils-1.9.4                     (@Cabbagec)
+            Perl-5.24.1                     (@Cabbagec)
             XML::Parser-2.44
             Intltool-0.51.0
             Autoconf-2.69
