@@ -25,25 +25,25 @@ Table of Contents lfs-8.0 目录
             Resources
             Help
     II. Preparing for the Build
-        2. Preparing the Host System
-            Introduction
-            Host System Requirements
-            Building LFS in Stages
-            Creating a New Partition
-            Creating a File System on the Partition
-            Setting The $LFS Variable
-            Mounting the New Partition
+        2. Preparing the Host System            （Yizhao）
+            Introduction           （Yizhao）
+            Host System Requirements           （Yizhao）
+            Building LFS in Stages           （Yizhao）
+            Creating a New Partition           （Yizhao）
+            Creating a File System on the Partition           （Yizhao）
+            Setting The $LFS Variable           （Yizhao）
+            Mounting the New Partition           （Yizhao）
         3. Packages and Patches
             Introduction
             All Packages
             Needed Patches
-        4. Final Preparations
-            Introduction
-            Creating the $LFS/tools Directory
-            Adding the LFS User
-            Setting Up the Environment
-            About SBUs
-            About the Test Suites
+        4. Final Preparations               （@Hirozy）
+            Introduction               （@Hirozy）
+            Creating the $LFS/tools Directory               （@Hirozy）
+            Adding the LFS User               （@Hirozy）
+            Setting Up the Environment               （@Hirozy）
+            About SBUs               （@Hirozy）
+            About the Test Suites               （@Hirozy）
         5. Constructing a Temporary System
             Introduction
             Toolchain Technical Notes
@@ -157,21 +157,21 @@ Table of Contents lfs-8.0 目录
             About Debugging Symbols
             Stripping Again
             Cleaning Up
-        7. System Configuration
-            Introduction
-            LFS-Bootscripts-20150222
-            Overview of Device and Module Handling
-            Managing Devices
-            General Network Configuration
-            System V Bootscript Usage and Configuration
-            The Bash Shell Startup Files
-            Creating the /etc/inputrc File
-            Creating the /etc/shells File
-        8. Making the LFS System Bootable
-            Introduction
-            Creating the /etc/fstab File
-            Linux-4.9.9
-            Using GRUB to Set Up the Boot Process
+        7. System Configuration            （@muzikmoe）
+            Introduction            （@muzikmoe）
+            LFS-Bootscripts-20150222            （@muzikmoe）
+            Overview of Device and Module Handling            （@muzikmoe）
+            Managing Devices            （@muzikmoe）
+            General Network Configuration            （@muzikmoe）
+            System V Bootscript Usage and Configuration            （@muzikmoe）
+            The Bash Shell Startup Files            （@muzikmoe）
+            Creating the /etc/inputrc File            （@muzikmoe）
+            Creating the /etc/shells File            （@muzikmoe）
+        8. Making the LFS System Bootable             （@王炯）
+            Introduction             （@王炯）
+            Creating the /etc/fstab File             （@王炯）
+            Linux-4.9.9             （@王炯）
+            Using GRUB to Set Up the Boot Process             （@王炯）
         9. The End
             The End
             Get Counted
