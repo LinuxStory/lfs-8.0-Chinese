@@ -9,7 +9,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 ### 原著
 - 原著链接：http://www.linuxfromscratch.org/lfs/view/8.0/
 - systemd版原著：http://www.linuxfromscratch.org/lfs/view/8.0-systemd/
-- 原作：Gerard Beekmans 
+- 原作：Gerard Beekmans
 - 原著版本：Revision 8.0, 28 February 2017
 
 ### 旧版译著
@@ -35,7 +35,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 1. 可参考  CLReq https://www.w3.org/TR/clreq
 2. 简单约定：A)专有名词的大小写、连字符等请保持跟原名或注册商标一致；B)一般情况下使用中文全角标点，但是文件名，版本号等其中出现的符号用保持用原来英文半角符号。C）待补充
 3. 对于不确定的专有名词翻译，请及时拿出来讨论
-4. 项目中使用到的术语、专业名词，请更新到术语表中 https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md 
+4. 项目中使用到的术语、专业名词，请更新到术语表中 https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md
 5. 编辑器请统一使用 UTF-8 无BOM，Windows 下尽量使用 Notepad++，Linux 和 Mac 不做约束
 6.
 ### 校稿标准化
@@ -96,7 +96,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
             Resources
             Help
     II. Preparing for the Build
-        2. Preparing the Host System
+        2. Preparing the Host System  (GitHub username:loopio)
             Introduction
             Host System Requirements
             Building LFS in Stages
