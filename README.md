@@ -78,6 +78,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 
 ## 如果不太了解 lfs ？
  - [维基百科上的介绍 Linux From Scratch](https://zh.wikipedia.org/wiki/Linux_From_Scratch)
+
 ## 如果不太了解 github 使用？
 - [GitHub 入门使用教程-图文并茂](http://developer.51cto.com/art/201407/446249_all.htm) 很简洁的说明如何使用，看图即可明白。 
 - [GitHub help](https://help.github.com/) Sometimes you just need a little help. 中文翻译版在此[GitHub 帮助文档](https://github.com/waylau/github-help)。
@@ -91,8 +92,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 - [fork-me-on-GitHub](https://github.com/blog/273-github-ribbons) 个人博客、技术博客等如果需要添加GitHub 的彩带，可以使用此方法。
 - [蒋鑫-GotGitHub](GotGitHub.md) 《Git权威指南》的作者，对GitHub有很深的了解。（由于首页打开太慢，放到了本文目录中，下面的文章既是）
 
-# GitHub Skills
-
+## GitHub Skills
 - [Using Git blame to trace changes in a file](https://help.github.com/articles/using-git-blame-to-trace-changes-in-a-file/) 如果你想看某一个文件中每一行是谁修改的，为什么修改？那么尽情的使用 `blame` 按钮，发现文件的历史。
 - [GitHub 搜索技巧](https://help.github.com/categories/search/)
 - [Closing issues via commit messages - 通过提交信息关闭Issues](https://help.github.com/articles/closing-issues-via-commit-messages/)
