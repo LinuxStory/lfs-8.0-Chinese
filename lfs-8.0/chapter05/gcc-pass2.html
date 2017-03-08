@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      5.10.&nbsp;GCC-6.3.0 - Pass 2
+      5.10.&nbsp;GCC-6.3.0 - 第二遍
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,50 +19,49 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章 构建临时系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="binutils-pass2.html" title=
-          "Binutils-2.27 - Pass 2">Prev</a>
+          "Binutils-2.27 - Pass 2">上一页</a>
           <p>
-            Binutils-2.27 - Pass 2
+            Binutils-2.27 - 第二遍
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="tcl.html" title="Tcl-core-8.6.6">Next</a>
+          <a accesskey="n" href="tcl.html" title="Tcl-core-8.6.6">下一页</a>
           <p>
             Tcl-core-8.6.6
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-tools-gcc-pass2" name="ch-tools-gcc-pass2"></a>5.10.
-        GCC-6.3.0 - Pass 2
+        GCC-6.3.0 - 第二遍
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The GCC package contains the GNU compiler collection, which
-          includes the C and C++ compilers.
+          GCC 软件包即 GNU 编译器集合（GNU Compiler Collection），其中包括 C 和 C++ 的编译器。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">11 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">2.9 GB</span>
             </div>
           </div>
@@ -70,30 +69,21 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          5.10.1. Installation of GCC
+          5.10.1. 安装 GCC
         </h2>
         <p>
-          Our first build of GCC has installed a couple of internal system
-          headers. Normally one of them, <code class=
-          "filename">limits.h</code>, will in turn include the corresponding
-          system <code class="filename">limits.h</code> header, in this case,
-          <code class="filename">/tools/include/limits.h</code>. However, at
-          the time of the first build of gcc <code class=
-          "filename">/tools/include/limits.h</code> did not exist, so the
-          internal header that GCC installed is a partial, self-contained
-          file and does not include the extended features of the system
-          header. This was adequate for building the temporary libc, but this
-          build of GCC now requires the full internal header. Create a full
-          version of the internal header using a command that is identical to
-          what the GCC build system does in normal circumstances:
+          我们第一次编译 GCC 的时候安装了一些内部系统头文件。其中的一个 <code class=
+          "filename">limits.h</code> 会反过来包括对应的系统头文件 <code class="filename">limits.h</code>，
+          在我们的例子中，是 <code class="filename">/tools/include/limits.h</code>。
+          但是，第一次编译 gcc 的时候 <code class=
+          "filename">/tools/include/limits.h</code> 并不存在，因此 GCC 安装的内部头文件只是部分的自包含文件，并不包括系统头文件的扩展功能。这足以编译临时 libc，但是这次编译 GCC 要求完整的内部头文件。使用和正常情况下 GCC 编译系统的相同的命令创建一个完整版本的内部头文件：
         </p>
         <pre class="userinput">
 <kbd class="command">cat gcc/limitx.h gcc/glimits.h gcc/limity.h &gt; \
   `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include-fixed/limits.h</kbd>
 </pre>
         <p>
-          Once again, change the location of GCC's default dynamic linker to
-          use the one installed in <code class="filename">/tools</code>.
+          再次更改 GCC 的默认动态链接器的位置，以使用安装在 <code class="filename">/tools</code> 的那个。
         </p>
         <pre class="userinput">
 <kbd class="command">for file in gcc/config/{linux,i386/linux{,64}}.h
@@ -110,9 +100,8 @@ do
 done</kbd>
 </pre>
         <p>
-          If building on x86_64, change the default directory name for 64-bit
-          libraries to <span class="quote">&ldquo;<span class=
-          "quote">lib</span>&rdquo;</span>:
+          如果是在 x86_64 机器上, 将64位库的默认目录名设置为 <span class=
+          "quote">&ldquo;<span class="quote">lib</span>&rdquo;</span>：
         </p>
         <pre class="userinput">
 <kbd class="command">case $(uname -m) in
@@ -123,9 +112,7 @@ done</kbd>
 esac</kbd>
 </pre>
         <p>
-          As in the first build of GCC it requires the GMP, MPFR and MPC
-          packages. Unpack the tarballs and move them into the required
-          directory names:
+          和第一次编译 GCC 一样，它要求 GMP，MPFR 和 MPC 软件包。 解压 tar 包并把它们重名为到所需的目录名称：
         </p>
         <pre class="userinput">
 <kbd class="command">tar -xf ../mpfr-3.1.5.tar.xz
@@ -136,18 +123,17 @@ tar -xf ../mpc-1.0.3.tar.gz
 mv -v mpc-1.0.3 mpc</kbd>
 </pre>
         <p>
-          Create a separate build directory again:
+           再次创建独立的 build 目录：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -v build
 cd       build</kbd>
 </pre>
         <p>
-          Before starting to build GCC, remember to unset any environment
-          variables that override the default optimization flags.
+          在开始编译 GCC 之前，记住取消所有会覆盖默认优化选项的环境变量。
         </p>
         <p>
-          Now prepare GCC for compilation:
+          现在准备编译：
         </p>
         <pre class="userinput">
 <kbd class="command">CC=$LFS_TGT-gcc                                    \
@@ -166,7 +152,7 @@ RANLIB=$LFS_TGT-ranlib                             \
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the new configure options:</strong>
+            <strong>新配置选项含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -175,8 +161,7 @@ RANLIB=$LFS_TGT-ranlib                             \
             </dt>
             <dd>
               <p>
-                This option ensures that both the C and C++ compilers are
-                built.
+                这个选项确保编译了 C 和 C++ 编译器。
               </p>
             </dd>
             <dt>
@@ -185,9 +170,8 @@ RANLIB=$LFS_TGT-ranlib                             \
             </dt>
             <dd>
               <p>
-                Do not build the pre-compiled header (PCH) for <code class=
-                "filename">libstdc++</code>. It takes up a lot of space, and
-                we have no use for it.
+                不为 <code class=
+                "filename">libstdc++</code> 编译预编译的头文件(PCH)。这会花费很多空间和时间，却对我们没有用处。
               </p>
             </dd>
             <dt>
@@ -196,39 +180,32 @@ RANLIB=$LFS_TGT-ranlib                             \
             </dt>
             <dd>
               <p>
-                For native builds of GCC, the default is to do a "bootstrap"
-                build. This does not just compile GCC, but compiles it
-                several times. It uses the programs compiled in a first round
-                to compile itself a second time, and then again a third time.
-                The second and third iterations are compared to make sure it
-                can reproduce itself flawlessly. This also implies that it
-                was compiled correctly. However, the LFS build method should
-                provide a solid compiler without the need to bootstrap each
-                time.
+                对于原生编译的 GCC，默认是做一个“引导”构建。这不仅会编译 GCC，而且会多次编译。
+                它用第一次编译的程序去第二次编译自己，然后同样进行第三次。
+                比较第二次和第三次迭代确保它可以完美复制自身。这也意味着已经成功编译。
+                但是，LFS 的构建方法能够提供一个稳固的编译器，而不需要每次都重新引导。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Install the package:
+          安装：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          As a finishing touch, create a symlink. Many programs and scripts
-          run <span class="command"><strong>cc</strong></span> instead of
-          <span class="command"><strong>gcc</strong></span>, which is used to
-          keep programs generic and therefore usable on all kinds of UNIX
-          systems where the GNU C compiler is not always installed. Running
-          <span class="command"><strong>cc</strong></span> leaves the system
-          administrator free to decide which C compiler to install:
+          作为画龙点睛之处，这里创建一个符号链接。很多程序和脚本执行
+          <span class="command"><strong>cc</strong></span> 而不是
+          <span class="command"><strong>gcc</strong></span>
+          来保持程序的兼容性，因而在所有并不总是安装了 GNU C 编译器的 Unix 类型的系统上都可以使用。
+          运行 <span class="command"><strong>cc</strong></span> 使得系统管理员不用考虑要安装那种 C 编译器：
         </p>
         <pre class="userinput">
 <kbd class="command">ln -sv gcc /tools/bin/cc</kbd>
@@ -236,13 +213,10 @@ RANLIB=$LFS_TGT-ranlib                             \
         <div class="admon caution">
           <img alt="[Caution]" src="../images/caution.png" />
           <h3>
-            Caution
+            警告
           </h3>
           <p>
-            At this point, it is imperative to stop and ensure that the basic
-            functions (compiling and linking) of the new toolchain are
-            working as expected. To perform a sanity check, run the following
-            commands:
+            到了这里，必须停下来确认新工具链的基本功能(编译和链接)是否都是像预期的那样正常工作。运行下面的命令进行全面的检查：
           </p>
           <pre class="userinput">
 <kbd class="command">echo 'int main(){}' &gt; dummy.c
@@ -250,40 +224,33 @@ cc dummy.c
 readelf -l a.out | grep ': /tools'</kbd>
 </pre>
           <p>
-            If everything is working correctly, there should be no errors,
-            and the output of the last command will be of the form:
+            如果一切顺利的话，这里应该没有错误，最后一个命令的输出形式会是：
           </p>
           <pre class="screen">
 <code class=
 "computeroutput">[Requesting program interpreter: /tools/lib/ld-linux.so.2]</code>
 </pre>
           <p>
-            Note that <code class="filename">/tools/lib</code>, or
-            <code class="filename">/tools/lib64</code> for 64-bit machines
-            appears as the prefix of the dynamic linker.
+            注意 <code class="filename">/tools/lib</code>, 或 64位机器的
+            <code class="filename">/tools/lib64</code> 会以动态链接器的前缀出现。
           </p>
           <p>
-            If the output is not shown as above or there was no output at
-            all, then something is wrong. Investigate and retrace the steps
-            to find out where the problem is and correct it. This issue must
-            be resolved before continuing on. First, perform the sanity check
-            again, using <span class="command"><strong>gcc</strong></span>
-            instead of <span class="command"><strong>cc</strong></span>. If
-            this works, then the <code class="filename">/tools/bin/cc</code>
-            symlink is missing. Install the symlink as per above. Next,
-            ensure that the <code class="envar">PATH</code> is correct. This
-            can be checked by running <span class="command"><strong>echo
-            $PATH</strong></span> and verifying that <code class=
-            "filename">/tools/bin</code> is at the head of the list. If the
-            <code class="envar">PATH</code> is wrong it could mean that you
-            are not logged in as user <code class="systemitem">lfs</code> or
-            that something went wrong back in <a class="xref" href=
-            "../chapter04/settingenvironment.html" title=
+            如果输出不像上面那样或者根本就没有输出，那么可能是某个地方出错了。
+            调查并回溯这些步骤，找出问题所在并改正它。在继续之前必须解决这个问题。
+            首先，使用 <span class="command"><strong>gcc</strong></span>
+            而不是 <span class="command"><strong>cc</strong></span> 再次进行全面的检查。
+            如果能运行，就是丢失了 <code class="filename">/tools/bin/cc</code> 符号链接。
+            像上面介绍的那样新建符号链接。下一步，确认 <code class="envar">PATH</code> 是正常的。
+            这能通过运行 <span class="command"><strong>echo
+            $PATH</strong></span> 检验，验证 <code class=
+            "filename">/tools/bin</code> 在输出结果里。如果 <code class="envar">PATH</code> 是错误的，
+            这意味着你可能不是以 <code class="systemitem">lfs</code> 用户的身份登录或者前面 
+            <a class="xref" href="../chapter04/settingenvironment.html" title=
             "4.4.&nbsp;Setting Up the Environment">Section&nbsp;4.4,
-            &ldquo;Setting Up the Environment.&rdquo;</a>
+            &ldquo;设置环境&rdquo;</a>中某些地方出现了错误。
           </p>
           <p>
-            Once all is well, clean up the test files:
+            一旦一切都顺利，清理测试文件：
           </p>
           <pre class="userinput">
 <kbd class="command">rm -v dummy.c a.out</kbd>
@@ -292,7 +259,7 @@ readelf -l a.out | grep ': /tools'</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <p>
-          Details on this package are located in <a class="xref" href=
+          该软件包的详细信息在 <a class="xref" href=
           "../chapter06/gcc.html#contents-gcc" title=
           "6.17.2.&nbsp;Contents of GCC">Section&nbsp;6.17.2, &ldquo;Contents
           of GCC.&rdquo;</a>
@@ -303,24 +270,24 @@ readelf -l a.out | grep ': /tools'</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="binutils-pass2.html" title=
-          "Binutils-2.27 - Pass 2">Prev</a>
+          "Binutils-2.27 - Pass 2">上一页</a>
           <p>
-            Binutils-2.27 - Pass 2
+            Binutils-2.27 - 第二遍
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="tcl.html" title="Tcl-core-8.6.6">Next</a>
+          <a accesskey="n" href="tcl.html" title="Tcl-core-8.6.6">下一页</a>
           <p>
             Tcl-core-8.6.6
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
