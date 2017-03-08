@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Typography
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Preface
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="prerequisites.html" title=
+          "Prerequisites">Prev</a>
+          <p>
+            Prerequisites
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="organization.html" title=
+          "Structure">Next</a>
+          <p>
+            Structure
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="pre-typography" name="pre-typography"></a>vii. Typography
+      </h1>
+      <p>
+        To make things easier to follow, there are a few typographical
+        conventions used throughout this book. This section contains some
+        examples of the typographical format found throughout Linux From
+        Scratch.
+      </p>
+      <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr</kbd>
+</pre>
+      <p>
+        This form of text is designed to be typed exactly as seen unless
+        otherwise noted in the surrounding text. It is also used in the
+        explanation sections to identify which of the commands is being
+        referenced.
+      </p>
+      <p>
+        In some cases, a logical line is extended to two or more physical
+        lines with a backslash at the end of the line.
+      </p>
+      <pre class="userinput">
+<kbd class="command">CC="gcc -B/usr/bin/" ../binutils-2.18/configure \
+  --prefix=/tools --disable-nls --disable-werror</kbd>
+</pre>
+      <p>
+        Note that the backslash must be followed by an immediate return.
+        Other whitespace characters like spaces or tab characters will create
+        incorrect results.
+      </p>
+      <pre class="screen">
+<code class=
+"computeroutput">install-info: unknown option '--dir-file=/mnt/lfs/usr/info/dir'</code>
+</pre>
+      <p>
+        This form of text (fixed-width text) shows screen output, usually as
+        the result of commands issued. This format is also used to show
+        filenames, such as <code class="filename">/etc/ld.so.conf</code>.
+      </p>
+      <p>
+        <span class="emphasis"><em>Emphasis</em></span>
+      </p>
+      <p>
+        This form of text is used for several purposes in the book. Its main
+        purpose is to emphasize important points or items.
+      </p>
+      <p>
+        <a class="ulink" href=
+        "http://www.linuxfromscratch.org/">http://www.linuxfromscratch.org/</a>
+      </p>
+      <p>
+        This format is used for hyperlinks both within the LFS community and
+        to external pages. It includes HOWTOs, download locations, and
+        websites.
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; $LFS/etc/group &lt;&lt; "EOF"
+<code class="literal">root:x:0:
+bin:x:1:
+......</code>
+EOF</kbd>
+</pre>
+      <p>
+        This format is used when creating configuration files. The first
+        command tells the system to create the file <code class=
+        "filename">$LFS/etc/group</code> from whatever is typed on the
+        following lines until the sequence End Of File (EOF) is encountered.
+        Therefore, this entire section is generally typed as seen.
+      </p>
+      <p>
+        <em class="replaceable"><code>&lt;REPLACED TEXT&gt;</code></em>
+      </p>
+      <p>
+        This format is used to encapsulate text that is not to be typed as
+        seen or for copy-and-paste operations.
+      </p>
+      <p>
+        <em class="replaceable"><code>[OPTIONAL TEXT]</code></em>
+      </p>
+      <p>
+        This format is used to encapsulate text that is optional.
+      </p>
+      <p>
+        <code class="filename">passwd(5)</code>
+      </p>
+      <p>
+        This format is used to refer to a specific manual (man) page. The
+        number inside parentheses indicates a specific section inside the
+        manuals. For example, <span class=
+        "command"><strong>passwd</strong></span> has two man pages. Per LFS
+        installation instructions, those two man pages will be located at
+        <code class="filename">/usr/share/man/man1/passwd.1</code> and
+        <code class="filename">/usr/share/man/man5/passwd.5</code>. When the
+        book uses <code class="filename">passwd(5)</code> it is specifically
+        referring to <code class=
+        "filename">/usr/share/man/man5/passwd.5</code>. <span class=
+        "command"><strong>man passwd</strong></span> will print the first man
+        page it finds that matches <span class="quote">&ldquo;<span class=
+        "quote">passwd</span>&rdquo;</span>, which will be <code class=
+        "filename">/usr/share/man/man1/passwd.1</code>. For this example, you
+        will need to run <span class="command"><strong>man 5
+        passwd</strong></span> in order to read the specific page being
+        referred to. It should be noted that most man pages do not have
+        duplicate page names in different sections. Therefore, <span class=
+        "command"><strong>man <em class="replaceable"><code>&lt;program
+        name&gt;</code></em></strong></span> is generally sufficient.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="prerequisites.html" title=
+          "Prerequisites">Prev</a>
+          <p>
+            Prerequisites
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="organization.html" title=
+          "Structure">Next</a>
+          <p>
+            Structure
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

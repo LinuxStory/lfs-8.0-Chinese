@@ -1,0 +1,1006 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.48.&nbsp;Systemd-232
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gettext.html" title=
+          "Gettext-0.19.8.1">Prev</a>
+          <p>
+            Gettext-0.19.8.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="procps-ng.html" title=
+          "Procps-ng-3.3.12">Next</a>
+          <p>
+            Procps-ng-3.3.12
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-systemd" name="ch-system-systemd"></a>6.48.
+        Systemd-232
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The systemd package contains programs for controlling the startup,
+          running, and shutdown of the system.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">7.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">507 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.48.1. Installation of systemd
+        </h2>
+        <p>
+          First, fix a build error when using Util-Linux built in Chapter 5:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i "s:blkid/::" $(grep -rl "blkid/blkid.h")</kbd>
+</pre>
+        <p>
+          Disable two tests that always fail:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -e 's@test/udev-test.pl @@'  \
+    -e 's@test-copy$(EXEEXT) @@' \
+    -i Makefile.in</kbd>
+</pre>
+        <p>
+          Create a file to allow systemd to build when using Util-Linux built
+          in Chapter 5, to disable LTO by default, and to build without
+          xlstproc:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; config.cache &lt;&lt; "EOF"
+<code class="literal">KILL=/bin/kill
+MOUNT_PATH=/bin/mount
+UMOUNT_PATH=/bin/umount
+HAVE_BLKID=1
+BLKID_LIBS="-lblkid"
+BLKID_CFLAGS="-I/tools/include/blkid"
+HAVE_LIBMOUNT=1
+MOUNT_LIBS="-lmount"
+MOUNT_CFLAGS="-I/tools/include/libmount"
+cc_cv_CFLAGS__flto=no
+SULOGIN="/sbin/sulogin"
+XSLTPROC="/usr/bin/xsltproc"</code>
+EOF</kbd>
+</pre>
+        <p>
+          LTO is disabled by default because it causes <span class=
+          "command"><strong>systemd</strong></span> and other auxiliary
+          programs to link to <code class="filename">libgcc_s.so</code>,
+          slows the build down and makes the compiled code larger.
+        </p>
+        <p>
+          Prepare systemd for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr            \
+            --sysconfdir=/etc        \
+            --localstatedir=/var     \
+            --config-cache           \
+            --with-rootprefix=       \
+            --with-rootlibdir=/lib   \
+            --enable-split-usr       \
+            --disable-firstboot      \
+            --disable-ldconfig       \
+            --disable-sysusers       \
+            --without-python         \
+            --with-default-dnssec=no \
+            --docdir=/usr/share/doc/systemd-232</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--config-cache</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch tells the build system to use the <code class=
+                "filename">config.cache</code> file which was created
+                earlier.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-root*</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                These switches ensure that core programs and shared libraries
+                are installed in the subdirectories of the root partition.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-split-usr</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch ensures that systemd will work on systems where
+                /bin, /lib and /sbin directories are not symlinks to their
+                /usr counterparts.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--without-python</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch prevents <span class=
+                "command"><strong>configure</strong></span> from trying to
+                use Python which isn't built in LFS.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-firstboot</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch prevents installation of systemd services
+                responsible for setting up the system for the first time.
+                They are not useful for LFS because everything is done
+                manually.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-ldconfig</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch prevents installation of a systemd unit that runs
+                <span class="command"><strong>ldconfig</strong></span> at
+                boot, making the boot time longer. Remove it if the described
+                feature is desired, even though it's not useful for source
+                distributions such as LFS.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-sysusers</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch prevents installation of systemd services
+                responsible for setting up the <code class=
+                "filename">/etc/group</code> and <code class=
+                "filename">/etc/passwd</code> files. Both files were created
+                early in this chapter.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-default-dnssec=no</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch turns off the experimental DNSSEC suport.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make LIBRARY_PATH=/tools/lib</kbd>
+</pre>
+        <p>
+          This package has a test suite, but it can only be run after the
+          package has been installed.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make LD_LIBRARY_PATH=/tools/lib install</kbd>
+</pre>
+        <p>
+          Remove an unnecessary directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">rm -rfv /usr/lib/rpm</kbd>
+</pre>
+        <p>
+          Create the Sysvinit compatibility symlinks, so systemd is used as
+          the default init system:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">for tool in runlevel reboot shutdown poweroff halt telinit; do
+     ln -sfv ../bin/systemctl /sbin/${tool}
+done
+ln -sfv ../lib/systemd/systemd /sbin/init</kbd>
+</pre>
+        <p>
+          Create the <code class="filename">/etc/machine-id</code> file
+          needed by <span class=
+          "command"><strong>systemd-journald</strong></span>:
+        </p>
+        <pre class="userinput">
+<kbd class="command">systemd-machine-id-setup</kbd>
+</pre>
+        <p>
+          Since the testsuite largely depends on the host system kernel
+          configuration, some tests may fail. It also needs a modification in
+          order not to look for a program that will be installed by
+          Util-Linux package later in this chapter. To test the results,
+          issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i "s:minix:ext4:g" src/test/test-path-util.c
+make LD_LIBRARY_PATH=/tools/lib -k check</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-systemd" name="contents-systemd"></a>6.48.2.
+          Contents of systemd
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">bootctl, busctl, coredumpctl, halt,
+              hostnamectl, init, journalctl, kernel-install, localectl,
+              loginctl, machinectl, networkctl, poweroff, reboot, runlevel,
+              shutdown, systemctl, systemd-analyze, systemd-ask-password,
+              systemd-cat, systemd-cgls, systemd-cgtop, systemd-delta,
+              systemd-detect-virt, systemd-escape, systemd-hwdb,
+              systemd-inhibit, systemd-machine-id-setup, systemd-mount,
+              systemd-notify, systemd-nspawn, systemd-path, systemd-resolve,
+              systemd-run, systemd-socket-activate, systemd-stdio-bridge,
+              systemd-tmpfiles, systemd-tty-ask-password-agent, telinit,
+              timedatectl, and udevadm</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libnss_myhostname.so.2,
+              libnss_mymachines.so.2, libnss_resolve.so.2,
+              libnss_systemd.so.2, libsystemd.so, libsystemd-shared-231.so,
+              and libudev.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/etc/binfmt.d, /etc/init.d, /etc/kernel,
+              /etc/modules-load.d, /etc/sysctl.d, /etc/systemd,
+              /etc/tmpfiles.d, /etc/udev, /etc/xdg/systemd, /lib/systemd,
+              /lib/udev, /usr/include/systemd, /usr/lib/binfmt.d,
+              /usr/lib/kernel, /usr/lib/modules-load.d, /usr/lib/sysctl.d,
+              /usr/lib/systemd, /usr/lib/tmpfiles.d,
+              /usr/share/doc/systemd-232, /usr/share/factory,
+              /usr/share/systemd, /var/lib/systemd, and
+              /var/log/journal</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="bootctl" name="bootctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>bootctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    used to query the firmware and boot manager settings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="busctl" name="busctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>busctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to introspect and monitor the D-Bus bus
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="coredumpctl" name="coredumpctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>coredumpctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to retrieve coredumps from the systemd Journal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="halt" name="halt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>halt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Normally invokes <span class=
+                    "command"><strong>shutdown</strong></span> with the
+                    <em class="parameter"><code>-h</code></em> option, except
+                    when already in run-level 0, then it tells the kernel to
+                    halt the system; it notes in the file <code class=
+                    "filename">/var/log/wtmp</code> that the system is being
+                    brought down
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hostnamectl" name="hostnamectl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hostnamectl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to query and change the system hostname and related
+                    settings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="init" name="init"></a><span class=
+                    "term"><span class=
+                    "command"><strong>init</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The first process to be started when the kernel has
+                    initialized the hardware which takes over the boot
+                    process and starts all the proceses it is instructed to
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="journalctl" name="journalctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>journalctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to query the contents of the systemd Journal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kernel-install" name=
+                    "kernel-install"></a><span class="term"><span class=
+                    "command"><strong>kernel-install</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to add and remove kernel and initramfs images to and
+                    from /boot
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="localectl" name="localectl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>localectl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to query and change the system locale and keyboard
+                    layout settings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="loginctl" name="loginctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>loginctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to introspect and control the state of the systemd
+                    Login Manager
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="machinectl" name="machinectl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>machinectl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to introspect and control the state of the systemd
+                    Virtual Machine and Container Registration Manager
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="networkctl" name="networkctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>networkctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to introspect the state of the network links as seen
+                    by systemd-networkd
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="poweroff" name="poweroff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>poweroff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells the kernel to halt the system and switch off the
+                    computer (see <span class=
+                    "command"><strong>halt</strong></span>)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="reboot" name="reboot"></a><span class=
+                    "term"><span class=
+                    "command"><strong>reboot</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells the kernel to reboot the system (see <span class=
+                    "command"><strong>halt</strong></span>)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="runlevel" name="runlevel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>runlevel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the previous and the current run-level, as noted
+                    in the last run-level record in <code class=
+                    "filename">/var/run/utmp</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="shutdown" name="shutdown"></a><span class=
+                    "term"><span class=
+                    "command"><strong>shutdown</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Brings the system down in a secure way, signaling all
+                    processes and notifying all logged-in users
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemctl" name="systemctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to introspect and control the state of the systemd
+                    system and service manager
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-analyze" name=
+                    "systemd-analyze"></a><span class="term"><span class=
+                    "command"><strong>systemd-analyze</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to determine system boot-up performance of the
+                    current boot
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-ask-password" name=
+                    "systemd-ask-password"></a><span class=
+                    "term"><span class="command"><strong>systemd-ask-password</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to query a system password or passphrase from the
+                    user, using a question message specified on the command
+                    line
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-cat" name="systemd-cat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-cat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to connect STDOUT and STDERR of a process with the
+                    Journal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-cgls" name="systemd-cgls"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-cgls</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Recursively shows the contents of the selected Linux
+                    control group hierarchy in a tree
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-cgtop" name=
+                    "systemd-cgtop"></a><span class="term"><span class=
+                    "command"><strong>systemd-cgtop</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows the top control groups of the local Linux control
+                    group hierarchy, ordered by their CPU, memory and disk
+                    I/O load
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-delta" name=
+                    "systemd-delta"></a><span class="term"><span class=
+                    "command"><strong>systemd-delta</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to identify and compare configuration files in
+                    <code class="filename">/etc</code> that override default
+                    counterparts in <code class="filename">/usr</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-detect-virt" name=
+                    "systemd-detect-virt"></a><span class="term"><span class=
+                    "command"><strong>systemd-detect-virt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Detects execution in a virtualized environment
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-escape" name=
+                    "systemd-escape"></a><span class="term"><span class=
+                    "command"><strong>systemd-escape</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to escape strings for inclusion in systemd unit
+                    names
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-hwdb" name="systemd-hwdb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-hwdb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to manage hardware database (hwdb)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-inhibit" name=
+                    "systemd-inhibit"></a><span class="term"><span class=
+                    "command"><strong>systemd-inhibit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to execute a program with a shutdown, sleep or idle
+                    inhibitor lock taken
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-machine-id-setup" name=
+                    "systemd-machine-id-setup"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-machine-id-setup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used by system installer tools to initialize the machine
+                    ID stored in <code class=
+                    "filename">/etc/machine-id</code> at install time with a
+                    randomly generated ID
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-mount" name=
+                    "systemd-mount"></a><span class="term"><span class=
+                    "command"><strong>systemd-mount</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to temporarily mount or auto-mount a drive.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-notify" name=
+                    "systemd-notify"></a><span class="term"><span class=
+                    "command"><strong>systemd-notify</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used by daemon scripts to notify the init system about
+                    status changes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-nspawn" name=
+                    "systemd-nspawn"></a><span class="term"><span class=
+                    "command"><strong>systemd-nspawn</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to run a command or OS in a light-weight namespace
+                    container
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-path" name="systemd-path"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-path</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to query system and user paths
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-resolve" name=
+                    "systemd-resolve"></a><span class="term"><span class=
+                    "command"><strong>systemd-resolve</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to resolve domain names, IPV4 and IPv6 addresses,
+                    DNS resource records, and services
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-run" name="systemd-run"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-run</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to create and start a transient .service or a .scope
+                    unit and run the specified command in it
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-socket-activate" name=
+                    "systemd-socket-activate"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-socket-activate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to listen on socket devices and launch a
+                    process upon connection.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-tmpfiles" name=
+                    "systemd-tmpfiles"></a><span class="term"><span class=
+                    "command"><strong>systemd-tmpfiles</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates, deletes and cleans up volatile and temporary
+                    files and directories, based on the configuration file
+                    format and location specified in <code class=
+                    "filename">tmpfiles.d</code> directories
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="systemd-tty-ask-password-agent" name=
+                    "systemd-tty-ask-password-agent"></a><span class=
+                    "term"><span class=
+                    "command"><strong>systemd-tty-ask-password-agent</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to list or process pending systemd password requests
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="telinit" name="telinit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>telinit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tells <span class="command"><strong>init</strong></span>
+                    which run-level to change to
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="timedatectl" name="timedatectl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>timedatectl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to query and change the system clock and its
+                    settings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="udevadm" name="udevadm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>udevadm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generic Udev administration tool: controls the udevd
+                    daemon, provides info from the Udev database, monitors
+                    uevents, waits for uevents to finish, tests Udev
+                    configuration, and triggers uevents for a given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libsystemd" name="libsystemd"></a><span class=
+                    "term"><code class="filename">libsystemd</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    systemd utility library
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libudev" name="libudev"></a><span class=
+                    "term"><code class="filename">libudev</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A library to access Udev device information
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gettext.html" title=
+          "Gettext-0.19.8.1">Prev</a>
+          <p>
+            Gettext-0.19.8.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="procps-ng.html" title=
+          "Procps-ng-3.3.12">Next</a>
+          <p>
+            Procps-ng-3.3.12
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

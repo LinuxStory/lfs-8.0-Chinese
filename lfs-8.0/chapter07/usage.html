@@ -1,0 +1,1019 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.6.&nbsp;System V Bootscript Usage and Configuration
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="network.html" title=
+          "General Network Configuration">Prev</a>
+          <p>
+            General Network Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="profile.html" title=
+          "The Bash Shell Startup Files">Next</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-usage" name="ch-scripts-usage"></a>7.6. System V
+        Bootscript Usage and Configuration
+      </h1>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.6.1. How Do the System V Bootscripts Work?
+        </h2>
+        <p>
+          Linux uses a special booting facility named SysVinit that is based
+          on a concept of <span class="emphasis"><em>run-levels</em></span>.
+          It can be quite different from one system to another, so it cannot
+          be assumed that because things worked in one particular Linux
+          distribution, they should work the same in LFS too. LFS has its own
+          way of doing things, but it respects generally accepted standards.
+        </p>
+        <p>
+          SysVinit (which will be referred to as <span class=
+          "quote">&ldquo;<span class="quote">init</span>&rdquo;</span> from
+          now on) works using a run-levels scheme. There are seven (numbered
+          0 to 6) run-levels (actually, there are more run-levels, but they
+          are for special cases and are generally not used. See <code class=
+          "filename">init(8)</code> for more details), and each one of those
+          corresponds to the actions the computer is supposed to perform when
+          it starts up. The default run-level is 3. Here are the descriptions
+          of the different run-levels as they are implemented:
+        </p>
+        <div class="literallayout">
+          <p>
+            0:&nbsp;halt&nbsp;the&nbsp;computer<br />
+            1:&nbsp;single-user&nbsp;mode<br />
+            2:&nbsp;multi-user&nbsp;mode&nbsp;without&nbsp;networking<br />
+            3:&nbsp;multi-user&nbsp;mode&nbsp;with&nbsp;networking<br />
+            4:&nbsp;reserved&nbsp;for&nbsp;customization,&nbsp;otherwise&nbsp;does&nbsp;the&nbsp;same&nbsp;as&nbsp;3<br />
+
+            5:&nbsp;same&nbsp;as&nbsp;4,&nbsp;it&nbsp;is&nbsp;usually&nbsp;used&nbsp;for&nbsp;GUI&nbsp;login&nbsp;(like&nbsp;X's&nbsp;<span class="command"><strong>xdm</strong></span>&nbsp;or&nbsp;KDE's&nbsp;<span class="command"><strong>kdm</strong></span>)<br />
+
+            6:&nbsp;reboot&nbsp;the&nbsp;computer
+          </p>
+        </div>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="conf-sysvinit" name="conf-sysvinit"></a>7.6.2. Configuring
+          Sysvinit
+        </h2>
+        <p>
+          During the kernel initialization, the first program that is run is
+          either specified on the command line or, by default <span class=
+          "command"><strong>init</strong></span>. This program reads the
+          initialization file <code class="filename">/etc/inittab</code>.
+          Create this file with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/inittab &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/inittab
+
+id:3:initdefault:
+
+si::sysinit:/etc/rc.d/init.d/rc S
+
+l0:0:wait:/etc/rc.d/init.d/rc 0
+l1:S1:wait:/etc/rc.d/init.d/rc 1
+l2:2:wait:/etc/rc.d/init.d/rc 2
+l3:3:wait:/etc/rc.d/init.d/rc 3
+l4:4:wait:/etc/rc.d/init.d/rc 4
+l5:5:wait:/etc/rc.d/init.d/rc 5
+l6:6:wait:/etc/rc.d/init.d/rc 6
+
+ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+
+su:S016:once:/sbin/sulogin
+
+1:2345:respawn:/sbin/agetty --noclear tty1 9600
+2:2345:respawn:/sbin/agetty tty2 9600
+3:2345:respawn:/sbin/agetty tty3 9600
+4:2345:respawn:/sbin/agetty tty4 9600
+5:2345:respawn:/sbin/agetty tty5 9600
+6:2345:respawn:/sbin/agetty tty6 9600
+
+# End /etc/inittab</code>
+EOF</kbd>
+</pre>
+        <p>
+          An explanation of this initialization file is in the man page for
+          <span class="emphasis"><em>inittab</em></span>. For LFS, the key
+          command that is run is <span class=
+          "command"><strong>rc</strong></span>. The initialization file above
+          will instruct <span class="command"><strong>rc</strong></span> to
+          run all the scripts starting with an S in the <code class=
+          "filename">/etc/rc.d/rcS.d</code> directory followed by all the
+          scripts starting with an S in the <code class=
+          "filename">/etc/rc.d/rc?.d</code> directory where the question mark
+          is specified by the initdefault value.
+        </p>
+        <p>
+          As a convenience, the <span class=
+          "command"><strong>rc</strong></span> script reads a library of
+          functions in <code class="filename">/lib/lsb/init-functions</code>.
+          This library also reads an optional configuration file,
+          <code class="filename">/etc/sysconfig/rc.site</code>. Any of the
+          system configuration file parameters described in subsequent
+          sections can be alternatively placed in this file allowing
+          consolidation of all system parameters in this one file.
+        </p>
+        <p>
+          As a debugging convenience, the functions script also logs all
+          output to <code class="filename">/run/var/bootlog</code>. Since the
+          <code class="filename">/run</code> directory is a tmpfs, this file
+          is not persistent across boots, however it is appended to the more
+          permanent file <code class="filename">/var/log/boot.log</code> at
+          the end of the boot process.
+        </p>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="init-levels" name="init-levels"></a>7.6.2.1. Changing Run
+            Levels
+          </h3>
+          <p>
+            Changing run-levels is done with <span class=
+            "command"><strong>init <em class=
+            "replaceable"><code>&lt;runlevel&gt;</code></em></strong></span>,
+            where <em class="replaceable"><code>&lt;runlevel&gt;</code></em>
+            is the target run-level. For example, to reboot the computer, a
+            user could issue the <span class="command"><strong>init
+            6</strong></span> command, which is an alias for the <span class=
+            "command"><strong>reboot</strong></span> command. Likewise,
+            <span class="command"><strong>init 0</strong></span> is an alias
+            for the <span class="command"><strong>halt</strong></span>
+            command.
+          </p>
+          <p>
+            There are a number of directories under <code class=
+            "filename">/etc/rc.d</code> that look like <code class=
+            "filename">rc?.d</code> (where ? is the number of the run-level)
+            and <code class="filename">rcsysinit.d</code>, all containing a
+            number of symbolic links. Some begin with a <span class=
+            "emphasis"><em>K</em></span>, the others begin with an
+            <span class="emphasis"><em>S</em></span>, and all of them have
+            two numbers following the initial letter. The K means to stop
+            (kill) a service and the S means to start a service. The numbers
+            determine the order in which the scripts are run, from 00 to
+            99&mdash;the lower the number the earlier it gets executed. When
+            <span class="command"><strong>init</strong></span> switches to
+            another run-level, the appropriate services are either started or
+            stopped, depending on the runlevel chosen.
+          </p>
+          <p>
+            The real scripts are in <code class=
+            "filename">/etc/rc.d/init.d</code>. They do the actual work, and
+            the symlinks all point to them. K links and S links point to the
+            same script in <code class="filename">/etc/rc.d/init.d</code>.
+            This is because the scripts can be called with different
+            parameters like <em class="parameter"><code>start</code></em>,
+            <em class="parameter"><code>stop</code></em>, <em class=
+            "parameter"><code>restart</code></em>, <em class=
+            "parameter"><code>reload</code></em>, and <em class=
+            "parameter"><code>status</code></em>. When a K link is
+            encountered, the appropriate script is run with the <em class=
+            "parameter"><code>stop</code></em> argument. When an S link is
+            encountered, the appropriate script is run with the <em class=
+            "parameter"><code>start</code></em> argument.
+          </p>
+          <p>
+            There is one exception to this explanation. Links that start with
+            an <span class="emphasis"><em>S</em></span> in the <code class=
+            "filename">rc0.d</code> and <code class="filename">rc6.d</code>
+            directories will not cause anything to be started. They will be
+            called with the parameter <em class=
+            "parameter"><code>stop</code></em> to stop something. The logic
+            behind this is that when a user is going to reboot or halt the
+            system, nothing needs to be started. The system only needs to be
+            stopped.
+          </p>
+          <p>
+            These are descriptions of what the arguments make the scripts do:
+          </p>
+          <div class="variablelist">
+            <dl class="variablelist">
+              <dt>
+                <span class="term"><em class=
+                "parameter"><code>start</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  The service is started.
+                </p>
+              </dd>
+              <dt>
+                <span class="term"><em class=
+                "parameter"><code>stop</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  The service is stopped.
+                </p>
+              </dd>
+              <dt>
+                <span class="term"><em class=
+                "parameter"><code>restart</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  The service is stopped and then started again.
+                </p>
+              </dd>
+              <dt>
+                <span class="term"><em class=
+                "parameter"><code>reload</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  The configuration of the service is updated. This is used
+                  after the configuration file of a service was modified,
+                  when the service does not need to be restarted.
+                </p>
+              </dd>
+              <dt>
+                <span class="term"><em class=
+                "parameter"><code>status</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  Tells if the service is running and with which PIDs.
+                </p>
+              </dd>
+            </dl>
+          </div>
+          <p>
+            Feel free to modify the way the boot process works (after all, it
+            is your own LFS system). The files given here are an example of
+            how it can be done.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.6.3. Udev Bootscripts
+        </h2>
+        <p>
+          The <code class="filename">/etc/rc.d/init.d/udev</code> initscript
+          starts <span class="command"><strong>udevd</strong></span>,
+          triggers any "coldplug" devices that have already been created by
+          the kernel and waits for any rules to complete. The script also
+          unsets the uevent handler from the default of <code class=
+          "filename">/sbin/hotplug</code> . This is done because the kernel
+          no longer needs to call out to an external binary. Instead
+          <span class="command"><strong>udevd</strong></span> will listen on
+          a netlink socket for uevents that the kernel raises.
+        </p>
+        <p>
+          The <span class=
+          "command"><strong>/etc/rc.d/init.d/udev_retry</strong></span>
+          initscript takes care of re-triggering events for subsystems whose
+          rules may rely on filesystems that are not mounted until the
+          <span class="command"><strong>mountfs</strong></span> script is run
+          (in particular, <code class="filename">/usr</code> and <code class=
+          "filename">/var</code> may cause this). This script runs after the
+          <span class="command"><strong>mountfs</strong></span> script, so
+          those rules (if re-triggered) should succeed the second time
+          around. It is configured from the <code class=
+          "filename">/etc/sysconfig/udev_retry</code> file; any words in this
+          file other than comments are considered subsystem names to trigger
+          at retry time. To find the subsystem of a device, use <span class=
+          "command"><strong>udevadm info --attribute-walk
+          &lt;device&gt;</strong></span> where &lt;device&gt; is an absolute
+          path in /dev or /sys such as /dev/sr0 or /sys/class/rtc.
+        </p>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.6.3.1. Module Loading
+          </h3>
+          <p>
+            Device drivers compiled as modules may have aliases built into
+            them. Aliases are visible in the output of the <span class=
+            "command"><strong>modinfo</strong></span> program and are usually
+            related to the bus-specific identifiers of devices supported by a
+            module. For example, the <span class=
+            "emphasis"><em>snd-fm801</em></span> driver supports PCI devices
+            with vendor ID 0x1319 and device ID 0x0801, and has an alias of
+            <span class="quote">&ldquo;<span class=
+            "quote">pci:v00001319d00000801sv*sd*bc04sc01i*</span>&rdquo;</span>.
+            For most devices, the bus driver exports the alias of the driver
+            that would handle the device via <code class=
+            "systemitem">sysfs</code>. E.g., the <code class=
+            "filename">/sys/bus/pci/devices/0000:00:0d.0/modalias</code> file
+            might contain the string <span class="quote">&ldquo;<span class=
+            "quote">pci:v00001319d00000801sv00001319sd00001319bc04sc01i00</span>&rdquo;</span>.
+            The default rules provided with Udev will cause <span class=
+            "command"><strong>udevd</strong></span> to call out to
+            <span class="command"><strong>/sbin/modprobe</strong></span> with
+            the contents of the <code class="envar">MODALIAS</code> uevent
+            environment variable (which should be the same as the contents of
+            the <code class="filename">modalias</code> file in sysfs), thus
+            loading all modules whose aliases match this string after
+            wildcard expansion.
+          </p>
+          <p>
+            In this example, this means that, in addition to <span class=
+            "emphasis"><em>snd-fm801</em></span>, the obsolete (and unwanted)
+            <span class="emphasis"><em>forte</em></span> driver will be
+            loaded if it is available. See below for ways in which the
+            loading of unwanted drivers can be prevented.
+          </p>
+          <p>
+            The kernel itself is also able to load modules for network
+            protocols, filesystems and NLS support on demand.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.6.3.2. Handling Hotpluggable/Dynamic Devices
+          </h3>
+          <p>
+            When you plug in a device, such as a Universal Serial Bus (USB)
+            MP3 player, the kernel recognizes that the device is now
+            connected and generates a uevent. This uevent is then handled by
+            <span class="command"><strong>udevd</strong></span> as described
+            above.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-clock" name="ch-scripts-clock"></a>7.6.4.
+          Configuring the System Clock
+        </h2>
+        <p>
+          The <span class="command"><strong>setclock</strong></span> script
+          reads the time from the hardware clock, also known as the BIOS or
+          the Complementary Metal Oxide Semiconductor (CMOS) clock. If the
+          hardware clock is set to UTC, this script will convert the hardware
+          clock's time to the local time using the <code class=
+          "filename">/etc/localtime</code> file (which tells the <span class=
+          "command"><strong>hwclock</strong></span> program which timezone
+          the user is in). There is no way to detect whether or not the
+          hardware clock is set to UTC, so this needs to be configured
+          manually.
+        </p>
+        <p>
+          The <span class="command"><strong>setclock</strong></span> is run
+          via <span class="application">udev</span> when the kernel detects
+          the hardware capability upon boot. It can also be run manually with
+          the stop parameter to store the system time to the CMOS clock.
+        </p>
+        <p>
+          If you cannot remember whether or not the hardware clock is set to
+          UTC, find out by running the <strong class=
+          "userinput"><code>hwclock --localtime --show</code></strong>
+          command. This will display what the current time is according to
+          the hardware clock. If this time matches whatever your watch says,
+          then the hardware clock is set to local time. If the output from
+          <span class="command"><strong>hwclock</strong></span> is not local
+          time, chances are it is set to UTC time. Verify this by adding or
+          subtracting the proper amount of hours for the timezone to the time
+          shown by <span class="command"><strong>hwclock</strong></span>. For
+          example, if you are currently in the MST timezone, which is also
+          known as GMT -0700, add seven hours to the local time.
+        </p>
+        <p>
+          Change the value of the <code class="envar">UTC</code> variable
+          below to a value of <em class="parameter"><code>0</code></em>
+          (zero) if the hardware clock is <span class=
+          "emphasis"><em>not</em></span> set to UTC time.
+        </p>
+        <p>
+          Create a new file <code class=
+          "filename">/etc/sysconfig/clock</code> by running the following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/sysconfig/clock &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/clock
+
+UTC=1
+
+# Set this to any options you might need to give to hwclock,
+# such as machine hardware clock type for Alphas.
+CLOCKPARAMS=
+
+# End /etc/sysconfig/clock</code>
+EOF</kbd>
+</pre>
+        <p>
+          A good hint explaining how to deal with time on LFS is available at
+          <a class="ulink" href=
+          "http://www.linuxfromscratch.org/hints/downloads/files/time.txt">http://www.linuxfromscratch.org/hints/downloads/files/time.txt</a>.
+          It explains issues such as time zones, UTC, and the <code class=
+          "envar">TZ</code> environment variable.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The CLOCKPARAMS and UTC paramaters may be alternatively set in
+            the <code class="filename">/etc/sysconfig/rc.site</code> file.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-console" name="ch-scripts-console"></a>7.6.5.
+          Configuring the Linux Console
+        </h2>
+        <p>
+          This section discusses how to configure the <span class=
+          "command"><strong>console</strong></span> bootscript that sets up
+          the keyboard map, console font and console kernel log level. If
+          non-ASCII characters (e.g., the copyright sign, the British pound
+          sign and Euro symbol) will not be used and the keyboard is a U.S.
+          one, much of this section can be skipped. Without the configuration
+          file, (or equivalent settings in <code class=
+          "filename">rc.site</code>), the <span class=
+          "command"><strong>console</strong></span> bootscript will do
+          nothing.
+        </p>
+        <p>
+          The <span class="command"><strong>console</strong></span> script
+          reads the <code class="filename">/etc/sysconfig/console</code> file
+          for configuration information. Decide which keymap and screen font
+          will be used. Various language-specific HOWTOs can also help with
+          this, see <a class="ulink" href=
+          "http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html">http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html</a>.
+          If still in doubt, look in the <code class=
+          "filename">/usr/share/keymaps</code> and <code class=
+          "filename">/usr/share/consolefonts</code> directories for valid
+          keymaps and screen fonts. Read <code class=
+          "filename">loadkeys(1)</code> and <code class=
+          "filename">setfont(8)</code> manual pages to determine the correct
+          arguments for these programs.
+        </p>
+        <p>
+          The <code class="filename">/etc/sysconfig/console</code> file
+          should contain lines of the form: VARIABLE="value". The following
+          variables are recognized:
+        </p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">LOGLEVEL</span>
+            </dt>
+            <dd>
+              <p>
+                This variable specifies the log level for kernel messages
+                sent to the console as set by <span class=
+                "command"><strong>dmesg</strong></span>. Valid levels are
+                from "1" (no messages) to "8". The default level is "7".
+              </p>
+            </dd>
+            <dt>
+              <span class="term">KEYMAP</span>
+            </dt>
+            <dd>
+              <p>
+                This variable specifies the arguments for the <span class=
+                "command"><strong>loadkeys</strong></span> program,
+                typically, the name of keymap to load, e.g., <span class=
+                "quote">&ldquo;<span class="quote">it</span>&rdquo;</span>.
+                If this variable is not set, the bootscript will not run the
+                <span class="command"><strong>loadkeys</strong></span>
+                program, and the default kernel keymap will be used. Note
+                that a few keymaps have multiple versions with the same name
+                (cz and its variants in qwerty/ and qwertz/, es in olpc/ and
+                qwerty/, and trf in fgGIod/ and qwerty/). In these cases the
+                parent directory should also be specified (e.g. qwerty/es) to
+                ensure the proper keymap is loaded.
+              </p>
+            </dd>
+            <dt>
+              <span class="term">KEYMAP_CORRECTIONS</span>
+            </dt>
+            <dd>
+              <p>
+                This (rarely used) variable specifies the arguments for the
+                second call to the <span class=
+                "command"><strong>loadkeys</strong></span> program. This is
+                useful if the stock keymap is not completely satisfactory and
+                a small adjustment has to be made. E.g., to include the Euro
+                sign into a keymap that normally doesn't have it, set this
+                variable to <span class="quote">&ldquo;<span class=
+                "quote">euro2</span>&rdquo;</span>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term">FONT</span>
+            </dt>
+            <dd>
+              <p>
+                This variable specifies the arguments for the <span class=
+                "command"><strong>setfont</strong></span> program. Typically,
+                this includes the font name, <span class=
+                "quote">&ldquo;<span class="quote">-m</span>&rdquo;</span>,
+                and the name of the application character map to load. E.g.,
+                in order to load the <span class="quote">&ldquo;<span class=
+                "quote">lat1-16</span>&rdquo;</span> font together with the
+                <span class="quote">&ldquo;<span class=
+                "quote">8859-1</span>&rdquo;</span> application character map
+                (as it is appropriate in the USA), set this variable to
+                <span class="quote">&ldquo;<span class="quote">lat1-16 -m
+                8859-1</span>&rdquo;</span>. In UTF-8 mode, the kernel uses
+                the application character map for conversion of composed
+                8-bit key codes in the keymap to UTF-8, and thus the argument
+                of the "-m" parameter should be set to the encoding of the
+                composed key codes in the keymap.
+              </p>
+            </dd>
+            <dt>
+              <span class="term">UNICODE</span>
+            </dt>
+            <dd>
+              <p>
+                Set this variable to <span class="quote">&ldquo;<span class=
+                "quote">1</span>&rdquo;</span>, <span class=
+                "quote">&ldquo;<span class="quote">yes</span>&rdquo;</span>
+                or <span class="quote">&ldquo;<span class=
+                "quote">true</span>&rdquo;</span> in order to put the console
+                into UTF-8 mode. This is useful in UTF-8 based locales and
+                harmful otherwise.
+              </p>
+            </dd>
+            <dt>
+              <span class="term">LEGACY_CHARSET</span>
+            </dt>
+            <dd>
+              <p>
+                For many keyboard layouts, there is no stock Unicode keymap
+                in the Kbd package. The <span class=
+                "command"><strong>console</strong></span> bootscript will
+                convert an available keymap to UTF-8 on the fly if this
+                variable is set to the encoding of the available non-UTF-8
+                keymap.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Some examples:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                For a non-Unicode setup, only the KEYMAP and FONT variables
+                are generally needed. E.g., for a Polish setup, one would
+                use:
+              </p>
+              <pre class="userinput">
+<kbd class="command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/console
+
+KEYMAP="pl2"
+FONT="lat2a-16 -m 8859-2"
+
+# End /etc/sysconfig/console</code>
+EOF</kbd>
+</pre>
+            </li>
+            <li class="listitem">
+              <p>
+                As mentioned above, it is sometimes necessary to adjust a
+                stock keymap slightly. The following example adds the Euro
+                symbol to the German keymap:
+              </p>
+              <pre class="userinput">
+<kbd class="command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/console
+
+KEYMAP="de-latin1"
+KEYMAP_CORRECTIONS="euro2"
+FONT="lat0-16 -m 8859-15"
+
+# End /etc/sysconfig/console</code>
+EOF</kbd>
+</pre>
+            </li>
+            <li class="listitem">
+              <p>
+                The following is a Unicode-enabled example for Bulgarian,
+                where a stock UTF-8 keymap exists:
+              </p>
+              <pre class="userinput">
+<kbd class="command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/console
+
+UNICODE="1"
+KEYMAP="bg_bds-utf8"
+FONT="LatArCyrHeb-16"
+
+# End /etc/sysconfig/console</code>
+EOF</kbd>
+</pre>
+            </li>
+            <li class="listitem">
+              <p>
+                Due to the use of a 512-glyph LatArCyrHeb-16 font in the
+                previous example, bright colors are no longer available on
+                the Linux console unless a framebuffer is used. If one wants
+                to have bright colors without framebuffer and can live
+                without characters not belonging to his language, it is still
+                possible to use a language-specific 256-glyph font, as
+                illustrated below:
+              </p>
+              <pre class="userinput">
+<kbd class="command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/console
+
+UNICODE="1"
+KEYMAP="bg_bds-utf8"
+FONT="cyr-sun16"
+
+# End /etc/sysconfig/console</code>
+EOF</kbd>
+</pre>
+            </li>
+            <li class="listitem">
+              <p>
+                The following example illustrates keymap autoconversion from
+                ISO-8859-15 to UTF-8 and enabling dead keys in Unicode mode:
+              </p>
+              <pre class="userinput">
+<kbd class="command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/console
+
+UNICODE="1"
+KEYMAP="de-latin1"
+KEYMAP_CORRECTIONS="euro2"
+LEGACY_CHARSET="iso-8859-15"
+FONT="LatArCyrHeb-16 -m 8859-15"
+
+# End /etc/sysconfig/console</code>
+EOF</kbd>
+</pre>
+            </li>
+            <li class="listitem">
+              <p>
+                Some keymaps have dead keys (i.e., keys that don't produce a
+                character by themselves, but put an accent on the character
+                produced by the next key) or define composition rules (such
+                as: <span class="quote">&ldquo;<span class="quote">press
+                Ctrl+. A E to get Æ</span>&rdquo;</span> in the default
+                keymap). Linux-4.9.9 interprets dead keys and composition
+                rules in the keymap correctly only when the source characters
+                to be composed together are not multibyte. This deficiency
+                doesn't affect keymaps for European languages, because there
+                accents are added to unaccented ASCII characters, or two
+                ASCII characters are composed together. However, in UTF-8
+                mode it is a problem, e.g., for the Greek language, where one
+                sometimes needs to put an accent on the letter <span class=
+                "quote">&ldquo;<span class=
+                "quote">alpha</span>&rdquo;</span>. The solution is either to
+                avoid the use of UTF-8, or to install the X window system
+                that doesn't have this limitation in its input handling.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                For Chinese, Japanese, Korean and some other languages, the
+                Linux console cannot be configured to display the needed
+                characters. Users who need such languages should install the
+                X Window System, fonts that cover the necessary character
+                ranges, and the proper input method (e.g., SCIM, it supports
+                a wide variety of languages).
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The <code class="filename">/etc/sysconfig/console</code> file
+            only controls the Linux text console localization. It has nothing
+            to do with setting the proper keyboard layout and terminal fonts
+            in the X Window System, with ssh sessions or with a serial
+            console. In such situations, limitations mentioned in the last
+            two list items above do not apply.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-createfiles" name=
+          "ch-scripts-createfiles"></a>7.6.6. Creating Files at Boot
+        </h2>
+        <p>
+          At times, it is desired to create files at boot time. For instance,
+          the <code class="filename">/tmp/.ICE-unix</code> directory may be
+          desired. This can be done by creating an entry in the <code class=
+          "filename">/etc/sysconfig/createfiles</code> configuration script.
+          The format of this file is embedded in the comments of the default
+          configuration file.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-sysklogd" name="ch-scripts-sysklogd"></a>7.6.7.
+          Configuring the sysklogd Script
+        </h2>
+        <p>
+          The <code class="filename">sysklogd</code> script invokes the
+          <span class="command"><strong>syslogd</strong></span> program as a
+          part of System V initialization. The <em class="parameter"><code>-m
+          0</code></em> option turns off the periodic timestamp mark that
+          <span class="command"><strong>syslogd</strong></span> writes to the
+          log files every 20 minutes by default. If you want to turn on this
+          periodic timestamp mark, edit <code class=
+          "filename">/etc/sysconfig/rc.site</code> and define the variable
+          SYSKLOGD_PARMS to the desired value. For instance, to remove all
+          parameters, set the variable to a null value:
+        </p>
+        <pre class="screen">
+SYSKLOGD_PARMS=
+</pre>
+        <p>
+          See <strong class="userinput"><code>man syslogd</code></strong> for
+          more options.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-site" name="ch-scripts-site"></a>7.6.8. The
+          rc.site File
+        </h2>
+        <p>
+          The optional <code class="filename">/etc/sysconfig/rc.site</code>
+          file contains settings that are automatically set for each SystemV
+          boot script. It can alternatively set the values specified in the
+          <code class="filename">hostname</code>, <code class=
+          "filename">console</code>, and <code class="filename">clock</code>
+          files in the <code class="filename">/etc/sysconfig/</code>
+          directory. If the associated variables are present in both these
+          separate files and <code class="filename">rc.site</code>, the
+          values in the script specific files have precedence.
+        </p>
+        <p>
+          <code class="filename">rc.site</code> also contains parameters that
+          can customize other aspects of the boot process. Setting the
+          IPROMPT variable will enable selective running of bootscripts.
+          Other options are described in the file comments. The default
+          version of the file is as follows:
+        </p>
+        <pre class="auto">
+# rc.site
+# Optional parameters for boot scripts.
+
+# Distro Information
+# These values, if specified here, override the defaults
+#DISTRO="Linux From Scratch" # The distro name
+#DISTRO_CONTACT="lfs-dev@linuxfromscratch.org" # Bug report address
+#DISTRO_MINI="LFS" # Short name used in filenames for distro config
+
+# Define custom colors used in messages printed to the screen
+
+# Please consult `man console_codes` for more information
+# under the "ECMA-48 Set Graphics Rendition" section
+#
+# Warning: when switching from a 8bit to a 9bit font,
+# the linux console will reinterpret the bold (1;) to
+# the top 256 glyphs of the 9bit font.  This does
+# not affect framebuffer consoles
+
+# These values, if specified here, override the defaults
+#BRACKET="\\033[1;34m" # Blue
+#FAILURE="\\033[1;31m" # Red
+#INFO="\\033[1;36m"    # Cyan
+#NORMAL="\\033[0;39m"  # Grey
+#SUCCESS="\\033[1;32m" # Green
+#WARNING="\\033[1;33m" # Yellow
+
+# Use a colored prefix
+# These values, if specified here, override the defaults
+#BMPREFIX="     "
+#SUCCESS_PREFIX="${SUCCESS}  *  ${NORMAL}"
+#FAILURE_PREFIX="${FAILURE}*****${NORMAL}"
+#WARNING_PREFIX="${WARNING} *** ${NORMAL}"
+
+# Manually seet the right edge of message output (characters)
+# Useful when resetting console font during boot to override
+# automatic screen width detection
+#COLUMNS=120
+
+# Interactive startup
+#IPROMPT="yes" # Whether to display the interactive boot prompt
+#itime="3"    # The amount of time (in seconds) to display the prompt
+
+# The total length of the distro welcome string, without escape codes
+#wlen=$(echo "Welcome to ${DISTRO}" | wc -c )
+#welcome_message="Welcome to ${INFO}${DISTRO}${NORMAL}"
+
+# The total length of the interactive string, without escape codes
+#ilen=$(echo "Press 'I' to enter interactive startup" | wc -c )
+#i_message="Press '${FAILURE}I${NORMAL}' to enter interactive startup"
+
+# Set scripts to skip the file system check on reboot
+#FASTBOOT=yes
+
+# Skip reading from the console
+#HEADLESS=yes
+
+# Write out fsck progress if yes
+#VERBOSE_FSCK=no
+
+# Speed up boot without waiting for settle in udev
+#OMIT_UDEV_SETTLE=y
+
+# Speed up boot without waiting for settle in udev_retry
+#OMIT_UDEV_RETRY_SETTLE=yes
+
+# Skip cleaning /tmp if yes
+#SKIPTMPCLEAN=no
+
+# For setclock
+#UTC=1
+#CLOCKPARAMS=
+
+# For consolelog (Note that the default, 7=debug, is noisy)
+#LOGLEVEL=7
+
+# For network
+#HOSTNAME=mylfs
+
+# Delay between TERM and KILL signals at shutdown
+#KILLDELAY=3
+
+# Optional sysklogd parameters
+#SYSKLOGD_PARMS="-m 0"
+
+# Console parameters
+#UNICODE=1
+#KEYMAP="de-latin1"
+#KEYMAP_CORRECTIONS="euro2"
+#FONT="lat0-16 -m 8859-15"
+#LEGACY_CHARSET=
+
+</pre>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.6.8.1. Customizing the Boot and Shutdown Scripts
+          </h3>
+          <p>
+            The LFS boot scripts boot and shut down a system in a fairly
+            efficient manner, but there are a few tweaks that you can make in
+            the rc.site file to improve speed even more and to adjust
+            messages according to your preferences. To do this, adjust the
+            settings in the <code class=
+            "filename">/etc/sysconfig/rc.site</code> file above.
+          </p>
+          <div class="itemizedlist">
+            <ul>
+              <li class="listitem">
+                <p>
+                  During the boot script <code class="filename">udev</code>,
+                  there is a call to <span class="command"><strong>udev
+                  settle</strong></span> that requires some time to complete.
+                  This time may or may not be required depending on devices
+                  present in the system. If you only have simple partitions
+                  and a single ethernet card, the boot process will probably
+                  not need to wait for this command. To skip it, set the
+                  variable OMIT_UDEV_SETTLE=y.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  The boot script <code class="filename">udev_retry</code>
+                  also runs <span class="command"><strong>udev
+                  settle</strong></span> by default. This command is only
+                  needed by default if the <code class="filename">/var</code>
+                  directory is separately mounted. This is because the clock
+                  needs the file <code class=
+                  "filename">/var/lib/hwclock/adjtime</code>. Other
+                  customizations may also need to wait for udev to complete,
+                  but in many installations it is not needed. Skip the
+                  command by setting the variable OMIT_UDEV_RETRY_SETTLE=y.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  By default, the file system checks are silent. This can
+                  appear to be a delay during the bootup process. To turn on
+                  the <span class="command"><strong>fsck</strong></span>
+                  output, set the variable VERBOSE_FSCK=y.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  When rebooting, you may want to skip the filesystem check,
+                  <span class="command"><strong>fsck</strong></span>,
+                  completely. To do this, either create the file <code class=
+                  "filename">/fastboot</code> or reboot the system with the
+                  command <span class="command"><strong>/sbin/shutdown -f -r
+                  now</strong></span>. On the other hand, you can force all
+                  file systems to be checked by creating <code class=
+                  "filename">/forcefsck</code> or running <span class=
+                  "command"><strong>shutdown</strong></span> with the
+                  <em class="parameter"><code>-F</code></em> parameter
+                  instead of <em class="parameter"><code>-f</code></em>.
+                </p>
+                <p>
+                  Setting the variable FASTBOOT=y will disable <span class=
+                  "command"><strong>fsck</strong></span> during the boot
+                  process until it is removed. This is not recommended on a
+                  permanent basis.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  Normally, all files in the <code class=
+                  "filename">/tmp</code> directory are deleted at boot time.
+                  Depending on the number of files or directories present,
+                  this can cause a noticeable delay in the boot process. To
+                  skip removing these files set the variable SKIPTMPCLEAN=y.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  During shutdown, the <span class=
+                  "command"><strong>init</strong></span> program sends a TERM
+                  signal to each program it has started (e.g. agetty), waits
+                  for a set time (default 3 seconds), and sends each process
+                  a KILL signal and waits again. This process is repeated in
+                  the <span class=
+                  "command"><strong>sendsignals</strong></span> script for
+                  any processes that are not shut down by their own scripts.
+                  The delay for <span class=
+                  "command"><strong>init</strong></span> can be set by
+                  passing a parameter. For example to remove the delay in
+                  <span class="command"><strong>init</strong></span>, pass
+                  the -t0 parameter when shutting down or rebooting (e.g.
+                  <span class="command"><strong>/sbin/shutdown -t0 -r
+                  now</strong></span>). The delay for the <span class=
+                  "command"><strong>sendsignals</strong></span> script can be
+                  skipped by setting the parameter KILLDELAY=0.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="network.html" title=
+          "General Network Configuration">Prev</a>
+          <p>
+            General Network Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="profile.html" title=
+          "The Bash Shell Startup Files">Next</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -13,176 +13,176 @@ Table of Contents lfs-8.0 目录
         LFS Target Architectures                 (@bootingman)
         LFS and Standards            (@bootingman)
         Rationale for Packages in the Book            (@bootingman)
-        Prerequisites
-        Typography
-        Structure
-        Errata
+        Prerequisites             (@21vianetchinaedu)
+        Typography             (@21vianetchinaedu)
+        Structure             (@21vianetchinaedu)
+        Errata             (@21vianetchinaedu)
     I. Introduction
-        1. Introduction
-            How to Build an LFS System
-            What's new since the last release
-            Changelog
-            Resources
-            Help
+        1. Introduction               (@heart4lor)
+            How to Build an LFS System                   (@heart4lor)
+            What's new since the last release             (@heart4lor)
+            Changelog                     (@heart4lor)
+            Resources                 (@heart4lor)
+            Help                       (@heart4lor)
     II. Preparing for the Build
-        2. Preparing the Host System
-            Introduction
-            Host System Requirements
-            Building LFS in Stages
-            Creating a New Partition
-            Creating a File System on the Partition
-            Setting The $LFS Variable
-            Mounting the New Partition
-        3. Packages and Patches
-            Introduction
-            All Packages
-            Needed Patches
-        4. Final Preparations
-            Introduction
-            Creating the $LFS/tools Directory
-            Adding the LFS User
-            Setting Up the Environment
-            About SBUs
-            About the Test Suites
-        5. Constructing a Temporary System
-            Introduction
-            Toolchain Technical Notes
-            General Compilation Instructions
-            Binutils-2.27 - Pass 1
-            GCC-6.3.0 - Pass 1
-            Linux-4.9.9 API Headers
-            Glibc-2.25
-            Libstdc++-6.3.0
-            Binutils-2.27 - Pass 2
-            GCC-6.3.0 - Pass 2
-            Tcl-core-8.6.6
-            Expect-5.45
-            DejaGNU-1.6
-            Check-0.11.0
-            Ncurses-6.0
-            Bash-4.4
-            Bison-3.0.4
-            Bzip2-1.0.6
-            Coreutils-8.26
-            Diffutils-3.5
-            File-5.30
-            Findutils-4.6.0
-            Gawk-4.1.4
-            Gettext-0.19.8.1
-            Grep-3.0
-            Gzip-1.8
-            M4-1.4.18
-            Make-4.2.1
-            Patch-2.7.5
-            Perl-5.24.1
-            Sed-4.4
-            Tar-1.29
-            Texinfo-6.3
-            Util-linux-2.29.1
-            Xz-5.2.3
-            Stripping
-            Changing Ownership
+        2. Preparing the Host System                     (@Geno1024)
+            Introduction                     (@Geno1024)
+            Host System Requirements                (@Geno1024)
+            Building LFS in Stages                   (@Geno1024)
+            Creating a New Partition                    (@Geno1024)
+            Creating a File System on the Partition                      (@Geno1024)
+            Setting The $LFS Variable                (@Geno1024)
+            Mounting the New Partition              (@Geno1024)
+        3. Packages and Patches                  (loopio)
+            Introduction                 (@loopio)
+            All Packages                 (@loopio)
+            Needed Patches                 (@loopio)
+        4. Final Preparations               (@Hirozy)
+            Introduction                  (@Hirozy)
+            Creating the $LFS/tools Directory                (@Hirozy)
+            Adding the LFS User                (@Hirozy)
+            Setting Up the Environment                (@Hirozy)
+            About SBUs               (@Hirozy)
+            About the Test Suites              (@Hirozy)
+        5. Constructing a Temporary System         (@Gilbert-Wong)
+            Introduction            (@Gilbert-Wong)
+            Toolchain Technical Notes            (@Gilbert-Wong)
+            General Compilation Instructions             (@mumuxme)
+            Binutils-2.27 - Pass 1             (@mumuxme)
+            GCC-6.3.0 - Pass 1             (@mumuxme)
+            Linux-4.9.9 API Headers             (@mumuxme)
+            Glibc-2.25            （@Geno1024）
+            Libstdc++-6.3.0             (@mumuxme)
+            Binutils-2.27 - Pass 2             (@mumuxme)
+            GCC-6.3.0 - Pass 2             (@mumuxme)
+            Tcl-core-8.6.6             (@mumuxme)
+            Expect-5.45             (@mumuxme)
+            DejaGNU-1.6             (@mumuxme)
+            Check-0.11.0             (@mumuxme)
+            Ncurses-6.0             (@mumuxme)
+            Bash-4.4             (@mumuxme)
+            Bison-3.0.4             (@mumuxme)
+            Bzip2-1.0.6             (@mumuxme)
+            Coreutils-8.26             (@mumuxme)
+            Diffutils-3.5             (@mumuxme)
+            File-5.30             (@mumuxme)
+            Findutils-4.6.0             (@mumuxme)
+            Gawk-4.1.4             (@mumuxme)
+            Gettext-0.19.8.1             (@mumuxme)
+            Grep-3.0             (@mumuxme)
+            Gzip-1.8             (@mumuxme)
+            M4-1.4.18             (@mumuxme)
+            Make-4.2.1             (@mumuxme)
+            Patch-2.7.5             (@mumuxme)
+            Perl-5.24.1             (@mumuxme)
+            Sed-4.4             (@mumuxme)
+            Tar-1.29             (@mumuxme)
+            Texinfo-6.3             (@mumuxme)
+            Util-linux-2.29.1             (@mumuxme)
+            Xz-5.2.3             (@mumuxme)
+            Stripping             (@mumuxme)
+            Changing Ownership             (@mumuxme)
     III. Building the LFS System
-        6. Installing Basic System Software
-            Introduction
-            Preparing Virtual Kernel File Systems
-            Package Management
-            Entering the Chroot Environment
-            Creating Directories
-            Creating Essential Files and Symlinks
-            Linux-4.9.9 API Headers
-            Man-pages-4.09
-            Glibc-2.25
-            Adjusting the Toolchain
-            Zlib-1.2.11
-            File-5.30
-            Binutils-2.27
-            GMP-6.1.2
-            MPFR-3.1.5
-            MPC-1.0.3
-            GCC-6.3.0
-            Bzip2-1.0.6
-            Pkg-config-0.29.1
-            Ncurses-6.0
-            Attr-2.4.47
-            Acl-2.2.52
-            Libcap-2.25
-            Sed-4.4
-            Shadow-4.4
-            Psmisc-22.21
-            Iana-Etc-2.30
-            M4-1.4.18
-            Bison-3.0.4
-            Flex-2.6.3
-            Grep-3.0
-            Readline-7.0
-            Bash-4.4
-            Bc-1.06.95
-            Libtool-2.4.6
-            GDBM-1.12
-            Gperf-3.0.4
-            Expat-2.2.0
-            Inetutils-1.9.4
-            Perl-5.24.1
-            XML::Parser-2.44
-            Intltool-0.51.0
-            Autoconf-2.69
-            Automake-1.15
-            Xz-5.2.3
-            Kmod-23
-            Gettext-0.19.8.1
-            Procps-ng-3.3.12
-            E2fsprogs-1.43.4
-            Coreutils-8.26
-            Diffutils-3.5
-            Gawk-4.1.4
-            Findutils-4.6.0
-            Groff-1.22.3
-            GRUB-2.02~beta3
-            Less-481
-            Gzip-1.8
-            IPRoute2-4.9.0
-            Kbd-2.0.4
-            Libpipeline-1.4.1
-            Make-4.2.1
-            Patch-2.7.5
-            Sysklogd-1.5.1
-            Sysvinit-2.88dsf
-            Eudev-3.2.1
-            Util-linux-2.29.1
-            Man-DB-2.7.6.1
-            Tar-1.29
-            Texinfo-6.3
-            Vim-8.0.069
-            About Debugging Symbols
-            Stripping Again
-            Cleaning Up
-        7. System Configuration
-            Introduction
-            LFS-Bootscripts-20150222
-            Overview of Device and Module Handling
-            Managing Devices
-            General Network Configuration
-            System V Bootscript Usage and Configuration
-            The Bash Shell Startup Files
-            Creating the /etc/inputrc File
-            Creating the /etc/shells File
-        8. Making the LFS System Bootable
-            Introduction
-            Creating the /etc/fstab File
-            Linux-4.9.9
-            Using GRUB to Set Up the Boot Process
-        9. The End
-            The End
-            Get Counted
-            Rebooting the System
-            What Now?
+        6. Installing Basic System Software               (@lzgh64)
+            Introduction              (@lzgh64)
+            Preparing Virtual Kernel File Systems              (@lzgh64)
+            Package Management              (@lzgh64)
+            Entering the Chroot Environment              (@lzgh64)
+            Creating Directories              (@lzgh64)
+            Creating Essential Files and Symlinks              (@lzgh64)
+            Linux-4.9.9 API Headers              (@lzgh64)
+            Man-pages-4.09              (@lzgh64)
+            Glibc-2.25             (@Geno1024)
+            Adjusting the Toolchain              (@yedamao)
+            Zlib-1.2.11              (@yedamao)
+            File-5.30              (@yedamao)
+            Binutils-2.27              (@yedamao)
+            GMP-6.1.2              (@yedamao)
+            MPFR-3.1.5              (@yedamao)
+            MPC-1.0.3              (@yedamao)
+            GCC-6.3.0              (@yedamao)
+            Bzip2-1.0.6              (@yedamao)
+            Pkg-config-0.29.1              (@yedamao)
+            Ncurses-6.0              (@yedamao)
+            Attr-2.4.47                     (@banner1024)    
+            Acl-2.2.52                    (@banner1024)    
+            Libcap-2.25                    (@banner1024)    
+            Sed-4.4                    (@banner1024)    
+            Shadow-4.4                    (@banner1024)    
+            Psmisc-22.21                    (@banner1024)    
+            Iana-Etc-2.30                    (@banner1024)    
+            M4-1.4.18                    (@banner1024)    
+            Bison-3.0.4                    (@banner1024)    
+            Flex-2.6.3                    (@banner1024)    
+            Grep-3.0                     (@Cabbagec)
+            Readline-7.0                     (@Cabbagec)
+            Bash-4.4                     (@Cabbagec)
+            Bc-1.06.95                     (@Cabbagec)
+            Libtool-2.4.6                     (@Cabbagec)
+            GDBM-1.12                     (@Cabbagec)
+            Gperf-3.0.4                     (@Cabbagec)
+            Expat-2.2.0                     (@Cabbagec)
+            Inetutils-1.9.4                     (@Cabbagec)
+            Perl-5.24.1                     (@Cabbagec)
+            XML::Parser-2.44                (@andyhuzhill)
+            Intltool-0.51.0               (@andyhuzhill)
+            Autoconf-2.69               (@andyhuzhill)
+            Automake-1.15               (@andyhuzhill)
+            Xz-5.2.3               (@andyhuzhill)
+            Kmod-23               (@andyhuzhill)
+            Gettext-0.19.8.1               (@andyhuzhill)
+            Procps-ng-3.3.12               (@andyhuzhill)
+            E2fsprogs-1.43.4               (@andyhuzhill)
+            Coreutils-8.26               (@andyhuzhill)
+            Diffutils-3.5                 (@zhaofengming)
+            Gawk-4.1.4                  (@zilu)
+            Findutils-4.6.0                   (@zilu)
+            Groff-1.22.3                  (@zilu)
+            GRUB-2.02~beta3                  (@zilu)
+            Less-481                  (@zilu)
+            Gzip-1.8                  (@zilu)
+            IPRoute2-4.9.0                  (@zilu)
+            Kbd-2.0.4                  (@zilu)
+            Libpipeline-1.4.1                  (@zilu)
+            Make-4.2.1                  (@zilu)
+            Patch-2.7.5                  (@zilu)
+            Sysklogd-1.5.1                (@zhaofengming)
+            Sysvinit-2.88dsf                (@zhaofengming)
+            Eudev-3.2.1                (@zhaofengming)
+            Util-linux-2.29.1                (@zhaofengming)
+            Man-DB-2.7.6.1              (@heart4lor)
+            Tar-1.29              (@heart4lor)
+            Texinfo-6.3              (@heart4lor)
+            Vim-8.0.069              (@heart4lor)
+            About Debugging Symbols              (@heart4lor)
+            Stripping Again              (@heart4lor)
+            Cleaning Up              (@heart4lor)
+        7. System Configuration            （@fooozhe）
+            Introduction              （@fooozhe）
+            LFS-Bootscripts-20150222              （@fooozhe）
+            Overview of Device and Module Handling             （@fooozhe）
+            Managing Devices               （@fooozhe）
+            General Network Configuration            （@muzikmoe）
+            System V Bootscript Usage and Configuration            （@muzikmoe）
+            The Bash Shell Startup Files            （@muzikmoe）
+            Creating the /etc/inputrc File            （@muzikmoe）
+            Creating the /etc/shells File            （@muzikmoe）
+        8. Making the LFS System Bootable             （@qq296776435）
+            Introduction            （@qq296776435）
+            Creating the /etc/fstab File             （@qq296776435）
+            Linux-4.9.9             （@qq296776435）
+            Using GRUB to Set Up the Boot Process            （@qq296776435）
+        9. The End             （@strange-jiong）
+            The End             （@strange-jiong）
+            Get Counted             （@strange-jiong）
+            Rebooting the System             （@strange-jiong）
+            What Now?             （@strange-jiong）
     IV. Appendices
-        A. Acronyms and Terms
-        B. Acknowledgments
-        C. Dependencies
-        D. Boot and sysconfig scripts version-20150222
-            /etc/rc.d/init.d/rc
+        A. Acronyms and Terms              (@21vianetchinaedu)
+        B. Acknowledgments             (@21vianetchinaedu)
+        C. Dependencies             (@21vianetchinaedu)
+        D. Boot and sysconfig scripts version-20150222             (@21vianetchinaedu)
+            /etc/rc.d/init.d/rc                         
             /lib/lsb/init-functions
             /etc/rc.d/init.d/mountvirtfs
             /etc/rc.d/init.d/modules
@@ -209,8 +209,8 @@ Table of Contents lfs-8.0 目录
             /sbin/ifdown
             /lib/services/ipv4-static
             /lib/services/ipv4-static-route
-        E. Udev configuration rules
-            55-lfs.rules
-        F. LFS Licenses
-            Creative Commons License
-            The MIT License
+        E. Udev configuration rules                  (@qq296776435)
+            55-lfs.rules                  (@qq296776435)
+        F. LFS Licenses                  (@qq296776435)
+            Creative Commons License                  (@qq296776435)
+            The MIT License                  (@qq296776435)

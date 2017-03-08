@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.5.&nbsp;Configuring the system clock
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="symlinks.html" title=
+          "Managing Devices">Prev</a>
+          <p>
+            Managing Devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="console.html" title=
+          "Configuring the Linux Console">Next</a>
+          <p>
+            Configuring the Linux Console
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-clock" name="ch-scripts-clock"></a>7.5. Configuring
+        the system clock
+      </h1>
+      <p>
+        This section discusses how to configure the <span class=
+        "command"><strong>systemd-timedated</strong></span> system service,
+        which configures system clock and timezone.
+      </p>
+      <p>
+        If you cannot remember whether or not the hardware clock is set to
+        UTC, find out by running the <strong class="userinput"><code>hwclock
+        --localtime --show</code></strong> command. This will display what
+        the current time is according to the hardware clock. If this time
+        matches whatever your watch says, then the hardware clock is set to
+        local time. If the output from <span class=
+        "command"><strong>hwclock</strong></span> is not local time, chances
+        are it is set to UTC time. Verify this by adding or subtracting the
+        proper amount of hours for the timezone to the time shown by
+        <span class="command"><strong>hwclock</strong></span>. For example,
+        if you are currently in the MST timezone, which is also known as GMT
+        -0700, add seven hours to the local time.
+      </p>
+      <p>
+        <span class="command"><strong>systemd-timedated</strong></span> reads
+        <code class="filename">/etc/adjtime</code>, and depending on the
+        contents of the file, it sets the clock to either UTC or local time.
+      </p>
+      <p>
+        Create the <code class="filename">/etc/adjtime</code> file with the
+        following contents if your hardware clock is set to local time:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; /etc/adjtime &lt;&lt; "EOF"
+<code class="literal">0.0 0 0.0
+0
+LOCAL</code>
+EOF</kbd>
+</pre>
+      <p>
+        If <code class="filename">/etc/adjtime</code> isn't present at first
+        boot, <span class="command"><strong>systemd-timedated</strong></span>
+        will assume that hardware clock is set to UTC and adjust the file
+        according to that.
+      </p>
+      <p>
+        You can also use the <span class=
+        "command"><strong>timedatectl</strong></span> utility to tell
+        <span class="command"><strong>systemd-timedated</strong></span> if
+        your hardware clock is set to UTC or local time:
+      </p>
+      <pre class="userinput">
+<kbd class="command">timedatectl set-local-rtc 1</kbd>
+</pre>
+      <p>
+        <span class="command"><strong>timedatectl</strong></span> can also be
+        used to change system time and time zone.
+      </p>
+      <p>
+        To change your current system time, issue:
+      </p>
+      <pre class="userinput">
+<kbd class="command">timedatectl set-time YYYY-MM-DD HH:MM:SS</kbd>
+</pre>
+      <p>
+        Hardware clock will also be updated accordingly.
+      </p>
+      <p>
+        To change your current time zone, issue:
+      </p>
+      <pre class="userinput">
+<kbd class="command">timedatectl set-timezone TIMEZONE</kbd>
+</pre>
+      <p>
+        You can get list of available time zones by running:
+      </p>
+      <pre class="userinput">
+<kbd class="command">timedatectl list-timezones</kbd>
+</pre>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Please note that <span class=
+          "command"><strong>timedatectl</strong></span> command can be used
+          only on a system booted with systemd.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.5.1. Network Time Synchronization
+        </h2>
+        <p>
+          Starting with version 213, systemd ships a daemon called
+          <span class="command"><strong>systemd-timesyncd</strong></span>
+          which can be used to synchronize the system time with remote NTP
+          servers.
+        </p>
+        <p>
+          The daemon is not intended as a replacement for the well
+          established NTP daemon, but as a client only implementation of the
+          SNTP protocol which can be used for less advanced tasks and on
+          resource limited systems.
+        </p>
+        <p>
+          Starting with systemd version 216, the <span class=
+          "command"><strong>systemd-timesyncd</strong></span> daemon is
+          enabled by default. If you want to disable it, issue the following
+          command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">systemctl disable systemd-timesyncd</kbd>
+</pre>
+        <p>
+          The <code class="filename">/etc/systemd/timesyncd.conf</code> file
+          can be used to change the NTP servers that <span class=
+          "command"><strong>systemd-timesyncd</strong></span> synchronizes
+          with.
+        </p>
+        <p>
+          Please note that when system clock is set to Local Time,
+          <span class="command"><strong>systemd-timesyncd</strong></span>
+          won't update hardware clock.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="symlinks.html" title=
+          "Managing Devices">Prev</a>
+          <p>
+            Managing Devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="console.html" title=
+          "Configuring the Linux Console">Next</a>
+          <p>
+            Configuring the Linux Console
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

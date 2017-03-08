@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.70.&nbsp;About Debugging Symbols
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="vim.html" title="Vim-8.0.069">Prev</a>
+          <p>
+            Vim-8.0.069
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="strippingagain.html" title=
+          "Stripping Again">Next</a>
+          <p>
+            Stripping Again
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-aboutdebug" name="ch-system-aboutdebug"></a>6.70.
+        About Debugging Symbols
+      </h1>
+      <p>
+        Most programs and libraries are, by default, compiled with debugging
+        symbols included (with <span class=
+        "command"><strong>gcc</strong></span>'s <em class=
+        "parameter"><code>-g</code></em> option). This means that when
+        debugging a program or library that was compiled with debugging
+        information included, the debugger can provide not only memory
+        addresses, but also the names of the routines and variables.
+      </p>
+      <p>
+        However, the inclusion of these debugging symbols enlarges a program
+        or library significantly. The following is an example of the amount
+        of space these symbols occupy:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              A <span class="command"><strong>bash</strong></span> binary
+              with debugging symbols: 1200 KB
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              A <span class="command"><strong>bash</strong></span> binary
+              without debugging symbols: 480 KB
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Glibc and GCC files (<code class="filename">/lib</code> and
+              <code class="filename">/usr/lib</code>) with debugging symbols:
+              87 MB
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Glibc and GCC files without debugging symbols: 16 MB
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Sizes may vary depending on which compiler and C library were used,
+        but when comparing programs with and without debugging symbols, the
+        difference will usually be a factor between two and five.
+      </p>
+      <p>
+        Because most users will never use a debugger on their system
+        software, a lot of disk space can be regained by removing these
+        symbols. The next section shows how to strip all debugging symbols
+        from the programs and libraries.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="vim.html" title="Vim-8.0.069">Prev</a>
+          <p>
+            Vim-8.0.069
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="strippingagain.html" title=
+          "Stripping Again">Next</a>
+          <p>
+            Stripping Again
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

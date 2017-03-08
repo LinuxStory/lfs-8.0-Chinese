@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.65.&nbsp;Eudev-3.2.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysvinit.html" title=
+          "Sysvinit-2.88dsf">Prev</a>
+          <p>
+            Sysvinit-2.88dsf
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="util-linux.html" title=
+          "Util-linux-2.29.1">Next</a>
+          <p>
+            Util-linux-2.29.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-eudev" name="ch-system-eudev"></a>6.65. Eudev-3.2.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Eudev package contains programs for dynamic creation of device
+          nodes.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.2 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">78 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.65.1. Installation of Eudev
+        </h2>
+        <p>
+          First, fix a test script:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -r -i 's|/usr(/bin/test)|\1|' test/udev-test.pl</kbd>
+</pre>
+        <p>
+          Next, remove an unneeded line that causes a build failure:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c</kbd>
+</pre>
+        <p>
+          Next, add a workaround to prevent the /tools directory from being
+          hard coded into Eudev binary files library locations:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; config.cache &lt;&lt; "EOF"
+HAVE_BLKID=1
+BLKID_LIBS="-lblkid"
+BLKID_CFLAGS="-I/tools/include"
+EOF</kbd>
+</pre>
+        <p>
+          Prepare Eudev for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr           \
+            --bindir=/sbin          \
+            --sbindir=/sbin         \
+            --libdir=/usr/lib       \
+            --sysconfdir=/etc       \
+            --libexecdir=/lib       \
+            --with-rootprefix=      \
+            --with-rootlibdir=/lib  \
+            --enable-manpages       \
+            --disable-static        \
+            --config-cache</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">LIBRARY_PATH=/tools/lib make</kbd>
+</pre>
+        <p>
+          Create some directories now that are needed for tests, but will
+          also be used as a part of installation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv /lib/udev/rules.d
+mkdir -pv /etc/udev/rules.d</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make LD_LIBRARY_PATH=/tools/lib check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make LD_LIBRARY_PATH=/tools/lib install</kbd>
+</pre>
+        <p>
+          Install some custom rules and support files useful in an LFS
+          environment:
+        </p>
+        <pre class="userinput">
+<kbd class="command">tar -xvf ../udev-lfs-20140408.tar.bz2
+make -f udev-lfs-20140408/Makefile.lfs install</kbd>
+</pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="conf-eudev" name="conf-eudev"></a>6.65.2. Configuring Eudev
+        </h2>
+        <p>
+          Information about hardware devices is maintained in the
+          <code class="filename">/etc/udev/hwdb.d</code> and <code class=
+          "filename">/usr/lib/udev/hwdb.d</code> directories. <span class=
+          "application">Eudev</span> needs that information to be compiled
+          into a binary database <code class=
+          "filename">/etc/udev/hwdb.bin</code>. Create the initial database:
+        </p>
+        <pre class="userinput">
+<kbd class="command">LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update</kbd>
+</pre>
+        <p>
+          This command needs to be run each time the hardware information is
+          updated.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-eudev" name="contents-eudev"></a>6.65.3. Contents
+          of Eudev
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">udevadm and udevd</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libudev.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/etc/udev, /lib/udev, and
+              /usr/share/doc/udev-20140408</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="udevadm" name="udevadm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>udevadm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generic udev administration tool: controls the udevd
+                    daemon, provides info from the Udev database, monitors
+                    uevents, waits for uevents to finish, tests Udev
+                    configuration, and triggers uevents for a given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="udevd" name="udevd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>udevd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A daemon that listens for uevents on the netlink socket,
+                    creates devices and runs the configured external programs
+                    in response to these uevents
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libudev" name="libudev"></a><span class=
+                    "term"><code class="filename">libudev</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A library interface to udev device information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="etc-udev" name="etc-udev"></a><span class=
+                    "term"><code class="filename">/etc/udev</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains Udev configuration files, device permissions,
+                    and rules for device naming
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysvinit.html" title=
+          "Sysvinit-2.88dsf">Prev</a>
+          <p>
+            Sysvinit-2.88dsf
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="util-linux.html" title=
+          "Util-linux-2.29.1">Next</a>
+          <p>
+            Util-linux-2.29.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

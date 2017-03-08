@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.3.&nbsp;Overview of Device and Module Handling
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="network.html" title=
+          "General Network Configuration">Prev</a>
+          <p>
+            General Network Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="symlinks.html" title=
+          "Managing Devices">Next</a>
+          <p>
+            Managing Devices
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-udev" name="ch-scripts-udev"></a>7.3. Overview of
+        Device and Module Handling
+      </h1>
+      <p>
+        In <a class="xref" href="../chapter06/chapter06.html" title=
+        "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
+        6</a>, we installed the Udev package when <span class=
+        "phrase">systemd</span> was built. Before we go into the details
+        regarding how this works, a brief history of previous methods of
+        handling devices is in order.
+      </p>
+      <p>
+        Linux systems in general traditionally used a static device creation
+        method, whereby a great many device nodes were created under
+        <code class="filename">/dev</code> (sometimes literally thousands of
+        nodes), regardless of whether the corresponding hardware devices
+        actually existed. This was typically done via a <span class=
+        "command"><strong>MAKEDEV</strong></span> script, which contains a
+        number of calls to the <span class=
+        "command"><strong>mknod</strong></span> program with the relevant
+        major and minor device numbers for every possible device that might
+        exist in the world.
+      </p>
+      <p>
+        Using the Udev method, only those devices which are detected by the
+        kernel get device nodes created for them. Because these device nodes
+        will be created each time the system boots, they will be stored on a
+        <code class="systemitem">devtmpfs</code> file system (a virtual file
+        system that resides entirely in system memory). Device nodes do not
+        require much space, so the memory that is used is negligible.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.3.1. History
+        </h2>
+        <p>
+          In February 2000, a new filesystem called <code class=
+          "systemitem">devfs</code> was merged into the 2.3.46 kernel and was
+          made available during the 2.4 series of stable kernels. Although it
+          was present in the kernel source itself, this method of creating
+          devices dynamically never received overwhelming support from the
+          core kernel developers.
+        </p>
+        <p>
+          The main problem with the approach adopted by <code class=
+          "systemitem">devfs</code> was the way it handled device detection,
+          creation, and naming. The latter issue, that of device node naming,
+          was perhaps the most critical. It is generally accepted that if
+          device names are allowed to be configurable, then the device naming
+          policy should be up to a system administrator, not imposed on them
+          by any particular developer(s). The <code class=
+          "systemitem">devfs</code> file system also suffered from race
+          conditions that were inherent in its design and could not be fixed
+          without a substantial revision to the kernel. It was marked as
+          deprecated for a long period &ndash; due to a lack of maintenance
+          &ndash; and was finally removed from the kernel in June, 2006.
+        </p>
+        <p>
+          With the development of the unstable 2.5 kernel tree, later
+          released as the 2.6 series of stable kernels, a new virtual
+          filesystem called <code class="systemitem">sysfs</code> came to be.
+          The job of <code class="systemitem">sysfs</code> is to export a
+          view of the system's hardware configuration to userspace processes.
+          With this userspace-visible representation, the possibility of
+          developing a userspace replacement for <code class=
+          "systemitem">devfs</code> became much more realistic.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.3.2. Udev Implementation
+        </h2>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.2.1. Sysfs
+          </h3>
+          <p>
+            The <code class="systemitem">sysfs</code> filesystem was
+            mentioned briefly above. One may wonder how <code class=
+            "systemitem">sysfs</code> knows about the devices present on a
+            system and what device numbers should be used for them. Drivers
+            that have been compiled into the kernel directly register their
+            objects with a <code class="systemitem">sysfs</code> (devtmpfs
+            internally) as they are detected by the kernel. For drivers
+            compiled as modules, this registration will happen when the
+            module is loaded. Once the <code class="systemitem">sysfs</code>
+            filesystem is mounted (on /sys), data which the drivers register
+            with <code class="systemitem">sysfs</code> are available to
+            userspace processes and to udevd for processing (including
+            modifications to device nodes).
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.2.2. Device Node Creation
+          </h3>
+          <p>
+            Device files are created by the kernel by the <code class=
+            "systemitem">devtmpfs</code> filesystem. Any driver that wishes
+            to register a device node will go through the <code class=
+            "systemitem">devtmpfs</code> (via the driver core) to do it. When
+            a <code class="systemitem">devtmpfs</code> instance is mounted on
+            <code class="filename">/dev</code>, the device node will
+            initially be created with a fixed name, permissions, and owner.
+          </p>
+          <p>
+            A short time later, the kernel will send a uevent to <span class=
+            "command"><strong>udevd</strong></span>. Based on the rules
+            specified in the files within the <code class=
+            "filename">/etc/udev/rules.d</code>, <code class=
+            "filename">/lib/udev/rules.d</code>, and <code class=
+            "filename">/run/udev/rules.d</code> directories, <span class=
+            "command"><strong>udevd</strong></span> will create additional
+            symlinks to the device node, or change its permissions, owner, or
+            group, or modify the internal <span class=
+            "command"><strong>udevd</strong></span> database entry (name) for
+            that object.
+          </p>
+          <p>
+            The rules in these three directories are numbered and all three
+            directories are merged together. If <span class=
+            "command"><strong>udevd</strong></span> can't find a rule for the
+            device it is creating, it will leave the permissions and
+            ownership at whatever <code class="systemitem">devtmpfs</code>
+            used initially.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.2.3. Module Loading
+          </h3>
+          <p>
+            Device drivers compiled as modules may have aliases built into
+            them. Aliases are visible in the output of the <span class=
+            "command"><strong>modinfo</strong></span> program and are usually
+            related to the bus-specific identifiers of devices supported by a
+            module. For example, the <span class=
+            "emphasis"><em>snd-fm801</em></span> driver supports PCI devices
+            with vendor ID 0x1319 and device ID 0x0801, and has an alias of
+            <span class="quote">&ldquo;<span class=
+            "quote">pci:v00001319d00000801sv*sd*bc04sc01i*</span>&rdquo;</span>.
+            For most devices, the bus driver exports the alias of the driver
+            that would handle the device via <code class=
+            "systemitem">sysfs</code>. E.g., the <code class=
+            "filename">/sys/bus/pci/devices/0000:00:0d.0/modalias</code> file
+            might contain the string <span class="quote">&ldquo;<span class=
+            "quote">pci:v00001319d00000801sv00001319sd00001319bc04sc01i00</span>&rdquo;</span>.
+            The default rules provided with Udev will cause <span class=
+            "command"><strong>udevd</strong></span> to call out to
+            <span class="command"><strong>/sbin/modprobe</strong></span> with
+            the contents of the <code class="envar">MODALIAS</code> uevent
+            environment variable (which should be the same as the contents of
+            the <code class="filename">modalias</code> file in sysfs), thus
+            loading all modules whose aliases match this string after
+            wildcard expansion.
+          </p>
+          <p>
+            In this example, this means that, in addition to <span class=
+            "emphasis"><em>snd-fm801</em></span>, the obsolete (and unwanted)
+            <span class="emphasis"><em>forte</em></span> driver will be
+            loaded if it is available. See below for ways in which the
+            loading of unwanted drivers can be prevented.
+          </p>
+          <p>
+            The kernel itself is also able to load modules for network
+            protocols, filesystems and NLS support on demand.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.2.4. Handling Hotpluggable/Dynamic Devices
+          </h3>
+          <p>
+            When you plug in a device, such as a Universal Serial Bus (USB)
+            MP3 player, the kernel recognizes that the device is now
+            connected and generates a uevent. This uevent is then handled by
+            <span class="command"><strong>udevd</strong></span> as described
+            above.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.3.3. Problems with Loading Modules and Creating Devices
+        </h2>
+        <p>
+          There are a few possible problems when it comes to automatically
+          creating device nodes.
+        </p>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.1. A kernel module is not loaded automatically
+          </h3>
+          <p>
+            Udev will only load a module if it has a bus-specific alias and
+            the bus driver properly exports the necessary aliases to
+            <code class="systemitem">sysfs</code>. In other cases, one should
+            arrange module loading by other means. With Linux-4.9.9, Udev is
+            known to load properly-written drivers for INPUT, IDE, PCI, USB,
+            SCSI, SERIO, and FireWire devices.
+          </p>
+          <p>
+            To determine if the device driver you require has the necessary
+            support for Udev, run <span class=
+            "command"><strong>modinfo</strong></span> with the module name as
+            the argument. Now try locating the device directory under
+            <code class="filename">/sys/bus</code> and check whether there is
+            a <code class="filename">modalias</code> file there.
+          </p>
+          <p>
+            If the <code class="filename">modalias</code> file exists in
+            <code class="systemitem">sysfs</code>, the driver supports the
+            device and can talk to it directly, but doesn't have the alias,
+            it is a bug in the driver. Load the driver without the help from
+            Udev and expect the issue to be fixed later.
+          </p>
+          <p>
+            If there is no <code class="filename">modalias</code> file in the
+            relevant directory under <code class="filename">/sys/bus</code>,
+            this means that the kernel developers have not yet added modalias
+            support to this bus type. With Linux-4.9.9, this is the case with
+            ISA busses. Expect this issue to be fixed in later kernel
+            versions.
+          </p>
+          <p>
+            Udev is not intended to load <span class=
+            "quote">&ldquo;<span class="quote">wrapper</span>&rdquo;</span>
+            drivers such as <span class=
+            "emphasis"><em>snd-pcm-oss</em></span> and non-hardware drivers
+            such as <span class="emphasis"><em>loop</em></span> at all.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.2. A kernel module is not loaded automatically, and Udev is
+            not intended to load it
+          </h3>
+          <p>
+            If the <span class="quote">&ldquo;<span class=
+            "quote">wrapper</span>&rdquo;</span> module only enhances the
+            functionality provided by some other module (e.g., <span class=
+            "emphasis"><em>snd-pcm-oss</em></span> enhances the functionality
+            of <span class="emphasis"><em>snd-pcm</em></span> by making the
+            sound cards available to OSS applications), configure
+            <span class="command"><strong>modprobe</strong></span> to load
+            the wrapper after Udev loads the wrapped module. To do this, add
+            a <span class="quote">&ldquo;<span class=
+            "quote">softdep</span>&rdquo;</span> line in any <code class=
+            "filename">/etc/modprobe.d/<em class=
+            "replaceable"><code>&lt;filename&gt;</code></em>.conf</code>
+            file. For example:
+          </p>
+          <pre class="screen">
+<code class="literal">softdep snd-pcm post: snd-pcm-oss</code>
+</pre>
+          <p>
+            Note that the <span class="quote">&ldquo;<span class=
+            "quote">softdep</span>&rdquo;</span> command also allows
+            <code class="literal">pre:</code> dependencies, or a mixture of
+            both <code class="literal">pre:</code> and <code class=
+            "literal">post:</code>. See the <code class=
+            "filename">modprobe.d(5)</code> manual page for more information
+            on <span class="quote">&ldquo;<span class=
+            "quote">softdep</span>&rdquo;</span> syntax and capabilities.
+          </p>
+          <p>
+            If the module in question is not a wrapper and is useful by
+            itself, configure the <span class=
+            "command"><strong>modules</strong></span> bootscript to load this
+            module on system boot. To do this, add the module name to the
+            <code class="filename">/etc/sysconfig/modules</code> file on a
+            separate line. This works for wrapper modules too, but is
+            suboptimal in that case.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.3. Udev loads some unwanted module
+          </h3>
+          <p>
+            Either don't build the module, or blacklist it in a <code class=
+            "filename">/etc/modprobe.d/blacklist.conf</code> file as done
+            with the <span class="emphasis"><em>forte</em></span> module in
+            the example below:
+          </p>
+          <pre class="screen">
+<code class="literal">blacklist forte</code>
+</pre>
+          <p>
+            Blacklisted modules can still be loaded manually with the
+            explicit <span class="command"><strong>modprobe</strong></span>
+            command.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.4. Udev creates a device incorrectly, or makes a wrong
+            symlink
+          </h3>
+          <p>
+            This usually happens if a rule unexpectedly matches a device. For
+            example, a poorly-written rule can match both a SCSI disk (as
+            desired) and the corresponding SCSI generic device (incorrectly)
+            by vendor. Find the offending rule and make it more specific,
+            with the help of the <span class="command"><strong>udevadm
+            info</strong></span> command.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.5. Udev rule works unreliably
+          </h3>
+          <p>
+            This may be another manifestation of the previous problem. If
+            not, and your rule uses <code class="systemitem">sysfs</code>
+            attributes, it may be a kernel timing issue, to be fixed in later
+            kernels. For now, you can work around it by creating a rule that
+            waits for the used <code class="systemitem">sysfs</code>
+            attribute and appending it to the <code class=
+            "filename">/etc/udev/rules.d/10-wait_for_sysfs.rules</code> file
+            (create this file if it does not exist). Please notify the LFS
+            Development list if you do so and it helps.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.6. Udev does not create a device
+          </h3>
+          <p>
+            Further text assumes that the driver is built statically into the
+            kernel or already loaded as a module, and that you have already
+            checked that Udev doesn't create a misnamed device.
+          </p>
+          <p>
+            Udev has no information needed to create a device node if a
+            kernel driver does not export its data to <code class=
+            "systemitem">sysfs</code>. This is most common with third party
+            drivers from outside the kernel tree. Create a static device node
+            in <code class="filename">/lib/udev/devices</code> with the
+            appropriate major/minor numbers (see the file <code class=
+            "filename">devices.txt</code> inside the kernel documentation or
+            the documentation provided by the third party driver vendor). The
+            static device node will be copied to <code class=
+            "filename">/dev</code> by <span class=
+            "command"><strong>udev</strong></span>.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.3.3.7. Device naming order changes randomly after rebooting
+          </h3>
+          <p>
+            This is due to the fact that Udev, by design, handles uevents and
+            loads modules in parallel, and thus in an unpredictable order.
+            This will never be <span class="quote">&ldquo;<span class=
+            "quote">fixed</span>&rdquo;</span>. You should not rely upon the
+            kernel device names being stable. Instead, create your own rules
+            that make symlinks with stable names based on some stable
+            attributes of the device, such as a serial number or the output
+            of various *_id utilities installed by Udev. See <a class="xref"
+            href="symlinks.html" title=
+            "7.4.&nbsp;Managing Devices">Section&nbsp;7.4, &ldquo;Managing
+            Devices&rdquo;</a> and <a class="xref" href="network.html" title=
+            "7.2.&nbsp;General Network Configuration">Section&nbsp;7.2,
+            &ldquo;General Network Configuration&rdquo;</a> for examples.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.3.4. Useful Reading
+        </h2>
+        <p>
+          Additional helpful documentation is available at the following
+          sites:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                A Userspace Implementation of <code class=
+                "systemitem">devfs</code> <a class="ulink" href=
+                "http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf">
+                http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                The <code class="systemitem">sysfs</code> Filesystem
+                <a class="ulink" href=
+                "http://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf">
+                http://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="network.html" title=
+          "General Network Configuration">Prev</a>
+          <p>
+            General Network Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="symlinks.html" title=
+          "Managing Devices">Next</a>
+          <p>
+            Managing Devices
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

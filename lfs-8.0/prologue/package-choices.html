@@ -1,0 +1,745 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Rationale for Packages in the Book
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Preface
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="standards.html" title=
+          "LFS and Standards">Prev</a>
+          <p>
+            LFS and Standards
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="prerequisites.html" title=
+          "Prerequisites">Next</a>
+          <p>
+            Prerequisites
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="pre-why" name="pre-why"></a>v. Rationale for Packages in the
+        Book
+      </h1>
+      <p>
+        As stated earlier, the goal of LFS is to build a complete and usable
+        foundation-level system. This includes all packages needed to
+        replicate itself while providing a relatively minimal base from which
+        to customize a more complete system based on the choices of the user.
+        This does not mean that LFS is the smallest system possible. Several
+        important packages are included that are not strictly required. The
+        lists below document the rationale for each package in the book.
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              Acl
+            </p>
+            <p>
+              This package contains utilities to administer Access Control
+              Lists, which are used to define more fine-grained discretionary
+              access rights for files and directories.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Attr
+            </p>
+            <p>
+              This package contains programs for administering extended
+              attributes on filesystem objects.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Autoconf
+            </p>
+            <p>
+              This package contains programs for producing shell scripts that
+              can automatically configure source code from a developer's
+              template. It is often needed to rebuild a package after updates
+              to the build procedures.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Automake
+            </p>
+            <p>
+              This package contains programs for generating Make files from a
+              template. It is often needed to rebuild a package after updates
+              to the build procedures.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Bash
+            </p>
+            <p>
+              This package satisfies an LSB core requirement to provide a
+              Bourne Shell interface to the system. It was chosen over other
+              shell packages because of its common usage and extensive
+              capabilities beyond basic shell functions.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Bc
+            </p>
+            <p>
+              This package provides an arbitrary precision numeric processing
+              language. It satisfies a requirement needed when building the
+              Linux kernel.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Binutils
+            </p>
+            <p>
+              This package contains a linker, an assembler, and other tools
+              for handling object files. The programs in this package are
+              needed to compile most of the packages in an LFS system and
+              beyond.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Bison
+            </p>
+            <p>
+              This package contains the GNU version of yacc (Yet Another
+              Compiler Compiler) needed to build several other LFS programs.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Bzip2
+            </p>
+            <p>
+              This package contains programs for compressing and
+              decompressing files. It is required to decompress many LFS
+              packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Check
+            </p>
+            <p>
+              This package contains a test harness for other programs. It is
+              only installed in the temporary toolchain.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Coreutils
+            </p>
+            <p>
+              This package contains a number of essential programs for
+              viewing and manipulating files and directories. These programs
+              are needed for command line file management, and are necessary
+              for the installation procedures of every package in LFS.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              DejaGNU
+            </p>
+            <p>
+              This package contains a framework for testing other programs.
+              It is only installed in the temporary toolchain.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Diffutils
+            </p>
+            <p>
+              This package contains programs that show the differences
+              between files or directories. These programs can be used to
+              create patches, and are also used in many packages' build
+              procedures.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              E2fsprogs
+            </p>
+            <p>
+              This package contains the utilities for handling the ext2, ext3
+              and ext4 file systems. These are the most common and thoroughly
+              tested file systems that Linux supports.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Eudev
+            </p>
+            <p>
+              This package is a device manager. It dynamically controls the
+              entries in the /dev directory as devices are added or removed
+              from the system.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Expat
+            </p>
+            <p>
+              This package contains a relatively small XML parsing library.
+              It is required by the XML::Parser Perl module.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Expect
+            </p>
+            <p>
+              This package contains a program for carrying out scripted
+              dialogues with other interactive programs. It is commonly used
+              for testing other packages. It is only installed in the
+              temporary toolchain.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              File
+            </p>
+            <p>
+              This package contains a utility for determining the type of a
+              given file or files. A few packages need it to build.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Findutils
+            </p>
+            <p>
+              This package contains programs to find files in a file system.
+              It is used in many packages' build scripts.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Flex
+            </p>
+            <p>
+              This package contains a utility for generating programs that
+              recognize patterns in text. It is the GNU version of the lex
+              (lexical analyzer) program. It is required to build several LFS
+              packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Gawk
+            </p>
+            <p>
+              This package contains programs for manipulating text files. It
+              is the GNU version of awk (Aho-Weinberg-Kernighan). It is used
+              in many other packages' build scripts.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Gcc
+            </p>
+            <p>
+              This package is the Gnu Compiler Collection. It contains the C
+              and C++ compilers as well as several others not built by LFS.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              GDBM
+            </p>
+            <p>
+              This package contains the GNU Database Manager library. It is
+              used by one other LFS package, Man-DB.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Gettext
+            </p>
+            <p>
+              This package contains utilities and libraries for
+              internationalization and localization of numerous packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Glibc
+            </p>
+            <p>
+              This package contains the main C library. Linux programs would
+              not run without it.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              GMP
+            </p>
+            <p>
+              This package contains math libraries that provide useful
+              functions for arbitrary precision arithmetic. It is required to
+              build Gcc.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Gperf
+            </p>
+            <p>
+              This package contains a program that generates a perfect hash
+              function from a key set. It is required for Eudev.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Grep
+            </p>
+            <p>
+              This package contains programs for searching through files.
+              These programs are used by most packages' build scripts.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Groff
+            </p>
+            <p>
+              This package contains programs for processing and formatting
+              text. One important function of these programs is to format man
+              pages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              GRUB
+            </p>
+            <p>
+              This package is the Grand Unified Boot Loader. It is one of
+              several boot loaders available, but is the most flexible.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Gzip
+            </p>
+            <p>
+              This package contains programs for compressing and
+              decompressing files. It is needed to decompress many packages
+              in LFS and beyond.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Iana-etc
+            </p>
+            <p>
+              This package provides data for network services and protocols.
+              It is needed to enable proper networking capabilities.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Inetutils
+            </p>
+            <p>
+              This package contains programs for basic network
+              administration.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Intltool
+            </p>
+            <p>
+              This package contains tools for extracting translatable strings
+              from source files.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              IProute2
+            </p>
+            <p>
+              This package contains programs for basic and advanced IPv4 and
+              IPv6 networking. It was chosen over the other common network
+              tools package (net-tools) for its IPv6 capabilities.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Kbd
+            </p>
+            <p>
+              This package contains key-table files, keyboard utilities for
+              non-US keyboards, and a number of console fonts.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Kmod
+            </p>
+            <p>
+              This package contains programs needed to administer Linux
+              kernel modules.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Less
+            </p>
+            <p>
+              This package contains a very nice text file viewer that allows
+              scrolling up or down when viewing a file. It is also used by
+              Man-DB for viewing manpages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Libcap
+            </p>
+            <p>
+              This package implements the user-space interfaces to the POSIX
+              1003.1e capabilities available in Linux kernels.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Libpipeline
+            </p>
+            <p>
+              The Libpipeline package contains a library for manipulating
+              pipelines of subprocesses in a flexible and convenient way. It
+              is required by the Man-DB package.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Libtool
+            </p>
+            <p>
+              This package contains the GNU generic library support script.
+              It wraps the complexity of using shared libraries in a
+              consistent, portable interface. It is needed by the test suites
+              in other LFS packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Linux Kernel
+            </p>
+            <p>
+              This package is the Operating System. It is the Linux in the
+              GNU/Linux environment.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              M4
+            </p>
+            <p>
+              This package contains a general text macro processor useful as
+              a build tool for other programs.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Make
+            </p>
+            <p>
+              This package contains a program for directing the building of
+              packages. It is required by almost every package in LFS.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Man-DB
+            </p>
+            <p>
+              This package contains programs for finding and viewing man
+              pages. It was chosen instead of the <span class=
+              "application">man</span> package due to superior
+              internationalization capabilities. It supplies the man program.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Man-pages
+            </p>
+            <p>
+              This package contains the actual contents of the basic Linux
+              man pages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              MPC
+            </p>
+            <p>
+              This package contains functions for the arithmetic of complex
+              numbers. It is required by Gcc.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              MPFR
+            </p>
+            <p>
+              This package contains functions for multiple precision
+              arithmetic. It is required by Gcc.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Ncurses
+            </p>
+            <p>
+              This package contains libraries for terminal-independent
+              handling of character screens. It is often used to provide
+              cursor control for a menuing system. It is needed by a number
+              of packages in LFS.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Patch
+            </p>
+            <p>
+              This package contains a program for modifying or creating files
+              by applying a <span class="emphasis"><em>patch</em></span> file
+              typically created by the <span class="application">diff</span>
+              program. It is needed by the build procedure for several LFS
+              packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Perl
+            </p>
+            <p>
+              This package is an interpreter for the runtime language PERL.
+              It is needed for the installation and test suites of several
+              LFS packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Pkg-config
+            </p>
+            <p>
+              This package provides a program to return meta-data about an
+              installed library or package.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Procps-NG
+            </p>
+            <p>
+              This package contains programs for monitoring processes. These
+              programs are useful for system administration, and are also
+              used by the LFS Bootscripts.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Psmisc
+            </p>
+            <p>
+              This package contains programs for displaying information about
+              running processes. These programs are useful for system
+              administration.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Readline
+            </p>
+            <p>
+              This package is a set of libraries that offers command-line
+              editing and history capabilities. It is used by Bash.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Sed
+            </p>
+            <p>
+              This package allows editing of text without opening it in a
+              text editor. It is also needed by most LFS packages' configure
+              scripts.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Shadow
+            </p>
+            <p>
+              This package contains programs for handling passwords in a
+              secure way.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Sysklogd
+            </p>
+            <p>
+              This package contains programs for logging system messages,
+              such as those given by the kernel or daemon processes when
+              unusual events occur.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Sysvinit
+            </p>
+            <p>
+              This package provides the <span class="application">init</span>
+              program, which is the parent of all other processes on the
+              Linux system.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Tar
+            </p>
+            <p>
+              This package provides archiving and extraction capabilities of
+              virtually all packages used in LFS.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Tcl
+            </p>
+            <p>
+              This package contains the Tool Command Language used in many
+              test suites in LFS packages. It is only installed in the
+              temporary toolchain.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Texinfo
+            </p>
+            <p>
+              This package contains programs for reading, writing, and
+              converting info pages. It is used in the installation
+              procedures of many LFS packages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Util-linux
+            </p>
+            <p>
+              This package contains miscellaneous utility programs. Among
+              them are utilities for handling file systems, consoles,
+              partitions, and messages.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Vim
+            </p>
+            <p>
+              This package contains an editor. It was chosen because of its
+              compatibility with the classic vi editor and its huge number of
+              powerful capabilities. An editor is a very personal choice for
+              many users and any other editor could be substituted if
+              desired.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              XML::Parser
+            </p>
+            <p>
+              This package is a Perl module that interfaces with Expat.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              XZ Utils
+            </p>
+            <p>
+              This package contains programs for compressing and
+              decompressing files. It provides the highest compression
+              generally available and is useful for decompressing packages in
+              XZ or LZMA format.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Zlib
+            </p>
+            <p>
+              This package contains compression and decompression routines
+              used by some programs.
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="standards.html" title=
+          "LFS and Standards">Prev</a>
+          <p>
+            LFS and Standards
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="prerequisites.html" title=
+          "Prerequisites">Next</a>
+          <p>
+            Prerequisites
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

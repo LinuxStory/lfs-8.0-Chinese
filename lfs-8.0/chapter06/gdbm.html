@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.36.&nbsp;GDBM-1.12
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libtool.html" title="Libtool-2.4.6">Prev</a>
+          <p>
+            Libtool-2.4.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">Next</a>
+          <p>
+            Gperf-3.0.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-gdbm" name="ch-system-gdbm"></a>6.36. GDBM-1.12
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The GDBM package contains the GNU Database Manager. It is a library
+          of database functions that use extensible hashing and work similar
+          to the standard UNIX dbm. The library provides primitives for
+          storing key/data pairs, searching and retrieving the data by its
+          key and deleting a key along with its data.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">9 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.36.1. Installation of GDBM
+        </h2>
+        <p>
+          Prepare GDBM for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr \
+            --disable-static \
+            --enable-libgdbm-compat</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure option:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><code class=
+              "envar">--enable-libgdbm-compat</code></span>
+            </dt>
+            <dd>
+              <p>
+                This switch enables the libgdbm compatibility library to be
+                built, as some packages outside of LFS may require the older
+                DBM routines it provides.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-gdbm" name="contents-gdbm"></a>6.36.2. Contents of
+          GDBM
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">gdbm_dump, gdbm_load, and gdbmtool</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libgdbm.so and libgdbm_compat.so</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gdbm_dump" name="gdbm_dump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gdbm_dump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps a GDBM database to a file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gdbm_load" name="gdbm_load"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gdbm_load</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Recreates a GDBM database from a dump file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gdbmtool" name="gdbmtool"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gdbmtool</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Tests and modifies a GDBM database
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgdbm" name="libgdbm"></a><span class=
+                    "term"><code class="filename">libgdbm</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to manipulate a hashed database
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgdbm_compat" name=
+                    "libgdbm_compat"></a><span class="term"><code class=
+                    "filename">libgdbm_compat</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compatibility library containing older DBM functions
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libtool.html" title="Libtool-2.4.6">Prev</a>
+          <p>
+            Libtool-2.4.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">Next</a>
+          <p>
+            Gperf-3.0.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

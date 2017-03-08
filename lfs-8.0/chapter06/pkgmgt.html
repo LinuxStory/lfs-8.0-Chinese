@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.3.&nbsp;Package Management
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kernfs.html" title=
+          "Preparing Virtual Kernel File Systems">Prev</a>
+          <p>
+            Preparing Virtual Kernel File Systems
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="chroot.html" title=
+          "Entering the Chroot Environment">Next</a>
+          <p>
+            Entering the Chroot Environment
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-pkgmgt" name="ch-system-pkgmgt"></a>6.3. Package
+        Management
+      </h1>
+      <p>
+        Package Management is an often requested addition to the LFS Book. A
+        Package Manager allows tracking the installation of files making it
+        easy to remove and upgrade packages. As well as the binary and
+        library files, a package manager will handle the installation of
+        configuration files. Before you begin to wonder, NO&mdash;this
+        section will not talk about nor recommend any particular package
+        manager. What it provides is a roundup of the more popular techniques
+        and how they work. The perfect package manager for you may be among
+        these techniques or may be a combination of two or more of these
+        techniques. This section briefly mentions issues that may arise when
+        upgrading packages.
+      </p>
+      <p>
+        Some reasons why no package manager is mentioned in LFS or BLFS
+        include:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              Dealing with package management takes the focus away from the
+              goals of these books&mdash;teaching how a Linux system is
+              built.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              There are multiple solutions for package management, each
+              having its strengths and drawbacks. Including one that
+              satisfies all audiences is difficult.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        There are some hints written on the topic of package management.
+        Visit the <a class="ulink" href=
+        "http://www.linuxfromscratch.org/hints/list.html">Hints Project</a>
+        and see if one of them fits your need.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.3.1. Upgrade Issues
+        </h2>
+        <p>
+          A Package Manager makes it easy to upgrade to newer versions when
+          they are released. Generally the instructions in the LFS and BLFS
+          Book can be used to upgrade to the newer versions. Here are some
+          points that you should be aware of when upgrading packages,
+          especially on a running system.
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                If Glibc needs to be upgraded to a newer version, (e.g. from
+                glibc-2.19 to glibc-2.20, it is safer to rebuild LFS. Though
+                you <span class="emphasis"><em>may</em></span> be able to
+                rebuild all the packages in their dependency order, we do not
+                recommend it.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                If a package containing a shared library is updated, and if
+                the name of the library changes, then all the packages
+                dynamically linked to the library need to be recompiled to
+                link against the newer library. (Note that there is no
+                correlation between the package version and the name of the
+                library.) For example, consider a package foo-1.2.3 that
+                installs a shared library with name <code class=
+                "filename">libfoo.so.1</code>. Say you upgrade the package to
+                a newer version foo-1.2.4 that installs a shared library with
+                name <code class="filename">libfoo.so.2</code>. In this case,
+                all packages that are dynamically linked to <code class=
+                "filename">libfoo.so.1</code> need to be recompiled to link
+                against <code class="filename">libfoo.so.2</code>. Note that
+                you should not remove the previous libraries until the
+                dependent packages are recompiled.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.3.2. Package Management Techniques
+        </h2>
+        <p>
+          The following are some common package management techniques. Before
+          making a decision on a package manager, do some research on the
+          various techniques, particularly the drawbacks of the particular
+          scheme.
+        </p>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.1. It is All in My Head!
+          </h3>
+          <p>
+            Yes, this is a package management technique. Some folks do not
+            find the need for a package manager because they know the
+            packages intimately and know what files are installed by each
+            package. Some users also do not need any package management
+            because they plan on rebuilding the entire system when a package
+            is changed.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.2. Install in Separate Directories
+          </h3>
+          <p>
+            This is a simplistic package management that does not need any
+            extra package to manage the installations. Each package is
+            installed in a separate directory. For example, package foo-1.1
+            is installed in <code class="filename">/usr/pkg/foo-1.1</code>
+            and a symlink is made from <code class=
+            "filename">/usr/pkg/foo</code> to <code class=
+            "filename">/usr/pkg/foo-1.1</code>. When installing a new version
+            foo-1.2, it is installed in <code class=
+            "filename">/usr/pkg/foo-1.2</code> and the previous symlink is
+            replaced by a symlink to the new version.
+          </p>
+          <p>
+            Environment variables such as <code class="envar">PATH</code>,
+            <code class="envar">LD_LIBRARY_PATH</code>, <code class=
+            "envar">MANPATH</code>, <code class="envar">INFOPATH</code> and
+            <code class="envar">CPPFLAGS</code> need to be expanded to
+            include <code class="filename">/usr/pkg/foo</code>. For more than
+            a few packages, this scheme becomes unmanageable.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.3. Symlink Style Package Management
+          </h3>
+          <p>
+            This is a variation of the previous package management technique.
+            Each package is installed similar to the previous scheme. But
+            instead of making the symlink, each file is symlinked into the
+            <code class="filename">/usr</code> hierarchy. This removes the
+            need to expand the environment variables. Though the symlinks can
+            be created by the user to automate the creation, many package
+            managers have been written using this approach. A few of the
+            popular ones include Stow, Epkg, Graft, and Depot.
+          </p>
+          <p>
+            The installation needs to be faked, so that the package thinks
+            that it is installed in <code class="filename">/usr</code> though
+            in reality it is installed in the <code class=
+            "filename">/usr/pkg</code> hierarchy. Installing in this manner
+            is not usually a trivial task. For example, consider that you are
+            installing a package libfoo-1.1. The following instructions may
+            not install the package properly:
+          </p>
+          <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr/pkg/libfoo/1.1
+make
+make install</kbd>
+</pre>
+          <p>
+            The installation will work, but the dependent packages may not
+            link to libfoo as you would expect. If you compile a package that
+            links against libfoo, you may notice that it is linked to
+            <code class="filename">/usr/pkg/libfoo/1.1/lib/libfoo.so.1</code>
+            instead of <code class="filename">/usr/lib/libfoo.so.1</code> as
+            you would expect. The correct approach is to use the <code class=
+            "envar">DESTDIR</code> strategy to fake installation of the
+            package. This approach works as follows:
+          </p>
+          <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr
+make
+make DESTDIR=/usr/pkg/libfoo/1.1 install</kbd>
+</pre>
+          <p>
+            Most packages support this approach, but there are some which do
+            not. For the non-compliant packages, you may either need to
+            manually install the package, or you may find that it is easier
+            to install some problematic packages into <code class=
+            "filename">/opt</code>.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.4. Timestamp Based
+          </h3>
+          <p>
+            In this technique, a file is timestamped before the installation
+            of the package. After the installation, a simple use of the
+            <span class="command"><strong>find</strong></span> command with
+            the appropriate options can generate a log of all the files
+            installed after the timestamp file was created. A package manager
+            written with this approach is install-log.
+          </p>
+          <p>
+            Though this scheme has the advantage of being simple, it has two
+            drawbacks. If, during installation, the files are installed with
+            any timestamp other than the current time, those files will not
+            be tracked by the package manager. Also, this scheme can only be
+            used when one package is installed at a time. The logs are not
+            reliable if two packages are being installed on two different
+            consoles.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.5. Tracing Installation Scripts
+          </h3>
+          <p>
+            In this approach, the commands that the installation scripts
+            perform are recorded. There are two techniques that one can use:
+          </p>
+          <p>
+            The <code class="envar">LD_PRELOAD</code> environment variable
+            can be set to point to a library to be preloaded before
+            installation. During installation, this library tracks the
+            packages that are being installed by attaching itself to various
+            executables such as <span class=
+            "command"><strong>cp</strong></span>, <span class=
+            "command"><strong>install</strong></span>, <span class=
+            "command"><strong>mv</strong></span> and tracking the system
+            calls that modify the filesystem. For this approach to work, all
+            the executables need to be dynamically linked without the suid or
+            sgid bit. Preloading the library may cause some unwanted
+            side-effects during installation. Therefore, it is advised that
+            one performs some tests to ensure that the package manager does
+            not break anything and logs all the appropriate files.
+          </p>
+          <p>
+            The second technique is to use <span class=
+            "command"><strong>strace</strong></span>, which logs all system
+            calls made during the execution of the installation scripts.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.6. Creating Package Archives
+          </h3>
+          <p>
+            In this scheme, the package installation is faked into a separate
+            tree as described in the Symlink style package management. After
+            the installation, a package archive is created using the
+            installed files. This archive is then used to install the package
+            either on the local machine or can even be used to install the
+            package on other machines.
+          </p>
+          <p>
+            This approach is used by most of the package managers found in
+            the commercial distributions. Examples of package managers that
+            follow this approach are RPM (which, incidentally, is required by
+            the <a class="ulink" href=
+            "http://refspecs.linuxfoundation.org/lsb.shtml">Linux Standard
+            Base Specification</a>), pkg-utils, Debian's apt, and Gentoo's
+            Portage system. A hint describing how to adopt this style of
+            package management for LFS systems is located at <a class="ulink"
+            href=
+            "http://www.linuxfromscratch.org/hints/downloads/files/fakeroot.txt">
+            http://www.linuxfromscratch.org/hints/downloads/files/fakeroot.txt</a>.
+          </p>
+          <p>
+            Creation of package files that include dependency information is
+            complex and is beyond the scope of LFS.
+          </p>
+          <p>
+            Slackware uses a <span class=
+            "command"><strong>tar</strong></span> based system for package
+            archives. This system purposely does not handle package
+            dependencies as more complex package managers do. For details of
+            Slackware package management, see <a class="ulink" href=
+            "http://www.slackbook.org/html/package-management.html">http://www.slackbook.org/html/package-management.html</a>.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            6.3.2.7. User Based Management
+          </h3>
+          <p>
+            This scheme, unique to LFS, was devised by Matthias Benkmann, and
+            is available from the <a class="ulink" href=
+            "http://www.linuxfromscratch.org/hints/list.html">Hints
+            Project</a>. In this scheme, each package is installed as a
+            separate user into the standard locations. Files belonging to a
+            package are easily identified by checking the user ID. The
+            features and shortcomings of this approach are too complex to
+            describe in this section. For the details please see the hint at
+            <a class="ulink" href=
+            "http://www.linuxfromscratch.org/hints/downloads/files/more_control_and_pkg_man.txt">
+            http://www.linuxfromscratch.org/hints/downloads/files/more_control_and_pkg_man.txt</a>.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.3.3. Deploying LFS on Multiple Systems
+        </h2>
+        <p>
+          One of the advantages of an LFS system is that there are no files
+          that depend on the position of files on a disk system. Cloning an
+          LFS build to another computer with the same architecture as the
+          base system is as simple as using <span class=
+          "command"><strong>tar</strong></span> on the LFS partition that
+          contains the root directory (about 250MB uncompressed for a base
+          LFS build), copying that file via network transfer or CD-ROM to the
+          new system and expanding it. From that point, a few configuration
+          files will have to be changed. Configuration files that may need to
+          be updated include: <code class="filename">/etc/hosts</code>,
+          <code class="filename">/etc/fstab</code>, <code class=
+          "filename">/etc/passwd</code>, <code class=
+          "filename">/etc/group</code>, <span class="phrase"><code class=
+          "filename">/etc/shadow</code>, <code class=
+          "filename">/etc/ld.so.conf</code>, <code class=
+          "filename">/etc/sysconfig/rc.site</code>, <code class=
+          "filename">/etc/sysconfig/network</code>, and <code class=
+          "filename">/etc/sysconfig/ifconfig.eth0</code>.</span>
+        </p>
+        <p>
+          A custom kernel may need to be built for the new system depending
+          on differences in system hardware and the original kernel
+          configuration.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            There have been some reports of issues when copying between
+            similar but not identical architectures. For instance, the
+            instruction set for an Intel system is not identical with an AMD
+            processor and later versions of some processors may have
+            instructions that are unavailable in earlier versions.
+          </p>
+        </div>
+        <p>
+          Finally the new system has to be made bootable via <a class="xref"
+          href="../chapter08/grub.html" title=
+          "8.4.&nbsp;Using GRUB to Set Up the Boot Process">Section&nbsp;8.4,
+          &ldquo;Using GRUB to Set Up the Boot Process&rdquo;</a>.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kernfs.html" title=
+          "Preparing Virtual Kernel File Systems">Prev</a>
+          <p>
+            Preparing Virtual Kernel File Systems
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="chroot.html" title=
+          "Entering the Chroot Environment">Next</a>
+          <p>
+            Entering the Chroot Environment
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

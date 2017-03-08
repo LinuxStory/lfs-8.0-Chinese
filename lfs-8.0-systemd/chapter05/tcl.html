@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.11.&nbsp;Tcl-core-8.6.6
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc-pass2.html" title=
+          "GCC-6.3.0 - Pass 2">Prev</a>
+          <p>
+            GCC-6.3.0 - Pass 2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="expect.html" title="Expect-5.45">Next</a>
+          <p>
+            Expect-5.45
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-tcl" name="ch-tools-tcl"></a>5.11. Tcl-core-8.6.6
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Tcl package contains the Tool Command Language.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">40 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.11.1. Installation of Tcl-core
+        </h2>
+        <p>
+          This package and the next three (Expect, DejaGNU, and Check) are
+          installed to support running the test suites for GCC and Binutils
+          and other packages. Installing four packages for testing purposes
+          may seem excessive, but it is very reassuring, if not essential, to
+          know that the most important tools are working properly. Even if
+          the test suites are not run in this chapter (they are not
+          mandatory), these packages are required to run the test suites in
+          <a class="xref" href="../chapter06/chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
+          6</a>.
+        </p>
+        <p>
+          Note that the Tcl package used here is a minimal version needed to
+          run the LFS tests. For the full package, see the <a class="ulink"
+          href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/general/tcl.html">BLFS
+          Tcl procedures</a>.
+        </p>
+        <p>
+          Prepare Tcl for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd unix
+./configure --prefix=/tools</kbd>
+</pre>
+        <p>
+          Build the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Compilation is now complete. As discussed earlier, running the test
+          suite is not mandatory for the temporary tools here in this
+          chapter. To run the Tcl test suite anyway, issue the following
+          command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">TZ=UTC make test</kbd>
+</pre>
+        <p>
+          The Tcl test suite may experience failures under certain host
+          conditions that are not fully understood. Therefore, test suite
+          failures here are not surprising, and are not considered critical.
+          The <em class="parameter"><code>TZ=UTC</code></em> parameter sets
+          the time zone to Coordinated Universal Time (UTC), but only for the
+          duration of the test suite run. This ensures that the clock tests
+          are exercised correctly. Details on the <code class=
+          "envar">TZ</code> environment variable are provided in <a class=
+          "xref" href="../chapter07/chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Chapter 7</a>.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Make the installed library writable so debugging symbols can be
+          removed later:
+        </p>
+        <pre class="userinput">
+<kbd class="command">chmod -v u+w /tools/lib/libtcl8.6.so</kbd>
+</pre>
+        <p>
+          Install Tcl's headers. The next package, Expect, requires them to
+          build.
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install-private-headers</kbd>
+</pre>
+        <p>
+          Now make a necessary symbolic link:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sv tclsh8.6 /tools/bin/tclsh</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-tcl" name="contents-tcl"></a>5.11.2. Contents of
+          Tcl-core
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">tclsh (link to tclsh8.6) and
+              tclsh8.6</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed library:</strong>
+              <span class="segbody">libtcl8.6.so, libtclstub8.6.a</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tclsh8.6" name="tclsh8.6"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tclsh8.6</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Tcl command shell
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tclsh" name="tclsh"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tclsh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A link to tclsh8.6
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libtcl8.6.so" name="libtcl8.6.so"></a><span class=
+                    "term"><code class="filename">libtcl8.6.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Tcl library
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libtclstub8.6.a" name=
+                    "libtclstub8.6.a"></a><span class="term"><code class=
+                    "filename">libtclstub8.6.a</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Tcl Stub library
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc-pass2.html" title=
+          "GCC-6.3.0 - Pass 2">Prev</a>
+          <p>
+            GCC-6.3.0 - Pass 2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="expect.html" title="Expect-5.45">Next</a>
+          <p>
+            Expect-5.45
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.39.&nbsp;Inetutils-1.9.4
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="expat.html" title="Expat-2.2.0">Prev</a>
+          <p>
+            Expat-2.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="perl.html" title="Perl-5.24.1">Next</a>
+          <p>
+            Perl-5.24.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-inetutils" name="ch-system-inetutils"></a>6.39.
+        Inetutils-1.9.4
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Inetutils package contains programs for basic networking.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">27 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.39.1. Installation of Inetutils
+        </h2>
+        <p>
+          Prepare Inetutils for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr        \
+            --localstatedir=/var \
+            --disable-logger     \
+            --disable-whois      \
+            --disable-rcp        \
+            --disable-rexec      \
+            --disable-rlogin     \
+            --disable-rsh        \
+            --disable-servers</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-logger</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option prevents Inetutils from installing the
+                <span class="command"><strong>logger</strong></span> program,
+                which is used by scripts to pass messages to the System Log
+                Daemon. Do not install it because Util-linux installs a more
+                recent version.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-whois</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option disables the building of the Inetutils
+                <span class="command"><strong>whois</strong></span> client,
+                which is out of date. Instructions for a better <span class=
+                "command"><strong>whois</strong></span> client are in the
+                BLFS book.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-r*</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                These parameters disable building obsolete programs that
+                should not be used due to security issues. The functions
+                provided by these programs can be provided by the
+                <span class="application">openssh</span> package in the BLFS
+                book.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-servers</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This disables the installation of the various network servers
+                included as part of the Inetutils package. These servers are
+                deemed not appropriate in a basic LFS system. Some are
+                insecure by nature and are only considered safe on trusted
+                networks. Note that better replacements are available for
+                many of these servers.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Move some programs so they are available if <code class=
+          "filename">/usr</code> is not accessible:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/bin/{hostname,ping,ping6,traceroute} /bin
+mv -v /usr/bin/ifconfig /sbin</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-inetutils" name="contents-inetutils"></a>6.39.2.
+          Contents of Inetutils
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">dnsdomainname, ftp, ifconfig, hostname,
+              ping, ping6, talk, telnet, tftp, and traceroute</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dnsdomainname" name=
+                    "dnsdomainname"></a><span class="term"><span class=
+                    "command"><strong>dnsdomainname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Show the system's DNS domain name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ftp" name="ftp"></a><span class=
+                    "term"><span class="command"><strong>ftp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is the file transfer protocol program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hostname" name="hostname"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hostname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports or sets the name of the host
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ifconfig" name="ifconfig"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ifconfig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Manages network interfaces
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ping" name="ping"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ping</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sends echo-request packets and reports how long the
+                    replies take
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ping6" name="ping6"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ping6</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A version of <span class=
+                    "command"><strong>ping</strong></span> for IPv6 networks
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="talk" name="talk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>talk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to chat with another user
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="telnet" name="telnet"></a><span class=
+                    "term"><span class=
+                    "command"><strong>telnet</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    An interface to the TELNET protocol
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tftp" name="tftp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tftp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A trivial file transfer program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="traceroute" name="traceroute"></a><span class=
+                    "term"><span class=
+                    "command"><strong>traceroute</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Traces the route your packets take from the host you are
+                    working on to another host on a network, showing all the
+                    intermediate hops (gateways) along the way
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="expat.html" title="Expat-2.2.0">Prev</a>
+          <p>
+            Expat-2.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="perl.html" title="Perl-5.24.1">Next</a>
+          <p>
+            Perl-5.24.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      3.3.&nbsp;Needed Patches
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;3.&nbsp;Packages and Patches
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="packages.html" title="All Packages">Prev</a>
+          <p>
+            All Packages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter04/chapter04.html" title=
+          "Final Preparations">Next</a>
+          <p>
+            Final Preparations
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter03.html" title=
+          "Chapter&nbsp;3.&nbsp;Packages and Patches">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="materials-patches" name="materials-patches"></a>3.3. Needed
+        Patches
+      </h1>
+      <p>
+        In addition to the packages, several patches are also required. These
+        patches correct any mistakes in the packages that should be fixed by
+        the maintainer. The patches also make small modifications to make the
+        packages easier to work with. The following patches will be needed to
+        build an LFS system:
+      </p>
+      <div class="materials">
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">Bash Upstream Fixes Patch - <span class=
+              "token">17 KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/bash-4.4-upstream_fixes-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/bash-4.4-upstream_fixes-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">e3d5bf23a4e5628680893d46e6ff286e</code>
+              </p>
+            </dd>
+            <dt>
+              <span class="term">Bc Memory Leak Patch - <span class=
+              "token">1.4 KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/bc-1.06.95-memory_leak-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/bc-1.06.95-memory_leak-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">877e81fba316fe487ec23501059d54b8</code>
+              </p>
+            </dd>
+            <dt>
+              <span class="term">Bzip2 Documentation Patch - <span class=
+              "token">1.6 KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/bzip2-1.0.6-install_docs-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/bzip2-1.0.6-install_docs-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">6a5ac7e89b791aae556de0f745916f7f</code>
+              </p>
+            </dd>
+            <dt>
+              <span class="term">Coreutils Internationalization Fixes Patch -
+              <span class="token">168 KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/coreutils-8.26-i18n-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/coreutils-8.26-i18n-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">e1f87b10b23d66344e5e99e7fabfa7a2</code>
+              </p>
+            </dd>
+            <dt>
+              <span class="term">Glibc FHS Patch - <span class="token">2.8
+              KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/glibc-2.25-fhs-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/glibc-2.25-fhs-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">9a5997c3452909b1769918c759eff8a2</code>
+              </p>
+            </dd>
+            <dt>
+              <span class="term">Kbd Backspace/Delete Fix Patch -
+              <span class="token">12 KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/kbd-2.0.4-backspace-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/kbd-2.0.4-backspace-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">f75cca16a38da6caa7d52151f7136895</code>
+              </p>
+            </dd>
+            <dt>
+              <span class="term">Sysvinit Consolidated Patch - <span class=
+              "token">3.9 KB</span>:</span>
+            </dt>
+            <dd>
+              <p>
+                Download: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/lfs/8.0/sysvinit-2.88dsf-consolidated-1.patch">
+                http://www.linuxfromscratch.org/patches/lfs/8.0/sysvinit-2.88dsf-consolidated-1.patch</a>
+              </p>
+              <p>
+                MD5 sum: <code class=
+                "literal">0b7b5ea568a878fdcc4057b2bf36e5cb</code>
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p>
+        Total size of these patches: about 206.7 KB
+      </p>
+      <p>
+        In addition to the above required patches, there exist a number of
+        optional patches created by the LFS community. These optional patches
+        solve minor problems or enable functionality that is not enabled by
+        default. Feel free to peruse the patches database located at
+        <a class="ulink" href=
+        "http://www.linuxfromscratch.org/patches/downloads/">http://www.linuxfromscratch.org/patches/downloads/</a>
+        and acquire any additional patches to suit your system needs.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="packages.html" title="All Packages">Prev</a>
+          <p>
+            All Packages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter04/chapter04.html" title=
+          "Final Preparations">Next</a>
+          <p>
+            Final Preparations
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter03.html" title=
+          "Chapter&nbsp;3.&nbsp;Packages and Patches">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

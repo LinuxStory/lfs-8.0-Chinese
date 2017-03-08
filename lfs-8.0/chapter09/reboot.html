@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      9.3.&nbsp;Rebooting the System
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;The End
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="getcounted.html" title=
+          "Get Counted">Prev</a>
+          <p>
+            Get Counted
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="whatnow.html" title="What Now?">Next</a>
+          <p>
+            What Now?
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;The End">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-finish-reboot" name="ch-finish-reboot"></a>9.3. Rebooting
+        the System
+      </h1>
+      <p>
+        Now that all of the software has been installed, it is time to reboot
+        your computer. However, you should be aware of a few things. The
+        system you have created in this book is quite minimal, and most
+        likely will not have the functionality you would need to be able to
+        continue forward. By installing a few extra packages from the BLFS
+        book while still in our current chroot environment, you can leave
+        yourself in a much better position to continue on once you reboot
+        into your new LFS installation. Here are some suggestions:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              A text mode browser such as <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/basicnet/lynx.html">
+              Lynx</a> will allow you to easily view the BLFS book in one
+              virtual terminal, while building packages in another.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              The <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/general/gpm.html">
+              GPM</a> package will allow you to perform copy/paste actions in
+              your virtual terminals.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              If you are in a situation where static IP configuration does
+              not meet your networking requirements, installing a package
+              such as <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/basicnet/dhcpcd.html">
+              dhcpcd</a> or the client portion of <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/basicnet/dhcp.html">
+              dhcp</a> may be useful.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Installing <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/sudo.html">
+              sudo</a> may be useful for building packages as a non-root user
+              and easily installing the resulting packages in your new
+              system.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              If you want to access your new system from a remote system
+              within a comfortable GUI environment, install <a class="ulink"
+              href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/openssh.html">
+              openssh</a> and its prerequisite, <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/openssl.html">
+              openssl</a>.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              To make fetching files over the internet easier, install
+              <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/basicnet/wget.html">
+              wget</a>.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              If one or more of your disk drives have a GUID partition table
+              (GPT), either <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/gptfdisk.html">
+              gptfdisk</a> or <a class="ulink" href=
+              "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/parted.html">
+              parted</a> will be useful.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Finally, a review of the following configuration files is also
+              appropriate at this point.
+            </p>
+            <div class="itemizedlist">
+              <ul>
+                <li class="listitem">
+                  <p>
+                    /etc/bashrc
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/dircolors
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/fstab
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/hosts
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/inputrc
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/profile
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/resolv.conf
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/vimrc
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /root/.bash_profile
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /root/.bashrc
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/sysconfig/network
+                  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+                    /etc/sysconfig/ifconfig.eth0
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Now that we have said that, let's move on to booting our shiny new
+        LFS installation for the first time! First exit from the chroot
+        environment:
+      </p>
+      <pre class="userinput">
+<kbd class="command">logout</kbd>
+</pre>
+      <p>
+        Then unmount the virtual file systems:
+      </p>
+      <pre class="userinput">
+<kbd class="command">umount -v $LFS/dev/pts
+umount -v $LFS/dev
+umount -v $LFS/run
+umount -v $LFS/proc
+umount -v $LFS/sys</kbd>
+</pre>
+      <p>
+        Unmount the LFS file system itself:
+      </p>
+      <pre class="userinput">
+<kbd class="command">umount -v $LFS</kbd>
+</pre>
+      <p>
+        If multiple partitions were created, unmount the other partitions
+        before unmounting the main one, like this:
+      </p>
+      <pre class="userinput">
+<kbd class="command">umount -v $LFS/usr
+umount -v $LFS/home
+umount -v $LFS</kbd>
+</pre>
+      <p>
+        Now, reboot the system with:
+      </p>
+      <pre class="userinput">
+<kbd class="command">shutdown -r now</kbd>
+</pre>
+      <p>
+        Assuming the GRUB boot loader was set up as outlined earlier, the
+        menu is set to boot <span class="emphasis"><em>LFS 8.0</em></span>
+        automatically.
+      </p>
+      <p>
+        When the reboot is complete, the LFS system is ready for use and more
+        software may be added to suit your needs.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="getcounted.html" title=
+          "Get Counted">Prev</a>
+          <p>
+            Get Counted
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="whatnow.html" title="What Now?">Next</a>
+          <p>
+            What Now?
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;The End">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

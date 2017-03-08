@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.5.&nbsp;General Network Configuration
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="symlinks.html" title=
+          "Managing Devices">Prev</a>
+          <p>
+            Managing Devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">Next</a>
+          <p>
+            System V Bootscript Usage and Configuration
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-network" name="ch-scripts-network"></a>7.5. General
+        Network Configuration
+      </h1>
+      <p>
+        This section only applies if a network card is to be configured.
+      </p>
+      <p>
+        If a network card will not be used, there is likely no need to create
+        any configuration files relating to network cards. If that is the
+        case, you will need to remove the <code class=
+        "filename">network</code> symlinks from all run-level directories
+        (<code class="filename">/etc/rc.d/rc*.d</code>) after the bootscripts
+        are installed in <a class="xref" href="bootscripts.html" title=
+        "7.2.&nbsp;LFS-Bootscripts-20150222">Section&nbsp;7.2,
+        &ldquo;LFS-Bootscripts-20150222&rdquo;</a>.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.5.1. Creating Network Interface Configuration Files
+        </h2>
+        <p>
+          Which interfaces are brought up and down by the network script
+          usually depends on the files in <code class=
+          "filename">/etc/sysconfig/</code>. This directory should contain a
+          file for each interface to be configured, such as <code class=
+          "filename">ifconfig.xyz</code>, where <span class=
+          "quote">&ldquo;<span class="quote">xyz</span>&rdquo;</span> is
+          required to be a Network Card Interface name (e.g. eth0). Inside
+          this file are attributes to this interface, such as its IP
+          address(es), subnet masks, and so forth. It is necessary that the
+          stem of the filename be <span class=
+          "emphasis"><em>ifconfig</em></span>.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If the procedure in the previous section was not used, Udev will
+            assign network card interface names based on system physical
+            characteristics such as enp2s1. If you are not sure what your
+            interface name is, you can always run <span class=
+            "command"><strong>ip link</strong></span> after you have booted
+            your system. Again, it is important that ifconfig.xyz is named
+            after correct network card interface name (e.g. ifconfig.enp2s1
+            or ifconfig.eth0) or your network interface will not be
+            initialized during the boot process.
+          </p>
+        </div>
+        <p>
+          The following command creates a sample file for the <span class=
+          "emphasis"><em>eth0</em></span> device with a static IP address:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd /etc/sysconfig/
+cat &gt; ifconfig.eth0 &lt;&lt; "EOF"
+<code class="literal">ONBOOT=yes
+IFACE=eth0
+SERVICE=ipv4-static
+IP=192.168.1.2
+GATEWAY=192.168.1.1
+PREFIX=24
+BROADCAST=192.168.1.255</code>
+EOF</kbd>
+</pre>
+        <p>
+          The values of these variables must be changed in every file to
+          match the proper setup.
+        </p>
+        <p>
+          If the <code class="envar">ONBOOT</code> variable is set to
+          <span class="quote">&ldquo;<span class=
+          "quote">yes</span>&rdquo;</span> the System V network script will
+          bring up the Network Interface Card (NIC) during booting of the
+          system. If set to anything but <span class=
+          "quote">&ldquo;<span class="quote">yes</span>&rdquo;</span> the NIC
+          will be ignored by the network script and not be automatically
+          brought up. The interface can be manually started or stopped with
+          the <span class="command"><strong>ifup</strong></span> and
+          <span class="command"><strong>ifdown</strong></span> commands.
+        </p>
+        <p>
+          The <code class="envar">IFACE</code> variable defines the interface
+          name, for example, eth0. It is required for all network device
+          configuration files.
+        </p>
+        <p>
+          The <code class="envar">SERVICE</code> variable defines the method
+          used for obtaining the IP address. The LFS-Bootscripts package has
+          a modular IP assignment format, and creating additional files in
+          the <code class="filename">/lib/services/</code> directory allows
+          other IP assignment methods. This is commonly used for Dynamic Host
+          Configuration Protocol (DHCP), which is addressed in the BLFS book.
+        </p>
+        <p>
+          The <code class="envar">GATEWAY</code> variable should contain the
+          default gateway IP address, if one is present. If not, then comment
+          out the variable entirely.
+        </p>
+        <p>
+          The <code class="envar">PREFIX</code> variable contains the number
+          of bits used in the subnet. Each octet in an IP address is 8 bits.
+          If the subnet's netmask is 255.255.255.0, then it is using the
+          first three octets (24 bits) to specify the network number. If the
+          netmask is 255.255.255.240, it would be using the first 28 bits.
+          Prefixes longer than 24 bits are commonly used by DSL and
+          cable-based Internet Service Providers (ISPs). In this example
+          (PREFIX=24), the netmask is 255.255.255.0. Adjust the <code class=
+          "envar">PREFIX</code> variable according to your specific subnet.
+          If omitted, the PREFIX defaults to 24.
+        </p>
+        <p>
+          For more information see the <span class=
+          "command"><strong>ifup</strong></span> man page.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="resolv.conf" name="resolv.conf"></a>7.5.2. Creating the
+          /etc/resolv.conf File
+        </h2>
+        <p>
+          If the system is going to be connected to the Internet, it will
+          need some means of Domain Name Service (DNS) name resolution to
+          resolve Internet domain names to IP addresses, and vice versa. This
+          is best achieved by placing the IP address of the DNS server,
+          available from the ISP or network administrator, into <code class=
+          "filename">/etc/resolv.conf</code>. Create the file by running the
+          following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/resolv.conf &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/resolv.conf
+
+domain <em class="replaceable"><code>&lt;Your Domain Name&gt;</code></em>
+nameserver <em class=
+"replaceable"><code>&lt;IP address of your primary nameserver&gt;</code></em>
+nameserver <em class=
+"replaceable"><code>&lt;IP address of your secondary nameserver&gt;</code></em>
+
+# End /etc/resolv.conf</code>
+EOF</kbd>
+</pre>
+        <p>
+          The <code class="varname">domain</code> statement can be omitted or
+          replaced with a <code class="varname">search</code> statement. See
+          the man page for resolv.conf for more details.
+        </p>
+        <p>
+          Replace <em class="replaceable"><code>&lt;IP address of the
+          nameserver&gt;</code></em> with the IP address of the DNS most
+          appropriate for the setup. There will often be more than one entry
+          (requirements demand secondary servers for fallback capability). If
+          you only need or want one DNS server, remove the second
+          <span class="emphasis"><em>nameserver</em></span> line from the
+          file. The IP address may also be a router on the local network.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The Google Public IPv4 DNS addresses are 8.8.8.8 and 8.8.4.4.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-hostname" name="ch-scripts-hostname"></a>7.5.3.
+          Configuring the system hostname
+        </h2>
+        <p>
+          During the boot process, the file <code class=
+          "filename">/etc/hostname</code> is used for establishing the
+          system's hostname.
+        </p>
+        <p>
+          Create the <code class="filename">/etc/hostname</code> file and
+          enter a hostname by running:
+        </p>
+        <pre class="userinput">
+<kbd class="command">echo "<em class=
+"replaceable"><code>&lt;lfs&gt;</code></em>" &gt; /etc/hostname</kbd>
+</pre>
+        <p>
+          <em class="replaceable"><code>&lt;lfs&gt;</code></em> needs to be
+          replaced with the name given to the computer. Do not enter the
+          Fully Qualified Domain Name (FQDN) here. That information is put in
+          the <code class="filename">/etc/hosts</code> file.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="ch-scripts-hosts" name="ch-scripts-hosts"></a>7.5.4.
+          Customizing the /etc/hosts File
+        </h2>
+        <p>
+          Decide on the IP address, fully-qualified domain name (FQDN), and
+          possible aliases for use in the <code class=
+          "filename">/etc/hosts</code> file. The syntax is:
+        </p>
+        <pre class="screen">
+<code class="literal">IP_address myhost.example.org aliases</code>
+</pre>
+        <p>
+          Unless the computer is to be visible to the Internet (i.e., there
+          is a registered domain and a valid block of assigned IP
+          addresses&mdash;most users do not have this), make sure that the IP
+          address is in the private network IP address range. Valid ranges
+          are:
+        </p>
+        <pre class="screen">
+<code class="literal">Private Network Address Range      Normal Prefix
+10.0.0.1 - 10.255.255.254           8
+172.x.0.1 - 172.x.255.254           16
+192.168.y.1 - 192.168.y.254         24</code>
+</pre>
+        <p>
+          x can be any number in the range 16-31. y can be any number in the
+          range 0-255.
+        </p>
+        <p>
+          A valid private IP address could be 192.168.1.1. A valid FQDN for
+          this IP could be lfs.example.org.
+        </p>
+        <p>
+          Even if not using a network card, a valid FQDN is still required.
+          This is necessary for certain programs to operate correctly.
+        </p>
+        <p>
+          Create the <code class="filename">/etc/hosts</code> file by
+          running:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/hosts &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/hosts (network card version)
+
+127.0.0.1 localhost
+<em class="replaceable"><code>&lt;192.168.1.1&gt;</code></em> <em class=
+"replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> <em class=
+"replaceable"><code>[alias1] [alias2 ...]</code></em>
+
+# End /etc/hosts (network card version)</code>
+EOF</kbd>
+</pre>
+        <p>
+          The <em class="replaceable"><code>&lt;192.168.1.1&gt;</code></em>
+          and <em class=
+          "replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> values
+          need to be changed for specific uses or requirements (if assigned
+          an IP address by a network/system administrator and the machine
+          will be connected to an existing network). The optional alias
+          name(s) can be omitted.
+        </p>
+        <p>
+          If a network card is not going to be configured, create the
+          <code class="filename">/etc/hosts</code> file by running:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/hosts &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/hosts (no network card version)
+
+127.0.0.1 <em class=
+"replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> <em class=
+"replaceable"><code>&lt;HOSTNAME&gt;</code></em> localhost
+
+# End /etc/hosts (no network card version)</code>
+EOF</kbd>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="symlinks.html" title=
+          "Managing Devices">Prev</a>
+          <p>
+            Managing Devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">Next</a>
+          <p>
+            System V Bootscript Usage and Configuration
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

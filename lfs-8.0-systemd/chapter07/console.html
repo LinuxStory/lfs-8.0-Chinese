@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.6.&nbsp;Configuring the Linux Console
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="clock.html" title=
+          "Configuring the system clock">Prev</a>
+          <p>
+            Configuring the system clock
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="locale.html" title=
+          "Configuring the System Locale">Next</a>
+          <p>
+            Configuring the System Locale
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-console" name="ch-scripts-console"></a>7.6.
+        Configuring the Linux Console
+      </h1>
+      <p>
+        This section discusses how to configure the <span class=
+        "command"><strong>systemd-vconsole-setup</strong></span> system
+        service, which configures the virtual console font and console
+        keymap.
+      </p>
+      <p>
+        The <span class=
+        "command"><strong>systemd-vconsole-setup</strong></span> service
+        reads the <code class="filename">/etc/vconsole.conf</code> file for
+        configuration information. Decide which keymap and screen font will
+        be used. Various language-specific HOWTOs can also help with this,
+        see <a class="ulink" href=
+        "http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html">http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html</a>.
+        Examine <span class="command"><strong>localectl
+        list-keymaps</strong></span> output for a list of valid console
+        keymaps. Look in <code class=
+        "filename">/usr/share/consolefonts</code> directory for valid screen
+        fonts.
+      </p>
+      <p>
+        The <code class="filename">/etc/vconsole.conf</code> file should
+        contain lines of the form: VARIABLE="value". The following variables
+        are recognized:
+      </p>
+      <div class="variablelist">
+        <dl class="variablelist">
+          <dt>
+            <span class="term">KEYMAP</span>
+          </dt>
+          <dd>
+            <p>
+              This variable specifies the key mapping table for the keyboard.
+              If unset, it defaults to <code class="literal">us</code>.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">KEYMAP_TOGGLE</span>
+          </dt>
+          <dd>
+            <p>
+              This variable can be used to configure a second toggle keymap
+              and is unset by default.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">FONT</span>
+          </dt>
+          <dd>
+            <p>
+              This variable specifies the font used by the virtual console.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">FONT_MAP</span>
+          </dt>
+          <dd>
+            <p>
+              This variable specifies the console map to be used.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">FONT_UNIMAP</span>
+          </dt>
+          <dd>
+            <p>
+              This variable specifies the Unicode font map.
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <p>
+        An example for a German keyboard and console is given below:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; /etc/vconsole.conf &lt;&lt; "EOF"
+<code class="literal">KEYMAP=de-latin1
+FONT=Lat2-Terminus16</code>
+EOF</kbd>
+</pre>
+      <p>
+        You can change KEYMAP value at runtime by using the <span class=
+        "command"><strong>localectl</strong></span> utility:
+      </p>
+      <pre class="userinput">
+<kbd class="command">localectl set-keymap MAP</kbd>
+</pre>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Please note that <span class=
+          "command"><strong>localectl</strong></span> command can be used
+          only on a system booted with systemd.
+        </p>
+      </div>
+      <p>
+        You can also use <span class=
+        "command"><strong>localectl</strong></span> utility with the
+        corresponding parameters to change X11 keyboard layout, model,
+        variant and options:
+      </p>
+      <pre class="userinput">
+<kbd class=
+"command">localectl set-x11-keymap LAYOUT [MODEL] [VARIANT] [OPTIONS]</kbd>
+</pre>
+      <p>
+        To list possible values for <span class="command"><strong>localectl
+        set-x11-keymap</strong></span> parameters, run <span class=
+        "command"><strong>localectl</strong></span> with parameters listed
+        below:
+      </p>
+      <div class="variablelist">
+        <dl class="variablelist">
+          <dt>
+            <span class="term">list-x11-keymap-models</span>
+          </dt>
+          <dd>
+            <p>
+              Show known X11 keyboard mapping models.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">list-x11-keymap-layouts</span>
+          </dt>
+          <dd>
+            <p>
+              Show known X11 keyboard mapping layouts.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">list-x11-keymap-variants</span>
+          </dt>
+          <dd>
+            <p>
+              Show known X11 keyboard mapping variants.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">list-x11-keymap-options</span>
+          </dt>
+          <dd>
+            <p>
+              Show known X11 keyboard mapping options.
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Using any of the parameters listed above requires XKeyboard Config
+          package from BLFS.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="clock.html" title=
+          "Configuring the system clock">Prev</a>
+          <p>
+            Configuring the system clock
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="locale.html" title=
+          "Configuring the System Locale">Next</a>
+          <p>
+            Configuring the System Locale
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
