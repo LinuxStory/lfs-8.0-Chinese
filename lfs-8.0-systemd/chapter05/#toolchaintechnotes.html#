@@ -3,10 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=utf-8" />
+    "application/xhtml+xml; charset=iso-8859-1" />
     <title>
-      <!--5.2.&nbsp;Toolchain Technical Notes-->
-      5.2.&nbsp;工具链技术说明
+      5.2.&nbsp;Toolchain Technical Notes
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -14,27 +13,27 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-8.0">
+  <body class="lfs" id="lfs-8.0-systemd">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 8.0
+        Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        第五章&nbsp;构建临时系统
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "简介">Prev</a>
+          "Introduction">Prev</a>
           <p>
-            简介
+            Introduction
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="generalinstructions.html" title=
-          "通用编译指南">Next</a>
+          "General Compilation Instructions">Next</a>
           <p>
-            通用编译指南
+            General Compilation Instructions
           </p>
         </li>
         <li class="up">
@@ -43,7 +42,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
         </li>
       </ul>
     </div>
@@ -284,7 +283,7 @@ checking what linker to use... /tools/i686-lfs-linux-gnu/bin/ld</code>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
         </li>
       </ul>
     </div>
