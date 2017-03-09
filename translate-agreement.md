@@ -15,6 +15,9 @@
 13. 文档中出现这四个单词，请按如下对应用词来翻译
 
   >   Note 注意
+  
   >   Important 重要
+  
   >   Caution 当心
+  
   >   Warning 警告
