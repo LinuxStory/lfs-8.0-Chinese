@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.1.&nbsp;Introduction
+      6.1&nbsp;介绍
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,153 +19,104 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第6章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter06.html" title=
-          "Installing Basic System Software">Prev</a>
+          "Installing Basic System Software">上一页</a>
           <p>
-            Installing Basic System Software
+            安装基本系统软件
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="kernfs.html" title=
-          "Preparing Virtual Kernel File Systems">Next</a>
+          "Preparing Virtual Kernel File Systems">下一页</a>
           <p>
-            Preparing Virtual Kernel File Systems
+            准备虚拟内核文件系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-introduction" name="ch-system-introduction"></a>6.1.
-        Introduction
+        <a id="ch-system-introduction" name="ch-system-introduction"></a>6.1
+        介绍
       </h1>
       <p>
-        In this chapter, we enter the building site and start constructing
-        the LFS system in earnest. That is, we chroot into the temporary mini
-        Linux system, make a few final preparations, and then begin
-        installing the packages.
+        在本章中，我们进入构建页面，开始认真构建 LFS 系统。也就是说，我们需要 chroot 到临时的迷你 Linux 系统，做一些最后的准备，然后开始安装软件包。
       </p>
       <p>
-        The installation of this software is straightforward. Although in
-        many cases the installation instructions could be made shorter and
-        more generic, we have opted to provide the full instructions for
-        every package to minimize the possibilities for mistakes. The key to
-        learning what makes a Linux system work is to know what each package
-        is used for and why you (or the system) may need it.
+        安装这些软件很简单。虽然在很多情况下安装说明可以做得更短，更通用，但是我们选择提供每个包的完整说明给大家，以尽量减少产生错误的可能性。学习 Linux 系统如何工作的关键是知道每个软件包是用来干什么以及你（或者系统）为什么需要它。
       </p>
       <p>
-        We do not recommend using optimizations. They can make a program run
-        slightly faster, but they may also cause compilation difficulties and
-        problems when running the program. If a package refuses to compile
-        when using optimization, try to compile it without optimization and
-        see if that fixes the problem. Even if the package does compile when
-        using optimization, there is the risk it may have been compiled
-        incorrectly because of the complex interactions between the code and
-        build tools. Also note that the <code class="option">-march</code>
-        and <code class="option">-mtune</code> options using values not
-        specified in the book have not been tested. This may cause problems
-        with the toolchain packages (Binutils, GCC and Glibc). The small
-        potential gains achieved in using compiler optimizations are often
-        outweighed by the risks. First-time builders of LFS are encouraged to
-        build without custom optimizations. The subsequent system will still
-        run very fast and be stable at the same time.
+        我们不建议使用最优化配置。它们可以使程序运行速度略快，但可能导致编译更困难或者程序运行时出现问题。如果某个包在使用优化时编译出错，请尝试在没有优化的情况下编译它，看看是否能解决问题。即使软件包在使用优化时进行编译，由于代码和构建工具之间复杂的交互，也有编译不正确的风险。另请注意，<code class="option">-march</code> 和 <code class="option">-mtune</code> 选项尚未测试，他们使用了未作详细说明的值。这可能会导致工具链包（Binutils，GCC 和 Glibc）出现问题。在使用编译器优化时实现的一点潜在增益通常会被其风险所抵消。建议首次构建 LFS 的人无需自定义优化。后续系统仍将运行非常快，同时也很稳定。
       </p>
       <p>
-        The order that packages are installed in this chapter needs to be
-        strictly followed to ensure that no program accidentally acquires a
-        path referring to <code class="filename">/tools</code> hard-wired
-        into it. For the same reason, do not compile separate packages in
-        parallel. Compiling in parallel may save time (especially on dual-CPU
-        machines), but it could result in a program containing a hard-wired
-        path to <code class="filename">/tools</code>, which will cause the
-        program to stop working when that directory is removed.
+        本章中安装软件包的顺序需要严格遵守，因为安装某些程序需要引用硬链接到 <code class="filename">/tools</code> 的路径，这样做可以确保这些程序不会产生这种意外的问题。同样，也不要并行编译单独的包。虽然并行编译可以节省时间（特别是在双CPU机器上），但它可能会影响到包含在 <code class="filename">/tools</code> 的硬连线路径中的程序，这将导致程序在该目录被删除时停止工作。
       </p>
       <p>
-        Before the installation instructions, each installation page provides
-        information about the package, including a concise description of
-        what it contains, approximately how long it will take to build, and
-        how much disk space is required during this building process.
-        Following the installation instructions, there is a list of programs
-        and libraries (along with brief descriptions of these) that the
-        package installs.
+        在进行安装说明之前，每个安装页面都会提供相关软件包的信息，包括其中包含内容的简述，大约需要的构建时长，以及在构建过程中需要多少磁盘空间。安装说明中会有一个安装软件包所需程序和库的列表（以及它们的简要说明）。
       </p>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          The SBU values and required disk space includes test suite data for
-          all applicable packages in Chapter 6.
+          SBU 值和所需硬盘空间包含第6章所有适用软件包的测试套件数据。
         </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.1.1. About libraries
+          6.1.1. 关于函数库
         </h2>
         <p>
-          In general, the LFS editors discourage building and installing
-          static libraries. The original purpose for most static libraries
-          has been made obsolete in a modern Linux system. In addition
-          linking a static library into a program can be detrimental. If an
-          update to the library is needed to remove a security problem, all
-          programs that use the static library will need to be relinked to
-          the new library. Since the use of static libraries is not always
-          obvious, the relevant programs (and the procedures needed to do the
-          linking) may not even be known.
+          一般来说，LFS 编辑器不鼓励构建和安装静态库。大多数静态库的最初目的在现代 Linux 系统中已经过时了。另外，将静态库链接到程序中可能是有害的。如果为了消除一个安全问题而需要更新一个静态库，那么使用这个静态库的所有程序都需要重新链接到新库。因为静态库的作用并不总是很明显，相关程序（以及执行链接所需的过程）甚至可能是未知的。
         </p>
         <p>
-          In the procedures in Chapter 6, we remove or disable installation
-          of most static libraries. In a few cases, especially glibc and gcc,
-          the use of static libraries remains essential to the general
-          package building process. Usually this is done by passing a
-          <code class="option">--disable-static</code> option to <span class=
-          "command"><strong>configure</strong></span>. In other cases,
-          alternate means are needed.
+          在介绍第6章的过程中，我们去除或禁用了大多数静态库的安装。在少数情况下，特别是 glibc 和 gcc，静态库的使用对于一般的包构建过程仍然是至关重要的。通常这要通过传递一个 <code class="option">--disable-static</code> 选项给 <span class="command"><strong>configure</strong></span> 来完成。在其他情况下，需要其它替代方法。
         </p>
         <p>
-          For a more complete discussion of libraries, see the discussion
+          有关函数库的更详细的讨论，见 BLFS 中的论述
           <a class="ulink" href=
           "http://www.linuxfromscratch.org/blfs//view/8.0/introduction/libraries.html">
-          Libraries: Static or shared?</a> in the BLFS book.
+          Libraries: Static or shared?</a>
         </p>
       </div>
     </div>
     <div class="navfooter">
+      &nbsp;&nbsp;翻译团队：LinuxStory LFS 8.0 翻译组&nbsp;&nbsp;&nbsp;&nbsp;本篇译者：Dawn.L<br>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter06.html" title=
-          "Installing Basic System Software">Prev</a>
+          "Installing Basic System Software">上一页</a>
           <p>
-            Installing Basic System Software
+            安装基本系统软件
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="kernfs.html" title=
-          "Preparing Virtual Kernel File Systems">Next</a>
+          "Preparing Virtual Kernel File Systems">下一页</a>
           <p>
-            Preparing Virtual Kernel File Systems
+            准备虚拟内核文件系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
