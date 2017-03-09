@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       5.19.&nbsp;Coreutils-8.26
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章 构建临时系统
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="bzip2.html" title="Bzip2-1.0.6">Prev</a>
+          <a accesskey="p" href="bzip2.html" title="Bzip2-1.0.6">上一页</a>
           <p>
             Bzip2-1.0.6
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="diffutils.html" title=
-          "Diffutils-3.5">Next</a>
+          "Diffutils-3.5">下一页</a>
           <p>
             Diffutils-3.5
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,17 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Coreutils package contains utilities for showing and setting
-          the basic system characteristics.
+          Coreutils 软件包包含一套用于显示和设定基本系统属性的工具。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.6 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">136 MB</span>
             </div>
           </div>
@@ -70,10 +69,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          5.19.1. Installation of Coreutils
+          5.19.1. 安装 Coreutils
         </h2>
         <p>
-          Prepare Coreutils for compilation:
+          准备编译 Coreutils：
         </p>
         <pre class="userinput">
 <kbd class=
@@ -81,7 +80,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -90,38 +89,30 @@
             </dt>
             <dd>
               <p>
-                This enables the <span class=
-                "command"><strong>hostname</strong></span> binary to be built
-                and installed &ndash; it is disabled by default but is
-                required by the Perl test suite.
+                这个选项会允许编译和安装 <span class=
+                "command"><strong>hostname</strong></span> 程序 &ndash; 默认是不安装的但是 Perl 测试套件需要它。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Compilation is now complete. As discussed earlier, running the test
-          suite is not mandatory for the temporary tools here in this
-          chapter. To run the Coreutils test suite anyway, issue the
-          following command:
+          现在编译完成了。就像之前说的那样，现在不要求执行测试套件，如果仍想执行的话，可以运行：
         </p>
         <pre class="userinput">
 <kbd class="command">make RUN_EXPENSIVE_TESTS=yes check</kbd>
 </pre>
         <p>
-          The <em class="parameter"><code>RUN_EXPENSIVE_TESTS=yes</code></em>
-          parameter tells the test suite to run several additional tests that
-          are considered relatively expensive (in terms of CPU power and
-          memory usage) on some platforms, but generally are not a problem on
-          Linux.
+          <em class="parameter"><code>RUN_EXPENSIVE_TESTS=yes</code></em>
+          参数告诉测试套件额外运行一些对某些系统相对来说开销大一些（主要是 CPU 运算能力和内存消耗）的测试，但通常对 Linux 来说不是问题。
         </p>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -129,7 +120,7 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <p>
-          Details on this package are located in <a class="xref" href=
+          该软件包的详细信息在 <a class="xref" href=
           "../chapter06/coreutils.html#contents-coreutils" title=
           "6.50.2.&nbsp;Contents of Coreutils">Section&nbsp;6.50.2,
           &ldquo;Contents of Coreutils.&rdquo;</a>
@@ -139,25 +130,25 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="bzip2.html" title="Bzip2-1.0.6">Prev</a>
+          <a accesskey="p" href="bzip2.html" title="Bzip2-1.0.6">上一页</a>
           <p>
             Bzip2-1.0.6
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="diffutils.html" title=
-          "Diffutils-3.5">Next</a>
+          "Diffutils-3.5">下一页</a>
           <p>
             Diffutils-3.5
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

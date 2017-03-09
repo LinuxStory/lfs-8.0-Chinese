@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       5.14.&nbsp;Check-0.11.0
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章 构建临时系统
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="dejagnu.html" title="DejaGNU-1.6">Prev</a>
+          <a accesskey="p" href="dejagnu.html" title="DejaGNU-1.6">上一页</a>
           <p>
             DejaGNU-1.6
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="ncurses.html" title="Ncurses-6.0">Next</a>
+          <a accesskey="n" href="ncurses.html" title="Ncurses-6.0">下一页</a>
           <p>
             Ncurses-6.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -50,16 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          Check is a unit testing framework for C.
+          Check 一个 C 的单元测试框架。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大约编译时间:</strong>
               <span class="segbody">0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">11 MB</span>
             </div>
           </div>
@@ -67,17 +67,17 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          5.14.1. Installation of Check
+          5.14.1. 安装 Check
         </h2>
         <p>
-          Prepare Check for compilation:
+          准备编译 Check：
         </p>
         <pre class="userinput">
 <kbd class="command">PKG_CONFIG= ./configure --prefix=/tools</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure parameter:</strong>
+            <strong>configure 参数的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -86,35 +86,28 @@
             </dt>
             <dd>
               <p>
-                This tells the configure script to ignore any pkg-config
-                options that may cause the system to try to link with
-                libraries not in the <code class="filename">/tools</code>
-                directory.
+                这个变量会告诉 configure 脚本忽略 pkg-config 里的任何可能会导致系统去链接 <code class="filename">/tools</code> 目录之外的库的选项。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Build the package:
+          构建软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Compilation is now complete. As discussed earlier, running the test
-          suite is not mandatory for the temporary tools here in this
-          chapter. To run the Check test suite anyway, issue the following
-          command:
+          现在编译已经完成了。就像之前说的一样，不要求为本章中所构建的临时工具运行测试套件，如果你想运行的话，可以执行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Note that the Check test suite may take a relatively long (up to 4
-          SBU) time.
+          注意 Check 的测试套件可能会耗费相对较长的时间（高达 4 SBU）。
         </p>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -122,24 +115,23 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-check" name="contents-check"></a>5.14.2. Contents
-          of Check
+          <a id="contents-check" name="contents-check"></a>5.14.2. Check 软件包的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed program:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">checkmk</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">libcheck.{a,so}</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -157,8 +149,7 @@
                 </td>
                 <td>
                   <p>
-                    Awk script for generating C unit tests for use with the
-                    Check unit testing framework
+                    用来生成 C 语言单元测试用例的 Awk 脚本，这些用例可以配合 Check 单元测试框架使用。
                   </p>
                 </td>
               </tr>
@@ -172,8 +163,7 @@
                 </td>
                 <td>
                   <p>
-                    Contains functions that allow Check to be called from a
-                    test program
+                    包含允许测试程序调用 Check 的函数。
                   </p>
                 </td>
               </tr>
@@ -185,24 +175,24 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="dejagnu.html" title="DejaGNU-1.6">Prev</a>
+          <a accesskey="p" href="dejagnu.html" title="DejaGNU-1.6">上一页</a>
           <p>
             DejaGNU-1.6
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="ncurses.html" title="Ncurses-6.0">Next</a>
+          <a accesskey="n" href="ncurses.html" title="Ncurses-6.0">下一页</a>
           <p>
             Ncurses-6.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
