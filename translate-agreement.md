@@ -13,7 +13,8 @@
 11. 每个翻译的页面，请手动将编码由 ISO-8859-1 改成 UTF-8
 12. 换行符统一为 LF(0x10 \n)
 13. 文档中出现这四个单词，请按如下对应用词来翻译
-  > Note 注意
-  > Important 重要
->   Caution 当心
-> Warning 警告
+
+  >   Note 注意
+  >   Important 重要
+  >   Caution 当心
+  >   Warning 警告
