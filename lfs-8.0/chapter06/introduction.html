@@ -19,26 +19,26 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        第6章&nbsp;安装基本系统软件
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter06.html" title=
-          "Installing Basic System Software">上一页</a>
+          "安装基本系统软件">上一页</a>
           <p>
             安装基本系统软件
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="kernfs.html" title=
-          "Preparing Virtual Kernel File Systems">下一页</a>
+          "准备虚拟内核文件系统">下一页</a>
           <p>
             准备虚拟内核文件系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -58,10 +58,10 @@
         安装这些软件很简单。虽然在很多情况下安装说明可以做得更短，更通用，但是我们选择提供每个包的完整说明给大家，以尽量减少产生错误的可能性。学习 Linux 系统如何工作的关键是知道每个软件包是用来干什么以及你（或者系统）为什么需要它。
       </p>
       <p>
-        我们不建议使用最优化配置。它们可以使程序运行速度略快，但可能导致编译更困难或者程序运行时出现问题。如果某个包在使用优化时编译出错，请尝试在没有优化的情况下编译它，看看是否能解决问题。即使软件包在使用优化时进行编译，由于代码和构建工具之间复杂的交互，也有编译不正确的风险。另请注意，<code class="option">-march</code> 和 <code class="option">-mtune</code> 选项尚未测试，他们使用了未作详细说明的值。这可能会导致工具链包（Binutils，GCC 和 Glibc）出现问题。在使用编译器优化时实现的一点潜在增益通常会被其风险所抵消。建议首次构建 LFS 的人无需自定义优化。后续系统仍将运行非常快，同时也很稳定。
+        我们不建议使用最优化配置。它们可以使程序运行速度略快，但可能导致编译更困难或者程序运行时出现问题。如果某个包在使用优化时编译出错，请尝试在没有优化的情况下编译它，看看是否能解决问题。即使软件包在使用优化时进行编译，由于代码和构建工具之间复杂的交互，也有编译不正确的风险。另请注意，<code class="option">-march</code> 和 <code class="option">-mtune</code> 选项尚未测试，他们使用了未作详细说明的值。这可能会导致工具链包（Binutils，GCC 和 Glibc）出现问题。在使用编译器优化时实现的一点潜在增益通常会被其风险所抵消。建议首次构建 LFS 的人无需自定义优化。后续系统仍将运行非常快，同时也会很稳定。
       </p>
       <p>
-        本章中安装软件包的顺序需要严格遵守，因为安装某些程序需要引用硬链接到 <code class="filename">/tools</code> 的路径，这样做可以确保这些程序不会产生这种意外的问题。同样，也不要并行编译单独的包。虽然并行编译可以节省时间（特别是在双CPU机器上），但它可能会影响到包含在 <code class="filename">/tools</code> 的硬连线路径中的程序，这将导致程序在该目录被删除时停止工作。
+        本章中安装软件包的顺序需要严格遵守，因为安装某些程序需要引用硬连接到 <code class="filename">/tools</code> 的路径，这样做可以确保这些程序不会产生这种意外的问题。同样，也不要并行编译单独的包。虽然并行编译可以节省时间（特别是在双 CPU 机器上），但它可能会影响到包含在 <code class="filename">/tools</code> 的硬连线路径中的程序，这将导致程序在该目录被删除时停止工作。
       </p>
       <p>
         在进行安装说明之前，每个安装页面都会提供相关软件包的信息，包括其中包含内容的简述，大约需要的构建时长，以及在构建过程中需要多少磁盘空间。安装说明中会有一个安装软件包所需程序和库的列表（以及它们的简要说明）。
@@ -72,7 +72,7 @@
           注意
         </h3>
         <p>
-          SBU 值和所需硬盘空间包含第6章所有适用软件包的测试套件数据。
+          SBU 值和所需硬盘空间包含第六章所有适用软件包的测试套件数据。
         </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
@@ -83,10 +83,10 @@
           一般来说，LFS 编辑器不鼓励构建和安装静态库。大多数静态库的最初目的在现代 Linux 系统中已经过时了。另外，将静态库链接到程序中可能是有害的。如果为了消除一个安全问题而需要更新一个静态库，那么使用这个静态库的所有程序都需要重新链接到新库。因为静态库的作用并不总是很明显，相关程序（以及执行链接所需的过程）甚至可能是未知的。
         </p>
         <p>
-          在介绍第6章的过程中，我们去除或禁用了大多数静态库的安装。在少数情况下，特别是 glibc 和 gcc，静态库的使用对于一般的包构建过程仍然是至关重要的。通常这要通过传递一个 <code class="option">--disable-static</code> 选项给 <span class="command"><strong>configure</strong></span> 来完成。在其他情况下，需要其它替代方法。
+          在介绍第六章的过程中，我们去除或禁用了大多数静态库的安装。在少数情况下，特别是 glibc 和 gcc，静态库的使用对于一般的包构建过程仍然是至关重要的。通常这要通过传递一个 <code class="option">--disable-static</code> 选项给 <span class="command"><strong>configure</strong></span> 来完成。在其他情况下，需要其它替代方法。
         </p>
         <p>
-          有关函数库的更详细的讨论，见 BLFS 中的论述
+          有关函数库更详细的讨论，见 BLFS 中的论述
           <a class="ulink" href=
           "http://www.linuxfromscratch.org/blfs//view/8.0/introduction/libraries.html">
           Libraries: Static or shared?</a>
@@ -98,21 +98,21 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter06.html" title=
-          "Installing Basic System Software">上一页</a>
+          "安装基本系统软件">上一页</a>
           <p>
             安装基本系统软件
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="kernfs.html" title=
-          "Preparing Virtual Kernel File Systems">下一页</a>
+          "准备虚拟内核文件系统">下一页</a>
           <p>
             准备虚拟内核文件系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
