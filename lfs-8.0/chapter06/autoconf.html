@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.43.&nbsp;Autoconf-2.69
     </title>
@@ -19,30 +19,30 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="intltool.html" title=
-          "Intltool-0.51.0">Prev</a>
+          "Intltool-0.51.0">上一页</a>
           <p>
             Intltool-0.51.0
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="automake.html" title=
-          "Automake-1.15">Next</a>
+          "Automake-1.15">下一页</a>
           <p>
             Automake-1.15
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -53,18 +53,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Autoconf package contains programs for producing shell scripts
-          that can automatically configure source code.
+          Autoconf 软件包包含了用于生成自动配置源代码 shell 脚本的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU (about 3.5 SBU with
-              tests)</span>
+              <strong class="segtitle">预计构建时间:</strong>
+              <span class="segbody">少于 0.1 SBU (加上测试大约 3.5 SBU)</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">17.3 MB</span>
             </div>
           </div>
@@ -72,34 +70,33 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.43.1. Installation of Autoconf
+          6.43.1. Autoconf 安装过程
         </h2>
         <p>
-          Prepare Autoconf for compilation:
+          准备编译 Autoconf:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，输入:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          This takes a long time, about 3.5 SBUs. In addition, several tests
-          are skipped that use Automake. For full test coverage, Autoconf can
-          be re-tested after Automake has been installed. In addition, two
-          tests fail due to changes in libtool-2.4.3 and later.
+          这一步将需要很长一段时间，大约 3.5 SBUs。另外，使用 Automake 的部分
+          测试被跳过了。要全面测试覆盖率，可以在 Automake 安装之后重新测试 Autoconf。
+          另外，libtool-2.4.3 和之后版本的变化会导致两个测试失败。
         </p>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -108,24 +105,24 @@
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-autoconf" name="contents-autoconf"></a>6.43.2.
-          Contents of Autoconf
+          Autoconf 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">autoconf, autoheader, autom4te,
               autoreconf, autoscan, autoupdate, and ifnames</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/share/autoconf</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -143,12 +140,10 @@
                 </td>
                 <td>
                   <p>
-                    Produces shell scripts that automatically configure
-                    software source code packages to adapt to many kinds of
-                    Unix-like systems; the configuration scripts it produces
-                    are independent&mdash;running them does not require the
+                    生成用于配置软件源代码以适应不同的类 Unix 系统的 shell
+                    脚本; 生成的配置脚本是独立运行的——运行这些脚本不需要
                     <span class="command"><strong>autoconf</strong></span>
-                    program
+                    程序
                   </p>
                 </td>
               </tr>
@@ -162,9 +157,8 @@
                 </td>
                 <td>
                   <p>
-                    A tool for creating template files of C <span class=
-                    "emphasis"><em>#define</em></span> statements for
-                    configure to use
+                    用于生成 C 语言 <span class=
+                    "emphasis"><em>#define</em></span> 语句模板文件给 configure 用的工具 
                   </p>
                 </td>
               </tr>
@@ -178,7 +172,7 @@
                 </td>
                 <td>
                   <p>
-                    A wrapper for the M4 macro processor
+                    一个 M4 宏处理的封装
                   </p>
                 </td>
               </tr>
@@ -192,18 +186,19 @@
                 </td>
                 <td>
                   <p>
-                    Automatically runs <span class=
+                    当修改了
+                    <span class="command"><strong>autoconf</strong></span>
+                    和 <span class=
+                    "command"><strong>automake</strong></span> 模板文件时，
+                    以正确的顺序自动运行 <span class=
                     "command"><strong>autoconf</strong></span>, <span class=
                     "command"><strong>autoheader</strong></span>,
                     <span class="command"><strong>aclocal</strong></span>,
                     <span class="command"><strong>automake</strong></span>,
                     <span class="command"><strong>gettextize</strong></span>,
-                    and <span class=
-                    "command"><strong>libtoolize</strong></span> in the
-                    correct order to save time when changes are made to
-                    <span class="command"><strong>autoconf</strong></span>
-                    and <span class=
-                    "command"><strong>automake</strong></span> template files
+                    和 <span class=
+                    "command"><strong>libtoolize</strong></span>
+                    来节约时间。
                   </p>
                 </td>
               </tr>
@@ -217,13 +212,11 @@
                 </td>
                 <td>
                   <p>
-                    Helps to create a <code class=
-                    "filename">configure.in</code> file for a software
-                    package; it examines the source files in a directory
-                    tree, searching them for common portability issues, and
-                    creates a <code class="filename">configure.scan</code>
-                    file that serves as as a preliminary <code class=
-                    "filename">configure.in</code> file for the package
+                    为软件包协助创建一个<code class=
+                    "filename">configure.in</code> 文件;
+                    它检查目录树中的源文件，检查他们中是否有一般的可移植性问题，
+                    然后创建一个 <code class="filename">configure.scan</code> 文件
+                    用于作为软件包最初的 <code class="filename">configure.in</code>文件
                   </p>
                 </td>
               </tr>
@@ -237,10 +230,8 @@
                 </td>
                 <td>
                   <p>
-                    Modifies a <code class="filename">configure.in</code>
-                    file that still calls <span class=
-                    "command"><strong>autoconf</strong></span> macros by
-                    their old names to use the current macro names
+                  修改仍在使用旧的 <span class="command"><strong>autoconf</strong></span> 宏的 <code class="filename">configure.in</code>
+                  文件去使用现在的宏名
                   </p>
                 </td>
               </tr>
@@ -254,16 +245,14 @@
                 </td>
                 <td>
                   <p>
-                    Helps when writing <code class=
-                    "filename">configure.in</code> files for a software
-                    package; it prints the identifiers that the package uses
-                    in C preprocessor conditionals [If a package has already
-                    been set up to have some portability, this program can
-                    help determine what <span class=
-                    "command"><strong>configure</strong></span> needs to
-                    check for. It can also fill in gaps in a <code class=
-                    "filename">configure.in</code> file generated by
-                    <span class="command"><strong>autoscan</strong></span>.]
+                    协助编写软件包的 <code class=
+                    "filename">configure.in</code> 文件;
+                    [它打印出软件包在 C 预处理器条件中使用的标识符[如果一个软件包
+                    已经为一定的可移植性设置了，这个程序将帮助决定  
+                    <span class="command"><strong>configure</strong></span> 
+                    需要检查什么。它也可以在 <span class="command"><strong>autoscan</strong></span> 生成的
+                    <code class=
+                    "filename">configure.in</code> 文件中填空。]
                   </p>
                 </td>
               </tr>
@@ -276,25 +265,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="intltool.html" title=
-          "Intltool-0.51.0">Prev</a>
+          "Intltool-0.51.0">上一页</a>
           <p>
             Intltool-0.51.0
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="automake.html" title=
-          "Automake-1.15">Next</a>
+          "Automake-1.15">下一页</a>
           <p>
             Automake-1.15
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
