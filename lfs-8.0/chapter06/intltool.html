@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.42.&nbsp;Intltool-0.51.0
     </title>
@@ -19,30 +19,30 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="xml-parser.html" title=
-          "XML::Parser-2.44">Prev</a>
+          "XML::Parser-2.44">上一页</a>
           <p>
             XML::Parser-2.44
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="autoconf.html" title=
-          "Autoconf-2.69">Next</a>
+          "Autoconf-2.69">下一页</a>
           <p>
             Autoconf-2.69
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -53,17 +53,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Intltool is an internationalization tool used for extracting
-          translatable strings from source files.
+          Intltool 是用与将可翻译的文本从源文件中提取出来的国际化工具。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计构建时间:</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">1.5 MB</span>
             </div>
           </div>
@@ -71,34 +70,34 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.42.1. Installation of Intltool
+          6.42.1. Intltool 安装过程
         </h2>
         <p>
-          First fix a warning that is caused by perl-5.22 and later:
+          首先修复一个由于 perl-5.22 及之后版本导致的一个警告:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's:\\\${:\\\$\\{:' intltool-update.in</kbd>
 </pre>
         <p>
-          Prepare Intltool for compilation:
+          准备编译 Intltool:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，输入:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -108,17 +107,17 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-intltool" name="contents-intltool"></a>6.42.2.
-          Contents of Intltool
+          Intltool 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">intltool-extract, intltool-merge,
               intltool-prepare, intltool-update, and intltoolize</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/share/doc/intltool-0.51.0 and
               /usr/share/intltool</span>
             </div>
@@ -126,7 +125,7 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+              简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -144,7 +143,7 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
                 </td>
                 <td>
                   <p>
-                    Prepares a package to use intltool
+                    准备一个软件包以使用 intltool
                   </p>
                 </td>
               </tr>
@@ -158,8 +157,8 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates header files that can be read by <span class=
-                    "command"><strong>gettext</strong></span>
+                    生成可以被 <span class=
+                    "command"><strong>gettext</strong></span> 读取的头文件
                   </p>
                 </td>
               </tr>
@@ -173,7 +172,7 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
                 </td>
                 <td>
                   <p>
-                    Merges translated strings into various file types
+                    将已翻译的字符串合并为不同的文件类型
                   </p>
                 </td>
               </tr>
@@ -187,7 +186,7 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
                 </td>
                 <td>
                   <p>
-                    Updates pot files and merges them with translation files
+                    更新 pot 文件并将他们与翻译文件合并
                   </p>
                 </td>
               </tr>
@@ -201,8 +200,7 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
                 </td>
                 <td>
                   <p>
-                    Updates the po template files and merges them with the
-                    translations
+                    更新 po 模板文件并将他们与翻译合并
                   </p>
                 </td>
               </tr>
@@ -215,25 +213,25 @@ install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="xml-parser.html" title=
-          "XML::Parser-2.44">Prev</a>
+          "XML::Parser-2.44">上一页</a>
           <p>
             XML::Parser-2.44
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="autoconf.html" title=
-          "Autoconf-2.69">Next</a>
+          "Autoconf-2.69">下一页</a>
           <p>
             Autoconf-2.69
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
