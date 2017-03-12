@@ -166,7 +166,7 @@
         <!--error before too much additional work is performed.-->
             </p>
             <p>
-            Binutila 把汇编器和链接器安装在两个位置，分别是 <code class="filename">/tools/bin</code> 和 <code class="filename">/tools/$LFS_TGT/bin</code> 。其中一个位置是指向另一个位置的硬链接。链接器的另外一个重要方面是它的库搜索顺序。你可以通过给 <span class="command"><strong>ld</strong></span> 传递 <em class=parameter"><code>--verbose</code></em> 参数来获取详细信息。例如，执行 <span class="userinput"><code>ld --verbose | grep SEARCH</code></span> 命令可以得到当前搜索路径和顺序。你还可以通过编译一个虚拟程序并将 <em class="parameter"><code>--verbose</code></em> 开关传递给链接器，来显示哪些文件由 <span class="command"><strong>ld</strong></span> 链接。例如，执行命令 <strong class="userinput"><code>gcc dummy.c -Wl,--verbose 2&gt;&amp;1 | grep succeeded</code></strong> 会成功显示在链接过程中打开的所有文件。
+            Binutila 把汇编器和链接器安装在两个位置，分别是 <code class="filename">/tools/bin</code> 和 <code class="filename">/tools/$LFS_TGT/bin</code> 。其中一个位置是指向另一个位置的硬链接。链接器的另外一个重要方面是它的库搜索顺序。你可以通过给 <span class="command"><strong>ld</strong></span> 传递 <em class=parameter"><code>--verbose</code></em> 参数来获取详细信息。例如，执行 <span class="userinput"><code>ld --verbose | grep SEARCH</code></span> 命令可以得到当前搜索路径和顺序。你还可以通过编译一个模拟程序并将 <em class="parameter"><code>--verbose</code></em> 开关传递给链接器，来显示哪些文件由 <span class="command"><strong>ld</strong></span> 链接。例如，执行命令 <strong class="userinput"><code>gcc dummy.c -Wl,--verbose 2&gt;&amp;1 | grep succeeded</code></strong> 会成功显示在链接过程中打开的所有文件。
 
             </p>
             <p>
@@ -178,82 +178,46 @@
 checking what linker to use... /tools/i686-lfs-linux-gnu/bin/ld</code>
             </pre>
             <p>
-            This is important for the reasons mentioned above. It also
-            demonstrates that GCC's configure script does not search the PATH
-            directories to find which tools to use. However, during the actual
-            operation of <span class="command"><strong>gcc</strong></span>
-            itself, the same search paths are not necessarily used. To find out
-            which standard linker <span class=
-            "command"><strong>gcc</strong></span> will use, run: <strong class=
-            "userinput"><code>gcc -print-prog-name=ld</code></strong>.
+            基于上述原因，这很重要。它也表明了GCC的配置脚本不能够搜索PATH目录来寻找使用哪个工具。但是在实际运行 <span class="command">gcc</strong></span> 本身时，并不需要使用相同的搜索路径。如果你想要知道 <span class="command"><strong>gcc</strong></span> 使用的是哪种标准的编辑器，可以运行命令： <strong class="userinput"><code>gcc -print-prog-name=ld</code></strong> 。
+            <!--This is important for the reasons mentioned above. It also-->
+            <!--demonstrates that GCC's configure script does not search the PATH-->
+            <!--directories to find which tools to use. However, during the actual-->
+            <!--operation of <span class="command"><strong>gcc</strong></span>-->
+            <!--itself, the same search paths are not necessarily used. To find out-->
+            <!--which standard linker <span class=-->
+            <!--"command"><strong>gcc</strong></span> will use, run: <strong class=-->
+            <!--"userinput"><code>gcc -print-prog-name=ld</code></strong>.-->
             </p>
             <p>
-            Detailed information can be obtained from <span class=
-            "command"><strong>gcc</strong></span> by passing it the <em class=
-            "parameter"><code>-v</code></em> command line option while compiling
-        a dummy program. For example, <strong class="userinput"><code>gcc -v
-                dummy.c</code></strong> will show detailed information about the
-        preprocessor, compilation, and assembly stages, including
-        <span class="command"><strong>gcc</strong></span>'s included search
-        paths and their order.
+            如果你想要获取 <span class="command"><strong>gcc</strong></span> 的细节信息，可以在编译模拟程序的时候向其传递 <em class="parameter"><code>-v</code></em> 命令行选项。例如，<strong class="userinput"><code>gcc -v dummy.c</code></strong> 将会显示有关预处理器，编译和装配阶段的详细信息，包括 <span class="command"><strong>gcc</strong></span> 的搜索路径及其顺序。
+            <!--Detailed information can be obtained from <span class=-->
+            <!--"command"><strong>gcc</strong></span> by passing it the <em class=-->
+            <!--"parameter"><code>-v</code></em> command line option while compiling-->
+        <!--a dummy program. For example, <strong class="userinput"><code>gcc -v-->
+                <!--dummy.c</code></strong> will show detailed information about the-->
+        <!--preprocessor, compilation, and assembly stages, including-->
+        <!--<span class="command"><strong>gcc</strong></span>'s included search-->
+        <!--paths and their order.-->
             </p>
             <p>
-            Next installed are sanitized Linux API headers. These allow the
-            standard C library (Glibc) to interface with features that the Linux
-            kernel will provide.
+            接下来要安装的是被清理过的Linux API头文件。这些头文件可使标准C库(Glibc)与linux内核提供的特性进行交互。对于构建Glibc，最需要着重考虑的是编译器，二进制工具以及
+            <!--Next installed are sanitized Linux API headers. These allow the-->
+            <!--standard C library (Glibc) to interface with features that the Linux-->
+            <!--kernel will provide.-->
             </p>
             <p>
-            The next package installed is Glibc. The most important
-            considerations for building Glibc are the compiler, binary tools, and
-            kernel headers. The compiler is generally not an issue since Glibc
-            will always use the compiler relating to the <em class=
-            "parameter"><code>--host</code></em> parameter passed to its
-        configure script; e.g. in our case, the compiler will be <span class=
-        "command"><strong>i686-lfs-linux-gnu-gcc</strong></span>. The binary
-    tools and kernel headers can be a bit more complicated. Therefore,
-    take no risks and use the available configure switches to enforce the
-    correct selections. After the run of <span class=
-    "command"><strong>configure</strong></span>, check the contents of
-the <code class="filename">config.make</code> file in the
-<code class="filename">glibc-build</code> directory for all important
-details. Note the use of <em class=
-"parameter"><code>CC="i686-lfs-gnu-gcc"</code></em> to control which
-        binary tools are used and the use of the <em class=
-        "parameter"><code>-nostdinc</code></em> and <em class=
-        "parameter"><code>-isystem</code></em> flags to control the
-    compiler's include search path. These items highlight an important
-    aspect of the Glibc package&mdash;it is very self-sufficient in terms
-    of its build machinery and generally does not rely on toolchain
-    defaults.
+            下一个要安装的包是Glibc。对于构建Glibc，最需要着重考虑的是编译器，二进制工具以及内核头文件。由于Glibc通常都会使用传递给它配置脚本 <em class="parameter"><code>--host</code></em> 参数有关的编译器，比如我们使用的编译器 <span class="command"><strong>i686-lfs-linux-gnu-gcc</strong></span> ，所以编译器通常不会出现问题。然而二进制工具以及内核头文件可能要麻烦一点。因此，请谨慎行事并且使用可获取的配置开关来执行正确的选择。在 <span class="command"><strong>configure</strong></span> 运行之后，请检查 <code class="filename">glibc-build</code> 目录下的 <code class="filename">config.make</code> 所有重要细节。注意使用 <em class="parameter"><code>CC="i686-lfs-gnu-gcc"</code></em> 来控制需要用到的二进制工具，用 <em class="parameter"><code>-nostdinc</code></em> 和 <em class="parameter"><code>-isystem</code></em> 参数来控制编译器包含的搜索路径。这些选项突出了Glibc包的一个重要方面-它的构建机制是完全自给自足的，基本上不会依赖于工具链默认值。
+
             </p>
             <p>
-            During the second pass of Binutils, we are able to utilize the
-            <em class="parameter"><code>--with-lib-path</code></em> configure
-            switch to control <span class="command"><strong>ld</strong></span>'s
-            library search path.
+            在第二遍扫描Binutils时，我们可以使用 <em class="parameter"><code>--with-lib-path</code></em> 配置开关来控制 <span class="command"><strong>ld</strong></span> 的库的搜索路径。
+
             </p>
             <p>
-            For the second pass of GCC, its sources also need to be modified to
-            tell GCC to use the new dynamic linker. Failure to do so will result
-            in the GCC programs themselves having the name of the dynamic linker
-            from the host system's <code class="filename">/lib</code> directory
-            embedded into them, which would defeat the goal of getting away from
-            the host. From this point onwards, the core toolchain is
-            self-contained and self-hosted. The remainder of the <a class="xref"
-                                                                    href="chapter05.html" title=
-                                                                    "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
-            packages all build against the new Glibc in <code class=
-            "filename">/tools</code>.
+            在第二遍扫描GCC时，也需要修改其源码以告知GCC使用最新的动态链接器。不过不修改会导致GCC程序本身具有嵌入到其中的来自于主机系统的 <code class="filename">/lib</code> 目录的动态链接气的名称，这将会破坏与主机分离的原则。从此时开始，核心工具链基本就具备了自包含和自托管特性。 <a class="xref" href="chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>包的剩余包都是基于 <code class="filename">/tools</code> 中的新的Glibc的基础上进行构建的。
             </p>
             <p>
-            Upon entering the chroot environment in <a class="xref" href=
-            "../chapter06/chapter06.html" title=
-            "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
-            6</a>, the first major package to be installed is Glibc, due to its
-        self-sufficient nature mentioned above. Once this Glibc is installed
-        into <code class="filename">/usr</code>, we will perform a quick
-        changeover of the toolchain defaults, and then proceed in building
-        the rest of the target LFS system.
+            在进入<a class="xref" href="../chapter06/chapter06.html" title="第六章&nbsp;安装基础系统软件">第六章</a> chroot 环境前，我们首先需要安装的主要的软件包是GLibc，这是因为我们之前提到过它的自给自足特性。一旦将 Glibc安装到 <code class="filename">/usr</code> 目录下，我们就可以快速改变工具链的默认设置，然后构建目标LFS系统的剩余部分。
             </p>
         </div>
         <div class="navfooter">
