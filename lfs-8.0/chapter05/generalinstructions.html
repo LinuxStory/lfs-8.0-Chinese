@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.3.&nbsp;General Compilation Instructions
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="toolchaintechnotes.html" title=
+          "Toolchain Technical Notes">Prev</a>
+          <p>
+            Toolchain Technical Notes
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="binutils-pass1.html" title=
+          "Binutils-2.27 - Pass 1">Next</a>
+          <p>
+            Binutils-2.27 - Pass 1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-generalinstructions" name=
+        "ch-tools-generalinstructions"></a>5.3. General Compilation
+        Instructions
+      </h1>
+      <p>
+        When building packages there are several assumptions made within the
+        instructions:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              Several of the packages are patched before compilation, but
+              only when the patch is needed to circumvent a problem. A patch
+              is often needed in both this and the next chapter, but
+              sometimes in only one or the other. Therefore, do not be
+              concerned if instructions for a downloaded patch seem to be
+              missing. Warning messages about <span class=
+              "emphasis"><em>offset</em></span> or <span class=
+              "emphasis"><em>fuzz</em></span> may also be encountered when
+              applying a patch. Do not worry about these warnings, as the
+              patch was still successfully applied.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              During the compilation of most packages, there will be several
+              warnings that scroll by on the screen. These are normal and can
+              safely be ignored. These warnings are as they
+              appear&mdash;warnings about deprecated, but not invalid, use of
+              the C or C++ syntax. C standards change fairly often, and some
+              packages still use the older standard. This is not a problem,
+              but does prompt the warning.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Check one last time that the <code class="envar">LFS</code>
+              environment variable is set up properly:
+            </p>
+            <pre class="userinput">
+<kbd class="command">echo $LFS</kbd>
+</pre>
+            <p>
+              Make sure the output shows the path to the LFS partition's
+              mount point, which is <code class="filename">/mnt/lfs</code>,
+              using our example.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Finally, two last important items must be emphasized:
+            </p>
+            <div class="admon important">
+              <img alt="[Important]" src="../images/important.png" />
+              <h3>
+                Important
+              </h3>
+              <p>
+                The build instructions assume that the <a class="xref" href=
+                "../chapter02/hostreqs.html" title=
+                "2.2.&nbsp;Host System Requirements">Host System
+                Requirements</a>, including symbolic links, have been set
+                properly:
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li class="listitem">
+                    <p>
+                      <span class="command"><strong>bash</strong></span> is
+                      the shell in use.
+                    </p>
+                  </li>
+                  <li class="listitem">
+                    <p>
+                      <span class="command"><strong>sh</strong></span> is a
+                      symbolic link to <span class=
+                      "command"><strong>bash</strong></span>.
+                    </p>
+                  </li>
+                  <li class="listitem">
+                    <p>
+                      <span class=
+                      "command"><strong>/usr/bin/awk</strong></span> is a
+                      symbolic link to <span class=
+                      "command"><strong>gawk</strong></span>.
+                    </p>
+                  </li>
+                  <li class="listitem">
+                    <p>
+                      <span class=
+                      "command"><strong>/usr/bin/yacc</strong></span> is a
+                      symbolic link to <span class=
+                      "command"><strong>bison</strong></span> or a small
+                      script that executes bison.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="admon important">
+              <img alt="[Important]" src="../images/important.png" />
+              <h3>
+                Important
+              </h3>
+              <p>
+                To re-emphasize the build process:
+              </p>
+              <div class="orderedlist">
+                <ol class="compact">
+                  <li class="listitem">
+                    <p>
+                      Place all the sources and patches in a directory that
+                      will be accessible from the chroot environment such as
+                      <code class="filename">/mnt/lfs/sources/</code>. Do
+                      <span class="emphasis"><em>not</em></span> put sources
+                      in <code class="filename">/mnt/lfs/tools/</code>.
+                    </p>
+                  </li>
+                  <li class="listitem">
+                    <p>
+                      Change to the sources directory.
+                    </p>
+                  </li>
+                  <li class="listitem">
+                    <p>
+                      <a id="buildinstr" name="buildinstr"></a>For each
+                      package:
+                    </p>
+                    <div class="orderedlist">
+                      <ol class="compact">
+                        <li class="listitem">
+                          <p>
+                            Using the <span class=
+                            "command"><strong>tar</strong></span> program,
+                            extract the package to be built. In Chapter 5,
+                            ensure you are the <span class=
+                            "emphasis"><em>lfs</em></span> user when
+                            extracting the package.
+                          </p>
+                        </li>
+                        <li class="listitem">
+                          <p>
+                            Change to the directory created when the package
+                            was extracted.
+                          </p>
+                        </li>
+                        <li class="listitem">
+                          <p>
+                            Follow the book's instructions for building the
+                            package.
+                          </p>
+                        </li>
+                        <li class="listitem">
+                          <p>
+                            Change back to the sources directory.
+                          </p>
+                        </li>
+                        <li class="listitem">
+                          <p>
+                            Delete the extracted source directory unless
+                            instructed otherwise.
+                          </p>
+                        </li>
+                      </ol>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="toolchaintechnotes.html" title=
+          "Toolchain Technical Notes">Prev</a>
+          <p>
+            Toolchain Technical Notes
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="binutils-pass1.html" title=
+          "Binutils-2.27 - Pass 1">Next</a>
+          <p>
+            Binutils-2.27 - Pass 1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.1.&nbsp;Introduction
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter07.html" title=
+          "System Configuration">Prev</a>
+          <p>
+            System Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="bootscripts.html" title=
+          "LFS-Bootscripts-20150222">Next</a>
+          <p>
+            LFS-Bootscripts-20150222
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-introduction" name=
+        "ch-scripts-introduction"></a>7.1. Introduction
+      </h1>
+      <p>
+        Booting a Linux system involves several tasks. The process must mount
+        both virtual and real file systems, initialize devices, activate
+        swap, check file systems for integrity, mount any swap partitions or
+        files, set the system clock, bring up networking, start any daemons
+        required by the system, and accomplish any other custom tasks needed
+        by the user. This process must be organized to ensure the tasks are
+        performed in the correct order but, at the same time, be executed as
+        fast as possible.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="sysv-desc" name="sysv-desc"></a>7.1.1. System V
+        </h2>
+        <p>
+          System V is the classic boot process that has been used in Unix and
+          Unix-like systems such as Linux since about 1983. It consists of a
+          small program, <span class="command"><strong>init</strong></span>,
+          that sets up basic programs such as <span class=
+          "command"><strong>login</strong></span> (via getty) and runs a
+          script. This script, usually named <span class=
+          "command"><strong>rc</strong></span>, controls the execution of a
+          set of additional scripts that perform the tasks required to
+          initialize the system.
+        </p>
+        <p>
+          The <span class="command"><strong>init</strong></span> program is
+          controlled by the <code class="filename">/etc/inittab</code> file
+          and is organized into run levels that can be run by the user:
+        </p>
+        <div class="literallayout">
+          <p>
+            <br />
+            0&nbsp;&mdash;&nbsp;halt<br />
+            1&nbsp;&mdash;&nbsp;Single&nbsp;user&nbsp;mode<br />
+            2&nbsp;&mdash;&nbsp;Multiuser,&nbsp;without&nbsp;networking<br />
+            3&nbsp;&mdash;&nbsp;Full&nbsp;multiuser&nbsp;mode<br />
+            4&nbsp;&mdash;&nbsp;User&nbsp;definable<br />
+            5&nbsp;&mdash;&nbsp;Full&nbsp;multiuser&nbsp;mode&nbsp;with&nbsp;display&nbsp;manager<br />
+
+            6&nbsp;&mdash;&nbsp;reboot<br />
+          </p>
+        </div>
+        <p>
+          The usual default run level is 3 or 5.
+        </p>
+        <h3>
+          Advantages
+        </h3>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                Established, well understood system.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Easy to customize.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Disadvantages
+        </h3>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                Slower to boot. A medium speed base LFS system takes 8-12
+                seconds where the boot time is measured from the first kernel
+                message to the login prompt. Network connectivity is
+                typically established about 2 seconds after the login prompt.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Serial processing of boot tasks. This is related to the
+                previous point. A delay in any process such as a file system
+                check, will delay the entire boot process.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Does not directly support advanced features like control
+                groups (cgroups), and per-user fair share scheduling.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Adding scripts requires manual, static sequencing decisions.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter07.html" title=
+          "System Configuration">Prev</a>
+          <p>
+            System Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="bootscripts.html" title=
+          "LFS-Bootscripts-20150222">Next</a>
+          <p>
+            LFS-Bootscripts-20150222
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

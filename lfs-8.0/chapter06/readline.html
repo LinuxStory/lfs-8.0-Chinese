@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=utf-8" />
+    <title>
+      6.32.&nbsp;Readline-7.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        第六章&nbsp;安装基本系统软件
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grep.html" title="Grep-3.0">上一页</a>
+          <p>
+            Grep-3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="bash.html" title="Bash-4.4">下一页</a>
+          <p>
+            Bash-4.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "第六章&nbsp;安装基本系统软件">返回</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">首页</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-readline" name="ch-system-readline"></a>6.32.
+        Readline-7.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          Readline 软件包是一组库的集合，提供命令行编辑和历史的功能。
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">预计构建时间：</strong>
+              <span class="segbody">0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">所需磁盘空间：</strong>
+              <span class="segbody">15 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.32.1. 安装 Readline
+        </h2>
+        <p>
+          如果重装 Readline，会导致旧的库被移至 &lt;库名称&gt;.old。虽然一般情况下这并不是个问题，但在某些情况下它可能会触发 <span class="command"><strong>ldconfig</strong></span> 的一个链接错误。运行下面两个 sed 命令可以避免这个问题：
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install</kbd>
+</pre>
+        <p>
+          准备编译 Readline：
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/readline-7.0</kbd>
+</pre>
+        <p>
+          编译软件包：
+        </p>
+        <pre class="userinput">
+<kbd class="command">make SHLIB_LIBS=-lncurses</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>make 选项的含义：</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>SHLIB_LIBS=-lncurses</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                这个选项强制 Readline 链接到 <code class="filename">libncurses</code> 库（实际上是 <code class="filename">libncursesw</code> ）。
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          此软件包没有包含测试套件。
+        </p>
+        <p>
+          安装软件包：
+        </p>
+        <pre class="userinput">
+<kbd class="command">make SHLIB_LIBS=-lncurses install</kbd>
+</pre>
+        <p>
+          现在将这些动态库移动到一个更合适的位置，再修复一些符号链接：
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/lib/lib{readline,history}.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so</kbd>
+</pre>
+        <p>
+          如果需要的话，安装文档：
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-7.0</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-readline" name="contents-readline"></a>6.32.2.
+          Readline 包含内容
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">安装的库：</strong>
+              <span class="segbody">libhistory.so 和 libreadline.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">安装目录：</strong>
+              <span class="segbody">/usr/include/readline，
+              /usr/share/readline，和 /usr/share/doc/readline-7.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            简介
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libhistory" name="libhistory"></a><span class=
+                    "term"><code class="filename">libhistory</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    提供查看历史行的一致的用户界面
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libreadline" name="libreadline"></a><span class=
+                    "term"><code class="filename">libreadline</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    在多个具备命令行界面的独立程序之间保持用户界面的一致性。
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grep.html" title="Grep-3.0">上一页</a>
+          <p>
+            Grep-3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="bash.html" title="Bash-4.4">下一页</a>
+          <p>
+            Bash-4.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "第六章&nbsp;安装基本系统软件">返回</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">首页</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

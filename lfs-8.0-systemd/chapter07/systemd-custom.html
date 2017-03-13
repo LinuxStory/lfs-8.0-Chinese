@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.10.&nbsp;Systemd Usage and Configuration
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="etcshells.html" title=
+          "Creating the /etc/shells File">Prev</a>
+          <p>
+            Creating the /etc/shells File
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter08/chapter08.html" title=
+          "Making the LFS System Bootable">Next</a>
+          <p>
+            Making the LFS System Bootable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-systemd-custom" name=
+        "ch-scripts-systemd-custom"></a>7.10. Systemd Usage and Configuration
+      </h1>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.1. Basic Configuration
+        </h2>
+        <p>
+          The <code class="filename">/etc/systemd/system.conf</code> file
+          contains a set of options to control basic systemd operations. The
+          default file has all entries commented out with the default
+          settings indicated. This file is where the log level may be changed
+          as well as some basic logging settings. See <code class=
+          "filename">systemd-system.conf(5)</code> manual page for details on
+          each configuration option.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.2. Disabling Screen Clearing at Boot Time
+        </h2>
+        <p>
+          The normal behavior for systemd is to clear the screen at the end
+          of the boot sequence. If desired, this behavior may be changed by
+          running the following command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv /etc/systemd/system/getty@tty1.service.d
+
+cat &gt; /etc/systemd/system/getty@tty1.service.d/noclear.conf &lt;&lt; EOF
+<code class="literal">[Service]
+TTYVTDisallocate=no</code>
+EOF</kbd>
+</pre>
+        <p>
+          The boot messages can always be revied by using the <strong class=
+          "userinput"><code>journalctl -b</code></strong> command as the root
+          user.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.3. Disabling tmpfs for /tmp
+        </h2>
+        <p>
+          By default, <code class="filename">/tmp</code> is created as a
+          tmpfs. If this is not desired, it can be overridden by the
+          following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sfv /dev/null /etc/systemd/system/tmp.mount</kbd>
+</pre>
+        <p>
+          This is not necessary if there is a separate partition for
+          <code class="filename">/tmp</code> specified in <code class=
+          "filename">/etc/fstab</code>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.4. Configuring Automatic File Creation and Deletion
+        </h2>
+        <p>
+          There are several services that create or delete files or
+          directories:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                systemd-tmpfiles-clean.service
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                systemd-tmpfiles-setup-dev.service
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                systemd-tmpfiles-setup.service
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          The system location for the configuration files is <code class=
+          "filename">/usr/lib/tmpfiles.d/*.conf</code>. The local
+          configuration files are in <code class=
+          "filename">/etc/tmpfiles.d</code>. Files in <code class=
+          "filename">/etc/tmpfiles.d</code> override files with the same name
+          in <code class="filename">/usr/lib/tmpfiles.d</code>. See
+          <code class="filename">tmpfiles.d(5)</code> manual page for file
+          format details.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.5. Overriding Default Services Behavior
+        </h2>
+        <p>
+          The parameter of a unit can be overriden by creating a directory
+          and a configuration file in <code class=
+          "filename">/etc/systemd/system</code>. For example:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -pv /etc/systemd/system/foobar.service.d
+
+cat &gt; /etc/systemd/system/foobar.service.d/foobar.conf &lt;&lt; EOF
+<code class="literal">[Service]
+Restart=always
+RestartSec=30</code>
+EOF</kbd>
+</pre>
+        <p>
+          See <code class="filename">systemd.unit(5)</code> manual page for
+          more information. After creating the configuration file, run
+          <strong class="userinput"><code>systemctl
+          daemon-reload</code></strong> and <strong class=
+          "userinput"><code>systemctl restart foobar</code></strong> to
+          activate the changes to a service.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.6. Debugging the Boot Sequence
+        </h2>
+        <p>
+          Rather than plain shell scripts used in SysVinit or BSD style init
+          systems, systemd uses a unified format for different types of
+          startup files (or units). The command <span class=
+          "command"><strong>systemctl</strong></span> is used to enable,
+          disable, controll state, and obtain status of unit files. Here are
+          some examples of frequently used commands:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>systemctl list-units -t
+                <em class="replaceable"><code>&lt;service&gt;</code></em>
+                [--all]</strong></span>: lists loaded unit files of type
+                service.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>systemctl list-units -t
+                <em class="replaceable"><code>&lt;target&gt;</code></em>
+                [--all]</strong></span>: lists loaded unit files of type
+                target.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>systemctl show -p Wants
+                <em class=
+                "replaceable"><code>&lt;multi-user.target&gt;</code></em></strong></span>:
+                shows all units that depend on the multi-user target. Targets
+                are special unit files that are anogalous to runlevels under
+                SysVinit.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>systemctl status <em class=
+                "replaceable"><code>&lt;servicename.service&gt;</code></em></strong></span>:
+                shows the status of the servicename service. The .service
+                extension can be omitted if there are no other unit files
+                with the same name, such as .socket files (which create a
+                listening socket that provides similar functionality to
+                inetd/xinetd).
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.7. Working with the Systemd Journal
+        </h2>
+        <p>
+          Logging on a system booted with systemd is handled with
+          systemd-journald (by default), rather than a typical unix syslog
+          daemon. You can also add a normal syslog daemon and have both work
+          side by side if desired. The systemd-journald program stores
+          journal entries in a binary format rather than a plain text log
+          file. To assist with parsing the file, the command <span class=
+          "command"><strong>journalctl</strong></span> is provided. Here are
+          some examples of frequently used commands:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>journalctl -r</strong></span>:
+                shows all contents of the journal in reverse chronological
+                order.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>journalctl -u <em class=
+                "replaceable"><code>UNIT</code></em></strong></span>: shows
+                the journal entries associated with the specified UNIT file.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>journalctl -b[=ID]
+                -r</strong></span>: shows the journal entries since last
+                successfull boot (or for boot ID) in reverse chronological
+                order.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="command"><strong>journalctl -f</strong></span>:
+                povides functionality similar to tail -f (follow).
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.10.8. Long Running Processes
+        </h2>
+        <p>
+          Beginning with systemd-230, all user processes are killed when a
+          user session is ended, even if nohup is used, or the process uses
+          <code class="function">daemon()</code> or <code class=
+          "function">setsid()</code>. This is a deliberate change from a
+          historically permissive environment to a more restrictive one. The
+          new behavior may cause issues if you depend on long running
+          programs (e.g., <span class=
+          "command"><strong>screen</strong></span> or <span class=
+          "command"><strong>tmux</strong></span>) to remain active after
+          ending your user session. There are three ways to enable lingering
+          processes to remain after a user session is ended.
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li class="listitem">
+              <p>
+                <span class="emphasis"><em>Enable process lingering for only
+                needed users</em></span>: normal users have permission to
+                enable process lingering with the command <span class=
+                "command"><strong>loginctl enable-linger</strong></span> for
+                their own user. System administrators can use the same
+                command with a <em class="parameter"><code>user</code></em>
+                argument to enable for a user. That user can then use the
+                <span class="command"><strong>systemd-run</strong></span>
+                command to start long running processes. For example:
+                <span class="command"><strong>systemd-run --scope --user
+                /usr/bin/screen</strong></span>. If you enable lingering for
+                your user, the user@.service will remain even after all login
+                sessions are closed, and will automatically start at system
+                boot. This has the advantage of explicitly allowing and
+                disallowing processes to run after the user session has
+                ended, but breaks backwards compatibility with tools like
+                <span class="command"><strong>nohup</strong></span> and
+                utilities that use <code class="function">deamon()</code>.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="emphasis"><em>Enable system-wide process
+                lingering</em></span>: you can set <em class=
+                "parameter"><code>KillUserProcesses=no</code></em> in
+                <code class="filename">/etc/logind.conf</code> to enable
+                process lingering globally for all users. This has the
+                benefit of leaving the old method available to all users at
+                the expense of explicit control.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <span class="emphasis"><em>Disable at build-time</em></span>:
+                You can enable lingering by default while building systemd by
+                adding the switch <em class=
+                "parameter"><code>--without-kill-user-processes</code></em>
+                to the <span class=
+                "command"><strong>configure</strong></span> command for
+                systemd. This completely disables the ability of systemd to
+                kill user processes at session end.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="etcshells.html" title=
+          "Creating the /etc/shells File">Prev</a>
+          <p>
+            Creating the /etc/shells File
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter08/chapter08.html" title=
+          "Making the LFS System Bootable">Next</a>
+          <p>
+            Making the LFS System Bootable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

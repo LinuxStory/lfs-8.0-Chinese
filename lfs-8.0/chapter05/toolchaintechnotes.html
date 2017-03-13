@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content=
+        "application/xhtml+xml; charset=utf-8" />
+        <title>
+            5.2.&nbsp;工具链技术说明
+        </title>
+        <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+        <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+        <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+        "text/css" media="print" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body class="lfs" id="lfs-8.0">
+        <div class="navheader">
+            <h4>
+                Linux From Scratch - Version 8.0
+            </h4>
+            <h3>
+                第五章&nbsp;构建临时系统
+            </h3>
+            <ul>
+                <li class="prev">
+                    <a accesskey="p" href="introduction.html" title=
+                    "简介">上一页</a>
+                    <p>
+                    简介
+                    </p>
+                </li>
+                <li class="next">
+                    <a accesskey="n" href="generalinstructions.html" title=
+                    "通用编译指南">下一页</a>
+                    <p>
+                    通用编译指南
+                    </p>
+                </li>
+                <li class="up">
+                    <a accesskey="u" href="chapter05.html" title=
+                    "第五章&nbsp;构建临时系统">返回</a>
+                </li>
+                <li class="home">
+                    <a accesskey="h" href="../index.html" title=
+                    "Linux From Scratch - Version 8.0 ">首页</a>
+                </li>
+            </ul>
+        </div>
+        <div class="sect1" lang="en" xml:lang="en">
+            <h1 class="sect1">
+                <a id="ch-tools-toolchaintechnotes" name=
+                "ch-tools-toolchaintechnotes"></a>5.2 工具链技术说明
+            </h1>
+            <p>
+            这部分解释了隐藏在整体构建方法背后的一些基本原理以及技术细节，你不需要立即吃透这部分的所有内容，你将会在实际构建过程中更清晰地理解这部分内容。此外，你还可以在构建系统的同时随时随地查阅本小节内容。
+            </p>
+            <p>
+            <a class="xref" href="chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>的总体目标是生成一个临时环境，该环境包含了一个大家都觉得很完善的独立于主系统的工具集。你可以通过使用 <span class="command"><strong>chroot</strong></span> 命令，将接下来几章节的命令包含在此环境中，以此确保目标LFS系统能够干净且无故障地生成。生成该构建过程是为了在给新读者最小化风险的同时，提供的更多的教育价值。
+            </p>
+            <div class="admon note">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3>
+                    注意
+                </h3>
+                <p>
+                在继续阅读之前，请留意工作平台的名称，它通常以目标三元组（译者注：形如“硬件平台-供应商-操作系统”称为目标三元组，比如x86_64-linux-gnu）的方式呈现。目标三元组名称可以很轻松地通过 <span class="command"><strong>config.guess</strong></span> 脚本来获取 ，很多软件的源码包都附带这个脚本。解压 Binutils 源码包并且执行脚本： <strong class="userinput"><code>./config.guess</code></strong> 就可以在终端看到工作平台的名称输出。比如说，搭载32位 Intel 处理器的电脑上就会输出 <span class="emphasis"><em>i686-pc-linux-gnu</em></span> ，而搭载64位处理器的电脑则会输出 <span class="emphasis"><em>x86_64-pc-linux-gnu</em></span>。
+                </p>
+                <p>
+                同时也请留意该平台的动态链接器的名称，通常它被称为动态加载器（请不要与Binutil中的动态链接器 <span class="command"><strong>ld</strong></span> 混淆）。该动态链接器由Glibc提供，它负责寻找并加载程序所需要的共享库，为程序运行做准备，并运行它。搭载32位Intel处理器的机器上动态链接器的名称为 <code class="filename">ld-linux.so.2</code> (64位系统上的名称为 <code class="filename">ld-linux-x86-64.so.2</code> ) 。如果你想要得到确定可靠的动态链接器名称，你可以在宿主系统上运行命令 <strong class="userinput"><code>readelf -l &lt;二进制文件名&gt; | grep interpreter</code></strong> 来检查任意二进制文件，并观察其输出。你可以在 Glibc 源码树根目录下的shlib-versions文件中找到所有平台的权威参考。
+                </p>
+            </div>
+            <p>
+            以下是<a class="xref" href="chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>构建方法工作原理的几个关键技术要点。
+            </p>
+            <div class="itemizedlist">
+                <ul>
+                    <li class="listitem">
+                        <p>
+                        为了确保第一次构建 binutils 和 GCC 时生成兼容的动态链接器和动态编译器，你需要微调工作平台的名称，微调方法是通过更改 <code class="envar">LFS_TGT</code> 变量来更改目标三元组的供应商字段。动态链接器和动态编译器生成的二进制文件与当前硬件兼容，而不是生成其它硬件架构上的二进制文件。
+                        </p>
+                    </li>
+                    <li class="listitem">
+                        <p>
+                        临时库是交叉编译生成的。因为交叉编译器本质上是不应该依赖于宿主系统的。通过减少将宿主系统所带的头文件以及库编译进新工具的机会，可以减少对于目标系统的潜在污染。交叉编译可以在64为硬件平台上同时编译出32位和64位的库。
+                        </p>
+                    </li>
+                    <li class="listitem">
+                        <p>
+                        请谨慎操作 GCC 的源并告知编译器该使用的目标系统的动态链接器。
+                        </p>
+                    </li>
+                </ul>
+            </div>
+            <p>
+            首先要安装 Binutils ，因为在执行 GCC 和 Glibc 的 <span class="command"><strong>configure</strong></span> 命令时，将会对汇编器和链接器进行多项功能测试，以此来确认哪些软件功能需要启用，哪些不要。这比我们最初意识到的还要重要。如果对 GCC 或者 GLibc 配置出错，将会导致工具链出现极其微小的错误，这种小错误也许可能要到整个发行版快构建完毕的时候才会显示出来。通常测试套件故障会在执行许多很多额外工作之前显示出来。
+            </p>
+            <p>
+            Binutila 把汇编器和链接器安装在两个位置，分别是 <code class="filename">/tools/bin</code> 和 <code class="filename">/tools/$LFS_TGT/bin</code> 。其中一个位置是指向另一个位置的硬链接。链接器的另外一个重要方面是它的库搜索顺序。你可以通过给 <span class="command"><strong>ld</strong></span> 传递 <em class=parameter"><code>--verbose</code></em> 参数来获取详细信息。例如，执行 <span class="userinput"><code>ld --verbose | grep SEARCH</code></span> 命令可以得到当前搜索路径和顺序。你还可以通过编译一个模拟程序并将 <em class="parameter"><code>--verbose</code></em> 开关传递给链接器，来显示哪些文件由 <span class="command"><strong>ld</strong></span> 链接。例如，执行命令 <strong class="userinput"><code>gcc dummy.c -Wl,--verbose 2&gt;&amp;1 | grep succeeded</code></strong> 会成功显示在链接过程中打开的所有文件。
+
+            </p>
+            <p>
+            下一个安装的包是 GCC 。我们可以看一个在它执行 <span class="command"><strong>configure</strong></span>的例子：
+            </p>
+            <pre class="screen">
+<code class=
+"computeroutput">checking what assembler to use... /tools/i686-lfs-linux-gnu/bin/as
+checking what linker to use... /tools/i686-lfs-linux-gnu/bin/ld</code>
+            </pre>
+            <p>
+            基于上述原因，这很重要。它也表明了 GCC 的配置脚本不能够搜索 PATH 目录来寻找使用哪个工具。但是在实际运行 <span class="command">gcc</strong></span> 本身时，并不需要使用相同的搜索路径。如果你想要知道 <span class="command"><strong>gcc</strong></span> 使用的是哪种标准的编辑器，可以运行命令： <strong class="userinput"><code>gcc -print-prog-name=ld</code></strong> 。
+            </p>
+            <p>
+            如果你想要获取 <span class="command"><strong>gcc</strong></span> 的细节信息，可以在编译模拟程序的时候向其传递 <em class="parameter"><code>-v</code></em> 命令行选项。例如，<strong class="userinput"><code>gcc -v dummy.c</code></strong> 将会显示有关预处理器，编译和装配阶段的详细信息，包括 <span class="command"><strong>gcc</strong></span> 的搜索路径及其顺序。
+            </p>
+            <p>
+            接下来要安装的是被清理过的 Linux API 头文件。这些头文件可使标准C库(Glibc)与linux内核提供的特性进行交互。
+            </p>
+            <p>
+            下一个要安装的包是 Glibc 。对于构建 Glibc ，最需要着重考虑的是编译器，二进制工具以及内核头文件。由于 Glibc 通常都会使用传递给它配置脚本 <em class="parameter"><code>--host</code></em> 参数有关的编译器，比如我们使用的编译器 <span class="command"><strong>i686-lfs-linux-gnu-gcc</strong></span> ，所以编译器通常不会出现问题。然而二进制工具以及内核头文件可能要麻烦一点。因此，请谨慎行事并且使用可获取的配置开关来执行正确的选择。在 <span class="command"><strong>configure</strong></span> 运行之后，请检查 <code class="filename">glibc-build</code> 目录下的 <code class="filename">config.make</code> 所有重要细节。注意使用 <em class="parameter"><code>CC="i686-lfs-gnu-gcc"</code></em> 来控制需要用到的二进制工具，用 <em class="parameter"><code>-nostdinc</code></em> 和 <em class="parameter"><code>-isystem</code></em> 参数来控制编译器包含的搜索路径。这些选项突出了Glibc包的一个重要方面-它的构建机制是完全自给自足的，基本上不会依赖于工具链默认值。
+
+            </p>
+            <p>
+            在第二遍扫描 Binutils 时，我们可以使用 <em class="parameter"><code>--with-lib-path</code></em> 配置开关来控制 <span class="command"><strong>ld</strong></span> 的库的搜索路径。
+
+            </p>
+            <p>
+            在第二遍扫描 GCC 时，也需要修改其源码以告知 GCC 使用最新的动态链接器。不过不修改会导致 GCC 程序本身具有嵌入到其中的来自于主机系统的 <code class="filename">/lib</code> 目录的动态链接气的名称，这将会破坏与主机分离的原则。从此时开始，核心工具链基本就具备了自包含和自托管特性。 <a class="xref" href="chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>包的剩余包都是基于 <code class="filename">/tools</code> 中的新的 Glibc 的基础上进行构建的。
+            </p>
+            <p>
+            在进入<a class="xref" href="../chapter06/chapter06.html" title="第六章&nbsp;安装基础系统软件">第六章</a> chroot 环境前，我们首先需要安装的主要的软件包是 GLibc ，这是因为我们之前提到过它的自给自足特性。一旦将 Glibc 安装到 <code class="filename">/usr</code> 目录下，我们就可以快速改变工具链的默认设置，然后构建目标 LFS 系统的剩余部分。
+            </p>
+        </div>
+        <div class="navfooter">
+            <ul>
+                <li class="prev">
+                    <a accesskey="p" href="introduction.html" title=
+                    "简介">上一页</a>
+                    <p>
+                    简介
+                    </p>
+                </li>
+                <li class="next">
+                    <a accesskey="n" href="generalinstructions.html" title=
+                    "通用编译指南">下一页</a>
+                    <p>
+                        通用编译指南
+                    </p>
+                </li>
+                <li class="up">
+                    <a accesskey="u" href="chapter05.html" title=
+                    "第五章&nbsp;构建临时系统">返回</a>
+                </li>
+                <li class="home">
+                    <a accesskey="h" href="../index.html" title=
+                    "Linux From Scratch - Version 8.0 ">主页</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

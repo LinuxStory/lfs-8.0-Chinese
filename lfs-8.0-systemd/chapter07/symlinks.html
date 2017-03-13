@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.4.&nbsp;Managing Devices
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="udev.html" title=
+          "Overview of Device and Module Handling">Prev</a>
+          <p>
+            Overview of Device and Module Handling
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="clock.html" title=
+          "Configuring the system clock">Next</a>
+          <p>
+            Configuring the system clock
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-symlinks" name="ch-scripts-symlinks"></a>7.4.
+        Managing Devices
+      </h1>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.4.1. Dealing with duplicate devices
+        </h2>
+        <p>
+          As explained in <a class="xref" href="udev.html" title=
+          "7.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;7.3,
+          &ldquo;Overview of Device and Module Handling&rdquo;</a>, the order
+          in which devices with the same function appear in <code class=
+          "filename">/dev</code> is essentially random. E.g., if you have a
+          USB web camera and a TV tuner, sometimes <code class=
+          "filename">/dev/video0</code> refers to the camera and <code class=
+          "filename">/dev/video1</code> refers to the tuner, and sometimes
+          after a reboot the order changes to the opposite one. For all
+          classes of hardware except sound cards and network cards, this is
+          fixable by creating Udev rules for custom persistent symlinks. The
+          case of network cards is covered separately in <a class="xref"
+          href="network.html" title=
+          "7.2.&nbsp;General Network Configuration">Section&nbsp;7.2,
+          &ldquo;General Network Configuration&rdquo;</a>, and sound card
+          configuration can be found in <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/devices.html">
+          BLFS</a>.
+        </p>
+        <p>
+          For each of your devices that is likely to have this problem (even
+          if the problem doesn't exist in your current Linux distribution),
+          find the corresponding directory under <code class=
+          "filename">/sys/class</code> or <code class=
+          "filename">/sys/block</code>. For video devices, this may be
+          <code class="filename">/sys/class/video4linux/video<em class=
+          "replaceable"><code>X</code></em></code>. Figure out the attributes
+          that identify the device uniquely (usually, vendor and product IDs
+          and/or serial numbers work):
+        </p>
+        <pre class="userinput">
+<kbd class="command">udevadm info -a -p /sys/class/video4linux/video0</kbd>
+</pre>
+        <p>
+          Then write rules that create the symlinks, e.g.:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">cat &gt; /etc/udev/rules.d/83-duplicate_devs.rules &lt;&lt; "EOF"
+<code class="literal">
+# Persistent symlinks for webcam and tuner
+KERNEL=="video*", ATTRS{idProduct}=="1910", ATTRS{idVendor}=="0d81", \
+    SYMLINK+="webcam"
+KERNEL=="video*", ATTRS{device}=="0x036f", ATTRS{vendor}=="0x109e", \
+    SYMLINK+="tvtuner"
+</code>
+EOF</kbd>
+</pre>
+        <p>
+          The result is that <code class="filename">/dev/video0</code> and
+          <code class="filename">/dev/video1</code> devices still refer
+          randomly to the tuner and the web camera (and thus should never be
+          used directly), but there are symlinks <code class=
+          "filename">/dev/tvtuner</code> and <code class=
+          "filename">/dev/webcam</code> that always point to the correct
+          device.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="udev.html" title=
+          "Overview of Device and Module Handling">Prev</a>
+          <p>
+            Overview of Device and Module Handling
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="clock.html" title=
+          "Configuring the system clock">Next</a>
+          <p>
+            Configuring the system clock
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

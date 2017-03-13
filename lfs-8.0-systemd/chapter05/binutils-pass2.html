@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.9.&nbsp;Binutils-2.27 - Pass 2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc-libstdc++.html" title=
+          "Libstdc++-6.3.0">Prev</a>
+          <p>
+            Libstdc++-6.3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-pass2.html" title=
+          "GCC-6.3.0 - Pass 2">Next</a>
+          <p>
+            GCC-6.3.0 - Pass 2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-binutils-pass2" name=
+        "ch-tools-binutils-pass2"></a>5.9. Binutils-2.27 - Pass 2
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Binutils package contains a linker, an assembler, and other
+          tools for handling object files.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">1.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">533 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.9.1. Installation of Binutils
+        </h2>
+        <p>
+          Create a separate build directory again:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build
+cd       build</kbd>
+</pre>
+        <p>
+          Prepare Binutils for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">CC=$LFS_TGT-gcc                \
+AR=$LFS_TGT-ar                 \
+RANLIB=$LFS_TGT-ranlib         \
+../configure                   \
+    --prefix=/tools            \
+    --disable-nls              \
+    --disable-werror           \
+    --with-lib-path=/tools/lib \
+    --with-sysroot</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>CC=$LFS_TGT-gcc
+              AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Because this is really a native build of Binutils, setting
+                these variables ensures that the build system uses the
+                cross-compiler and associated tools instead of the ones on
+                the host system.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-lib-path=/tools/lib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the configure script to specify the library search
+                path during the compilation of Binutils, resulting in
+                <code class="filename">/tools/lib</code> being passed to the
+                linker. This prevents the linker from searching through
+                library directories on the host.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-sysroot</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The sysroot feature enables the linker to find shared objects
+                which are required by other shared objects explicitly
+                included on the linker's command line. Without this, some
+                packages may not build successfully on some hosts.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Now prepare the linker for the <span class=
+          "quote">&ldquo;<span class=
+          "quote">Re-adjusting</span>&rdquo;</span> phase in the next
+          chapter:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C ld clean
+make -C ld LIB_PATH=/usr/lib:/lib
+cp -v ld/ld-new /tools/bin</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the make parameters:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>-C ld
+              clean</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This tells the make program to remove all compiled files in
+                the <code class="filename">ld</code> subdirectory.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class="parameter"><code>-C ld
+              LIB_PATH=/usr/lib:/lib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option rebuilds everything in the <code class=
+                "filename">ld</code> subdirectory. Specifying the
+                <code class="envar">LIB_PATH</code> Makefile variable on the
+                command line allows us to override the default value of the
+                temporary tools and point it to the proper final path. The
+                value of this variable specifies the linker's default library
+                search path. This preparation is used in the next chapter.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter06/binutils.html#contents-binutils" title=
+          "6.13.2.&nbsp;Contents of Binutils">Section&nbsp;6.13.2,
+          &ldquo;Contents of Binutils.&rdquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc-libstdc++.html" title=
+          "Libstdc++-6.3.0">Prev</a>
+          <p>
+            Libstdc++-6.3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-pass2.html" title=
+          "GCC-6.3.0 - Pass 2">Next</a>
+          <p>
+            GCC-6.3.0 - Pass 2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

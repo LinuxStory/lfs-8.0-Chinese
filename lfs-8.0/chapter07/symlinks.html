@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.4.&nbsp;Managing Devices
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="udev.html" title=
+          "Overview of Device and Module Handling">Prev</a>
+          <p>
+            Overview of Device and Module Handling
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="network.html" title=
+          "General Network Configuration">Next</a>
+          <p>
+            General Network Configuration
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-symlinks" name="ch-scripts-symlinks"></a>7.4.
+        Managing Devices
+      </h1>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.4.1. Network Devices
+        </h2>
+        <p>
+          Udev, by default, names network devices according to Firmware/BIOS
+          data or physical characteristics like the bus, slot, or MAC
+          address. The purpose of this naming convention is to ensure that
+          network devices are named consistently and not based on the time
+          the network card was discovered. For example, on a computer having
+          two network cards made by Intel and Realtek, the network card
+          manufactured by Intel may become eth0 and the Realtek card becomes
+          eth1. In some cases, after a reboot the cards get renumbered the
+          other way around.
+        </p>
+        <p>
+          In the new naming scheme, typical network device names would then
+          be something like enp5s0 or wlp3s0. If this naming convention is
+          not desired, the traditional naming scheme or a custom scheme can
+          be implemented.
+        </p>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.4.1.1. Disabling Persistent Naming on the Kernel Command Line
+          </h3>
+          <p>
+            The traditional naming scheme using eth0, eth1, etc can be
+            restored by adding <strong class=
+            "userinput"><code>net.ifnames=0</code></strong> on the kernel
+            command line. This is most appropriate for those systems that
+            have only one ethernet device of the same type. Laptops often
+            have multiple ethernet connections that are named eth0 and wlan0
+            and are also candidates for this method. The command line is
+            passed in the GRUB configuration file. See <a class="xref" href=
+            "../chapter08/grub.html#grub-cfg" title=
+            "8.4.4.&nbsp;Creating the GRUB Configuration File">Section&nbsp;8.4.4,
+            &ldquo;Creating the GRUB Configuration File&rdquo;</a>.
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            7.4.1.2. Creating Custom Udev Rules
+          </h3>
+          <p>
+            The naming scheme can be customized by creating custom Udev
+            rules. A script has been included that generates the initial
+            rules. Generate these rules by running:
+          </p>
+          <pre class="install">
+<kbd class="command">bash /lib/udev/init-net-rules.sh</kbd>
+</pre>
+          <p>
+            Now, inspect the <code class=
+            "filename">/etc/udev/rules.d/70-persistent-net.rules</code> file,
+            to find out which name was assigned to which network device:
+          </p>
+          <pre class="userinput">
+<kbd class="command">cat /etc/udev/rules.d/70-persistent-net.rules</kbd>
+</pre>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              In some cases such as when MAC addresess have been assigned to
+              a network card manually or in a virtual environment such as
+              Qemu or Xen, the network rules file may not have been generated
+              because addresses are not consistently assigned. In these
+              cases, this method cannot be used.
+            </p>
+          </div>
+          <p>
+            The file begins with a comment block followed by two lines for
+            each NIC. The first line for each NIC is a commented description
+            showing its hardware IDs (e.g. its PCI vendor and device IDs, if
+            it's a PCI card), along with its driver in parentheses, if the
+            driver can be found. Neither the hardware ID nor the driver is
+            used to determine which name to give an interface; this
+            information is only for reference. The second line is the Udev
+            rule that matches this NIC and actually assigns it a name.
+          </p>
+          <p>
+            All Udev rules are made up of several keys, separated by commas
+            and optional whitespace. This rule's keys and an explanation of
+            each of them are as follows:
+          </p>
+          <div class="itemizedlist">
+            <ul>
+              <li class="listitem">
+                <p>
+                  <code class="literal">SUBSYSTEM=="net"</code> - This tells
+                  Udev to ignore devices that are not network cards.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  <code class="literal">ACTION=="add"</code> - This tells
+                  Udev to ignore this rule for a uevent that isn't an add
+                  ("remove" and "change" uevents also happen, but don't need
+                  to rename network interfaces).
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  <code class="literal">DRIVERS=="?*"</code> - This exists so
+                  that Udev will ignore VLAN or bridge sub-interfaces
+                  (because these sub-interfaces do not have drivers). These
+                  sub-interfaces are skipped because the name that would be
+                  assigned would collide with their parent devices.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  <code class="literal">ATTR{address}</code> - The value of
+                  this key is the NIC's MAC address.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  <code class="literal">ATTR{type}=="1"</code> - This ensures
+                  the rule only matches the primary interface in the case of
+                  certain wireless drivers, which create multiple virtual
+                  interfaces. The secondary interfaces are skipped for the
+                  same reason that VLAN and bridge sub-interfaces are
+                  skipped: there would be a name collision otherwise.
+                </p>
+              </li>
+              <li class="listitem">
+                <p>
+                  <code class="literal">NAME</code> - The value of this key
+                  is the name that Udev will assign to this interface.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p>
+            The value of <code class="literal">NAME</code> is the important
+            part. Make sure you know which name has been assigned to each of
+            your network cards before proceeding, and be sure to use that
+            <code class="literal">NAME</code> value when creating your
+            configuration files below.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.4.2. CD-ROM symlinks
+        </h2>
+        <p>
+          Some software that you may want to install later (e.g., various
+          media players) expect the <code class="filename">/dev/cdrom</code>
+          and <code class="filename">/dev/dvd</code> symlinks to exist, and
+          to point to a CD-ROM or DVD-ROM device. Also, it may be convenient
+          to put references to those symlinks into <code class=
+          "filename">/etc/fstab</code>. Udev comes with a script that will
+          generate rules files to create these symlinks for you, depending on
+          the capabilities of each device, but you need to decide which of
+          two modes of operation you wish to have the script use.
+        </p>
+        <p>
+          First, the script can operate in <span class=
+          "quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>
+          mode (used by default for USB and FireWire devices), where the
+          rules it creates depend on the physical path to the CD or DVD
+          device. Second, it can operate in <span class=
+          "quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> mode
+          (default for IDE and SCSI devices), where the rules it creates
+          depend on identification strings stored in the CD or DVD device
+          itself. The path is determined by Udev's <span class=
+          "command"><strong>path_id</strong></span> script, and the
+          identification strings are read from the hardware by its
+          <span class="command"><strong>ata_id</strong></span> or
+          <span class="command"><strong>scsi_id</strong></span> programs,
+          depending on which type of device you have.
+        </p>
+        <p>
+          There are advantages to each approach; the correct approach to use
+          will depend on what kinds of device changes may happen. If you
+          expect the physical path to the device (that is, the ports and/or
+          slots that it plugs into) to change, for example because you plan
+          on moving the drive to a different IDE port or a different USB
+          connector, then you should use the <span class=
+          "quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> mode.
+          On the other hand, if you expect the device's identification to
+          change, for example because it may die, and you would replace it
+          with a different device with the same capabilities and which is
+          plugged into the same connectors, then you should use the
+          <span class="quote">&ldquo;<span class=
+          "quote">by-path</span>&rdquo;</span> mode.
+        </p>
+        <p>
+          If either type of change is possible with your drive, then choose a
+          mode based on the type of change you expect to happen more often.
+        </p>
+        <div class="admon important">
+          <img alt="[Important]" src="../images/important.png" />
+          <h3>
+            Important
+          </h3>
+          <p>
+            External devices (for example, a USB-connected CD drive) should
+            not use by-path persistence, because each time the device is
+            plugged into a new external port, its physical path will change.
+            All externally-connected devices will have this problem if you
+            write Udev rules to recognize them by their physical path; the
+            problem is not limited to CD and DVD drives.
+          </p>
+        </div>
+        <p>
+          If you wish to see the values that the Udev scripts will use, then
+          for the appropriate CD-ROM device, find the corresponding directory
+          under <code class="filename">/sys</code> (e.g., this can be
+          <code class="filename">/sys/block/hdd</code>) and run a command
+          similar to the following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">udevadm test /sys/block/hdd</kbd>
+</pre>
+        <p>
+          Look at the lines containing the output of various *_id programs.
+          The <span class="quote">&ldquo;<span class=
+          "quote">by-id</span>&rdquo;</span> mode will use the ID_SERIAL
+          value if it exists and is not empty, otherwise it will use a
+          combination of ID_MODEL and ID_REVISION. The <span class=
+          "quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>
+          mode will use the ID_PATH value.
+        </p>
+        <p>
+          If the default mode is not suitable for your situation, then the
+          following modification can be made to the <code class=
+          "filename">/etc/udev/rules.d/83-cdrom-symlinks.rules</code> file,
+          as follows (where <em class="replaceable"><code>mode</code></em> is
+          one of <span class="quote">&ldquo;<span class=
+          "quote">by-id</span>&rdquo;</span> or <span class=
+          "quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>):
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i -e 's/"write_cd_rules"/"write_cd_rules <em class=
+"replaceable"><code>mode</code></em>"/' \
+    /etc/udev/rules.d/83-cdrom-symlinks.rules</kbd>
+</pre>
+        <p>
+          Note that it is not necessary to create the rules files or symlinks
+          at this time, because you have bind-mounted the host's <code class=
+          "filename">/dev</code> directory into the LFS system, and we assume
+          the symlinks exist on the host. The rules and symlinks will be
+          created the first time you boot your LFS system.
+        </p>
+        <p>
+          However, if you have multiple CD-ROM devices, then the symlinks
+          generated at that time may point to different devices than they
+          point to on your host, because devices are not discovered in a
+          predictable order. The assignments created when you first boot the
+          LFS system will be stable, so this is only an issue if you need the
+          symlinks on both systems to point to the same device. If you need
+          that, then inspect (and possibly edit) the generated <code class=
+          "filename">/etc/udev/rules.d/70-persistent-cd.rules</code> file
+          after booting, to make sure the assigned symlinks match what you
+          need.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.4.3. Dealing with duplicate devices
+        </h2>
+        <p>
+          As explained in <a class="xref" href="udev.html" title=
+          "7.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;7.3,
+          &ldquo;Overview of Device and Module Handling&rdquo;</a>, the order
+          in which devices with the same function appear in <code class=
+          "filename">/dev</code> is essentially random. E.g., if you have a
+          USB web camera and a TV tuner, sometimes <code class=
+          "filename">/dev/video0</code> refers to the camera and <code class=
+          "filename">/dev/video1</code> refers to the tuner, and sometimes
+          after a reboot the order changes to the opposite one. For all
+          classes of hardware except sound cards and network cards, this is
+          fixable by creating Udev rules for custom persistent symlinks. The
+          case of network cards is covered separately in <a class="xref"
+          href="network.html" title=
+          "7.5.&nbsp;General Network Configuration">Section&nbsp;7.5,
+          &ldquo;General Network Configuration&rdquo;</a>, and sound card
+          configuration can be found in <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/devices.html">
+          BLFS</a>.
+        </p>
+        <p>
+          For each of your devices that is likely to have this problem (even
+          if the problem doesn't exist in your current Linux distribution),
+          find the corresponding directory under <code class=
+          "filename">/sys/class</code> or <code class=
+          "filename">/sys/block</code>. For video devices, this may be
+          <code class="filename">/sys/class/video4linux/video<em class=
+          "replaceable"><code>X</code></em></code>. Figure out the attributes
+          that identify the device uniquely (usually, vendor and product IDs
+          and/or serial numbers work):
+        </p>
+        <pre class="userinput">
+<kbd class="command">udevadm info -a -p /sys/class/video4linux/video0</kbd>
+</pre>
+        <p>
+          Then write rules that create the symlinks, e.g.:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">cat &gt; /etc/udev/rules.d/83-duplicate_devs.rules &lt;&lt; "EOF"
+<code class="literal">
+# Persistent symlinks for webcam and tuner
+KERNEL=="video*", ATTRS{idProduct}=="1910", ATTRS{idVendor}=="0d81", \
+    SYMLINK+="webcam"
+KERNEL=="video*", ATTRS{device}=="0x036f", ATTRS{vendor}=="0x109e", \
+    SYMLINK+="tvtuner"
+</code>
+EOF</kbd>
+</pre>
+        <p>
+          The result is that <code class="filename">/dev/video0</code> and
+          <code class="filename">/dev/video1</code> devices still refer
+          randomly to the tuner and the web camera (and thus should never be
+          used directly), but there are symlinks <code class=
+          "filename">/dev/tvtuner</code> and <code class=
+          "filename">/dev/webcam</code> that always point to the correct
+          device.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="udev.html" title=
+          "Overview of Device and Module Handling">Prev</a>
+          <p>
+            Overview of Device and Module Handling
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="network.html" title=
+          "General Network Configuration">Next</a>
+          <p>
+            General Network Configuration
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.23.&nbsp;Libcap-2.25
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acl.html" title="Acl-2.2.52">Prev</a>
+          <p>
+            Acl-2.2.52
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sed.html" title="Sed-4.4">Next</a>
+          <p>
+            Sed-4.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-libcap" name="ch-system-libcap"></a>6.23.
+        Libcap-2.25
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Libcap package implements the user-space interfaces to the
+          POSIX 1003.1e capabilities available in Linux kernels. These
+          capabilities are a partitioning of the all powerful root privilege
+          into a set of distinct privileges.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">1.3 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.23.1. Installation of Libcap
+        </h2>
+        <p>
+          Prevent a static library from being installed:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i '/install.*STALIBNAME/d' libcap/Makefile</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make RAISE_SETFCAP=no lib=lib prefix=/usr install
+chmod -v 755 /usr/lib/libcap.so</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the make option:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>RAISE_SETFCAP=no</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This parameter skips trying to use <span class=
+                "command"><strong>setcap</strong></span> on itself. This
+                avoids an installation error if the kernel or file system
+                does not support extended capabilities.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>lib=lib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This parameter installs the library in <code class=
+                "filename">$prefix/lib</code> rather than <code class=
+                "filename">$prefix/lib64</code> on x86_64. It has no effect
+                on x86.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          The shared library needs to be moved to <code class=
+          "filename">/lib</code>, and as a result the <code class=
+          "filename">.so</code> file in <code class=
+          "filename">/usr/lib</code> will need to be recreated:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/lib/libcap.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-libcap" name="contents-libcap"></a>6.23.2. Contents
+          of Libcap
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">capsh, getcap, getpcaps, and
+              setcap</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed library:</strong>
+              <span class="segbody">libcap.so</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="capsh" name="capsh"></a><span class=
+                    "term"><span class=
+                    "command"><strong>capsh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A shell wrapper to explore and constrain capability
+                    support
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getcap" name="getcap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getcap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Examines file capabilities
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getpcaps" name="getpcaps"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getpcaps</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the capabilities on the queried process(es)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcap" name="libcap"></a><span class=
+                    "term"><code class="filename">libcap</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains the library functions for manipulating POSIX
+                    1003.1e capabilities
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setcap" name="setcap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setcap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets file capabilities
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acl.html" title="Acl-2.2.52">Prev</a>
+          <p>
+            Acl-2.2.52
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sed.html" title="Sed-4.4">Next</a>
+          <p>
+            Sed-4.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

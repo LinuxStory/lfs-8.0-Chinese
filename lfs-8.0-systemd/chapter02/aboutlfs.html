@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      2.6.&nbsp;Setting The $LFS Variable
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Preparing the Host System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="creatingfilesystem.html" title=
+          "Creating a File System on the Partition">Prev</a>
+          <p>
+            Creating a File System on the Partition
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mounting.html" title=
+          "Mounting the New Partition">Next</a>
+          <p>
+            Mounting the New Partition
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-partitioning-aboutlfs" name=
+        "ch-partitioning-aboutlfs"></a>2.6. Setting The $LFS Variable
+      </h1>
+      <p>
+        Throughout this book, the environment variable <code class=
+        "envar">LFS</code> will be used several times. You should ensure that
+        this variable is always defined throughout the LFS build process. It
+        should be set to the name of the directory where you will be building
+        your LFS system - we will use <code class="filename">/mnt/lfs</code>
+        as an example, but the directory choice is up to you. If you are
+        building LFS on a separate partition, this directory will be the
+        mount point for the partition. Choose a directory location and set
+        the variable with the following command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">export LFS=<em class=
+"replaceable"><code>/mnt/lfs</code></em></kbd>
+</pre>
+      <p>
+        Having this variable set is beneficial in that commands such as
+        <span class="command"><strong>mkdir -v $LFS/tools</strong></span> can
+        be typed literally. The shell will automatically replace <span class=
+        "quote">&ldquo;<span class="quote">$LFS</span>&rdquo;</span> with
+        <span class="quote">&ldquo;<span class=
+        "quote">/mnt/lfs</span>&rdquo;</span> (or whatever the variable was
+        set to) when it processes the command line.
+      </p>
+      <div class="admon caution">
+        <img alt="[Caution]" src="../images/caution.png" />
+        <h3>
+          Caution
+        </h3>
+        <p>
+          Do not forget to check that <code class="envar">LFS</code> is set
+          whenever you leave and reenter the current working environment
+          (such as when doing a <span class=
+          "command"><strong>su</strong></span> to <code class=
+          "systemitem">root</code> or another user). Check that the
+          <code class="envar">LFS</code> variable is set up properly with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">echo $LFS</kbd>
+</pre>
+        <p>
+          Make sure the output shows the path to your LFS system's build
+          location, which is <code class="filename">/mnt/lfs</code> if the
+          provided example was followed. If the output is incorrect, use the
+          command given earlier on this page to set <code class=
+          "envar">$LFS</code> to the correct directory name.
+        </p>
+      </div>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          One way to ensure that the <code class="envar">LFS</code> variable
+          is always set is to edit the <code class=
+          "filename">.bash_profile</code> file in both your personal home
+          directory and in <code class="filename">/root/.bash_profile</code>
+          and enter the export command above. In addition, the shell
+          specified in the <code class="filename">/etc/passwd</code> file for
+          all users that need the <code class="envar">LFS</code> variable
+          needs to be bash to ensure that the <code class=
+          "filename">/root/.bash_profile</code> file is incorporated as a
+          part of the login process.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="creatingfilesystem.html" title=
+          "Creating a File System on the Partition">Prev</a>
+          <p>
+            Creating a File System on the Partition
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mounting.html" title=
+          "Mounting the New Partition">Next</a>
+          <p>
+            Mounting the New Partition
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

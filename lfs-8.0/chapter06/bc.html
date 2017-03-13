@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=utf-8" />
+    <title>
+      6.34.&nbsp;Bc-1.06.95
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        第六章&nbsp;安装基本系统软件
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="bash.html" title="Bash-4.4">上一页</a>
+          <p>
+            Bash-4.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libtool.html" title="Libtool-2.4.6">下一页</a>
+          <p>
+            Libtool-2.4.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "第六章&nbsp;安装基本系统软件">返回</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">首页</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-bc" name="ch-system-bc"></a>6.34. Bc-1.06.95
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          Bc 软件包，包含一个处理任意精度数值的语言。
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">预计构建时间：</strong>
+              <span class="segbody">0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">所需磁盘空间：</strong>
+              <span class="segbody">3.6 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.34.1. 安装 Bc
+        </h2>
+        <p>
+          首先，修复代码中一些小的内存泄漏问题：
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../bc-1.06.95-memory_leak-1.patch</kbd>
+</pre>
+        <p>
+          准备编译 Bc：
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr           \
+            --with-readline         \
+            --mandir=/usr/share/man \
+            --infodir=/usr/share/info</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>配置选项的含义：</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-readline</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                此选项让 Bc 使用系统中已安装的 <code class="filename">readline</code> 库，而不是使用它自带的版本。
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          编译软件包：
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          如要测试 bc，运行下面的命令。输出会有点多，因此你可能会希望把它重定向到一个文件。测试中，最后一位数字会发生小概率的舍入误差（12144 次中会有 10 次）。
+        </p>
+        <pre class="userinput">
+<kbd class="command">echo "quit" | ./bc/bc -l Test/checklib.b</kbd>
+</pre>
+        <p>
+          安装软件包：
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-bc" name="contents-bc"></a>6.34.2. Bc 包含内容
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">bc 和 dc</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            简介
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="bc" name="bc"></a><span class="term"><span class=
+                    "command"><strong>bc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    是一个命令行计算器
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dc" name="dc"></a><span class="term"><span class=
+                    "command"><strong>dc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    是一个反向修饰（运算符写在参数的最后面，一般是数字的最后面）的命令行计算器
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="bash.html" title="Bash-4.4">上一页</a>
+          <p>
+            Bash-4.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libtool.html" title="Libtool-2.4.6">下一页</a>
+          <p>
+            Libtool-2.4.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "第六章&nbsp;安装基本系统软件">返回</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">首页</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

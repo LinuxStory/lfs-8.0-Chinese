@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      8.2.&nbsp;Creating the /etc/fstab File
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Making the LFS System Bootable
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kernel.html" title="Linux-4.9.9">Next</a>
+          <p>
+            Linux-4.9.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-bootable-fstab" name="ch-bootable-fstab"></a>8.2. Creating
+        the /etc/fstab File
+      </h1>
+      <p>
+        The <code class="filename">/etc/fstab</code> file is used by some
+        programs to determine where file systems are to be mounted by
+        default, in which order, and which must be checked (for integrity
+        errors) prior to mounting. Create a new file systems table like this:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; /etc/fstab &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/fstab
+
+# file system  mount-point  type     options             dump  fsck
+#                                                              order
+
+/dev/<em class=
+"replaceable"><code>&lt;xxx&gt;</code></em>     /            <em class=
+"replaceable"><code>&lt;fff&gt;</code></em>    defaults            1     1
+/dev/<em class=
+"replaceable"><code>&lt;yyy&gt;</code></em>     swap         swap     pri=1               0     0
+proc           /proc        proc     nosuid,noexec,nodev 0     0
+sysfs          /sys         sysfs    nosuid,noexec,nodev 0     0
+devpts         /dev/pts     devpts   gid=5,mode=620      0     0
+tmpfs          /run         tmpfs    defaults            0     0
+devtmpfs       /dev         devtmpfs mode=0755,nosuid    0     0
+
+# End /etc/fstab</code>
+EOF</kbd>
+</pre>
+      <p>
+        Replace <em class="replaceable"><code>&lt;xxx&gt;</code></em>,
+        <em class="replaceable"><code>&lt;yyy&gt;</code></em>, and <em class=
+        "replaceable"><code>&lt;fff&gt;</code></em> with the values
+        appropriate for the system, for example, <code class=
+        "filename">sda2</code>, <code class="filename">sda5</code>, and
+        <code class="systemitem">ext4</code>. For details on the six fields
+        in this file, see <span class="command"><strong>man 5
+        fstab</strong></span>.
+      </p>
+      <p>
+        Filesystems with MS-DOS or Windows origin (i.e.: vfat, ntfs, smbfs,
+        cifs, iso9660, udf) need the <span class="quote">&ldquo;<span class=
+        "quote">iocharset</span>&rdquo;</span> mount option in order for
+        non-ASCII characters in file names to be interpreted properly. The
+        value of this option should be the same as the character set of your
+        locale, adjusted in such a way that the kernel understands it. This
+        works if the relevant character set definition (found under File
+        systems -&gt; Native Language Support) has been compiled into the
+        kernel or built as a module. The <span class=
+        "quote">&ldquo;<span class="quote">codepage</span>&rdquo;</span>
+        option is also needed for vfat and smbfs filesystems. It should be
+        set to the codepage number used under MS-DOS in your country. E.g.,
+        in order to mount USB flash drives, a ru_RU.KOI8-R user would need
+        the following in the options portion of its mount line in
+        <code class="filename">/etc/fstab</code>:
+      </p>
+      <pre class="screen">
+<code class=
+"literal">noauto,user,quiet,showexec,iocharset=koi8r,codepage=866</code>
+</pre>
+      <p>
+        The corresponding options fragment for ru_RU.UTF-8 users is:
+      </p>
+      <pre class="screen">
+<code class=
+"literal">noauto,user,quiet,showexec,iocharset=utf8,codepage=866</code>
+</pre>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          In the latter case, the kernel emits the following message:
+        </p>
+        <pre class="screen">
+<code class=
+"computeroutput">FAT: utf8 is not a recommended IO charset for FAT filesystems,
+    filesystem will be case sensitive!</code>
+</pre>
+        <p>
+          This negative recommendation should be ignored, since all other
+          values of the <span class="quote">&ldquo;<span class=
+          "quote">iocharset</span>&rdquo;</span> option result in wrong
+          display of filenames in UTF-8 locales.
+        </p>
+      </div>
+      <p>
+        It is also possible to specify default codepage and iocharset values
+        for some filesystems during kernel configuration. The relevant
+        parameters are named <span class="quote">&ldquo;<span class=
+        "quote">Default NLS Option</span>&rdquo;</span> (<code class=
+        "option">CONFIG_NLS_DEFAULT)</code>, <span class=
+        "quote">&ldquo;<span class="quote">Default Remote NLS
+        Option</span>&rdquo;</span> (<code class=
+        "option">CONFIG_SMB_NLS_DEFAULT</code>), <span class=
+        "quote">&ldquo;<span class="quote">Default codepage for
+        FAT</span>&rdquo;</span> (<code class=
+        "option">CONFIG_FAT_DEFAULT_CODEPAGE</code>), and <span class=
+        "quote">&ldquo;<span class="quote">Default iocharset for
+        FAT</span>&rdquo;</span> (<code class=
+        "option">CONFIG_FAT_DEFAULT_IOCHARSET</code>). There is no way to
+        specify these settings for the ntfs filesystem at kernel compilation
+        time.
+      </p>
+      <p>
+        It is possible to make the ext3 filesystem reliable across power
+        failures for some hard disk types. To do this, add the <code class=
+        "option">barrier=1</code> mount option to the appropriate entry in
+        <code class="filename">/etc/fstab</code>. To check if the disk drive
+        supports this option, run <a class="ulink" href=
+        "http://www.linuxfromscratch.org/blfs/view/8.0/general/hdparm.html">hdparm</a>
+        on the applicable disk drive. For example, if:
+      </p>
+      <pre class="userinput">
+<kbd class="command">hdparm -I /dev/sda | grep NCQ</kbd>
+</pre>
+      <p>
+        returns non-empty output, the option is supported.
+      </p>
+      <p>
+        Note: Logical Volume Management (LVM) based partitions cannot use the
+        <code class="option">barrier</code> option.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kernel.html" title="Linux-4.9.9">Next</a>
+          <p>
+            Linux-4.9.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      2.7.&nbsp;Mounting the New Partition
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Preparing the Host System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="aboutlfs.html" title=
+          "Setting The $LFS Variable">Prev</a>
+          <p>
+            Setting The $LFS Variable
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter03/chapter03.html" title=
+          "Packages and Patches">Next</a>
+          <p>
+            Packages and Patches
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="space-mounting" name="space-mounting"></a>2.7. Mounting the
+        New Partition
+      </h1>
+      <p>
+        Now that a file system has been created, the partition needs to be
+        made accessible. In order to do this, the partition needs to be
+        mounted at a chosen mount point. For the purposes of this book, it is
+        assumed that the file system is mounted under the directory specified
+        by the <code class="envar">LFS</code> environment variable as
+        described in the previous section.
+      </p>
+      <p>
+        Create the mount point and mount the LFS file system by running:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkdir -pv $LFS
+mount -v -t ext4 /dev/<em class=
+"replaceable"><code>&lt;xxx&gt;</code></em> $LFS</kbd>
+</pre>
+      <p>
+        Replace <em class="replaceable"><code>&lt;xxx&gt;</code></em> with
+        the designation of the LFS partition.
+      </p>
+      <p>
+        If using multiple partitions for LFS (e.g., one for <code class=
+        "filename">/</code> and another for <code class=
+        "filename">/usr</code>), mount them using:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mkdir -pv $LFS
+mount -v -t ext4 /dev/<em class=
+"replaceable"><code>&lt;xxx&gt;</code></em> $LFS
+mkdir -v $LFS/usr
+mount -v -t ext4 /dev/<em class=
+"replaceable"><code>&lt;yyy&gt;</code></em> $LFS/usr</kbd>
+</pre>
+      <p>
+        Replace <em class="replaceable"><code>&lt;xxx&gt;</code></em> and
+        <em class="replaceable"><code>&lt;yyy&gt;</code></em> with the
+        appropriate partition names.
+      </p>
+      <p>
+        Ensure that this new partition is not mounted with permissions that
+        are too restrictive (such as the <code class="option">nosuid</code>
+        or <code class="option">nodev</code> options). Run the <span class=
+        "command"><strong>mount</strong></span> command without any
+        parameters to see what options are set for the mounted LFS partition.
+        If <code class="option">nosuid</code> and/or <code class=
+        "option">nodev</code> are set, the partition will need to be
+        remounted.
+      </p>
+      <p>
+        If you are using a <code class="systemitem">swap</code> partition,
+        ensure that it is enabled using the <span class=
+        "command"><strong>swapon</strong></span> command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">/sbin/swapon -v /dev/<em class=
+"replaceable"><code>&lt;zzz&gt;</code></em></kbd>
+</pre>
+      <p>
+        Replace <em class="replaceable"><code>&lt;zzz&gt;</code></em> with
+        the name of the <code class="systemitem">swap</code> partition.
+      </p>
+      <p>
+        Now that there is an established place to work, it is time to
+        download the packages.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="aboutlfs.html" title=
+          "Setting The $LFS Variable">Prev</a>
+          <p>
+            Setting The $LFS Variable
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter03/chapter03.html" title=
+          "Packages and Patches">Next</a>
+          <p>
+            Packages and Patches
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

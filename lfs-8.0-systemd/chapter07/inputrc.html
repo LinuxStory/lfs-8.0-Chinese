@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.8.&nbsp;Creating the /etc/inputrc File
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="locale.html" title=
+          "Configuring the System Locale">Prev</a>
+          <p>
+            Configuring the System Locale
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="etcshells.html" title=
+          "Creating the /etc/shells File">Next</a>
+          <p>
+            Creating the /etc/shells File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-inputrc" name="ch-scripts-inputrc"></a>7.8.
+        Creating the /etc/inputrc File
+      </h1>
+      <p>
+        The <code class="filename">inputrc</code> file is the configuration
+        file for Readline library, which provides editing capabilities while
+        the user is entering a line from the terminal. It works by tranlating
+        keyboard inputs into specific actions. Readline is used by Bash and
+        most other shells as well as many other applications.
+      </p>
+      <p>
+        Most people do not need user-specific functionality so the command
+        below creates a global <code class="filename">/etc/inputrc</code>
+        used by everyone who logs in. If you later decide you need to
+        override the defaults on a per-user basis, you can create a
+        <code class="filename">.inputrc</code> file in the user's home
+        directory with the modified mappings.
+      </p>
+      <p>
+        For more information on how to edit the <code class=
+        "filename">inputrc</code> file, see <span class=
+        "command"><strong>info bash</strong></span> under the <span class=
+        "emphasis"><em>Readline Init File</em></span> section. <span class=
+        "command"><strong>info readline</strong></span> is also a good source
+        of information.
+      </p>
+      <p>
+        Below is a generic global <code class="filename">inputrc</code> along
+        with comments to explain what the various options do. Note that
+        comments cannot be on the same line as commands. Create the file
+        using the following command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; /etc/inputrc &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/inputrc
+# Modified by Chris Lynn &lt;roryo@roryo.dynup.net&gt;
+
+# Allow the command prompt to wrap to the next line
+set horizontal-scroll-mode Off
+
+# Enable 8bit input
+set meta-flag On
+set input-meta On
+
+# Turns off 8th bit stripping
+set convert-meta Off
+
+# Keep the 8th bit for display
+set output-meta On
+
+# none, visible or audible
+set bell-style none
+
+# All of the following map the escape sequence of the value
+# contained in the 1st argument to the readline specific functions
+"\eOd": backward-word
+"\eOc": forward-word
+
+# for linux console
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+
+# for xterm
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+
+# for Konsole
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+
+# End /etc/inputrc</code>
+EOF</kbd>
+</pre>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="locale.html" title=
+          "Configuring the System Locale">Prev</a>
+          <p>
+            Configuring the System Locale
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="etcshells.html" title=
+          "Creating the /etc/shells File">Next</a>
+          <p>
+            Creating the /etc/shells File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

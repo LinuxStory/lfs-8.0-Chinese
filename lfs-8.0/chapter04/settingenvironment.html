@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      4.4.&nbsp;Setting Up the Environment
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;4.&nbsp;Final Preparations
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="addinguser.html" title=
+          "Adding the LFS User">Prev</a>
+          <p>
+            Adding the LFS User
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aboutsbus.html" title="About SBUs">Next</a>
+          <p>
+            About SBUs
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter04.html" title=
+          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-settingenviron" name=
+        "ch-tools-settingenviron"></a>4.4. Setting Up the Environment
+      </h1>
+      <p>
+        Set up a good working environment by creating two new startup files
+        for the <span class="command"><strong>bash</strong></span> shell.
+        While logged in as user <code class="systemitem">lfs</code>, issue
+        the following command to create a new <code class=
+        "filename">.bash_profile</code>:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; ~/.bash_profile &lt;&lt; "EOF"
+<code class=
+"literal">exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash</code>
+EOF</kbd>
+</pre>
+      <p>
+        When logged on as user <code class="systemitem">lfs</code>, the
+        initial shell is usually a <span class=
+        "emphasis"><em>login</em></span> shell which reads the <code class=
+        "filename">/etc/profile</code> of the host (probably containing some
+        settings and environment variables) and then <code class=
+        "filename">.bash_profile</code>. The <span class=
+        "command"><strong>exec env -i.../bin/bash</strong></span> command in
+        the <code class="filename">.bash_profile</code> file replaces the
+        running shell with a new one with a completely empty environment,
+        except for the <code class="envar">HOME</code>, <code class=
+        "envar">TERM</code>, and <code class="envar">PS1</code> variables.
+        This ensures that no unwanted and potentially hazardous environment
+        variables from the host system leak into the build environment. The
+        technique used here achieves the goal of ensuring a clean
+        environment.
+      </p>
+      <p>
+        The new instance of the shell is a <span class=
+        "emphasis"><em>non-login</em></span> shell, which does not read the
+        <code class="filename">/etc/profile</code> or <code class=
+        "filename">.bash_profile</code> files, but rather reads the
+        <code class="filename">.bashrc</code> file instead. Create the
+        <code class="filename">.bashrc</code> file now:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; ~/.bashrc &lt;&lt; "EOF"
+<code class="literal">set +h
+umask 022
+LFS=/mnt/lfs
+LC_ALL=POSIX
+LFS_TGT=$(uname -m)-lfs-linux-gnu
+PATH=/tools/bin:/bin:/usr/bin
+export LFS LC_ALL LFS_TGT PATH</code>
+EOF</kbd>
+</pre>
+      <p>
+        The <span class="command"><strong>set +h</strong></span> command
+        turns off <span class="command"><strong>bash</strong></span>'s hash
+        function. Hashing is ordinarily a useful feature&mdash;<span class=
+        "command"><strong>bash</strong></span> uses a hash table to remember
+        the full path of executable files to avoid searching the <code class=
+        "envar">PATH</code> time and again to find the same executable.
+        However, the new tools should be used as soon as they are installed.
+        By switching off the hash function, the shell will always search the
+        <code class="envar">PATH</code> when a program is to be run. As such,
+        the shell will find the newly compiled tools in <code class=
+        "filename">$LFS/tools</code> as soon as they are available without
+        remembering a previous version of the same program in a different
+        location.
+      </p>
+      <p>
+        Setting the user file-creation mask (umask) to 022 ensures that newly
+        created files and directories are only writable by their owner, but
+        are readable and executable by anyone (assuming default modes are
+        used by the <code class="function">open(2)</code> system call, new
+        files will end up with permission mode 644 and directories with mode
+        755).
+      </p>
+      <p>
+        The <code class="envar">LFS</code> variable should be set to the
+        chosen mount point.
+      </p>
+      <p>
+        The <code class="envar">LC_ALL</code> variable controls the
+        localization of certain programs, making their messages follow the
+        conventions of a specified country. Setting <code class=
+        "envar">LC_ALL</code> to <span class="quote">&ldquo;<span class=
+        "quote">POSIX</span>&rdquo;</span> or <span class=
+        "quote">&ldquo;<span class="quote">C</span>&rdquo;</span> (the two
+        are equivalent) ensures that everything will work as expected in the
+        chroot environment.
+      </p>
+      <p>
+        The <code class="envar">LFS_TGT</code> variable sets a non-default,
+        but compatible machine description for use when building our cross
+        compiler and linker and when cross compiling our temporary toolchain.
+        More information is contained in <a class="xref" href=
+        "../chapter05/toolchaintechnotes.html" title=
+        "5.2.&nbsp;Toolchain Technical Notes">Section&nbsp;5.2,
+        &ldquo;Toolchain Technical Notes&rdquo;</a>.
+      </p>
+      <p>
+        By putting <code class="filename">/tools/bin</code> ahead of the
+        standard <code class="envar">PATH</code>, all the programs installed
+        in <a class="xref" href="../chapter05/chapter05.html" title=
+        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
+        are picked up by the shell immediately after their installation.
+        This, combined with turning off hashing, limits the risk that old
+        programs are used from the host when the same programs are available
+        in the chapter 5 environment.
+      </p>
+      <p>
+        Finally, to have the environment fully prepared for building the
+        temporary tools, source the just-created user profile:
+      </p>
+      <pre class="userinput">
+<kbd class="command">source ~/.bash_profile</kbd>
+</pre>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="addinguser.html" title=
+          "Adding the LFS User">Prev</a>
+          <p>
+            Adding the LFS User
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aboutsbus.html" title="About SBUs">Next</a>
+          <p>
+            About SBUs
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter04.html" title=
+          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

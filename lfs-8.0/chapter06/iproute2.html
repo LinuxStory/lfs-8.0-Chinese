@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.58.&nbsp;IPRoute2-4.9.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gzip.html" title="Gzip-1.8">Prev</a>
+          <p>
+            Gzip-1.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kbd.html" title="Kbd-2.0.4">Next</a>
+          <p>
+            Kbd-2.0.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-iproute2" name="ch-system-iproute2"></a>6.58.
+        IPRoute2-4.9.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The IPRoute2 package contains programs for basic and advanced
+          IPV4-based networking.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.2 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">11 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.58.1. Installation of IPRoute2
+        </h2>
+        <p>
+          The <span class="command"><strong>arpd</strong></span> program
+          included in this package will not be built since it is dependent on
+          Berkeley DB, which is not installed in LFS. However, documentation
+          files and a directory for <span class=
+          "command"><strong>arpd</strong></span> will still be installed.
+          Prevent this by running the commands below. If the <span class=
+          "command"><strong>arpd</strong></span> binary is needed,
+          instructions for compiling Berkeley DB can be found in the BLFS
+          Book at <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/server/databases.html#db">
+          http://www.linuxfromscratch.org/blfs/view/8.0/server/databases.html#db</a>.
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i /ARPD/d Makefile
+sed -i 's/arpd.8//' man/man8/Makefile
+rm -v doc/arpd.sgml</kbd>
+</pre>
+        <p>
+          It is also necessary to disable building one module that requires
+          <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/iptables.html">
+          http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/iptables.html</a>.
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i 's/m_ipt.o//' tc/Makefile</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not have a working test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make DOCDIR=/usr/share/doc/iproute2-4.9.0 install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-iproute2" name="contents-iproute2"></a>6.58.2.
+          Contents of IPRoute2
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">bridge, ctstat (link to lnstat), genl,
+              ifcfg, ifstat, ip, lnstat, nstat, routef, routel, rtacct,
+              rtmon, rtpr, rtstat (link to lnstat), ss, and tc</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/etc/iproute2, /usr/lib/tc, and
+              /usr/share/doc/iproute2-4.9.0,</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="bridge" name="bridge"></a><span class=
+                    "term"><span class=
+                    "command"><strong>bridge</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Configures network bridges
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ctstat" name="ctstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ctstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Connection status utility
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="genl" name="genl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>genl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generic netlink utility frontend
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ifcfg" name="ifcfg"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ifcfg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A shell script wrapper for the <span class=
+                    "command"><strong>ip</strong></span> command [Note that
+                    it requires the <span class=
+                    "command"><strong>arping</strong></span> and <span class=
+                    "command"><strong>rdisk</strong></span> programs from the
+                    iputils package found at <a class="ulink" href=
+                    "http://www.skbuff.net/iputils/">http://www.skbuff.net/iputils/</a>.]
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ifstat" name="ifstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ifstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows the interface statistics, including the amount of
+                    transmitted and received packets by interface
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ip" name="ip"></a><span class="term"><span class=
+                    "command"><strong>ip</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The main executable. It has several different functions:
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip link <em class=
+                    "replaceable"><code>&lt;device&gt;</code></em></strong></span>
+                    allows users to look at the state of devices and to make
+                    changes
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip addr</strong></span>
+                    allows users to look at addresses and their properties,
+                    add new addresses, and delete old ones
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip neighbor</strong></span>
+                    allows users to look at neighbor bindings and their
+                    properties, add new neighbor entries, and delete old ones
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip rule</strong></span>
+                    allows users to look at the routing policies and change
+                    them
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip route</strong></span>
+                    allows users to look at the routing table and change
+                    routing table rules
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip tunnel</strong></span>
+                    allows users to look at the IP tunnels and their
+                    properties, and change them
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip maddr</strong></span>
+                    allows users to look at the multicast addresses and their
+                    properties, and change them
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip mroute</strong></span>
+                    allows users to set, change, or delete the multicast
+                    routing
+                  </p>
+                  <p>
+                    <span class="command"><strong>ip monitor</strong></span>
+                    allows users to continuously monitor the state of
+                    devices, addresses and routes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lnstat" name="lnstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lnstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Provides Linux network statistics; it is a generalized
+                    and more feature-complete replacement for the old
+                    <span class="command"><strong>rtstat</strong></span>
+                    program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nstat" name="nstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows network statistics
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="routef" name="routef"></a><span class=
+                    "term"><span class=
+                    "command"><strong>routef</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A component of <span class="command"><strong>ip
+                    route</strong></span>. This is for flushing the routing
+                    tables
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="routel" name="routel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>routel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A component of <span class="command"><strong>ip
+                    route</strong></span>. This is for listing the routing
+                    tables
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rtacct" name="rtacct"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rtacct</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the contents of <code class=
+                    "filename">/proc/net/rt_acct</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rtmon" name="rtmon"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rtmon</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Route monitoring utility
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rtpr" name="rtpr"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rtpr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts the output of <span class="command"><strong>ip
+                    -o</strong></span> back into a readable form
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rtstat" name="rtstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rtstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Route status utility
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ss" name="ss"></a><span class="term"><span class=
+                    "command"><strong>ss</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Similar to the <span class=
+                    "command"><strong>netstat</strong></span> command; shows
+                    active connections
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tc" name="tc"></a><span class="term"><span class=
+                    "command"><strong>tc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Traffic Controlling Executable; this is for Quality Of
+                    Service (QOS) and Class Of Service (COS) implementations
+                  </p>
+                  <p>
+                    <span class="command"><strong>tc qdisc</strong></span>
+                    allows users to setup the queueing discipline
+                  </p>
+                  <p>
+                    <span class="command"><strong>tc class</strong></span>
+                    allows users to setup classes based on the queuing
+                    discipline scheduling
+                  </p>
+                  <p>
+                    <span class="command"><strong>tc
+                    estimator</strong></span> allows users to estimate the
+                    network flow into a network
+                  </p>
+                  <p>
+                    <span class="command"><strong>tc filter</strong></span>
+                    allows users to setup the QOS/COS packet filtering
+                  </p>
+                  <p>
+                    <span class="command"><strong>tc policy</strong></span>
+                    allows users to setup the QOS/COS policies
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gzip.html" title="Gzip-1.8">Prev</a>
+          <p>
+            Gzip-1.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kbd.html" title="Kbd-2.0.4">Next</a>
+          <p>
+            Kbd-2.0.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

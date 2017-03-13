@@ -1,0 +1,553 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.13.&nbsp;Binutils-2.27
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="file.html" title="File-5.30">Prev</a>
+          <p>
+            File-5.30
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gmp.html" title="GMP-6.1.2">Next</a>
+          <p>
+            GMP-6.1.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-binutils" name="ch-system-binutils"></a>6.13.
+        Binutils-2.27
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Binutils package contains a linker, an assembler, and other
+          tools for handling object files.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">5.7 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">2.0 GB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.13.1. Installation of Binutils
+        </h2>
+        <p>
+          Verify that the PTYs are working properly inside the chroot
+          environment by performing a simple test:
+        </p>
+        <pre class="userinput">
+<kbd class="command">expect -c "spawn ls"</kbd>
+</pre>
+        <p>
+          This command should output the following:
+        </p>
+        <pre class="screen">
+<code class="computeroutput">spawn ls</code>
+</pre>
+        <p>
+          If, instead, the output includes the message below, then the
+          environment is not set up for proper PTY operation. This issue
+          needs to be resolved before running the test suites for Binutils
+          and GCC:
+        </p>
+        <pre class="screen">
+<code class="computeroutput">The system has no more ptys.
+Ask your system administrator to create more.</code>
+</pre>
+        <p>
+          The Binutils documentation recommends building Binutils in a
+          dedicated build directory:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build
+cd       build</kbd>
+</pre>
+        <p>
+          Prepare Binutils for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">../configure --prefix=/usr       \
+             --enable-gold       \
+             --enable-ld=default \
+             --enable-plugins    \
+             --enable-shared     \
+             --disable-werror    \
+             --with-system-zlib</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure parameters:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-gold</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Build the gold linker and install it as ld.gold (along side
+                the default linker).
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-ld=default</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Build the original bdf linker and install it as both ld (the
+                default linker) and ld.bfd.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-plugins</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Enables plugin support for the linker.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-system-zlib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Use the installed zlib library rather than building the
+                included version.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make tooldir=/usr</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the make parameter:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>tooldir=/usr</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Normally, the tooldir (the directory where the executables
+                will ultimately be located) is set to <code class=
+                "filename">$(exec_prefix)/$(target_alias)</code>. For
+                example, x86_64 machines would expand that to <code class=
+                "filename">/usr/x86_64-unknown-linux-gnu</code>. Because this
+                is a custom system, this target-specific directory in
+                <code class="filename">/usr</code> is not required.
+                <code class="filename">$(exec_prefix)/$(target_alias)</code>
+                would be used if the system was used to cross-compile (for
+                example, compiling a package on an Intel machine that
+                generates code that can be executed on PowerPC machines).
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <div class="admon important">
+          <img alt="[Important]" src="../images/important.png" />
+          <h3>
+            Important
+          </h3>
+          <p>
+            The test suite for Binutils in this section is considered
+            critical. Do not skip it under any circumstances.
+          </p>
+        </div>
+        <p>
+          Test the results:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -k check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make tooldir=/usr install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-binutils" name="contents-binutils"></a>6.13.2.
+          Contents of Binutils
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">addr2line, ar, as, c++filt, elfedit,
+              gprof, ld, ld.bfd, nm, objcopy, objdump, ranlib, readelf, size,
+              strings, and strip</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libbfd.{a,so} and
+              libopcodes.{a,so}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/lib/ldscripts</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="addr2line" name="addr2line"></a><span class=
+                    "term"><span class=
+                    "command"><strong>addr2line</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates program addresses to file names and line
+                    numbers; given an address and the name of an executable,
+                    it uses the debugging information in the executable to
+                    determine which source file and line number are
+                    associated with the address
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ar" name="ar"></a><span class="term"><span class=
+                    "command"><strong>ar</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates, modifies, and extracts from archives
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="as" name="as"></a><span class="term"><span class=
+                    "command"><strong>as</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    An assembler that assembles the output of <span class=
+                    "command"><strong>gcc</strong></span> into object files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="c-filt" name="c-filt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>c++filt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used by the linker to de-mangle C++ and Java symbols and
+                    to keep overloaded functions from clashing
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="elfedit" name="elfedit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>elfedit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Updates the ELF header of ELF files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gprof" name="gprof"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gprof</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays call graph profile data
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ld" name="ld"></a><span class="term"><span class=
+                    "command"><strong>ld</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A linker that combines a number of object and archive
+                    files into a single file, relocating their data and tying
+                    up symbol references
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ld.bfd" name="ld.bfd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ld.bfd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Hard link to <span class=
+                    "command"><strong>ld</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nm" name="nm"></a><span class="term"><span class=
+                    "command"><strong>nm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists the symbols occurring in a given object file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="objcopy" name="objcopy"></a><span class=
+                    "term"><span class=
+                    "command"><strong>objcopy</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates one type of object file into another
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="objdump" name="objdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>objdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays information about the given object file, with
+                    options controlling the particular information to
+                    display; the information shown is useful to programmers
+                    who are working on the compilation tools
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ranlib" name="ranlib"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ranlib</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates an index of the contents of an archive and
+                    stores it in the archive; the index lists all of the
+                    symbols defined by archive members that are relocatable
+                    object files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="readelf" name="readelf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>readelf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays information about ELF type binaries
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="size" name="size"></a><span class=
+                    "term"><span class=
+                    "command"><strong>size</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists the section sizes and the total size for the given
+                    object files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="strings" name="strings"></a><span class=
+                    "term"><span class=
+                    "command"><strong>strings</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Outputs, for each given file, the sequences of printable
+                    characters that are of at least the specified length
+                    (defaulting to four); for object files, it prints, by
+                    default, only the strings from the initializing and
+                    loading sections while for other types of files, it scans
+                    the entire file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="strip" name="strip"></a><span class=
+                    "term"><span class=
+                    "command"><strong>strip</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Discards symbols from object files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libbfd" name="libbfd"></a><span class=
+                    "term"><code class="filename">libbfd</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Binary File Descriptor library
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libopcodes" name="libopcodes"></a><span class=
+                    "term"><code class="filename">libopcodes</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A library for dealing with opcodes&mdash;the <span class=
+                    "quote">&ldquo;<span class="quote">readable
+                    text</span>&rdquo;</span> versions of instructions for
+                    the processor; it is used for building utilities like
+                    <span class="command"><strong>objdump</strong></span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="file.html" title="File-5.30">Prev</a>
+          <p>
+            File-5.30
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gmp.html" title="GMP-6.1.2">Next</a>
+          <p>
+            GMP-6.1.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
