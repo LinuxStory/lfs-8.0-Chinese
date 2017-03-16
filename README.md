@@ -64,9 +64,232 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 ## 校稿流程 (待补充)
 1. 计划采用交叉校稿的形式来完成校稿
 
+<<<<<<< HEAD
 ## 项目进度
 1. 闻其详定期跟大家邮件和微信通报项目进度
 2. 任何问题请第一时间通报
+=======
+
+## 翻译进度 （请大家在认领的章节后面加上自己的 github 用户名）
+ Table of Contents
+
+    Preface
+        Foreword
+        Audience
+        LFS Target Architectures
+        LFS and Standards
+        Rationale for Packages in the Book
+        Prerequisites
+        Typography
+        Structure
+        Errata
+    I. Introduction
+        1. Introduction
+            How to Build an LFS System
+            What's new since the last release
+            Changelog
+            Resources
+            Help
+    II. Preparing for the Build
+        2. Preparing the Host System
+            Introduction
+            Host System Requirements
+            Building LFS in Stages
+            Creating a New Partition
+            Creating a File System on the Partition
+            Setting The $LFS Variable
+            Mounting the New Partition
+        3. Packages and Patches
+            Introduction
+            All Packages
+            Needed Patches
+        4. Final Preparations
+            Introduction
+            Creating the $LFS/tools Directory
+            Adding the LFS User
+            Setting Up the Environment
+            About SBUs
+            About the Test Suites
+        5. Constructing a Temporary System
+            Introduction
+            Toolchain Technical Notes
+            General Compilation Instructions
+            Binutils-2.27 - Pass 1
+            GCC-6.3.0 - Pass 1
+            Linux-4.9.9 API Headers
+            Glibc-2.25
+            Libstdc++-6.3.0
+            Binutils-2.27 - Pass 2
+            GCC-6.3.0 - Pass 2
+            Tcl-core-8.6.6
+            Expect-5.45
+            DejaGNU-1.6
+            Check-0.11.0
+            Ncurses-6.0
+            Bash-4.4
+            Bison-3.0.4
+            Bzip2-1.0.6
+            Coreutils-8.26
+            Diffutils-3.5
+            File-5.30
+            Findutils-4.6.0
+            Gawk-4.1.4
+            Gettext-0.19.8.1
+            Grep-3.0
+            Gzip-1.8
+            M4-1.4.18
+            Make-4.2.1
+            Patch-2.7.5
+            Perl-5.24.1
+            Sed-4.4
+            Tar-1.29
+            Texinfo-6.3
+            Util-linux-2.29.1
+            Xz-5.2.3
+            Stripping
+            Changing Ownership
+    III. Building the LFS System
+        6. Installing Basic System Software
+            Introduction
+            Preparing Virtual Kernel File Systems
+            Package Management
+            Entering the Chroot Environment
+            Creating Directories
+            Creating Essential Files and Symlinks
+            Linux-4.9.9 API Headers
+            Man-pages-4.09
+            Glibc-2.25
+            Adjusting the Toolchain
+            Zlib-1.2.11
+            File-5.30
+            Binutils-2.27
+            GMP-6.1.2
+            MPFR-3.1.5
+            MPC-1.0.3
+            GCC-6.3.0
+            Bzip2-1.0.6
+            Pkg-config-0.29.1
+            Ncurses-6.0
+            Attr-2.4.47
+            Acl-2.2.52
+            Libcap-2.25
+            Sed-4.4
+            Shadow-4.4
+            Psmisc-22.21
+            Iana-Etc-2.30
+            M4-1.4.18
+            Bison-3.0.4
+            Flex-2.6.3
+            Grep-3.0
+            Readline-7.0
+            Bash-4.4
+            Bc-1.06.95
+            Libtool-2.4.6
+            GDBM-1.12
+            Gperf-3.0.4
+            Expat-2.2.0
+            Inetutils-1.9.4
+            Perl-5.24.1
+            XML::Parser-2.44
+            Intltool-0.51.0
+            Autoconf-2.69
+            Automake-1.15
+            Xz-5.2.3
+            Kmod-23
+            Gettext-0.19.8.1
+            Procps-ng-3.3.12
+            E2fsprogs-1.43.4
+            Coreutils-8.26
+            Diffutils-3.5
+            Gawk-4.1.4
+            Findutils-4.6.0
+            Groff-1.22.3
+            GRUB-2.02~beta3
+            Less-481
+            Gzip-1.8
+            IPRoute2-4.9.0
+            Kbd-2.0.4
+            Libpipeline-1.4.1
+            Make-4.2.1
+            Patch-2.7.5
+            Sysklogd-1.5.1
+            Sysvinit-2.88dsf
+            Eudev-3.2.1
+            Util-linux-2.29.1
+            Man-DB-2.7.6.1
+            Tar-1.29
+            Texinfo-6.3
+            Vim-8.0.069
+            About Debugging Symbols
+            Stripping Again
+            Cleaning Up
+        7. System Configuration
+            Introduction
+            LFS-Bootscripts-20150222
+            Overview of Device and Module Handling
+            Managing Devices
+            General Network Configuration
+            System V Bootscript Usage and Configuration
+            The Bash Shell Startup Files
+            Creating the /etc/inputrc File
+            Creating the /etc/shells File
+        8. Making the LFS System Bootable(GitHub username:qq296776435)
+            Introduction
+            Creating the /etc/fstab File
+            Linux-4.9.9
+            Using GRUB to Set Up the Boot Process
+        9. The End
+            The End
+            Get Counted
+            Rebooting the System
+            What Now?
+    IV. Appendices
+        A. Acronyms and Terms
+        B. Acknowledgments
+        C. Dependencies
+        D. Boot and sysconfig scripts version-20150222
+            /etc/rc.d/init.d/rc
+            /lib/lsb/init-functions
+            /etc/rc.d/init.d/mountvirtfs
+            /etc/rc.d/init.d/modules
+            /etc/rc.d/init.d/udev
+            /etc/rc.d/init.d/swap
+            /etc/rc.d/init.d/setclock
+            /etc/rc.d/init.d/checkfs
+            /etc/rc.d/init.d/mountfs
+            /etc/rc.d/init.d/udev_retry
+            /etc/rc.d/init.d/cleanfs
+            /etc/rc.d/init.d/console
+            /etc/rc.d/init.d/localnet
+            /etc/rc.d/init.d/sysctl
+            /etc/rc.d/init.d/sysklogd
+            /etc/rc.d/init.d/network
+            /etc/rc.d/init.d/sendsignals
+            /etc/rc.d/init.d/reboot
+            /etc/rc.d/init.d/halt
+            /etc/rc.d/init.d/template
+            /etc/sysconfig/modules
+            /etc/sysconfig/createfiles
+            /etc/sysconfig/udev-retry
+            /sbin/ifup
+            /sbin/ifdown
+            /lib/services/ipv4-static
+            /lib/services/ipv4-static-route
+        E. Udev configuration rules
+            55-lfs.rules
+        F. LFS Licenses
+            Creative Commons License
+            The MIT License
+
+
+
+## 翻译校审建议
+1. 使用markdown进行翻译校审，文件名必须使用英文，单词之间请使用短横线“-”做连字符
+2. 翻译校审后的文档请放到source文件夹下的对应章节中，然后pull request即可
+3. 有任何问题欢迎随时发issue，并请参与翻译的同学保持邮箱畅通，每天最少检查一次邮件
+4. 术语尽量保证和已翻译的一致，也可以查询[微软术语搜索](http://www.microsoft.com/Language/zh-cn/Search.aspx)
+5. 请将翻译过程中用到的术语保存到[Linux Story术语词典](https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md)
+>>>>>>> 0bfb1004776aa97a48f403561b27bc8a3213d9f2
 
 ## 关于版权
 根据原著作者的要求，翻译成果属于公有领域(CC0)，翻译参与人员及原著作者享有署名权，署名顺序将按加入项目的顺序排列。
