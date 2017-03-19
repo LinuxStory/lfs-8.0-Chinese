@@ -51,10 +51,9 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Patch package contains a program for modifying or creating
-          files by applying a <span class="quote">&ldquo;<span class=
-          "quote">patch</span>&rdquo;</span> file typically created by the
-          <span class="command"><strong>diff</strong></span> program.
+          Patch 软件包包含一个通过打<span class="quote">&ldquo;<span class=
+          "quote">补丁</span>&rdquo;</span> 来创建或修改文件的程序，补丁文件通常由
+          <span class="command"><strong>diff</strong></span> 程序生成。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
@@ -71,28 +70,28 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.62.1. Installation of Patch
+          6.62.1. 安装 Patch
         </h2>
         <p>
-          Prepare Patch for compilation:
+          准备编译 Patch ：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，执行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -100,20 +99,19 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-patch" name="contents-patch"></a>6.62.2. Contents
-          of Patch
+          <a id="contents-patch" name="contents-patch"></a>6.62.2. Patch 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed program:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">patch</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -131,13 +129,10 @@
                 </td>
                 <td>
                   <p>
-                    Modifies files according to a patch file [A patch file is
-                    normally a difference listing created with the
+                    根据补丁文件来修改文件 [补丁文件通常是由
                     <span class="command"><strong>diff</strong></span>
-                    program. By applying these differences to the original
-                    files, <span class=
-                    "command"><strong>patch</strong></span> creates the
-                    patched versions.]
+                    程序创建的差异列表。 <span class=
+                    "command"><strong>patch</strong></span> 通过对原始文件应用这些差异创建打补丁后的版本。]
                   </p>
                 </td>
               </tr>
