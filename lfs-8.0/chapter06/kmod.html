@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.46.&nbsp;Kmod-23
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="xz.html" title="Xz-5.2.3">Prev</a>
+          <a accesskey="p" href="xz.html" title="Xz-5.2.3">上一页</a>
           <p>
             Xz-5.2.3
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="gettext.html" title=
-          "Gettext-0.19.8.1">Next</a>
+          "Gettext-0.19.8.1">下一页</a>
           <p>
             Gettext-0.19.8.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Kmod package contains libraries and utilities for loading
-          kernel modules
+          Kmod 软件包包含了用于加载内核模块的库和工具。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">10.3 MB</span>
             </div>
           </div>
@@ -69,10 +68,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.46.1. Installation of Kmod
+          6.46.1. Kmod 安装过程
         </h2>
         <p>
-          Prepare Kmod for compilation:
+          准备编译 Kmod:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr          \
@@ -84,7 +83,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的意义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -93,8 +92,7 @@
             </dt>
             <dd>
               <p>
-                These options enable Kmod to handle compressed kernel
-                modules.
+                这些选项将使能 Kmod 处理压缩的内核模块的能力。
               </p>
             </dd>
             <dt>
@@ -103,27 +101,22 @@
             </dt>
             <dd>
               <p>
-                This option ensures different library related files are
-                placed in the correct directories.
+                这些选项将保证不同的库相关文件放在正确的目录。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not come with a test suite that can be run in the
-          LFS chroot environment. At a minimum the git program is required
-          and several tests will not run outside of a git repository.
-        </p>
+          这个软件包并没有包含可以在 LFS chroot 环境中可以运行的测试套件。
+          至少需要 git 程序，而且有些测试在 git 版本库之外无法运行。
         <p>
-          Install the package, and create symlinks for compatibility with
-          Module-Init-Tools (the package that previously handled Linux kernel
-          modules):
+          安装软件包, 然后创建兼容 Module-Init-Tools (之前用于处理 Linux 内核模块的软件包)工具的链接:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -137,13 +130,12 @@ ln -sfv kmod /bin/lsmod</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-kmod" name="contents-kmod"></a>6.46.2. Contents of
-          Kmod
+          <a id="contents-kmod" name="contents-kmod"></a>6.46.2. Kmod 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">depmod (link to kmod), insmod (link to
               kmod), kmod, lsmod (link to kmod), modinfo (link to kmod),
               modprobe (link to kmod), and rmmod (link to kmod)</span>
@@ -156,7 +148,7 @@ ln -sfv kmod /bin/lsmod</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -174,11 +166,8 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a dependency file based on the symbols it finds
-                    in the existing set of modules; this dependency file is
-                    used by <span class=
-                    "command"><strong>modprobe</strong></span> to
-                    automatically load the required modules
+                    基于它在已存在的模块集中发现的符号创建一个依赖文件;
+                    <span class="command"><strong>modprobe</strong></span> 将使用这个依赖文件来自动加载需要的模块
                   </p>
                 </td>
               </tr>
@@ -192,7 +181,7 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Installs a loadable module in the running kernel
+                    在正在运行的内核中安装一个可以加载的模块
                   </p>
                 </td>
               </tr>
@@ -206,7 +195,7 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Loads and unloads kernel modules
+                    加载和卸载内核模块
                   </p>
                 </td>
               </tr>
@@ -220,7 +209,7 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists currently loaded modules
+                    列出当前已加载的模块
                   </p>
                 </td>
               </tr>
@@ -234,8 +223,7 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Examines an object file associated with a kernel module
-                    and displays any information that it can glean
+                    检查一个与内核模块相关联的目标文件然后显示所有它能收集的信息
                   </p>
                 </td>
               </tr>
@@ -249,9 +237,8 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Uses a dependency file, created by <span class=
-                    "command"><strong>depmod</strong></span>, to
-                    automatically load relevant modules
+                    使用 <span class=
+                    "command"><strong>depmod</strong></span> 命令生成的依赖文件来自动加载相关的模块
                   </p>
                 </td>
               </tr>
@@ -265,7 +252,7 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    Unloads modules from the running kernel
+                    在运行的内核中卸载模块
                   </p>
                 </td>
               </tr>
@@ -278,8 +265,7 @@ ln -sfv kmod /bin/lsmod</kbd>
                 </td>
                 <td>
                   <p>
-                    This library is used by other programs to load and unload
-                    kernel modules
+                    这个库用于让别的程序来加载和卸载内核模块
                   </p>
                 </td>
               </tr>
@@ -291,25 +277,25 @@ ln -sfv kmod /bin/lsmod</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="xz.html" title="Xz-5.2.3">Prev</a>
+          <a accesskey="p" href="xz.html" title="Xz-5.2.3">上一页</a>
           <p>
             Xz-5.2.3
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="gettext.html" title=
-          "Gettext-0.19.8.1">Next</a>
+          "Gettext-0.19.8.1">下一页</a>
           <p>
             Gettext-0.19.8.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
