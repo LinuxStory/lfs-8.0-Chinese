@@ -50,13 +50,13 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Less package contains a text file viewer.
+          Less 软件包包含一个文件查看器。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">大概编译时间：</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
               <strong class="segtitle">所需磁盘空间：</strong>
@@ -67,17 +67,17 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.56.1. Installation of Less
+          6.56.1. 安装 Less
         </h2>
         <p>
-          Prepare Less for compilation:
+          准备编译 Less ：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr --sysconfdir=/etc</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -86,24 +86,24 @@
             </dt>
             <dd>
               <p>
-                This option tells the programs created by the package to look
-                in <code class="filename">/etc</code> for the configuration
-                files.
+                这个选项会让本软件包创建的程序从
+                <code class="filename">/etc</code>
+                中寻找配置文件。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not come with a test suite.
+          本软件包不包含测试套件。
         </p>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -111,20 +111,19 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-less" name="contents-less"></a>6.56.2. Contents of
-          Less
+          <a id="contents-less" name="contents-less"></a>6.56.2. Less 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">less, lessecho, and lesskey</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -142,9 +141,7 @@
                 </td>
                 <td>
                   <p>
-                    A file viewer or pager; it displays the contents of the
-                    given file, letting the user scroll, find strings, and
-                    jump to marks
+                    文件查看器或分页器；显示指定文件的内容，允许用户滚动，查找字符串，以及跳转到标记。
                   </p>
                 </td>
               </tr>
@@ -158,10 +155,9 @@
                 </td>
                 <td>
                   <p>
-                    Needed to expand meta-characters, such as <span class=
-                    "emphasis"><em>*</em></span> and <span class=
-                    "emphasis"><em>?</em></span>, in filenames on Unix
-                    systems
+                    扩展 Unix 系统下文件名中的元字符，例如 <span class=
+                    "emphasis"><em>*</em></span> 和 <span class=
+                    "emphasis"><em>?</em></span>
                   </p>
                 </td>
               </tr>
@@ -175,8 +171,8 @@
                 </td>
                 <td>
                   <p>
-                    Used to specify the key bindings for <span class=
-                    "command"><strong>less</strong></span>
+                    用于为 <span class=
+                    "command"><strong>less</strong></span> 指定绑定键
                   </p>
                 </td>
               </tr>
