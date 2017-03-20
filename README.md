@@ -42,12 +42,7 @@ lfs 8.0 中文版 以及  lfs 8.0 systemd 中文版
 
 
 ### 翻译标准化
-1. 可参考  CLReq https://www.w3.org/TR/clreq
-2. 简单约定：A)专有名词的大小写、连字符等请保持跟原名或注册商标一致；B)一般情况下使用中文全角标点，但是文件名，版本号等其中出现的符号用保持用原来英文半角符号。C）待补充
-3. 对于不确定的专有名词翻译，请及时拿出来讨论，发github issue或者微信、邮件
-4. 项目中使用到的术语、专业名词，请更新到术语表中 https://github.com/LinuxStory/StoryTranslation/blob/master/Dictionary.md 
-5. 编辑器请统一使用 UTF-8 无BOM，Windows 下尽量使用 Notepad++，Linux 和 Mac 不做约束
-6. 术语尽量保证和已翻译的一致，也可以查询[微软术语搜索](http://www.microsoft.com/Language/zh-cn/Search.aspx)
+- 请参见 <https://github.com/LinuxStory/lfs-8.0-Chinese/blob/master/translate-agreement.md>
 
 ### 项目约定
 1. 建议大家每天抽出一小时或者每周抽出三小时（或更多），不要把工作留到最后，打铁趁热，一鼓作气

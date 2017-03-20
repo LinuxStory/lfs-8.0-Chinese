@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.47.&nbsp;Gettext-0.19.8.1
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="kmod.html" title="Kmod-23">Prev</a>
+          <a accesskey="p" href="kmod.html" title="Kmod-23">上一页</a>
           <p>
             Kmod-23
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="procps-ng.html" title=
-          "Procps-ng-3.3.12">Next</a>
+          "Procps-ng-3.3.12">下一页</a>
           <p>
             Procps-ng-3.3.12
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,19 +52,18 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Gettext package contains utilities for internationalization and
-          localization. These allow programs to be compiled with NLS (Native
-          Language Support), enabling them to output messages in the user's
-          native language.
+          Gettext 软件包包含来用于国际化和本地化的工具。
+          这些工具用于让程序具有 NLS (本地语言支持），
+          使它们能使用用户的本地语言来输出消息。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">2.9 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">199 MB</span>
             </div>
           </div>
@@ -72,11 +71,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.47.1. Installation of Gettext
+          6.47.1. Gettext 安装过程
         </h2>
         <p>
-          First, suppress two invocations of test-lock which on some machines
-          can loop forever:
+          首先，关闭两个在一些机器上会导致无限循环的 test-lock 调用:
         </p>
         <pre class="userinput">
 <kbd class=
@@ -84,7 +82,7 @@
 sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in</kbd>
 </pre>
         <p>
-          Prepare Gettext for compilation:
+          准备编译 Gettext:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr    \
@@ -92,19 +90,19 @@ sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in</kbd>
             --docdir=/usr/share/doc/gettext-0.19.8.1</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results (this takes a long time, around 3 SBUs), issue:
+        　要测试编译结果（这将花费很长时间，大约 3 SBUs), 输入:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -114,12 +112,12 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-gettext" name="contents-gettext"></a>6.47.2.
-          Contents of Gettext
+          Gettext 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">autopoint, envsubst, gettext, gettext.sh,
               gettextize, msgattrib, msgcat, msgcmp, msgcomm, msgconv, msgen,
               msgexec, msgfilter, msgfmt, msggrep, msginit, msgmerge,
@@ -127,13 +125,13 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
               xgettext</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libasprintf.so, libgettextlib.so,
               libgettextpo.so, libgettextsrc.so, and
               preloadable_libintl.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/lib/gettext,
               /usr/share/doc/gettext-0.19.8.1, and /usr/share/gettext</span>
             </div>
@@ -141,7 +139,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -159,8 +157,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Copies standard Gettext infrastructure files into a
-                    source package
+                    复制标准的 Gettext 基础文件到源代码包
                   </p>
                 </td>
               </tr>
@@ -174,7 +171,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Substitutes environment variables in shell format strings
+                    替换掉 shell 格式字符串中的环境变量　
                   </p>
                 </td>
               </tr>
@@ -188,9 +185,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Translates a natural language message into the user's
-                    language by looking up the translation in a message
-                    catalog
+                  　通过在消息类别中查找翻译来将自然语言消息翻译成用户的语言
                   </p>
                 </td>
               </tr>
@@ -204,7 +199,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Primarily serves as a shell function library for gettext
+                  　主要作为 gettext 的一个 shell 函数库
                   </p>
                 </td>
               </tr>
@@ -218,10 +213,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Copies all standard Gettext files into the given
-                    top-level directory of a package to begin
-                    internationalizing it
-                  </p>
+                  　将所有的标准 Gettext 文件复制到制定的软件包的顶级类别以开始
+                  　将它国际化
                 </td>
               </tr>
               <tr>
@@ -234,8 +227,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Filters the messages of a translation catalog according
-                    to their attributes and manipulates the attributes
+                  　在一个翻译类别中根据消息的属性过滤消息并操作这些属性
                   </p>
                 </td>
               </tr>
@@ -249,8 +241,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Concatenates and merges the given <code class=
-                    "filename">.po</code> files
+                  　将给出的 <code class=
+                    "filename">.po</code> 文件连接并合并起来
                   </p>
                 </td>
               </tr>
@@ -264,8 +256,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Compares two <code class="filename">.po</code> files to
-                    check that both contain the same set of msgid strings
+                    比较两个 <code class="filename">.po</code> 文件
+                    来检查它们都包含同样的 msgid 集合的字符串
                   </p>
                 </td>
               </tr>
@@ -279,8 +271,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Finds the messages that are common to the given
-                    <code class="filename">.po</code> files
+                  　在指定的 <code class="filename">.po</code> 文件中找到
+                  　共有的消息
                   </p>
                 </td>
               </tr>
@@ -294,8 +286,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Converts a translation catalog to a different character
-                    encoding
+                  　将一个翻译类别转换到不同的字符编码
                   </p>
                 </td>
               </tr>
@@ -309,7 +300,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates an English translation catalog
+                  　创建一个英文翻译类别
                   </p>
                 </td>
               </tr>
@@ -323,8 +314,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Applies a command to all translations of a translation
-                    catalog
+                  　将一个命令应用到一个翻译类别下的所有翻译
                   </p>
                 </td>
               </tr>
@@ -338,8 +328,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Applies a filter to all translations of a translation
-                    catalog
+                  　将一个过滤器应用到一个翻译类别下的所有翻译
                   </p>
                 </td>
               </tr>
@@ -353,8 +342,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates a binary message catalog from a translation
-                    catalog
+                  　从一个翻译类别中生成一条二进制消息类别
                   </p>
                 </td>
               </tr>
@@ -368,8 +356,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Extracts all messages of a translation catalog that match
-                    a given pattern or belong to some given source files
+                  　将一个翻译类别中符合指定模式或属于某些指定源文件的所有消息提取出来
                   </p>
                 </td>
               </tr>
@@ -383,9 +370,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a new <code class="filename">.po</code> file,
-                    initializing the meta information with values from the
-                    user's environment
+                  　创建一个新的 <code class="filename">.po</code> 文件,
+                  　并使用用户环境中的值初始化它的元信息
                   </p>
                 </td>
               </tr>
@@ -399,7 +385,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Combines two raw translations into a single file
+                  　将两条原始翻译合并到一个单独的文件
                   </p>
                 </td>
               </tr>
@@ -413,8 +399,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompiles a binary message catalog into raw translation
-                    text
+                  　将一个二进制消息类别反编译成原始的翻译文本
                   </p>
                 </td>
               </tr>
@@ -428,7 +413,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Unifies duplicate translations in a translation catalog
+                  　去除一个翻译类别中的重复翻译
                   </p>
                 </td>
               </tr>
@@ -442,8 +427,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays native language translations of a textual
-                    message whose grammatical form depends on a number
+                  　显示一条语法形式基于数字的消息的本地语言翻译
                   </p>
                 </td>
               </tr>
@@ -457,7 +441,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Recodes Serbian text from Cyrillic to Latin script
+                  　将塞尔维亚文本从西里尔字母转化为拉丁字母
                   </p>
                 </td>
               </tr>
@@ -471,8 +455,7 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Extracts the translatable message lines from the given
-                    source files to make the first translation template
+                  　在指定源文件中提取可翻译消息行来制作第一个翻译模板
                   </p>
                 </td>
               </tr>
@@ -485,13 +468,13 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    defines the <span class=
-                    "emphasis"><em>autosprintf</em></span> class, which makes
-                    C formatted output routines usable in C++ programs, for
-                    use with the <span class=
-                    "emphasis"><em>&lt;string&gt;</em></span> strings and the
+                    定义 <span class=
+                    "emphasis"><em>autosprintf</em></span> 类, 这个类让使用了
+                    <span class=
+                    "emphasis"><em>&lt;string&gt;</em></span> 和
                     <span class="emphasis"><em>&lt;iostream&gt;</em></span>
-                    streams
+                的 C++ 程序可以
+                使用 C 格式化输出函数。
                   </p>
                 </td>
               </tr>
@@ -505,9 +488,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    a private library containing common routines used by the
-                    various Gettext programs; these are not intended for
-                    general use
+                  　一个供许多 Gettext 程序使用的包含了公用函数的私有库；这些都
+                  　不是供一般使用的
                   </p>
                 </td>
               </tr>
@@ -520,15 +502,14 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to write specialized programs that process
-                    <code class="filename">.po</code> files; this library is
-                    used when the standard applications shipped with Gettext
-                    (such as <span class=
+                  　用于写定制程序来处理
+                    <code class="filename">.po</code> 文件;
+                    当随 Gettext 附送的标准程序(例如 <span class=
                     "command"><strong>msgcomm</strong></span>, <span class=
                     "command"><strong>msgcmp</strong></span>, <span class=
-                    "command"><strong>msgattrib</strong></span>, and
-                    <span class="command"><strong>msgen</strong></span>) will
-                    not suffice
+                    "command"><strong>msgattrib</strong></span>, 和 
+                    <span class="command"><strong>msgen</strong></span>) 
+                    不够用时，可以使用这个库
                   </p>
                 </td>
               </tr>
@@ -542,9 +523,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    A private library containing common routines used by the
-                    various Gettext programs; these are not intended for
-                    general use
+                  　一个供许多 Gettext 程序使用的包含了公用函数的私有库；这些都
+                  　不是供一般使用的
                   </p>
                 </td>
               </tr>
@@ -558,9 +538,8 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
                 </td>
                 <td>
                   <p>
-                    A library, intended to be used by LD_PRELOAD that assists
-                    <code class="filename">libintl</code> in logging
-                    untranslated messages
+                  　一个被 LD_PRELOAD 使用来帮助 <code class="filename">libintl</code> 
+                    记录未翻译消息的库
                   </p>
                 </td>
               </tr>
@@ -572,25 +551,25 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="kmod.html" title="Kmod-23">Prev</a>
+          <a accesskey="p" href="kmod.html" title="Kmod-23">上一页</a>
           <p>
             Kmod-23
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="procps-ng.html" title=
-          "Procps-ng-3.3.12">Next</a>
+          "Procps-ng-3.3.12">下一页</a>
           <p>
             Procps-ng-3.3.12
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

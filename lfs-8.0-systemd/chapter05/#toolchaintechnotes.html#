@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.2.&nbsp;Toolchain Technical Notes
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="generalinstructions.html" title=
+          "General Compilation Instructions">Next</a>
+          <p>
+            General Compilation Instructions
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-toolchaintechnotes" name=
+        "ch-tools-toolchaintechnotes"></a>5.2. Toolchain Technical Notes
+      </h1>
+      <p>
+        This section explains some of the rationale and technical details
+        behind the overall build method. It is not essential to immediately
+        understand everything in this section. Most of this information will
+        be clearer after performing an actual build. This section can be
+        referred to at any time during the process.
+      </p>
+      <p>
+        The overall goal of <a class="xref" href="chapter05.html" title=
+        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
+        is to produce a temporary area that contains a known-good set of
+        tools that can be isolated from the host system. By using
+        <span class="command"><strong>chroot</strong></span>, the commands in
+        the remaining chapters will be contained within that environment,
+        ensuring a clean, trouble-free build of the target LFS system. The
+        build process has been designed to minimize the risks for new readers
+        and to provide the most educational value at the same time.
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Before continuing, be aware of the name of the working platform,
+          often referred to as the target triplet. A simple way to determine
+          the name of the target triplet is to run the <span class=
+          "command"><strong>config.guess</strong></span> script that comes
+          with the source for many packages. Unpack the Binutils sources and
+          run the script: <strong class=
+          "userinput"><code>./config.guess</code></strong> and note the
+          output. For example, for a 32-bit Intel processor the output will
+          be <span class="emphasis"><em>i686-pc-linux-gnu</em></span>. On a
+          64-bit system it will be <span class=
+          "emphasis"><em>x86_64-pc-linux-gnu</em></span>.
+        </p>
+        <p>
+          Also be aware of the name of the platform's dynamic linker, often
+          referred to as the dynamic loader (not to be confused with the
+          standard linker <span class="command"><strong>ld</strong></span>
+          that is part of Binutils). The dynamic linker provided by Glibc
+          finds and loads the shared libraries needed by a program, prepares
+          the program to run, and then runs it. The name of the dynamic
+          linker for a 32-bit Intel machine will be <code class=
+          "filename">ld-linux.so.2</code> (<code class=
+          "filename">ld-linux-x86-64.so.2</code> for 64-bit systems). A
+          sure-fire way to determine the name of the dynamic linker is to
+          inspect a random binary from the host system by running:
+          <strong class="userinput"><code>readelf -l &lt;name of binary&gt; |
+          grep interpreter</code></strong> and noting the output. The
+          authoritative reference covering all platforms is in the
+          <code class="filename">shlib-versions</code> file in the root of
+          the Glibc source tree.
+        </p>
+      </div>
+      <p>
+        Some key technical points of how the <a class="xref" href=
+        "chapter05.html" title=
+        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
+        build method works:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              Slightly adjusting the name of the working platform, by
+              changing the "vendor" field target triplet by way of the
+              <code class="envar">LFS_TGT</code> variable, ensures that the
+              first build of Binutils and GCC produces a compatible
+              cross-linker and cross-compiler. Instead of producing binaries
+              for another architecture, the cross-linker and cross-compiler
+              will produce binaries compatible with the current hardware.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              The temporary libraries are cross-compiled. Because a
+              cross-compiler by its nature cannot rely on anything from its
+              host system, this method removes potential contamination of the
+              target system by lessening the chance of headers or libraries
+              from the host being incorporated into the new tools.
+              Cross-compilation also allows for the possibility of building
+              both 32-bit and 64-bit libraries on 64-bit capable hardware.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              Careful manipulation of the GCC source tells the compiler which
+              target dynamic linker will be used.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Binutils is installed first because the <span class=
+        "command"><strong>configure</strong></span> runs of both GCC and
+        Glibc perform various feature tests on the assembler and linker to
+        determine which software features to enable or disable. This is more
+        important than one might first realize. An incorrectly configured GCC
+        or Glibc can result in a subtly broken toolchain, where the impact of
+        such breakage might not show up until near the end of the build of an
+        entire distribution. A test suite failure will usually highlight this
+        error before too much additional work is performed.
+      </p>
+      <p>
+        Binutils installs its assembler and linker in two locations,
+        <code class="filename">/tools/bin</code> and <code class=
+        "filename">/tools/$LFS_TGT/bin</code>. The tools in one location are
+        hard linked to the other. An important facet of the linker is its
+        library search order. Detailed information can be obtained from
+        <span class="command"><strong>ld</strong></span> by passing it the
+        <em class="parameter"><code>--verbose</code></em> flag. For example,
+        an <strong class="userinput"><code>ld --verbose | grep
+        SEARCH</code></strong> will illustrate the current search paths and
+        their order. It shows which files are linked by <span class=
+        "command"><strong>ld</strong></span> by compiling a dummy program and
+        passing the <em class="parameter"><code>--verbose</code></em> switch
+        to the linker. For example, <strong class="userinput"><code>gcc
+        dummy.c -Wl,--verbose 2&gt;&amp;1 | grep succeeded</code></strong>
+        will show all the files successfully opened during the linking.
+      </p>
+      <p>
+        The next package installed is GCC. An example of what can be seen
+        during its run of <span class=
+        "command"><strong>configure</strong></span> is:
+      </p>
+      <pre class="screen">
+<code class=
+"computeroutput">checking what assembler to use... /tools/i686-lfs-linux-gnu/bin/as
+checking what linker to use... /tools/i686-lfs-linux-gnu/bin/ld</code>
+</pre>
+      <p>
+        This is important for the reasons mentioned above. It also
+        demonstrates that GCC's configure script does not search the PATH
+        directories to find which tools to use. However, during the actual
+        operation of <span class="command"><strong>gcc</strong></span>
+        itself, the same search paths are not necessarily used. To find out
+        which standard linker <span class=
+        "command"><strong>gcc</strong></span> will use, run: <strong class=
+        "userinput"><code>gcc -print-prog-name=ld</code></strong>.
+      </p>
+      <p>
+        Detailed information can be obtained from <span class=
+        "command"><strong>gcc</strong></span> by passing it the <em class=
+        "parameter"><code>-v</code></em> command line option while compiling
+        a dummy program. For example, <strong class="userinput"><code>gcc -v
+        dummy.c</code></strong> will show detailed information about the
+        preprocessor, compilation, and assembly stages, including
+        <span class="command"><strong>gcc</strong></span>'s included search
+        paths and their order.
+      </p>
+      <p>
+        Next installed are sanitized Linux API headers. These allow the
+        standard C library (Glibc) to interface with features that the Linux
+        kernel will provide.
+      </p>
+      <p>
+        The next package installed is Glibc. The most important
+        considerations for building Glibc are the compiler, binary tools, and
+        kernel headers. The compiler is generally not an issue since Glibc
+        will always use the compiler relating to the <em class=
+        "parameter"><code>--host</code></em> parameter passed to its
+        configure script; e.g. in our case, the compiler will be <span class=
+        "command"><strong>i686-lfs-linux-gnu-gcc</strong></span>. The binary
+        tools and kernel headers can be a bit more complicated. Therefore,
+        take no risks and use the available configure switches to enforce the
+        correct selections. After the run of <span class=
+        "command"><strong>configure</strong></span>, check the contents of
+        the <code class="filename">config.make</code> file in the
+        <code class="filename">glibc-build</code> directory for all important
+        details. Note the use of <em class=
+        "parameter"><code>CC="i686-lfs-gnu-gcc"</code></em> to control which
+        binary tools are used and the use of the <em class=
+        "parameter"><code>-nostdinc</code></em> and <em class=
+        "parameter"><code>-isystem</code></em> flags to control the
+        compiler's include search path. These items highlight an important
+        aspect of the Glibc package&mdash;it is very self-sufficient in terms
+        of its build machinery and generally does not rely on toolchain
+        defaults.
+      </p>
+      <p>
+        During the second pass of Binutils, we are able to utilize the
+        <em class="parameter"><code>--with-lib-path</code></em> configure
+        switch to control <span class="command"><strong>ld</strong></span>'s
+        library search path.
+      </p>
+      <p>
+        For the second pass of GCC, its sources also need to be modified to
+        tell GCC to use the new dynamic linker. Failure to do so will result
+        in the GCC programs themselves having the name of the dynamic linker
+        from the host system's <code class="filename">/lib</code> directory
+        embedded into them, which would defeat the goal of getting away from
+        the host. From this point onwards, the core toolchain is
+        self-contained and self-hosted. The remainder of the <a class="xref"
+        href="chapter05.html" title=
+        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
+        packages all build against the new Glibc in <code class=
+        "filename">/tools</code>.
+      </p>
+      <p>
+        Upon entering the chroot environment in <a class="xref" href=
+        "../chapter06/chapter06.html" title=
+        "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
+        6</a>, the first major package to be installed is Glibc, due to its
+        self-sufficient nature mentioned above. Once this Glibc is installed
+        into <code class="filename">/usr</code>, we will perform a quick
+        changeover of the toolchain defaults, and then proceed in building
+        the rest of the target LFS system.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="generalinstructions.html" title=
+          "General Compilation Instructions">Next</a>
+          <p>
+            General Compilation Instructions
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
