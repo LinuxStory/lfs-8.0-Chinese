@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.10.&nbsp;Adjusting the Toolchain
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="glibc.html" title="Glibc-2.25">Prev</a>
+          <p>
+            Glibc-2.25
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zlib.html" title="Zlib-1.2.11">Next</a>
+          <p>
+            Zlib-1.2.11
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-adjusting" name="ch-system-adjusting"></a>6.10.
+        Adjusting the Toolchain
+      </h1>
+      <p>
+        Now that the final C libraries have been installed, it is time to
+        adjust the toolchain so that it will link any newly compiled program
+        against these new libraries.
+      </p>
+      <p>
+        First, backup the <code class="filename">/tools</code> linker, and
+        replace it with the adjusted linker we made in chapter 5. We'll also
+        create a link to its counterpart in <code class=
+        "filename">/tools/$(uname -m)-pc-linux-gnu/bin</code>:
+      </p>
+      <pre class="userinput">
+<kbd class="command">mv -v /tools/bin/{ld,ld-old}
+mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
+mv -v /tools/bin/{ld-new,ld}
+ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld</kbd>
+</pre>
+      <p>
+        Next, amend the GCC specs file so that it points to the new dynamic
+        linker. Simply deleting all instances of <span class=
+        "quote">&ldquo;<span class="quote">/tools</span>&rdquo;</span> should
+        leave us with the correct path to the dynamic linker. Also adjust the
+        specs file so that GCC knows where to find the correct headers and
+        Glibc start files. A <span class=
+        "command"><strong>sed</strong></span> command accomplishes this:
+      </p>
+      <pre class="userinput">
+<kbd class=
+"command">gcc -dumpspecs | sed -e 's@/tools@@g'                   \
+    -e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
+    -e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' &gt;      \
+    `dirname $(gcc --print-libgcc-file-name)`/specs</kbd>
+</pre>
+      <p>
+        It is a good idea to visually inspect the specs file to verify the
+        intended change was actually made.
+      </p>
+      <p>
+        It is imperative at this point to ensure that the basic functions
+        (compiling and linking) of the adjusted toolchain are working as
+        expected. To do this, perform the following sanity checks:
+      </p>
+      <pre class="userinput">
+<kbd class="command">echo 'int main(){}' &gt; dummy.c
+cc dummy.c -v -Wl,--verbose &amp;&gt; dummy.log
+readelf -l a.out | grep ': /lib'</kbd>
+</pre>
+      <p>
+        There should be no errors, and the output of the last command will be
+        (allowing for platform-specific differences in dynamic linker name):
+      </p>
+      <pre class="screen">
+<code class=
+"computeroutput">[Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]</code>
+</pre>
+      <p>
+        Note that on 64-bit systems <code class="filename">/lib</code> is the
+        location of our dynamic linker, but is accessed via a symbolic link
+        in /lib64.
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          On 32-bit systems the interpreter should be /lib/ld-linux.so.2.
+        </p>
+      </div>
+      <p>
+        Now make sure that we're setup to use the correct start files:
+      </p>
+      <pre class="userinput">
+<kbd class="command">grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log</kbd>
+</pre>
+      <p>
+        The output of the last command should be:
+      </p>
+      <pre class="screen">
+<code class="computeroutput">/usr/lib/../lib/crt1.o succeeded
+/usr/lib/../lib/crti.o succeeded
+/usr/lib/../lib/crtn.o succeeded</code>
+</pre>
+      <p>
+        Verify that the compiler is searching for the correct header files:
+      </p>
+      <pre class="userinput">
+<kbd class="command">grep -B1 '^ /usr/include' dummy.log</kbd>
+</pre>
+      <p>
+        This command should return the following output:
+      </p>
+      <pre class="screen">
+<code class="computeroutput">#include &lt;...&gt; search starts here:
+ /usr/include</code>
+</pre>
+      <p>
+        Next, verify that the new linker is being used with the correct
+        search paths:
+      </p>
+      <pre class="userinput">
+<kbd class="command">grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'</kbd>
+</pre>
+      <p>
+        References to paths that have components with '-linux-gnu' should be
+        ignored, but otherwise the output of the last command should be:
+      </p>
+      <pre class="screen">
+<code class="computeroutput">SEARCH_DIR("/usr/lib")
+SEARCH_DIR("/lib")</code>
+</pre>
+      <p>
+        Next make sure that we're using the correct libc:
+      </p>
+      <pre class="userinput">
+<kbd class="command">grep "/lib.*/libc.so.6 " dummy.log</kbd>
+</pre>
+      <p>
+        The output of the last command should be:
+      </p>
+      <pre class="screen">
+<code class="computeroutput">attempt to open /lib/libc.so.6 succeeded</code>
+</pre>
+      <p>
+        Lastly, make sure GCC is using the correct dynamic linker:
+      </p>
+      <pre class="userinput">
+<kbd class="command">grep found dummy.log</kbd>
+</pre>
+      <p>
+        The output of the last command should be (allowing for
+        platform-specific differences in dynamic linker name):
+      </p>
+      <pre class="screen">
+<code class=
+"computeroutput">found ld-linux-x86-64.so.2 at /lib/ld-linux-x86-64.so.2</code>
+</pre>
+      <p>
+        If the output does not appear as shown above or is not received at
+        all, then something is seriously wrong. Investigate and retrace the
+        steps to find out where the problem is and correct it. The most
+        likely reason is that something went wrong with the specs file
+        adjustment. Any issues will need to be resolved before continuing on
+        with the process.
+      </p>
+      <p>
+        Once everything is working correctly, clean up the test files:
+      </p>
+      <pre class="userinput">
+<kbd class="command">rm -v dummy.c a.out dummy.log</kbd>
+</pre>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="glibc.html" title="Glibc-2.25">Prev</a>
+          <p>
+            Glibc-2.25
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zlib.html" title="Zlib-1.2.11">Next</a>
+          <p>
+            Zlib-1.2.11
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

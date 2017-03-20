@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.51.&nbsp;Diffutils-3.5
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="coreutils.html" title=
+          "Coreutils-8.26">Prev</a>
+          <p>
+            Coreutils-8.26
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gawk.html" title="Gawk-4.1.4">Next</a>
+          <p>
+            Gawk-4.1.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-diffutils" name="ch-system-diffutils"></a>6.51.
+        Diffutils-3.5
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Diffutils package contains programs that show the differences
+          between files or directories.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">30 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.51.1. Installation of Diffutils
+        </h2>
+        <p>
+          First fix a file so locale files are installed:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i 's:= @mkdir_p@:= /bin/mkdir -p:' po/Makefile.in.in</kbd>
+</pre>
+        <p>
+          Prepare Diffutils for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-diffutils" name="contents-diffutils"></a>6.51.2.
+          Contents of Diffutils
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">cmp, diff, diff3, and sdiff</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cmp" name="cmp"></a><span class=
+                    "term"><span class="command"><strong>cmp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compares two files and reports whether or in which bytes
+                    they differ
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="diff" name="diff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>diff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compares two files or directories and reports which lines
+                    in the files differ
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="diff3" name="diff3"></a><span class=
+                    "term"><span class=
+                    "command"><strong>diff3</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compares three files line by line
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sdiff" name="sdiff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sdiff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Merges two files and interactively outputs the results
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="coreutils.html" title=
+          "Coreutils-8.26">Prev</a>
+          <p>
+            Coreutils-8.26
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gawk.html" title="Gawk-4.1.4">Next</a>
+          <p>
+            Gawk-4.1.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

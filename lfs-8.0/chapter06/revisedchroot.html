@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.73.&nbsp;Cleaning Up
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="strippingagain.html" title=
+          "Stripping Again">Prev</a>
+          <p>
+            Stripping Again
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter07/chapter07.html" title=
+          "System Configuration">Next</a>
+          <p>
+            System Configuration
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-revisedchroot" name=
+        "ch-system-revisedchroot"></a>6.73. Cleaning Up
+      </h1>
+      <p>
+        Finally, clean up some extra files left around from running tests:
+      </p>
+      <pre class="userinput">
+<kbd class="command">rm -rf /tmp/*</kbd>
+</pre>
+      <p>
+        From now on, when reentering the chroot environment after exiting,
+        use the following modified chroot command:
+      </p>
+      <pre class="userinput">
+<kbd class="command">chroot "$LFS" /usr/bin/env -i              \
+    HOME=/root TERM="$TERM" PS1='\u:\w\$ ' \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin     \
+    /bin/bash --login</kbd>
+</pre>
+      <p>
+        The reason for this is that the programs in <code class=
+        "filename">/tools</code> are no longer needed. Since they are no
+        longer needed you can delete the <code class="filename">/tools</code>
+        directory if so desired.
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          Removing <code class="filename">/tools</code> will also remove the
+          temporary copies of Tcl, Expect, and DejaGNU which were used for
+          running the toolchain tests. If you need these programs later on,
+          they will need to be recompiled and re-installed. The BLFS book has
+          instructions for this (see <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/">http://www.linuxfromscratch.org/blfs/</a>).
+        </p>
+      </div>
+      <p>
+        If the virtual kernel file systems have been unmounted, either
+        manually or through a reboot, ensure that the virtual kernel file
+        systems are mounted when reentering the chroot. This process was
+        explained in <a class="xref" href="kernfs.html#ch-system-bindmount"
+        title="6.2.2.&nbsp;Mounting and Populating /dev">Section&nbsp;6.2.2,
+        &ldquo;Mounting and Populating /dev&rdquo;</a> and <a class="xref"
+        href="kernfs.html#ch-system-kernfsmount" title=
+        "6.2.3.&nbsp;Mounting Virtual Kernel File Systems">Section&nbsp;6.2.3,
+        &ldquo;Mounting Virtual Kernel File Systems&rdquo;</a>.
+      </p>
+      <p>
+        Finally, there were several static libraries that were not suppressed
+        earlier in the chapter in order to satisfy the regression tests in
+        several packages. These libraries are from binutils, bzip2,
+        e2fsprogs, flex, libtool, and zlib. If desired, remove them now:
+      </p>
+      <pre class="userinput">
+<kbd class="command">rm -f /usr/lib/lib{bfd,opcodes}.a
+rm -f /usr/lib/libbz2.a
+rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
+rm -f /usr/lib/libltdl.a
+rm -f /usr/lib/libfl.a
+rm -f /usr/lib/libfl_pic.a
+rm -f /usr/lib/libz.a</kbd>
+</pre>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="strippingagain.html" title=
+          "Stripping Again">Prev</a>
+          <p>
+            Stripping Again
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter07/chapter07.html" title=
+          "System Configuration">Next</a>
+          <p>
+            System Configuration
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

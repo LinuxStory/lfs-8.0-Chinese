@@ -1,0 +1,2582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Appendix&nbsp;C.&nbsp;Dependencies
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Part&nbsp;IV.&nbsp;Appendices
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acknowledgments.html" title=
+          "Acknowledgments">Prev</a>
+          <p>
+            Acknowledgments
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../scripts/scripts.html" title=
+          "Boot and sysconfig scripts version-20150222">Next</a>
+          <p>
+            Boot and sysconfig scripts version-20150222
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part4.html" title=
+          "Part&nbsp;IV.&nbsp;Appendices">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="appendix">
+      <h1 class="appendix">
+        <a id="appendixc" name="appendixc"></a>C. Dependencies
+      </h1>
+      <p>
+        Every package built in LFS relies on one or more other packages in
+        order to build and install properly. Some packages even participate
+        in circular dependencies, that is, the first package depends on the
+        second which in turn depends on the first. Because of these
+        dependencies, the order in which packages are built in LFS is very
+        important. The purpose of this page is to document the dependencies
+        of each package built in LFS.
+      </p>
+      <p>
+        For each package we build, we have listed three, and sometimes four,
+        types of dependencies. The first lists what other packages need to be
+        available in order to compile and install the package in question.
+        The second lists what packages, in addition to those on the first
+        list, need to be available in order to run the test suites. The third
+        list of dependencies are packages that require this package to be
+        built and installed in its final location before they are built and
+        installed. In most cases, this is because these packages will hard
+        code paths to binaries within their scripts. If not built in a
+        certain order, this could result in paths of /tools/bin/[binary]
+        being placed inside scripts installed to the final system. This is
+        obviously not desirable.
+      </p>
+      <p>
+        The last list of dependencies are optional packages that are not
+        addressed in LFS, but could be useful to the user. These packages may
+        have additional mandatory or optional dependencies of their own. For
+        these dependencies, the recommended practice is to install them after
+        completion of the LFS book and then go back and rebuild the LFS
+        package. In several cases, re-installation is addressed in BLFS.
+      </p>
+      <h2>
+        <a id="acl-dep" name="acl-dep"></a>acl
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Attr, Bash, Binutils, Coreutils, GCC,
+            Gettext, Grep, M4, Make, Perl, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Automake, Diffutils, Findutils, and
+            Libtool</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Coreutils, Sed, Tar, Vim</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="attr-dep" name="attr-dep"></a>attr
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Grep, M4, Make, Perl, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Automake, Diffutils, Findutils, and
+            Libtool</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Acl, Libcap</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="autoconf-dep" name="autoconf-dep"></a>Autoconf
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Coreutils, Grep, M4, Make, Perl, Sed,
+            and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Automake, Diffutils, Findutils, GCC, and
+            Libtool</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Automake</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Emacs</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="automake-dep" name="automake-dep"></a>Automake
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Autoconf, Bash, Coreutils, Gettext, Grep,
+            M4, Make, Perl, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Binutils, Bison, Bzip2, DejaGNU, Diffutils,
+            Expect, Findutils, Flex, GCC, Gettext, Gzip, Libtool, and
+            Tar.</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="bash-dep" name="bash-dep"></a>Bash
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bison, Coreutils,
+            Diffutils, Gawk, GCC, Glibc, Grep, Make, Ncurses, Patch,
+            Readline, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Shadow</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Xorg</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="bc-dep" name="bc-dep"></a>Bc
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bison, Coreutils, GCC,
+            Glibc, Grep, Make, and Readline</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Gawk</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Linux Kernel</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="binutils-dep" name="binutils-dep"></a>Binutils
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, File,
+            Gawk, GCC, Glibc, Grep, Make, Perl, Sed, Texinfo and Zlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">DejaGNU and Expect</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="bison-dep" name="bison-dep"></a>Bison
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, M4, Make, Perl, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils, Findutils, and Flex</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Kbd and Tar</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Doxygen (test suite)</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="bzip2-dep" name="bzip2-dep"></a>Bzip2
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Glibc, Make, and Patch</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="check-dep" name="check-dep"></a>Check
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">GCC, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="coreutils-dep" name="coreutils-dep"></a>Coreutils
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, GMP, Grep, Make, Patch, Perl, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils, E2fsprogs, Findutils, Shadow,
+            and Util-linux</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Bash, Diffutils, Findutils, Man-DB, and
+            Eudev</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Perl Expect and IO:Tty modules (for test
+            suite)</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="dejagnu-dep" name="dejagnu-dep"></a>DejaGNU
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Coreutils, Diffutils, GCC, Grep,
+            Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="diffutils-dep" name="diffutils-dep"></a>Diffutils
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Gettext, Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils, Perl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="eudev-dep" name="eudev-dep"></a>Eudev
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Glibc, Grep, Gperf, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="expat-dep" name="expat-dep"></a>Expat
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Glibc, Grep, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">XML::Parser</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="expect-dep" name="expect-dep"></a>Expect
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Glibc, Grep, Make, Patch, Sed, and Tcl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="e2fsprogs-dep" name="e2fsprogs-dep"></a>E2fsprogs
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, Gzip, Make, Sed, Texinfo, and Util-linux</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Procps-ng,Psmisc</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="file-dep" name="file-dep"></a>File
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, Make, Sed, and Zlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="findutils-dep" name="findutils-dep"></a>Findutils
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">DejaGNU, Diffutils, and Expect</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="flex-dep" name="flex-dep"></a>Flex
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, M4, Make, Patch, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Bison and Gawk</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">IPRoute2, Kbd, and Man-DB</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gawk-dep" name="gawk-dep"></a>Gawk
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, GMP, Grep, Make, MPFR, Patch, Readline, Sed and
+            Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gcc-dep" name="gcc-dep"></a>Gcc
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils,
+            Findutils, Gawk, GCC, Gettext, Glibc, GMP, Grep, M4, Make, MPC,
+            MPFR, Patch, Perl, Sed, Tar, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">DejaGNU and Expect</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody"><a class="ulink" href=
+            "http://gcc.gnu.org/wiki/Graphite">CLooG-PPL</a>, <a class=
+            "ulink" href="http://gcc.gnu.org/wiki/GNAT">GNAT</a> and
+            <a class="ulink" href=
+            "http://gcc.gnu.org/wiki/Graphite">PPL</a></span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gdbm" name="gdbm"></a>GDBM
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Grep, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gettext-dep" name="gettext-dep"></a>Gettext
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils, Perl, and Tcl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Automake</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="glibc-dep" name="glibc-dep"></a>Glibc
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Gettext, Grep, Gzip, Linux API Headers, Make, Perl, Sed, and
+            Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">File</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gmp-dep" name="gmp-dep"></a>GMP
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, M4, Make, Sed and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">MPFR, GCC</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gperf-dep" name="gperf-dep"></a>Gperf
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Make</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils, Expect</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="grep-dep" name="grep-dep"></a>Grep
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Gettext, Glibc, Grep, Make, Patch, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Gawk</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Man-DB</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Pcre</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="groff-dep" name="groff-dep"></a>Groff
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bison, Coreutils, Gawk,
+            GCC, Glibc, Grep, Make, Patch, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Man-DB and Perl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">GPL Ghostscript</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="grub-dep" name="grub-dep"></a>GRUB
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bison, Coreutils,
+            Diffutils, GCC, Gettext, Glibc, Grep, Make, Ncurses, Sed,
+            Texinfo, and Xz</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="gzip-dep" name="gzip-dep"></a>Gzip
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils, Less</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Man-DB</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="iana-etc-dep" name="iana-etc-dep"></a>Iana-Etc
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Coreutils, Gawk, and Make</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Perl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="inetutils-dep" name="inetutils-dep"></a>Inetutils
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Grep, Make, Ncurses, Patch, Sed, Texinfo, and Zlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Tar</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="intltool-dep" name="intltool-dep"></a>Intltool
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Gawk, Glibc, Make, Perl, Sed, and
+            XML::Parser</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Perl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="iproute2-dep" name="iproute2-dep"></a>IProute2
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Bison, Coreutils, Flex, GCC, Glibc,
+            Make, and Linux API Headers</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="kbd-dep" name="kbd-dep"></a>Kbd
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bison, Check, Coreutils,
+            Flex, GCC, Gettext, Glibc, Gzip, Make, Patch, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="kmod-dep" name="kmod-dep"></a>Kmod
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bison, Coreutils, Flex,
+            GCC, Gettext, Glibc, Gzip, Make, Sed, Xz-Utils, Zlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Eudev</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="less-dep" name="less-dep"></a>Less
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Glibc, Grep, Make, Ncurses, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Gzip</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Pcre</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="libcap-dep" name="libcap-dep"></a>Libcap
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Attr, Bash, Binutils, Coreutils, GCC,
+            Glibc, Perl, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Linux-PAM</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="libpipeline-dep" name="libpipeline-dep"></a>Libpipeline
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Check</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Man-DB</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="libtool-dep" name="libtool-dep"></a>Libtool
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Autoconf, Automake, Findutils</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="linux-dep" name="linux-dep"></a>Linux Kernel
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Bc, Binutils, Coreutils, Diffutils,
+            Findutils, GCC, Glibc, Grep, Gzip, Kmod, Make, Ncurses, Perl, and
+            Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">OpenSSL</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="m4-dep" name="m4-dep"></a>M4
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Autoconf and Bison</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">libsigsegv</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="make-dep" name="make-dep"></a>Make
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Perl and Procps-ng</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="man-db-dep" name="man-db-dep"></a>Man-DB
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Bzip2, Coreutils, Flex,
+            GCC, GDBM, Gettext, Glibc, Grep, Groff, Gzip, Less, Libpipeline,
+            Make, Sed, and Xz</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Util-linux</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="man-pages-dep" name="man-pages-dep"></a>Man-Pages
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Coreutils, and Make</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="mpc-dep" name="mpc-dep"></a>MPC
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, GMP, Make, MPFR, Sed and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">GCC</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="mpfr-dep" name="mpfr-dep"></a>MPFR
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, GMP, Make, Sed and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Gawk, GCC</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="ncurses-dep" name="ncurses-dep"></a>Ncurses
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, Gawk,
+            GCC, Glibc, Grep, Make, Patch, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Bash, GRUB, Inetutils, Less, Procps-ng,
+            Psmisc, Readline, Texinfo, Util-linux, and Vim</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="patch-dep" name="patch-dep"></a>Patch
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Grep, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Ed</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="perl-dep" name="perl-dep"></a>Perl
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC, GDBM,
+            Glibc, Grep, Groff, Make, Sed, and Zlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Iana-Etc and Procps-ng</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Autoconf</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="pkgconfig-dep" name="pkgconfig-dep"></a>Pkg-config
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Glibc, Grep, Make, Popt, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Kmod</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="popt-dep" name="popt-dep"></a>Popt
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Glibc, Grep, Make</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Pkg-config</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="procps-dep" name="procps-dep"></a>Procps-ng
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Make, and Ncurses</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">DejaGNU</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="psmisc-dep" name="psmisc-dep"></a>Psmisc
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, Make, Ncurses, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="readline-dep" name="readline-dep"></a>Readline
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Gawk, GCC,
+            Glibc, Grep, Make, Ncurses, Patch, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Bash, Gawk</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="sed-dep" name="sed-dep"></a>Sed
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, Make, Sed, and Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Diffutils and Gawk</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">E2fsprogs, File, Libtool, and Shadow</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Cracklib</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="shadow-dep" name="shadow-dep"></a>Shadow
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils,
+            Findutils, Gawk, GCC, Gettext, Glibc, Grep, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Coreutils</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Acl, Attr, Cracklib, PAM</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="sysklogd-dep" name="sysklogd-dep"></a>Sysklogd
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Binutils, Coreutils, GCC, Glibc, Make, and
+            Patch</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="sysvinit-dep" name="sysvinit-dep"></a>Sysvinit
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Binutils, Coreutils, GCC, Glibc, Make, and
+            Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">No test suite available</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="tar-dep" name="tar-dep"></a>Tar
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Acl, Attr, Bash, Binutils, Bison,
+            Coreutils, GCC, Gettext, Glibc, Grep, Inetutils, Make, Sed, and
+            Texinfo</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Autoconf, Diffutils, Findutils, Gawk, and
+            Gzip</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="tcl-dep" name="tcl-dep"></a>Tcl
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Glibc, Grep, Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="texinfo-dep" name="texinfo-dep"></a>Texinfo
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Gettext,
+            Glibc, Grep, Make, Ncurses, Patch, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="util-linux-dep" name="util-linux-dep"></a>Util-linux
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils,
+            Findutils, Gawk, GCC, Gettext, Glibc, Grep, Make, Ncurses, Sed,
+            Eudev, and Zlib</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody"><a class="ulink" href=
+            "https://people.redhat.com/sgrubb/libcap-ng/">libcap-ng</a></span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="vim-dep" name="vim-dep"></a>Vim
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Acl, Attr, Bash, Binutils, Coreutils,
+            Diffutils, GCC, Glibc, Grep, Make, Ncurses, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">Xorg, GTK+2, LessTif, Python, Tcl, Ruby,
+            and GPM</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="xml-parser-dep" name="xml-parser-dep"></a>XML::Parser
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Expat, GCC,
+            Glibc, Make, and Perl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">Perl</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">Intltool</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="xz-dep" name="xz-dep"></a>Xz
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, Diffutils, GCC,
+            Glibc, and Make.</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">GRUB, Kmod, Man-DB, Eudev</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <h2>
+        <a id="zlib-dep" name="zlib-dep"></a>Zlib
+      </h2>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Installation depends on:</strong>
+            <span class="segbody">Bash, Binutils, Coreutils, GCC, Glibc,
+            Make, and Sed</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Test suite depends on:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Must be installed before:</strong>
+            <span class="segbody">File, Kmod, Perl, and Util-linux</span>
+          </div>
+        </div>
+      </div>
+      <div class="segmentedlist">
+        <div class="seglistitem">
+          <div class="seg">
+            <strong class="segtitle">Optional dependencies:</strong>
+            <span class="segbody">None</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acknowledgments.html" title=
+          "Acknowledgments">Prev</a>
+          <p>
+            Acknowledgments
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../scripts/scripts.html" title=
+          "Boot and sysconfig scripts version-20150222">Next</a>
+          <p>
+            Boot and sysconfig scripts version-20150222
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part4.html" title=
+          "Part&nbsp;IV.&nbsp;Appendices">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

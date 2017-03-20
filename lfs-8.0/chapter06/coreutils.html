@@ -1,0 +1,1758 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.50.&nbsp;Coreutils-8.26
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="e2fsprogs.html" title=
+          "E2fsprogs-1.43.4">Prev</a>
+          <p>
+            E2fsprogs-1.43.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="diffutils.html" title=
+          "Diffutils-3.5">Next</a>
+          <p>
+            Diffutils-3.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-coreutils" name="ch-system-coreutils"></a>6.50.
+        Coreutils-8.26
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Coreutils package contains utilities for showing and setting
+          the basic system characteristics.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">3.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">173 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.50.1. Installation of Coreutils
+        </h2>
+        <p>
+          POSIX requires that programs from Coreutils recognize character
+          boundaries correctly even in multibyte locales. The following patch
+          fixes this non-compliance and other internationalization-related
+          bugs.
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../coreutils-8.26-i18n-1.patch</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            In the past, many bugs were found in this patch. When reporting
+            new bugs to Coreutils maintainers, please check first if they are
+            reproducible without this patch.
+          </p>
+        </div>
+        <p>
+          Suppress a test which on some machines can loop forever:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i '/test.lock/s/^/#/' gnulib-tests/gnulib.mk</kbd>
+</pre>
+        <p>
+          Now prepare Coreutils for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">FORCE_UNSAFE_CONFIGURE=1 ./configure \
+            --prefix=/usr            \
+            --enable-no-install-program=kill,uptime</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><code class=
+              "envar">FORCE_UNSAFE_CONFIGURE=1</code></span>
+            </dt>
+            <dd>
+              <p>
+                This environment variable allows the package to be built as
+                the root user.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-no-install-program=kill,uptime</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The purpose of this switch is to prevent Coreutils from
+                installing binaries that will be installed by other packages
+                later.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">FORCE_UNSAFE_CONFIGURE=1 make</kbd>
+</pre>
+        <p>
+          Skip down to <span class="quote">&ldquo;<span class="quote">Install
+          the package</span>&rdquo;</span> if not running the test suite.
+        </p>
+        <p>
+          Now the test suite is ready to be run. First, run the tests that
+          are meant to be run as user <code class="systemitem">root</code>:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make NON_ROOT_USERNAME=nobody check-root</kbd>
+</pre>
+        <p>
+          We're going to run the remainder of the tests as the <code class=
+          "systemitem">nobody</code> user. Certain tests, however, require
+          that the user be a member of more than one group. So that these
+          tests are not skipped we'll add a temporary group and make the user
+          <code class="systemitem">nobody</code> a part of it:
+        </p>
+        <pre class="userinput">
+<kbd class="command">echo "dummy:x:1000:nobody" &gt;&gt; /etc/group</kbd>
+</pre>
+        <p>
+          Fix some of the permissions so that the non-root user can compile
+          and run the tests:
+        </p>
+        <pre class="userinput">
+<kbd class="command">chown -Rv nobody . </kbd>
+</pre>
+        <p>
+          Now run the tests. Make sure the PATH in the <strong class=
+          "userinput"><code>su</code></strong> environment includes
+          /tools/bin.
+        </p>
+        <pre class="userinput">
+<kbd class="command">su nobody -s /bin/bash \
+          -c "PATH=$PATH make RUN_EXPENSIVE_TESTS=yes check"</kbd>
+</pre>
+        <p>
+          The test-getlogin test is known to fail on a virtual console such
+          as the chroot environment here, but passes if run in an X terminal.
+        </p>
+        <p>
+          Remove the temporary group:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i '/dummy/d' /etc/group</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Move programs to the locations specified by the FHS:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">mv -v /usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} /bin
+mv -v /usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} /bin
+mv -v /usr/bin/{rmdir,stty,sync,true,uname} /bin
+mv -v /usr/bin/chroot /usr/sbin
+mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8
+sed -i s/\"1\"/\"8\"/1 /usr/share/man/man8/chroot.8</kbd>
+</pre>
+        <p>
+          Some of the scripts in the LFS-Bootscripts package depend on
+          <span class="command"><strong>head</strong></span>, <span class=
+          "command"><strong>sleep</strong></span>, and <span class=
+          "command"><strong>nice</strong></span>. As <code class=
+          "filename">/usr</code> may not be available during the early stages
+          of booting, those binaries need to be on the root partition:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/bin/{head,sleep,nice,test,[} /bin</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-coreutils" name="contents-coreutils"></a>6.50.2.
+          Contents of Coreutils
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">[, base32, base64, basename, cat, chcon,
+              chgrp, chmod, chown, chroot, cksum, comm, cp, csplit, cut,
+              date, dd, df, dir, dircolors, dirname, du, echo, env, expand,
+              expr, factor, false, fmt, fold, groups, head, hostid, id,
+              install, join, link, ln, logname, ls, md5sum, mkdir, mkfifo,
+              mknod, mktemp, mv, nice, nl, nohup, nproc, numfmt, od, paste,
+              pathchk, pinky, pr, printenv, printf, ptx, pwd, readlink,
+              realpath, rm, rmdir, runcon, seq, sha1sum, sha224sum,
+              sha256sum, sha384sum, sha512sum, shred, shuf, sleep, sort,
+              split, stat, stdbuf, stty, sum, sync, tac, tail, tee, test,
+              timeout, touch, tr, true, truncate, tsort, tty, uname,
+              unexpand, uniq, unlink, users, vdir, wc, who, whoami, and
+              yes</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed library:</strong>
+              <span class="segbody">libstdbuf.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/libexec/coreutils</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="base32" name="base32"></a><span class=
+                    "term"><span class=
+                    "command"><strong>base32</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Encodes and decodes data according to the base32
+                    specification (RFC 4648)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="base64" name="base64"></a><span class=
+                    "term"><span class=
+                    "command"><strong>base64</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Encodes and decodes data according to the base64
+                    specification (RFC 4648)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="basename" name="basename"></a><span class=
+                    "term"><span class=
+                    "command"><strong>basename</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Strips any path and a given suffix from a file name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cat" name="cat"></a><span class=
+                    "term"><span class="command"><strong>cat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Concatenates files to standard output
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chcon" name="chcon"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chcon</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes security context for files and directories
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chgrp" name="chgrp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chgrp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the group ownership of files and directories
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chmod" name="chmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the permissions of each file to the given mode;
+                    the mode can be either a symbolic representation of the
+                    changes to make or an octal number representing the new
+                    permissions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chown" name="chown"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chown</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the user and/or group ownership of files and
+                    directories
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chroot" name="chroot"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chroot</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a command with the specified directory as the
+                    <code class="filename">/</code> directory
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cksum" name="cksum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cksum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the Cyclic Redundancy Check (CRC) checksum and the
+                    byte counts of each specified file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="comm" name="comm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>comm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compares two sorted files, outputting in three columns
+                    the lines that are unique and the lines that are common
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cp" name="cp"></a><span class="term"><span class=
+                    "command"><strong>cp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Copies files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="csplit" name="csplit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>csplit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Splits a given file into several new files, separating
+                    them according to given patterns or line numbers and
+                    outputting the byte count of each new file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cut" name="cut"></a><span class=
+                    "term"><span class="command"><strong>cut</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints sections of lines, selecting the parts according
+                    to given fields or positions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="date" name="date"></a><span class=
+                    "term"><span class=
+                    "command"><strong>date</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the current time in the given format, or sets
+                    the system date
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dd" name="dd"></a><span class="term"><span class=
+                    "command"><strong>dd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Copies a file using the given block size and count, while
+                    optionally performing conversions on it
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="df" name="df"></a><span class="term"><span class=
+                    "command"><strong>df</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the amount of disk space available (and used) on
+                    all mounted file systems, or only on the file systems
+                    holding the selected files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dir" name="dir"></a><span class=
+                    "term"><span class="command"><strong>dir</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists the contents of each given directory (the same as
+                    the <span class="command"><strong>ls</strong></span>
+                    command)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dircolors" name="dircolors"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dircolors</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Outputs commands to set the <code class=
+                    "envar">LS_COLOR</code> environment variable to change
+                    the color scheme used by <span class=
+                    "command"><strong>ls</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dirname" name="dirname"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dirname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Strips the non-directory suffix from a file name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="du" name="du"></a><span class="term"><span class=
+                    "command"><strong>du</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the amount of disk space used by the current
+                    directory, by each of the given directories (including
+                    all subdirectories) or by each of the given files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="echo" name="echo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>echo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the given strings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="env" name="env"></a><span class=
+                    "term"><span class="command"><strong>env</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a command in a modified environment
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="expand" name="expand"></a><span class=
+                    "term"><span class=
+                    "command"><strong>expand</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts tabs to spaces
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="expr" name="expr"></a><span class=
+                    "term"><span class=
+                    "command"><strong>expr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Evaluates expressions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="factor" name="factor"></a><span class=
+                    "term"><span class=
+                    "command"><strong>factor</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the prime factors of all specified integer numbers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="false" name="false"></a><span class=
+                    "term"><span class=
+                    "command"><strong>false</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Does nothing, unsuccessfully; it always exits with a
+                    status code indicating failure
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fmt" name="fmt"></a><span class=
+                    "term"><span class="command"><strong>fmt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reformats the paragraphs in the given files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fold" name="fold"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fold</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Wraps the lines in the given files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groups" name="groups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groups</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports a user's group memberships
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="head" name="head"></a><span class=
+                    "term"><span class=
+                    "command"><strong>head</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the first ten lines (or the given number of lines)
+                    of each given file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hostid" name="hostid"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hostid</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the numeric identifier (in hexadecimal) of the
+                    host
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="id" name="id"></a><span class="term"><span class=
+                    "command"><strong>id</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the effective user ID, group ID, and group
+                    memberships of the current user or specified user
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="install" name="install"></a><span class=
+                    "term"><span class=
+                    "command"><strong>install</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Copies files while setting their permission modes and, if
+                    possible, their owner and group
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="join" name="join"></a><span class=
+                    "term"><span class=
+                    "command"><strong>join</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Joins the lines that have identical join fields from two
+                    separate files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="link" name="link"></a><span class=
+                    "term"><span class=
+                    "command"><strong>link</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a hard link with the given name to a file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ln" name="ln"></a><span class="term"><span class=
+                    "command"><strong>ln</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes hard links or soft (symbolic) links between files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="logname" name="logname"></a><span class=
+                    "term"><span class=
+                    "command"><strong>logname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the current user's login name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ls" name="ls"></a><span class="term"><span class=
+                    "command"><strong>ls</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists the contents of each given directory
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="md5sum" name="md5sum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>md5sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports or checks Message Digest 5 (MD5) checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkdir" name="mkdir"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkdir</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates directories with the given names
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mkfifo" name="mkfifo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mkfifo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates First-In, First-Outs (FIFOs), a "named pipe" in
+                    UNIX parlance, with the given names
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mknod" name="mknod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mknod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates device nodes with the given names; a device node
+                    is a character special file, a block special file, or a
+                    FIFO
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mktemp" name="mktemp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mktemp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates temporary files in a secure manner; it is used in
+                    scripts
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mv" name="mv"></a><span class="term"><span class=
+                    "command"><strong>mv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Moves or renames files or directories
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nice" name="nice"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nice</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a program with modified scheduling priority
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nl" name="nl"></a><span class="term"><span class=
+                    "command"><strong>nl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Numbers the lines from the given files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nohup" name="nohup"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nohup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a command immune to hangups, with its output
+                    redirected to a log file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nproc" name="nproc"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nproc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the number of processing units available to a
+                    process
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="numfmt" name="numfmt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>numfmt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts numbers to or from human-readable strings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="od" name="od"></a><span class="term"><span class=
+                    "command"><strong>od</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps files in octal and other formats
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="paste" name="paste"></a><span class=
+                    "term"><span class=
+                    "command"><strong>paste</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Merges the given files, joining sequentially
+                    corresponding lines side by side, separated by tab
+                    characters
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pathchk" name="pathchk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pathchk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Checks if file names are valid or portable
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pinky" name="pinky"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pinky</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a lightweight finger client; it reports some
+                    information about the given users
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pr" name="pr"></a><span class="term"><span class=
+                    "command"><strong>pr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Paginates and columnates files for printing
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="printenv" name="printenv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>printenv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the environment
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="printf" name="printf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>printf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the given arguments according to the given format,
+                    much like the C printf function
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ptx" name="ptx"></a><span class=
+                    "term"><span class="command"><strong>ptx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Produces a permuted index from the contents of the given
+                    files, with each keyword in its context
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pwd" name="pwd"></a><span class=
+                    "term"><span class="command"><strong>pwd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the name of the current working directory
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="readlink" name="readlink"></a><span class=
+                    "term"><span class=
+                    "command"><strong>readlink</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the value of the given symbolic link
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="realpath" name="realpath"></a><span class=
+                    "term"><span class=
+                    "command"><strong>realpath</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the resolved path
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rm" name="rm"></a><span class="term"><span class=
+                    "command"><strong>rm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Removes files or directories
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rmdir" name="rmdir"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rmdir</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Removes directories if they are empty
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="runcon" name="runcon"></a><span class=
+                    "term"><span class=
+                    "command"><strong>runcon</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a command with specified security context
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="seq" name="seq"></a><span class=
+                    "term"><span class="command"><strong>seq</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints a sequence of numbers within a given range and
+                    with a given increment
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sha1sum" name="sha1sum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sha1sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints or checks 160-bit Secure Hash Algorithm 1 (SHA1)
+                    checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sha224sum" name="sha224sum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sha224sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints or checks 224-bit Secure Hash Algorithm checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sha256sum" name="sha256sum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sha256sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints or checks 256-bit Secure Hash Algorithm checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sha384sum" name="sha384sum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sha384sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints or checks 384-bit Secure Hash Algorithm checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sha512sum" name="sha512sum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sha512sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints or checks 512-bit Secure Hash Algorithm checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="shred" name="shred"></a><span class=
+                    "term"><span class=
+                    "command"><strong>shred</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Overwrites the given files repeatedly with complex
+                    patterns, making it difficult to recover the data
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="shuf" name="shuf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>shuf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shuffles lines of text
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sleep" name="sleep"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sleep</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Pauses for the given amount of time
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sort" name="sort"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sort</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sorts the lines from the given files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="split" name="split"></a><span class=
+                    "term"><span class=
+                    "command"><strong>split</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Splits the given file into pieces, by size or by number
+                    of lines
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="stat" name="stat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>stat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays file or filesystem status
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="stdbuf" name="stdbuf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>stdbuf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs commands with altered buffering operations for its
+                    standard streams
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="stty" name="stty"></a><span class=
+                    "term"><span class=
+                    "command"><strong>stty</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets or reports terminal line settings
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sum" name="sum"></a><span class=
+                    "term"><span class="command"><strong>sum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints checksum and block counts for each given file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sync" name="sync"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sync</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Flushes file system buffers; it forces changed blocks to
+                    disk and updates the super block
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tac" name="tac"></a><span class=
+                    "term"><span class="command"><strong>tac</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Concatenates the given files in reverse
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tail" name="tail"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tail</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the last ten lines (or the given number of lines)
+                    of each given file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tee" name="tee"></a><span class=
+                    "term"><span class="command"><strong>tee</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads from standard input while writing both to standard
+                    output and to the given files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="test" name="test"></a><span class=
+                    "term"><span class=
+                    "command"><strong>test</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compares values and checks file types
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="timeout" name="timeout"></a><span class=
+                    "term"><span class=
+                    "command"><strong>timeout</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a command with a time limit
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="touch" name="touch"></a><span class=
+                    "term"><span class=
+                    "command"><strong>touch</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes file timestamps, setting the access and
+                    modification times of the given files to the current
+                    time; files that do not exist are created with zero
+                    length
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tr" name="tr"></a><span class="term"><span class=
+                    "command"><strong>tr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates, squeezes, and deletes the given characters
+                    from standard input
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="true" name="true"></a><span class=
+                    "term"><span class=
+                    "command"><strong>true</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Does nothing, successfully; it always exits with a status
+                    code indicating success
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="truncate" name="truncate"></a><span class=
+                    "term"><span class=
+                    "command"><strong>truncate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shrinks or expands a file to the specified size
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tsort" name="tsort"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tsort</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Performs a topological sort; it writes a completely
+                    ordered list according to the partial ordering in a given
+                    file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tty" name="tty"></a><span class=
+                    "term"><span class="command"><strong>tty</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the file name of the terminal connected to
+                    standard input
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="uname" name="uname"></a><span class=
+                    "term"><span class=
+                    "command"><strong>uname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports system information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="unexpand" name="unexpand"></a><span class=
+                    "term"><span class=
+                    "command"><strong>unexpand</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts spaces to tabs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="uniq" name="uniq"></a><span class=
+                    "term"><span class=
+                    "command"><strong>uniq</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Discards all but one of successive identical lines
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="unlink" name="unlink"></a><span class=
+                    "term"><span class=
+                    "command"><strong>unlink</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Removes the given file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="users" name="users"></a><span class=
+                    "term"><span class=
+                    "command"><strong>users</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the names of the users currently logged on
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vdir" name="vdir"></a><span class=
+                    "term"><span class=
+                    "command"><strong>vdir</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is the same as <span class="command"><strong>ls
+                    -l</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="wc" name="wc"></a><span class="term"><span class=
+                    "command"><strong>wc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the number of lines, words, and bytes for each
+                    given file, as well as a total line when more than one
+                    file is given
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="who" name="who"></a><span class=
+                    "term"><span class="command"><strong>who</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports who is logged on
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="whoami" name="whoami"></a><span class=
+                    "term"><span class=
+                    "command"><strong>whoami</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the user name associated with the current
+                    effective user ID
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="yes" name="yes"></a><span class=
+                    "term"><span class="command"><strong>yes</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Repeatedly outputs <span class=
+                    "quote">&ldquo;<span class="quote">y</span>&rdquo;</span>
+                    or a given string until killed
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libstdbuf" name="libstdbuf"></a><span class=
+                    "term"><code class="filename">libstdbuf</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Library used by <span class=
+                    "command"><strong>stdbuf</strong></span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="e2fsprogs.html" title=
+          "E2fsprogs-1.43.4">Prev</a>
+          <p>
+            E2fsprogs-1.43.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="diffutils.html" title=
+          "Diffutils-3.5">Next</a>
+          <p>
+            Diffutils-3.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

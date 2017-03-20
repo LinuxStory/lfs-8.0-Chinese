@@ -1,0 +1,894 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.54.&nbsp;Groff-1.22.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="findutils.html" title=
+          "Findutils-4.6.0">Prev</a>
+          <p>
+            Findutils-4.6.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="grub.html" title="GRUB-2.02~beta3">Next</a>
+          <p>
+            GRUB-2.02~beta3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-groff" name="ch-system-groff"></a>6.54. Groff-1.22.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Groff package contains programs for processing and formatting
+          text.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">82 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.54.1. Installation of Groff
+        </h2>
+        <p>
+          Groff expects the environment variable <code class=
+          "envar">PAGE</code> to contain the default paper size. For users in
+          the United States, <em class=
+          "parameter"><code>PAGE=letter</code></em> is appropriate.
+          Elsewhere, <em class="parameter"><code>PAGE=A4</code></em> may be
+          more suitable. While the default paper size is configured during
+          compilation, it can be overridden later by echoing either
+          <span class="quote">&ldquo;<span class=
+          "quote">A4</span>&rdquo;</span> or <span class=
+          "quote">&ldquo;<span class="quote">letter</span>&rdquo;</span> to
+          the <code class="filename">/etc/papersize</code> file.
+        </p>
+        <p>
+          Prepare Groff for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">PAGE=<em class=
+"replaceable"><code>&lt;paper_size&gt;</code></em> ./configure --prefix=/usr</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-groff" name="contents-groff"></a>6.54.2. Contents
+          of Groff
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">addftinfo, afmtodit, chem, eqn,
+              eqn2graph, gdiffmk, glilypond, gperl, gpinyin, grap2graph, grn,
+              grodvi, groff, groffer, grog, grolbp, grolj4, gropdf, grops,
+              grotty, hpftodit, indxbib, lkbib, lookbib, mmroff, neqn, nroff,
+              pdfmom, pdfroff, pfbtops, pic, pic2graph, post-grohtml,
+              preconv, pre-grohtml, refer, roff2dvi, roff2html, roff2pdf,
+              roff2ps, roff2text, roff2x, soelim, tbl, tfmtodit, and
+              troff</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/lib/groff and
+              /usr/share/doc/groff-1.22.3, /usr/share/groff</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="addftinfo" name="addftinfo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>addftinfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads a troff font file and adds some additional
+                    font-metric information that is used by the <span class=
+                    "command"><strong>groff</strong></span> system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="afmtodit" name="afmtodit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>afmtodit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a font file for use with <span class=
+                    "command"><strong>groff</strong></span> and <span class=
+                    "command"><strong>grops</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chem" name="chem"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chem</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Groff preprocessor for producing chemical structure
+                    diagrams
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="eqn" name="eqn"></a><span class=
+                    "term"><span class="command"><strong>eqn</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compiles descriptions of equations embedded within troff
+                    input files into commands that are understood by
+                    <span class="command"><strong>troff</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="eqn2graph" name="eqn2graph"></a><span class=
+                    "term"><span class=
+                    "command"><strong>eqn2graph</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts a troff EQN (equation) into a cropped image
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gdiffmk" name="gdiffmk"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gdiffmk</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Marks differences between groff/nroff/troff files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="glilypond" name="glilypond"></a><span class=
+                    "term"><span class=
+                    "command"><strong>glilypond</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms sheet music written in the lilypond language
+                    into the groff language
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gperl" name="gperl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gperl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Preprocesor for groff, allowing addition of perl code
+                    into groff files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gpinyin" name="gpinyin"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gpinyin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Preprocesor for groff, allowing addition of Chinese
+                    European-like language Pinyin into groff files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grap2graph" name="grap2graph"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grap2graph</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts a grap diagram into a cropped bitmap image
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grn" name="grn"></a><span class=
+                    "term"><span class="command"><strong>grn</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A <span class="command"><strong>groff</strong></span>
+                    preprocessor for gremlin files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grodvi" name="grodvi"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grodvi</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A driver for <span class=
+                    "command"><strong>groff</strong></span> that produces TeX
+                    dvi format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groff" name="groff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A front-end to the groff document formatting system;
+                    normally, it runs the <span class=
+                    "command"><strong>troff</strong></span> program and a
+                    post-processor appropriate for the selected device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groffer" name="groffer"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groffer</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays groff files and man pages on X and tty terminals
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grog" name="grog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads files and guesses which of the <span class=
+                    "command"><strong>groff</strong></span> options
+                    <code class="option">-e</code>, <code class=
+                    "option">-man</code>, <code class="option">-me</code>,
+                    <code class="option">-mm</code>, <code class=
+                    "option">-ms</code>, <code class="option">-p</code>,
+                    <code class="option">-s</code>, and <code class=
+                    "option">-t</code> are required for printing files, and
+                    reports the <span class=
+                    "command"><strong>groff</strong></span> command including
+                    those options
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grolbp" name="grolbp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grolbp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a <span class="command"><strong>groff</strong></span>
+                    driver for Canon CAPSL printers (LBP-4 and LBP-8 series
+                    laser printers)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grolj4" name="grolj4"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grolj4</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a driver for <span class=
+                    "command"><strong>groff</strong></span> that produces
+                    output in PCL5 format suitable for an HP LaserJet 4
+                    printer
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gropdf" name="gropdf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gropdf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates the output of GNU <span class=
+                    "command"><strong>troff</strong></span> to PDF
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grops" name="grops"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grops</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates the output of GNU <span class=
+                    "command"><strong>troff</strong></span> to PostScript
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grotty" name="grotty"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grotty</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates the output of GNU <span class=
+                    "command"><strong>troff</strong></span> into a form
+                    suitable for typewriter-like devices
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hpftodit" name="hpftodit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hpftodit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a font file for use with <span class=
+                    "command"><strong>groff -Tlj4</strong></span> from an
+                    HP-tagged font metric file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="indxbib" name="indxbib"></a><span class=
+                    "term"><span class=
+                    "command"><strong>indxbib</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates an inverted index for the bibliographic databases
+                    with a specified file for use with <span class=
+                    "command"><strong>refer</strong></span>, <span class=
+                    "command"><strong>lookbib</strong></span>, and
+                    <span class="command"><strong>lkbib</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lkbib" name="lkbib"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lkbib</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Searches bibliographic databases for references that
+                    contain specified keys and reports any references found
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lookbib" name="lookbib"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lookbib</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints a prompt on the standard error (unless the
+                    standard input is not a terminal), reads a line
+                    containing a set of keywords from the standard input,
+                    searches the bibliographic databases in a specified file
+                    for references containing those keywords, prints any
+                    references found on the standard output, and repeats this
+                    process until the end of input
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mmroff" name="mmroff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mmroff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A simple preprocessor for <span class=
+                    "command"><strong>groff</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="neqn" name="neqn"></a><span class=
+                    "term"><span class=
+                    "command"><strong>neqn</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Formats equations for American Standard Code for
+                    Information Interchange (ASCII) output
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nroff" name="nroff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nroff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A script that emulates the <span class=
+                    "command"><strong>nroff</strong></span> command using
+                    <span class="command"><strong>groff</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfmom" name="pdfmom"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfmom</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a wrapper around groff that facilitates the production
+                    of PDF documents from files formatted with the mom
+                    macros.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfroff" name="pdfroff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfroff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates pdf documents using groff
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pfbtops" name="pfbtops"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pfbtops</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates a PostScript font in <code class=
+                    "filename">.pfb</code> format to ASCII
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pic" name="pic"></a><span class=
+                    "term"><span class="command"><strong>pic</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compiles descriptions of pictures embedded within troff
+                    or TeX input files into commands understood by TeX or
+                    <span class="command"><strong>troff</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pic2graph" name="pic2graph"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pic2graph</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts a PIC diagram into a cropped image
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="post-grohtml" name="post-grohtml"></a><span class=
+                    "term"><span class=
+                    "command"><strong>post-grohtml</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates the output of GNU <span class=
+                    "command"><strong>troff</strong></span> to HTML
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="preconv" name="preconv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>preconv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts encoding of input files to something GNU
+                    <span class="command"><strong>troff</strong></span>
+                    understands
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pre-grohtml" name="pre-grohtml"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pre-grohtml</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Translates the output of GNU <span class=
+                    "command"><strong>troff</strong></span> to HTML
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="refer" name="refer"></a><span class=
+                    "term"><span class=
+                    "command"><strong>refer</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Copies the contents of a file to the standard output,
+                    except that lines between <span class=
+                    "emphasis"><em>.[</em></span> and <span class=
+                    "emphasis"><em>.]</em></span> are interpreted as
+                    citations, and lines between <span class=
+                    "emphasis"><em>.R1</em></span> and <span class=
+                    "emphasis"><em>.R2</em></span> are interpreted as
+                    commands for how citations are to be processed
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="roff2dvi" name="roff2dvi"></a><span class=
+                    "term"><span class=
+                    "command"><strong>roff2dvi</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms roff files into DVI format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="roff2html" name="roff2html"></a><span class=
+                    "term"><span class=
+                    "command"><strong>roff2html</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms roff files into HTML format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="roff2pdf" name="roff2pdf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>roff2pdf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms roff files into PDFs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="roff2ps" name="roff2ps"></a><span class=
+                    "term"><span class=
+                    "command"><strong>roff2ps</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms roff files into ps files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="roff2text" name="roff2text"></a><span class=
+                    "term"><span class=
+                    "command"><strong>roff2text</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms roff files into text files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="roff2x" name="roff2x"></a><span class=
+                    "term"><span class=
+                    "command"><strong>roff2x</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms roff files into other formats
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="soelim" name="soelim"></a><span class=
+                    "term"><span class=
+                    "command"><strong>soelim</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads files and replaces lines of the form <span class=
+                    "emphasis"><em>.so file</em></span> by the contents of
+                    the mentioned <span class="emphasis"><em>file</em></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tbl" name="tbl"></a><span class=
+                    "term"><span class="command"><strong>tbl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compiles descriptions of tables embedded within troff
+                    input files into commands that are understood by
+                    <span class="command"><strong>troff</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tfmtodit" name="tfmtodit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tfmtodit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a font file for use with <span class=
+                    "command"><strong>groff -Tdvi</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="troff" name="troff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>troff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is highly compatible with Unix <span class=
+                    "command"><strong>troff</strong></span>; it should
+                    usually be invoked using the <span class=
+                    "command"><strong>groff</strong></span> command, which
+                    will also run preprocessors and post-processors in the
+                    appropriate order and with the appropriate options
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="findutils.html" title=
+          "Findutils-4.6.0">Prev</a>
+          <p>
+            Findutils-4.6.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="grub.html" title="GRUB-2.02~beta3">Next</a>
+          <p>
+            GRUB-2.02~beta3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

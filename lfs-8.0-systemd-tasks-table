@@ -1,0 +1,189 @@
+
+Table of Contents lfs-8.0 systemd 目录
+
+1.请大家在自己认领的章节后面加上  “（@github_id）" 使用半角括号，可以参看下方的示例，为了方面阅读，请在左括号之前加10个左右的半角空格
+2.认领的单位是“节”，及缩进最靠后的最小单位，每一个“节”就是一个独立的 Html 文件，举例而言，就目录最前的序言，不应该认领 “Preface”，而是
+应该认领 “Foreword”，因为 “Foreword”是最小单位，一个独立 html。
+3.翻译的时候注意不要破坏 html 代码，避免网页显示不正常。
+
+目录：
+
+Table of Contents
+
+    Preface
+        Foreword
+        Audience
+        LFS Target Architectures
+        LFS and Standards
+        Rationale for Packages in the Book
+        Prerequisites
+        Typography
+        Structure
+        Errata
+    I. Introduction
+        1. Introduction
+            How to Build an LFS System
+            What's new since the last release
+            Changelog
+            Resources
+            Help
+    II. Preparing for the Build
+        2. Preparing the Host System
+            Introduction
+            Host System Requirements
+            Building LFS in Stages
+            Creating a New Partition
+            Creating a File System on the Partition
+            Setting The $LFS Variable
+            Mounting the New Partition
+        3. Packages and Patches
+            Introduction
+            All Packages
+            Needed Patches
+        4. Final Preparations
+            Introduction
+            Creating the $LFS/tools Directory
+            Adding the LFS User
+            Setting Up the Environment
+            About SBUs
+            About the Test Suites
+        5. Constructing a Temporary System
+            Introduction
+            Toolchain Technical Notes
+            General Compilation Instructions
+            Binutils-2.27 - Pass 1
+            GCC-6.3.0 - Pass 1
+            Linux-4.9.9 API Headers
+            Glibc-2.25
+            Libstdc++-6.3.0
+            Binutils-2.27 - Pass 2
+            GCC-6.3.0 - Pass 2
+            Tcl-core-8.6.6
+            Expect-5.45
+            DejaGNU-1.6
+            Check-0.11.0
+            Ncurses-6.0
+            Bash-4.4
+            Bison-3.0.4
+            Bzip2-1.0.6
+            Coreutils-8.26
+            Diffutils-3.5
+            File-5.30
+            Findutils-4.6.0
+            Gawk-4.1.4
+            Gettext-0.19.8.1
+            Grep-3.0
+            Gzip-1.8
+            M4-1.4.18
+            Make-4.2.1
+            Patch-2.7.5
+            Perl-5.24.1
+            Sed-4.4
+            Tar-1.29
+            Texinfo-6.3
+            Util-linux-2.29.1
+            Xz-5.2.3
+            Stripping
+            Changing Ownership
+    III. Building the LFS System
+        6. Installing Basic System Software
+            Introduction
+            Preparing Virtual Kernel File Systems
+            Package Management
+            Entering the Chroot Environment
+            Creating Directories
+            Creating Essential Files and Symlinks
+            Linux-4.9.9 API Headers
+            Man-pages-4.09
+            Glibc-2.25
+            Adjusting the Toolchain
+            Zlib-1.2.11
+            File-5.30
+            Binutils-2.27
+            GMP-6.1.2
+            MPFR-3.1.5
+            MPC-1.0.3
+            GCC-6.3.0
+            Bzip2-1.0.6
+            Pkg-config-0.29.1
+            Ncurses-6.0
+            Attr-2.4.47
+            Acl-2.2.52
+            Libcap-2.25
+            Sed-4.4
+            Shadow-4.4
+            Psmisc-22.21
+            Iana-Etc-2.30
+            M4-1.4.18
+            Bison-3.0.4
+            Flex-2.6.3
+            Grep-3.0
+            Readline-7.0
+            Bash-4.4
+            Bc-1.06.95
+            Libtool-2.4.6
+            GDBM-1.12
+            Gperf-3.0.4
+            Expat-2.2.0
+            Inetutils-1.9.4
+            Perl-5.24.1
+            XML::Parser-2.44
+            Intltool-0.51.0
+            Autoconf-2.69
+            Automake-1.15
+            Xz-5.2.3
+            Kmod-23
+            Gettext-0.19.8.1
+            Systemd-232
+            Procps-ng-3.3.12
+            E2fsprogs-1.43.4
+            Coreutils-8.26
+            Diffutils-3.5
+            Gawk-4.1.4
+            Findutils-4.6.0
+            Groff-1.22.3
+            GRUB-2.02~beta3
+            Less-481
+            Gzip-1.8
+            IPRoute2-4.9.0
+            Kbd-2.0.4
+            Libpipeline-1.4.1
+            Make-4.2.1
+            Patch-2.7.5
+            D-Bus-1.10.14
+            Util-linux-2.29.1
+            Man-DB-2.7.6.1
+            Tar-1.29
+            Texinfo-6.3
+            Vim-8.0.069
+            About Debugging Symbols
+            Stripping Again
+            Cleaning Up
+        7. System Configuration
+            Introduction
+            General Network Configuration
+            Overview of Device and Module Handling
+            Managing Devices
+            Configuring the system clock
+            Configuring the Linux Console
+            Configuring the System Locale
+            Creating the /etc/inputrc File
+            Creating the /etc/shells File
+            Systemd Usage and Configuration
+        8. Making the LFS System Bootable
+            Introduction
+            Creating the /etc/fstab File
+            Linux-4.9.9
+            Using GRUB to Set Up the Boot Process
+        9. The End
+            The End
+            Get Counted
+            Rebooting the System
+            What Now?
+    IV. Appendices
+        A. Acronyms and Terms
+        B. Acknowledgments
+        C. Dependencies
+        D. LFS Licenses
+            Creative Commons License
+            The MIT License

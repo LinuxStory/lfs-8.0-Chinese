@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.27.&nbsp;Iana-Etc-2.30
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="psmisc.html" title="Psmisc-22.21">Prev</a>
+          <p>
+            Psmisc-22.21
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="m4.html" title="M4-1.4.18">Next</a>
+          <p>
+            M4-1.4.18
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-iana-etc" name="ch-system-iana-etc"></a>6.27.
+        Iana-Etc-2.30
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Iana-Etc package provides data for network services and
+          protocols.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">2.3 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.27.1. Installation of Iana-Etc
+        </h2>
+        <p>
+          The following command converts the raw data provided by IANA into
+          the correct formats for the <code class=
+          "filename">/etc/protocols</code> and <code class=
+          "filename">/etc/services</code> data files:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-iana-etc" name="contents-iana-etc"></a>6.27.2.
+          Contents of Iana-Etc
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed files:</strong> <span class=
+              "segbody">/etc/protocols and /etc/services</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="protocols" name="protocols"></a><span class=
+                    "term"><code class=
+                    "filename">/etc/protocols</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Describes the various DARPA Internet protocols that are
+                    available from the TCP/IP subsystem
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="services" name="services"></a><span class=
+                    "term"><code class="filename">/etc/services</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Provides a mapping between friendly textual names for
+                    internet services, and their underlying assigned port
+                    numbers and protocol types
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="psmisc.html" title="Psmisc-22.21">Prev</a>
+          <p>
+            Psmisc-22.21
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="m4.html" title="M4-1.4.18">Next</a>
+          <p>
+            M4-1.4.18
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.4.&nbsp;Entering the Chroot Environment
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pkgmgt.html" title=
+          "Package Management">Prev</a>
+          <p>
+            Package Management
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="creatingdirs.html" title=
+          "Creating Directories">Next</a>
+          <p>
+            Creating Directories
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-chroot" name="ch-system-chroot"></a>6.4. Entering
+        the Chroot Environment
+      </h1>
+      <p>
+        It is time to enter the chroot environment to begin building and
+        installing the final LFS system. As user <code class=
+        "systemitem">root</code>, run the following command to enter the
+        realm that is, at the moment, populated with only the temporary
+        tools:
+      </p>
+      <pre class="userinput">
+<kbd class="command">chroot "$LFS" /tools/bin/env -i \
+    HOME=/root                  \
+    TERM="$TERM"                \
+    PS1='\u:\w\$ '              \
+    PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+    /tools/bin/bash --login +h</kbd>
+</pre>
+      <p>
+        The <em class="parameter"><code>-i</code></em> option given to the
+        <span class="command"><strong>env</strong></span> command will clear
+        all variables of the chroot environment. After that, only the
+        <code class="envar">HOME</code>, <code class="envar">TERM</code>,
+        <code class="envar">PS1</code>, and <code class="envar">PATH</code>
+        variables are set again. The <em class=
+        "parameter"><code>TERM=$TERM</code></em> construct will set the
+        <code class="envar">TERM</code> variable inside chroot to the same
+        value as outside chroot. This variable is needed for programs like
+        <span class="command"><strong>vim</strong></span> and <span class=
+        "command"><strong>less</strong></span> to operate properly. If other
+        variables are needed, such as <code class="envar">CFLAGS</code> or
+        <code class="envar">CXXFLAGS</code>, this is a good place to set them
+        again.
+      </p>
+      <p>
+        From this point on, there is no need to use the <code class=
+        "envar">LFS</code> variable anymore, because all work will be
+        restricted to the LFS file system. This is because the Bash shell is
+        told that <code class="filename">$LFS</code> is now the root
+        (<code class="filename">/</code>) directory.
+      </p>
+      <p>
+        Notice that <code class="filename">/tools/bin</code> comes last in
+        the <code class="envar">PATH</code>. This means that a temporary tool
+        will no longer be used once its final version is installed. This
+        occurs when the shell does not <span class=
+        "quote">&ldquo;<span class="quote">remember</span>&rdquo;</span> the
+        locations of executed binaries&mdash;for this reason, hashing is
+        switched off by passing the <em class=
+        "parameter"><code>+h</code></em> option to <span class=
+        "command"><strong>bash</strong></span>.
+      </p>
+      <p>
+        Note that the <span class="command"><strong>bash</strong></span>
+        prompt will say <code class="computeroutput">I have no name!</code>
+        This is normal because the <code class="filename">/etc/passwd</code>
+        file has not been created yet.
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          It is important that all the commands throughout the remainder of
+          this chapter and the following chapters are run from within the
+          chroot environment. If you leave this environment for any reason
+          (rebooting for example), ensure that the virtual kernel filesystems
+          are mounted as explained in <a class="xref" href=
+          "kernfs.html#ch-system-bindmount" title=
+          "6.2.2.&nbsp;Mounting and Populating /dev">Section&nbsp;6.2.2,
+          &ldquo;Mounting and Populating /dev&rdquo;</a> and <a class="xref"
+          href="kernfs.html#ch-system-kernfsmount" title=
+          "6.2.3.&nbsp;Mounting Virtual Kernel File Systems">Section&nbsp;6.2.3,
+          &ldquo;Mounting Virtual Kernel File Systems&rdquo;</a> and enter
+          chroot again before continuing with the installation.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pkgmgt.html" title=
+          "Package Management">Prev</a>
+          <p>
+            Package Management
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="creatingdirs.html" title=
+          "Creating Directories">Next</a>
+          <p>
+            Creating Directories
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.30.&nbsp;Perl-5.24.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="patch.html" title="Patch-2.7.5">Prev</a>
+          <p>
+            Patch-2.7.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sed.html" title="Sed-4.4">Next</a>
+          <p>
+            Sed-4.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-perl" name="ch-tools-perl"></a>5.30. Perl-5.24.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Perl package contains the Practical Extraction and Report
+          Language.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">1.3 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">249 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.30.1. Installation of Perl
+        </h2>
+        <p>
+          Prepare Perl for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sh Configure -des -Dprefix=/tools -Dlibs=-lm</kbd>
+</pre>
+        <p>
+          Build the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          Although Perl comes with a test suite, it would be better to wait
+          until it is installed in the next chapter.
+        </p>
+        <p>
+          Only a few of the utilities and libraries need to be installed at
+          this time:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cp -v perl cpan/podlators/scripts/pod2man /tools/bin
+mkdir -pv /tools/lib/perl5/5.24.1
+cp -Rv lib/* /tools/lib/perl5/5.24.1</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter06/perl.html#contents-perl" title=
+          "6.40.2.&nbsp;Contents of Perl">Section&nbsp;6.40.2,
+          &ldquo;Contents of Perl.&rdquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="patch.html" title="Patch-2.7.5">Prev</a>
+          <p>
+            Patch-2.7.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sed.html" title="Sed-4.4">Next</a>
+          <p>
+            Sed-4.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

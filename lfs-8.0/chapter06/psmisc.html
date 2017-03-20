@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.26.&nbsp;Psmisc-22.21
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="shadow.html" title="Shadow-4.4">Prev</a>
+          <p>
+            Shadow-4.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iana-etc.html" title=
+          "Iana-Etc-2.30">Next</a>
+          <p>
+            Iana-Etc-2.30
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-psmisc" name="ch-system-psmisc"></a>6.26.
+        Psmisc-22.21
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Psmisc package contains programs for displaying information
+          about running processes.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">4.0 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.26.1. Installation of Psmisc
+        </h2>
+        <p>
+          Prepare Psmisc for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Finally, move the <span class=
+          "command"><strong>killall</strong></span> and <span class=
+          "command"><strong>fuser</strong></span> programs to the location
+          specified by the FHS:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/bin/fuser   /bin
+mv -v /usr/bin/killall /bin</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-psmisc" name="contents-psmisc"></a>6.26.2. Contents
+          of Psmisc
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">fuser, killall, peekfd, prtstat, pstree,
+              and pstree.x11 (link to pstree)</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fuser" name="fuser"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fuser</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the Process IDs (PIDs) of processes that use the
+                    given files or file systems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="killall" name="killall"></a><span class=
+                    "term"><span class=
+                    "command"><strong>killall</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Kills processes by name; it sends a signal to all
+                    processes running any of the given commands
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="peekfd" name="peekfd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>peekfd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Peek at file descriptors of a running process, given its
+                    PID
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="prtstat" name="prtstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>prtstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints information about a process
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pstree" name="pstree"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pstree</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays running processes as a tree
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pstree.x11" name="pstree.x11"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pstree.x11</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Same as <span class=
+                    "command"><strong>pstree</strong></span>, except that it
+                    waits for confirmation before exiting
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="shadow.html" title="Shadow-4.4">Prev</a>
+          <p>
+            Shadow-4.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iana-etc.html" title=
+          "Iana-Etc-2.30">Next</a>
+          <p>
+            Iana-Etc-2.30
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

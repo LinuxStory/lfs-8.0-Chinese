@@ -1,0 +1,591 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.60.&nbsp;Kbd-2.0.4
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="iproute2.html" title=
+          "IPRoute2-4.9.0">Prev</a>
+          <p>
+            IPRoute2-4.9.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libpipeline.html" title=
+          "Libpipeline-1.4.1">Next</a>
+          <p>
+            Libpipeline-1.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-kbd" name="ch-system-kbd"></a>6.60. Kbd-2.0.4
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Kbd package contains key-table files, console fonts, and
+          keyboard utilities.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">29 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.60.1. Installation of Kbd
+        </h2>
+        <p>
+          The behaviour of the Backspace and Delete keys is not consistent
+          across the keymaps in the Kbd package. The following patch fixes
+          this issue for i386 keymaps:
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../kbd-2.0.4-backspace-1.patch</kbd>
+</pre>
+        <p>
+          After patching, the Backspace key generates the character with code
+          127, and the Delete key generates a well-known escape sequence.
+        </p>
+        <p>
+          Remove the redundant <span class=
+          "command"><strong>resizecons</strong></span> program (it requires
+          the defunct svgalib to provide the video mode files - for normal
+          use <span class="command"><strong>setfont</strong></span> sizes the
+          console appropriately) together with its manpage.
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in</kbd>
+</pre>
+        <p>
+          Prepare Kbd for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-vlock</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option prevents the vlock utility from being built, as
+                it requires the PAM library, which isn't available in the
+                chroot environment.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            For some languages (e.g., Belarusian) the Kbd package doesn't
+            provide a useful keymap where the stock <span class=
+            "quote">&ldquo;<span class="quote">by</span>&rdquo;</span> keymap
+            assumes the ISO-8859-5 encoding, and the CP1251 keymap is
+            normally used. Users of such languages have to download working
+            keymaps separately.
+          </p>
+        </div>
+        <p>
+          If desired, install the documentation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v       /usr/share/doc/kbd-2.0.4
+cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-kbd" name="contents-kbd"></a>6.60.2. Contents of
+          Kbd
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">chvt, deallocvt, dumpkeys, fgconsole,
+              getkeycodes, kbdinfo, kbd_mode, kbdrate, loadkeys, loadunimap,
+              mapscrn, openvt, psfaddtable (link to psfxtable), psfgettable
+              (link to psfxtable), psfstriptable (link to psfxtable),
+              psfxtable, setfont, setkeycodes, setleds, setmetamode,
+              setvtrgb, showconsolefont, showkey, unicode_start, and
+              unicode_stop</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/share/consolefonts,
+              /usr/share/consoletrans, /usr/share/keymaps,
+              /usr/share/doc/kbd-2.0.4, and /usr/share/unimaps</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chvt" name="chvt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chvt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the foreground virtual terminal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="deallocvt" name="deallocvt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>deallocvt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Deallocates unused virtual terminals
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dumpkeys" name="dumpkeys"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dumpkeys</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps the keyboard translation tables
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fgconsole" name="fgconsole"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fgconsole</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the number of the active virtual terminal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getkeycodes" name="getkeycodes"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getkeycodes</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints the kernel scancode-to-keycode mapping table
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kbdinfo" name="kbdinfo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kbdinfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Obtains information about the status of a console
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kbd_mode" name="kbd_mode"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kbd_mode</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports or sets the keyboard mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kbdrate" name="kbdrate"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kbdrate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets the keyboard repeat and delay rates
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="loadkeys" name="loadkeys"></a><span class=
+                    "term"><span class=
+                    "command"><strong>loadkeys</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Loads the keyboard translation tables
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="loadunimap" name="loadunimap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>loadunimap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Loads the kernel unicode-to-font mapping table
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mapscrn" name="mapscrn"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mapscrn</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    An obsolete program that used to load a user-defined
+                    output character mapping table into the console driver;
+                    this is now done by <span class=
+                    "command"><strong>setfont</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="openvt" name="openvt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>openvt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Starts a program on a new virtual terminal (VT)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="psfaddtable" name="psfaddtable"></a><span class=
+                    "term"><span class=
+                    "command"><strong>psfaddtable</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Adds a Unicode character table to a console font
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="psfgettable" name="psfgettable"></a><span class=
+                    "term"><span class=
+                    "command"><strong>psfgettable</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Extracts the embedded Unicode character table from a
+                    console font
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="psfstriptable" name=
+                    "psfstriptable"></a><span class="term"><span class=
+                    "command"><strong>psfstriptable</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Removes the embedded Unicode character table from a
+                    console font
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="psfxtable" name="psfxtable"></a><span class=
+                    "term"><span class=
+                    "command"><strong>psfxtable</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Handles Unicode character tables for console fonts
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setfont" name="setfont"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setfont</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Changes the Enhanced Graphic Adapter (EGA) and Video
+                    Graphics Array (VGA) fonts on the console
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setkeycodes" name="setkeycodes"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setkeycodes</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Loads kernel scancode-to-keycode mapping table entries;
+                    this is useful if there are unusual keys on the keyboard
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setleds" name="setleds"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setleds</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets the keyboard flags and Light Emitting Diodes (LEDs)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setmetamode" name="setmetamode"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setmetamode</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Defines the keyboard meta-key handling
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setvtrgb" name="setvtrgb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setvtrgb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets the console color map in all virtual terminals
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="showconsolefont" name=
+                    "showconsolefont"></a><span class="term"><span class=
+                    "command"><strong>showconsolefont</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shows the current EGA/VGA console screen font
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="showkey" name="showkey"></a><span class=
+                    "term"><span class=
+                    "command"><strong>showkey</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the scancodes, keycodes, and ASCII codes of the
+                    keys pressed on the keyboard
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="unicode_start" name=
+                    "unicode_start"></a><span class="term"><span class=
+                    "command"><strong>unicode_start</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Puts the keyboard and console in UNICODE mode [Don't use
+                    this program unless your keymap file is in the ISO-8859-1
+                    encoding. For other encodings, this utility produces
+                    incorrect results.]
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="unicode_stop" name="unicode_stop"></a><span class=
+                    "term"><span class=
+                    "command"><strong>unicode_stop</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reverts keyboard and console from UNICODE mode
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="iproute2.html" title=
+          "IPRoute2-4.9.0">Prev</a>
+          <p>
+            IPRoute2-4.9.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libpipeline.html" title=
+          "Libpipeline-1.4.1">Next</a>
+          <p>
+            Libpipeline-1.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

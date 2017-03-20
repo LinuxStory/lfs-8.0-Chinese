@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.40.&nbsp;Perl-5.24.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="inetutils.html" title=
+          "Inetutils-1.9.4">Prev</a>
+          <p>
+            Inetutils-1.9.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xml-parser.html" title=
+          "XML::Parser-2.44">Next</a>
+          <p>
+            XML::Parser-2.44
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-perl" name="ch-system-perl"></a>6.40. Perl-5.24.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Perl package contains the Practical Extraction and Report
+          Language.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">5.9 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">245 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.40.1. Installation of Perl
+        </h2>
+        <p>
+          First create a basic <code class="filename">/etc/hosts</code> file
+          to be referenced in one of Perl's configuration files as well as
+          the optional test suite:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">echo "127.0.0.1 localhost $(hostname)" &gt; /etc/hosts</kbd>
+</pre>
+        <p>
+          This version of Perl now builds the Compress::Raw::Zlib and
+          Compress::Raw::BZip2 modules. By default Perl will use an internal
+          copy of the sources for the build. Issue the following command so
+          that Perl will use the libraries installed on the system:
+        </p>
+        <pre class="userinput">
+<kbd class="command">export BUILD_ZLIB=False
+export BUILD_BZIP2=0</kbd>
+</pre>
+        <p>
+          To have full control over the way Perl is set up, you can remove
+          the <span class="quote">&ldquo;<span class=
+          "quote">-des</span>&rdquo;</span> options from the following
+          command and hand-pick the way this package is built. Alternatively,
+          use the command exactly as below to use the defaults that Perl
+          auto-detects:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sh Configure -des -Dprefix=/usr                 \
+                  -Dvendorprefix=/usr           \
+                  -Dman1dir=/usr/share/man/man1 \
+                  -Dman3dir=/usr/share/man/man3 \
+                  -Dpager="/usr/bin/less -isR"  \
+                  -Duseshrplib</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>-Dvendorprefix=/usr</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This ensures <span class=
+                "command"><strong>perl</strong></span> knows how to tell
+                packages where they should install their perl modules.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>-Dpager="/usr/bin/less
+              -isR"</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This ensures that <strong class=
+                "userinput"><code>less</code></strong> is used instead of
+                <strong class="userinput"><code>more</code></strong>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>-Dman1dir=/usr/share/man/man1
+              -Dman3dir=/usr/share/man/man3</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Since Groff is not installed yet, <span class=
+                "command"><strong>Configure</strong></span> thinks that we do
+                not want man pages for Perl. Issuing these parameters
+                overrides this decision.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>-Duseshrplib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Build a shared libperl needed by some perl modules.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results (approximately 2.5 SBU), issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -k test</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Several tests related to zlib will fail due to using the system
+            version of zlib instead of the internal version.
+          </p>
+        </div>
+        <p>
+          Install the package and clean up:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install
+unset BUILD_ZLIB BUILD_BZIP2</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-perl" name="contents-perl"></a>6.40.2. Contents of
+          Perl
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">c2ph, corelist, cpan, enc2xs, encguess,
+              h2ph, h2xs, instmodsh, json_pp, libnetcfg, perl, perl5.24.1
+              (hard link to perl), perlbug, perldoc, perlivp, perlthanks
+              (hard link to perlbug), piconv, pl2pm, pod2html, pod2man,
+              pod2text, pod2usage, podchecker, podselect, prove, pstruct
+              (hard link to c2ph), ptar, ptardiff, ptargrep, shasum, splain,
+              xsubpp, and zipdetails</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">Many which cannot all be listed
+              here</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/lib/perl5</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="c2ph" name="c2ph"></a><span class=
+                    "term"><span class=
+                    "command"><strong>c2ph</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps C structures as generated from <span class=
+                    "command"><strong>cc -g -S</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="corelist" name="corelist"></a><span class=
+                    "term"><span class=
+                    "command"><strong>corelist</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A commandline frontend to Module::CoreList
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cpan" name="cpan"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cpan</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Interact with the Comprehensive Perl Archive Network
+                    (CPAN) from the command line
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="enc2xs" name="enc2xs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>enc2xs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Builds a Perl extension for the Encode module from either
+                    Unicode Character Mappings or Tcl Encoding Files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="encguess" name="encguess"></a><span class=
+                    "term"><span class=
+                    "command"><strong>encguess</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Guess the encoding type of one or several files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="h2ph" name="h2ph"></a><span class=
+                    "term"><span class=
+                    "command"><strong>h2ph</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts <code class="filename">.h</code> C header files
+                    to <code class="filename">.ph</code> Perl header files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="h2xs" name="h2xs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>h2xs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts <code class="filename">.h</code> C header files
+                    to Perl extensions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="instmodsh" name="instmodsh"></a><span class=
+                    "term"><span class=
+                    "command"><strong>instmodsh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Shell script for examining installed Perl modules, and
+                    can even create a tarball from an installed module
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="json_pp" name="json_pp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>json_pp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts data between certain input and output formats
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libnetcfg" name="libnetcfg"></a><span class=
+                    "term"><span class=
+                    "command"><strong>libnetcfg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Can be used to configure the <code class=
+                    "filename">libnet</code> Perl module
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="perl" name="perl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>perl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Combines some of the best features of C, <span class=
+                    "command"><strong>sed</strong></span>, <span class=
+                    "command"><strong>awk</strong></span> and <span class=
+                    "command"><strong>sh</strong></span> into a single
+                    swiss-army language
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="perl-version" name="perl-version"></a><span class=
+                    "term"><span class=
+                    "command"><strong>perl5.24.1</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A hard link to <span class=
+                    "command"><strong>perl</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="perlbug" name="perlbug"></a><span class=
+                    "term"><span class=
+                    "command"><strong>perlbug</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to generate bug reports about Perl, or the modules
+                    that come with it, and mail them
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="perldoc" name="perldoc"></a><span class=
+                    "term"><span class=
+                    "command"><strong>perldoc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays a piece of documentation in pod format that is
+                    embedded in the Perl installation tree or in a Perl
+                    script
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="perlivp" name="perlivp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>perlivp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Perl Installation Verification Procedure; it can be
+                    used to verify that Perl and its libraries have been
+                    installed correctly
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="perlthanks" name="perlthanks"></a><span class=
+                    "term"><span class=
+                    "command"><strong>perlthanks</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to generate thank you messages to mail to the Perl
+                    developers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="piconv" name="piconv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>piconv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A Perl version of the character encoding converter
+                    <span class="command"><strong>iconv</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pl2pm" name="pl2pm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pl2pm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A rough tool for converting Perl4 <code class=
+                    "filename">.pl</code> files to Perl5 <code class=
+                    "filename">.pm</code> modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pod2html" name="pod2html"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pod2html</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts files from pod format to HTML format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pod2man" name="pod2man"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pod2man</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts pod data to formatted *roff input
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pod2text" name="pod2text"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pod2text</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts pod data to formatted ASCII text
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pod2usage" name="pod2usage"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pod2usage</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints usage messages from embedded pod docs in files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="podchecker" name="podchecker"></a><span class=
+                    "term"><span class=
+                    "command"><strong>podchecker</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Checks the syntax of pod format documentation files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="podselect" name="podselect"></a><span class=
+                    "term"><span class=
+                    "command"><strong>podselect</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays selected sections of pod documentation
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="prove" name="prove"></a><span class=
+                    "term"><span class=
+                    "command"><strong>prove</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Command line tool for running tests against the
+                    Test::Harness module
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pstruct" name="pstruct"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pstruct</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Dumps C structures as generated from <span class=
+                    "command"><strong>cc -g -S</strong></span> stabs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ptar" name="ptar"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ptar</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A <span class="command"><strong>tar</strong></span>-like
+                    program written in Perl
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ptardiff" name="ptardiff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ptardiff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A Perl program that compares an extracted archive with an
+                    unextracted one
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ptargrep" name="ptargrep"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ptargrep</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A Perl program that applies pattern matching to the
+                    contents of files in a tar archive
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="shasum" name="shasum"></a><span class=
+                    "term"><span class=
+                    "command"><strong>shasum</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints or checks SHA checksums
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="splain" name="splain"></a><span class=
+                    "term"><span class=
+                    "command"><strong>splain</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to force verbose warning diagnostics in Perl
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xsubpp" name="xsubpp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xsubpp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts Perl XS code into C code
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="zipdetails" name="zipdetails"></a><span class=
+                    "term"><span class=
+                    "command"><strong>zipdetails</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays details about the internal structure of a Zip
+                    file
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="inetutils.html" title=
+          "Inetutils-1.9.4">Prev</a>
+          <p>
+            Inetutils-1.9.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xml-parser.html" title=
+          "XML::Parser-2.44">Next</a>
+          <p>
+            XML::Parser-2.44
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

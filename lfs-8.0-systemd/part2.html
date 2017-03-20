@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Part&nbsp;II.&nbsp;Preparing for the Build
+    </title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter01/askforhelp.html" title=
+          "Help">Prev</a>
+          <p>
+            Help
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="chapter02/chapter02.html" title=
+          "Preparing the Host System">Next</a>
+          <p>
+            Preparing the Host System
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="part">
+      <h1 class="part">
+        <a id="part2" name="part2"></a>II. Preparing for the Build
+      </h1>
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="chapter">
+            <h4>
+              2. Preparing the Host System
+            </h4>
+            <ul>
+              <li class="sect1">
+                <a href="chapter02/introduction.html">Introduction</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter02/hostreqs.html">Host System
+                Requirements</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter02/stages.html">Building LFS in Stages</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter02/creatingpartition.html">Creating a New
+                Partition</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter02/creatingfilesystem.html">Creating a File
+                System on the Partition</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter02/aboutlfs.html">Setting The $LFS
+                Variable</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter02/mounting.html">Mounting the New
+                Partition</a>
+              </li>
+            </ul>
+          </li>
+          <li class="chapter">
+            <h4>
+              3. Packages and Patches
+            </h4>
+            <ul>
+              <li class="sect1">
+                <a href="chapter03/introduction.html">Introduction</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter03/packages.html">All Packages</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter03/patches.html">Needed Patches</a>
+              </li>
+            </ul>
+          </li>
+          <li class="chapter">
+            <h4>
+              4. Final Preparations
+            </h4>
+            <ul>
+              <li class="sect1">
+                <a href="chapter04/introduction.html">Introduction</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/creatingtoolsdir.html">Creating the
+                $LFS/tools Directory</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/addinguser.html">Adding the LFS User</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/settingenvironment.html">Setting Up the
+                Environment</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/aboutsbus.html">About SBUs</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/abouttestsuites.html">About the Test
+                Suites</a>
+              </li>
+            </ul>
+          </li>
+          <li class="chapter">
+            <h4>
+              5. Constructing a Temporary System
+            </h4>
+            <ul>
+              <li class="sect1">
+                <a href="chapter05/introduction.html">Introduction</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/toolchaintechnotes.html">Toolchain
+                Technical Notes</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/generalinstructions.html">General
+                Compilation Instructions</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/binutils-pass1.html">Binutils-2.27 - Pass
+                1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gcc-pass1.html">GCC-6.3.0 - Pass 1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/linux-headers.html">Linux-4.9.9 API
+                Headers</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/glibc.html">Glibc-2.25</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gcc-libstdc++.html">Libstdc++-6.3.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/binutils-pass2.html">Binutils-2.27 - Pass
+                2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gcc-pass2.html">GCC-6.3.0 - Pass 2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/tcl.html">Tcl-core-8.6.6</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/expect.html">Expect-5.45</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/dejagnu.html">DejaGNU-1.6</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/check.html">Check-0.11.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/ncurses.html">Ncurses-6.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/bash.html">Bash-4.4</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/bison.html">Bison-3.0.4</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/bzip2.html">Bzip2-1.0.6</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/coreutils.html">Coreutils-8.26</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/diffutils.html">Diffutils-3.5</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/file.html">File-5.30</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/findutils.html">Findutils-4.6.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gawk.html">Gawk-4.1.4</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gettext.html">Gettext-0.19.8.1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/grep.html">Grep-3.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gzip.html">Gzip-1.8</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/m4.html">M4-1.4.18</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/make.html">Make-4.2.1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/patch.html">Patch-2.7.5</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/perl.html">Perl-5.24.1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/sed.html">Sed-4.4</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/tar.html">Tar-1.29</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/texinfo.html">Texinfo-6.3</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/util-linux.html">Util-linux-2.29.1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/xz.html">Xz-5.2.3</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/stripping.html">Stripping</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/changingowner.html">Changing Ownership</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter01/askforhelp.html" title=
+          "Help">Prev</a>
+          <p>
+            Help
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="chapter02/chapter02.html" title=
+          "Preparing the Host System">Next</a>
+          <p>
+            Preparing the Host System
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

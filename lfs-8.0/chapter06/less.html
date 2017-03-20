@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.56.&nbsp;Less-481
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grub.html" title="GRUB-2.02~beta3">Prev</a>
+          <p>
+            GRUB-2.02~beta3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gzip.html" title="Gzip-1.8">Next</a>
+          <p>
+            Gzip-1.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-less" name="ch-system-less"></a>6.56. Less-481
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Less package contains a text file viewer.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">3.5 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.56.1. Installation of Less
+        </h2>
+        <p>
+          Prepare Less for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr --sysconfdir=/etc</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--sysconfdir=/etc</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option tells the programs created by the package to look
+                in <code class="filename">/etc</code> for the configuration
+                files.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-less" name="contents-less"></a>6.56.2. Contents of
+          Less
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">less, lessecho, and lesskey</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="less" name="less"></a><span class=
+                    "term"><span class=
+                    "command"><strong>less</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A file viewer or pager; it displays the contents of the
+                    given file, letting the user scroll, find strings, and
+                    jump to marks
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lessecho" name="lessecho"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lessecho</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Needed to expand meta-characters, such as <span class=
+                    "emphasis"><em>*</em></span> and <span class=
+                    "emphasis"><em>?</em></span>, in filenames on Unix
+                    systems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lesskey" name="lesskey"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lesskey</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to specify the key bindings for <span class=
+                    "command"><strong>less</strong></span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grub.html" title="GRUB-2.02~beta3">Prev</a>
+          <p>
+            GRUB-2.02~beta3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gzip.html" title="Gzip-1.8">Next</a>
+          <p>
+            Gzip-1.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

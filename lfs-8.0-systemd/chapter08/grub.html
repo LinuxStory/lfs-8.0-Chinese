@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      8.4.&nbsp;Using GRUB to Set Up the Boot Process
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Making the LFS System Bootable
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kernel.html" title="Linux-4.9.9">Prev</a>
+          <p>
+            Linux-4.9.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter09/chapter09.html" title=
+          "The End">Next</a>
+          <p>
+            The End
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-bootable-grub" name="ch-bootable-grub"></a>8.4. Using GRUB
+        to Set Up the Boot Process
+      </h1>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.4.1. Introduction
+        </h2>
+        <div class="admon warning">
+          <img alt="[Warning]" src="../images/warning.png" />
+          <h3>
+            Warning
+          </h3>
+          <p>
+            Configuring GRUB incorrectly can render your system inoperable
+            without an alternate boot device such as a CD-ROM. This section
+            is not required to boot your LFS system. You may just want to
+            modify your current boot loader, e.g. Grub-Legacy, GRUB2, or
+            LILO.
+          </p>
+        </div>
+        <p>
+          Ensure that an emergency boot disk is ready to <span class=
+          "quote">&ldquo;<span class="quote">rescue</span>&rdquo;</span> the
+          computer if the computer becomes unusable (un-bootable). If you do
+          not already have a boot device, you can create one. In order for
+          the procedure below to work, you need to jump ahead to BLFS and
+          install <strong class="userinput"><code>xorriso</code></strong>
+          from the <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/view/8.0/multimedia/libisoburn.html">
+          libisoburn</a> package.
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd /tmp 
+grub-mkrescue --output=grub-img.iso 
+xorriso -as cdrecord -v dev=/dev/cdrw blank=as_needed grub-img.iso</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            To boot LFS on host systems that have UEFI enabled, the kernel
+            needs to have been built with the CONFIG_EFI_STUB capabality
+            described in the previous section. However, LFS can be booted
+            using GRUB2 without such an addition. To do this, the UEFI Mode
+            and Secure Boot capabilities in the host system's BIOS need to be
+            turned off. For details, see <a class="ulink" href=
+            "http://www.linuxfromscratch.org/hints/downloads/files/lfs-uefi.txt">
+            the lfs-uefi.txt hint</a> at
+            http://www.linuxfromscratch.org/hints/downloads/files/lfs-uefi.txt.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.4.2. GRUB Naming Conventions
+        </h2>
+        <p>
+          GRUB uses its own naming structure for drives and partitions in the
+          form of <span class="emphasis"><em>(hdn,m)</em></span>, where
+          <span class="emphasis"><em>n</em></span> is the hard drive number
+          and <span class="emphasis"><em>m</em></span> is the partition
+          number. The hard drive number starts from zero, but the partition
+          number starts from one for normal partitions and five for extended
+          partitions. Note that this is different from earlier versions where
+          both numbers started from zero. For example, partition <code class=
+          "filename">sda1</code> is <span class=
+          "emphasis"><em>(hd0,1)</em></span> to GRUB and <code class=
+          "filename">sdb3</code> is <span class=
+          "emphasis"><em>(hd1,3)</em></span>. In contrast to Linux, GRUB does
+          not consider CD-ROM drives to be hard drives. For example, if using
+          a CD on <code class="filename">hdb</code> and a second hard drive
+          on <code class="filename">hdc</code>, that second hard drive would
+          still be <span class="emphasis"><em>(hd1)</em></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.4.3. Setting Up the Configuration
+        </h2>
+        <p>
+          GRUB works by writing data to the first physical track of the hard
+          disk. This area is not part of any file system. The programs there
+          access GRUB modules in the boot partition. The default location is
+          /boot/grub/.
+        </p>
+        <p>
+          The location of the boot partition is a choice of the user that
+          affects the configuration. One recommendation is to have a separate
+          small (suggested size is 100 MB) partition just for boot
+          information. That way each build, whether LFS or some commercial
+          distro, can access the same boot files and access can be made from
+          any booted system. If you choose to do this, you will need to mount
+          the separate partition, move all files in the current <code class=
+          "filename">/boot</code> directory (e.g. the linux kernel you just
+          built in the previous section) to the new partition. You will then
+          need to unmount the partition and remount it as <code class=
+          "filename">/boot</code>. If you do this, be sure to update
+          <code class="filename">/etc/fstab</code>.
+        </p>
+        <p>
+          Using the current lfs partition will also work, but configuration
+          for multiple systems is more difficult.
+        </p>
+        <p>
+          Using the above information, determine the appropriate designator
+          for the root partition (or boot partition, if a separate one is
+          used). For the following example, it is assumed that the root (or
+          separate boot) partition is <code class="filename">sda2</code>.
+        </p>
+        <p>
+          Install the GRUB files into <code class=
+          "filename">/boot/grub</code> and set up the boot track:
+        </p>
+        <div class="admon warning">
+          <img alt="[Warning]" src="../images/warning.png" />
+          <h3>
+            Warning
+          </h3>
+          <p>
+            The following command will overwrite the current boot loader. Do
+            not run the command if this is not desired, for example, if using
+            a third party boot manager to manage the Master Boot Record
+            (MBR).
+          </p>
+        </div>
+        <pre class="userinput">
+<kbd class="command">grub-install /dev/sda</kbd>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="grub-cfg" name="grub-cfg"></a>8.4.4. Creating the GRUB
+          Configuration File
+        </h2>
+        <p>
+          Generate <code class="filename">/boot/grub/grub.cfg</code>:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /boot/grub/grub.cfg &lt;&lt; "EOF"
+<code class="literal"># Begin /boot/grub/grub.cfg
+set default=0
+set timeout=5
+
+insmod ext2
+set root=(hd0,2)
+
+menuentry "GNU/Linux, Linux 4.9.9-lfs-8.0-systemd" {
+        linux   /boot/vmlinuz-4.9.9-lfs-8.0-systemd root=/dev/sda2 ro
+}</code>
+EOF</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            From <span class="application">GRUB</span>'s perspective, the
+            kernel files are relative to the partition used. If you used a
+            separate /boot partition, remove /boot from the above
+            <span class="emphasis"><em>linux</em></span> line. You will also
+            need to change the <span class="emphasis"><em>set
+            root</em></span> line to point to the boot partition.
+          </p>
+        </div>
+        <p>
+          GRUB is an extremely powerful program and it provides a tremendous
+          number of options for booting from a wide variety of devices,
+          operating systems, and partition types. There are also many options
+          for customization such as graphical splash screens, playing sounds,
+          mouse input, etc. The details of these options are beyond the scope
+          of this introduction.
+        </p>
+        <div class="admon caution">
+          <img alt="[Caution]" src="../images/caution.png" />
+          <h3>
+            Caution
+          </h3>
+          <p>
+            There is a command, <span class=
+            "application">grub-mkconfig</span>, that can write a
+            configuration file automatically. It uses a set of scripts in
+            /etc/grub.d/ and will destroy any customizations that you make.
+            These scripts are designed primarily for non-source distributions
+            and are not recommended for LFS. If you install a commercial
+            Linux distribution, there is a good chance that this program will
+            be run. Be sure to back up your grub.cfg file.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kernel.html" title="Linux-4.9.9">Prev</a>
+          <p>
+            Linux-4.9.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter09/chapter09.html" title=
+          "The End">Next</a>
+          <p>
+            The End
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

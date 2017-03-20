@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      2.2.&nbsp;Host System Requirements
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Preparing the Host System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="stages.html" title=
+          "Building LFS in Stages">Next</a>
+          <p>
+            Building LFS in Stages
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="pre-hostreqs" name="pre-hostreqs"></a>2.2. Host System
+        Requirements
+      </h1>
+      <p>
+        Your host system should have the following software with the minimum
+        versions indicated. This should not be an issue for most modern Linux
+        distributions. Also note that many distributions will place software
+        headers into separate packages, often in the form of <span class=
+        "quote">&ldquo;<span class=
+        "quote">&lt;package-name&gt;-devel</span>&rdquo;</span> or
+        <span class="quote">&ldquo;<span class=
+        "quote">&lt;package-name&gt;-dev</span>&rdquo;</span>. Be sure to
+        install those if your distribution provides them.
+      </p>
+      <p>
+        Earlier versions of the listed software packages may work, but have
+        not been tested.
+      </p>
+      <div class="itemizedlist">
+        <ul class="compact">
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Bash-3.2</strong></span> (/bin/sh
+              should be a symbolic or hard link to bash)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Binutils-2.17</strong></span>
+              (Versions greater than 2.27 are not recommended as they have
+              not been tested)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Bison-2.3</strong></span>
+              (/usr/bin/yacc should be a link to bison or small script that
+              executes bison)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Bzip2-1.0.4</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Coreutils-6.9</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Diffutils-2.8.1</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Findutils-4.2.31</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Gawk-4.0.1</strong></span>
+              (/usr/bin/awk should be a link to gawk)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>GCC-4.7</strong></span> including
+              the C++ compiler, <span class=
+              "command"><strong>g++</strong></span> (Versions greater than
+              6.3.0 are not recommended as they have not been tested)
+            </p>
+            <div class="admon note">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3>
+                Note
+              </h3>
+              <p>
+                On some distributions, there have been reports that some
+                libraries used by gcc can be in an inconsistent state and
+                that this interferes with building some LFS packages. To
+                check this, look in /usr/lib and possibly /usr/lib64 for
+                libgmp.la, libmpfr.la, and libmpc.la. Either all three should
+                be present or absent, but not only one or two. If the problem
+                exists on your system, either rename or delete the .la files
+                or install the appropriate missing package.
+              </p>
+            </div>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Glibc-2.11</strong></span>
+              (Versions greater than 2.25 are not recommended as they have
+              not been tested)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Grep-2.5.1a</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Gzip-1.3.12</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Linux
+              Kernel-2.6.32</strong></span>
+            </p>
+            <p>
+              The reason for the kernel version requirement is that we
+              specify that version when building <span class=
+              "application">glibc</span> in Chapter 6 at the recommendation
+              of the developers. It is also required by udev.
+            </p>
+            <p>
+              If the host kernel is earlier than 2.6.32 you will need to
+              replace the kernel with a more up to date version. There are
+              two ways you can go about this. First, see if your Linux vendor
+              provides a 2.6.32 or later kernel package. If so, you may wish
+              to install it. If your vendor doesn't offer an acceptable
+              kernel package, or you would prefer not to install it, you can
+              compile a kernel yourself. Instructions for compiling the
+              kernel and configuring the boot loader (assuming the host uses
+              GRUB) are located in <a class="xref" href=
+              "../chapter08/chapter08.html" title=
+              "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">Chapter
+              8</a>.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>M4-1.4.10</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Make-3.81</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Patch-2.5.4</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Perl-5.8.8</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Sed-4.1.5</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Tar-1.22</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Texinfo-4.7</strong></span>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <span class="strong"><strong>Xz-5.0.0</strong></span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="admon important">
+        <img alt="[Important]" src="../images/important.png" />
+        <h3>
+          Important
+        </h3>
+        <p>
+          Note that the symlinks mentioned above are required to build an LFS
+          system using the instructions contained within this book. Symlinks
+          that point to other software (such as dash, mawk, etc.) may work,
+          but are not tested or supported by the LFS development team, and
+          may require either deviation from the instructions or additional
+          patches to some packages.
+        </p>
+      </div>
+      <h2>
+        <a id="version-check" name="version-check"></a>
+      </h2>
+      <p>
+        To see whether your host system has all the appropriate versions, and
+        the ability to compile programs, run the following:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; version-check.sh &lt;&lt; "EOF"
+<code class="literal">#!/bin/bash
+# Simple script to list version numbers of critical development tools
+export LC_ALL=C
+bash --version | head -n1 | cut -d" " -f2-4
+MYSH=$(readlink -f /bin/sh)
+echo "/bin/sh -&gt; $MYSH"
+echo $MYSH | grep -q bash || echo "ERROR: /bin/sh does not point to bash"
+unset MYSH
+
+echo -n "Binutils: "; ld --version | head -n1 | cut -d" " -f3-
+bison --version | head -n1
+
+if [ -h /usr/bin/yacc ]; then
+  echo "/usr/bin/yacc -&gt; `readlink -f /usr/bin/yacc`";
+elif [ -x /usr/bin/yacc ]; then
+  echo yacc is `/usr/bin/yacc --version | head -n1`
+else
+  echo "yacc not found" 
+fi
+
+bzip2 --version 2&gt;&amp;1 &lt; /dev/null | head -n1 | cut -d" " -f1,6-
+echo -n "Coreutils: "; chown --version | head -n1 | cut -d")" -f2
+diff --version | head -n1
+find --version | head -n1
+gawk --version | head -n1
+
+if [ -h /usr/bin/awk ]; then
+  echo "/usr/bin/awk -&gt; `readlink -f /usr/bin/awk`";
+elif [ -x /usr/bin/awk ]; then
+  echo awk is `/usr/bin/awk --version | head -n1`
+else 
+  echo "awk not found" 
+fi
+
+gcc --version | head -n1
+g++ --version | head -n1
+ldd --version | head -n1 | cut -d" " -f2-  # glibc version
+grep --version | head -n1
+gzip --version | head -n1
+cat /proc/version
+m4 --version | head -n1
+make --version | head -n1
+patch --version | head -n1
+echo Perl `perl -V:version`
+sed --version | head -n1
+tar --version | head -n1
+makeinfo --version | head -n1
+xz --version | head -n1
+
+echo 'int main(){}' &gt; dummy.c &amp;&amp; g++ -o dummy dummy.c
+if [ -x dummy ]
+  then echo "g++ compilation OK";
+  else echo "g++ compilation failed"; fi
+rm -f dummy.c dummy</code>
+EOF
+
+bash version-check.sh</kbd>
+</pre>
+      <p>
+        Also check for some library consistency:
+      </p>
+      <pre class="userinput">
+<kbd class="command">cat &gt; library-check.sh &lt;&lt; "EOF"
+<code class="literal">#!/bin/bash
+for lib in lib{gmp,mpfr,mpc}.la; do
+  echo $lib: $(if find /usr/lib* -name $lib|
+               grep -q $lib;then :;else echo not;fi) found
+done
+unset lib</code>
+EOF
+
+bash library-check.sh</kbd>
+</pre>
+      <p>
+        The files identified by this script should be all present or all
+        absent, but not only one or two present.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="stages.html" title=
+          "Building LFS in Stages">Next</a>
+          <p>
+            Building LFS in Stages
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter02.html" title=
+          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

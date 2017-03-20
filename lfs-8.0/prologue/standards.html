@@ -1,0 +1,378 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      LFS and Standards
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Preface
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="architecture.html" title=
+          "LFS Target Architectures">Prev</a>
+          <p>
+            LFS Target Architectures
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="package-choices.html" title=
+          "Rationale for Packages in the Book">Next</a>
+          <p>
+            Rationale for Packages in the Book
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="pre-standards" name="pre-standards"></a>iv. LFS and Standards
+      </h1>
+      <p>
+        The structure of LFS follows Linux standards as closely as possible.
+        The primary standards are:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              <a class="ulink" href=
+              "http://pubs.opengroup.org/onlinepubs/9699919799/">POSIX.1-2008</a>.
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <a class="ulink" href=
+              "http://refspecs.linuxfoundation.org/fhs.shtml">Filesystem
+              Hierarchy Standard (FHS) Version 3.0</a>
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              <a class="ulink" href=
+              "http://refspecs.linuxfoundation.org/lsb.shtml">Linux Standard
+              Base (LSB) Version 5.0</a>
+            </p>
+            <p>
+              The LSB has four separate standards: Core, Desktop, Runtime
+              Languages, and Imaging. In addition to generic requirements
+              there are also architecture specific requirements. There are
+              also two areas for trial use: Gtk3 and Graphics. LFS attempts
+              to conform to the architectures discussed in the previous
+              section.
+            </p>
+            <div class="admon note">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3>
+                Note
+              </h3>
+              <p>
+                Many people do not agree with the requirements of the LSB.
+                The main purpose of defining it is to ensure that proprietary
+                software will be able to be installed and run properly on a
+                compliant system. Since LFS is source based, the user has
+                complete control over what packages are desired and many
+                choose not to install some packages that are specified by the
+                LSB.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Creating a complete LFS system capable of passing the LSB
+        certifications tests is possible, but not without many additional
+        packages that are beyond the scope of LFS. These additional packages
+        have installation instructions in BLFS.
+      </p>
+      <div class="variablelist">
+        <h3>
+          Packages supplied by LFS needed to satisfy the LSB Requirements
+        </h3>
+        <table border="0" class="variablelist">
+          <colgroup>
+            <col align="left" valign="top" />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Core:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  Bash, Bc, Binutils, Coreutils, Diffutils, File, Findutils,
+                  Gawk, Grep, Gzip, M4, Man-DB, Ncurses, Procps, Psmisc, Sed,
+                  Shadow, Tar, Util-linux, Zlib
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Desktop:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB Runtime
+                  Languages:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  Perl
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Imaging:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB Gtk3 and
+                  LSB Graphics (Trial Use):</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="variablelist">
+        <h3>
+          Packages supplied by BLFS needed to satisfy the LSB Requirements
+        </h3>
+        <table border="0" class="variablelist">
+          <colgroup>
+            <col align="left" valign="top" />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Core:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  At, Batch (a part of At), Cpio, Ed, Fcrontab, Initd-tools,
+                  Lsb_release, NSPR, NSS, PAM, Pax, Sendmail (or Postfix or
+                  Exim), time
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Desktop:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  Alsa, ATK, Cairo, Desktop-file-utils, Freetype, Fontconfig,
+                  Gdk-pixbuf, Glib2, GTK+2, Icon-naming-utils, Libjpeg-turbo,
+                  Libpng, Libtiff, Libxml2, MesaLib, Pango, Qt4, Xdg-utils,
+                  Xorg
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB Runtime
+                  Languages:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  Python, Libxml2, Libxslt
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Imaging:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  CUPS, Cups-filters, Ghostscript, SANE
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB Gtk3 and
+                  LSB Graphics (Trial Use):</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  GTK+3
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="variablelist">
+        <h3>
+          Packages not supplied by LFS or BLFS needed to satisfy the LSB
+          Requirements
+        </h3>
+        <table border="0" class="variablelist">
+          <colgroup>
+            <col align="left" valign="top" />
+            <col />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Core:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Desktop:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB Runtime
+                  Languages:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB
+                  Imaging:</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p>
+                  <span class="term"><span class="emphasis"><em>LSB Gtk3 and
+                  LSB Graphics (Trial Use):</em></span></span>
+                </p>
+              </td>
+              <td>
+                <p>
+                  None
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="architecture.html" title=
+          "LFS Target Architectures">Prev</a>
+          <p>
+            LFS Target Architectures
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="package-choices.html" title=
+          "Rationale for Packages in the Book">Next</a>
+          <p>
+            Rationale for Packages in the Book
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

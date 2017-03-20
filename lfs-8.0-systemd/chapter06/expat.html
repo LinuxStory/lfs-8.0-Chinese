@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.38.&nbsp;Expat-2.2.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gperf.html" title="Gperf-3.0.4">Prev</a>
+          <p>
+            Gperf-3.0.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inetutils.html" title=
+          "Inetutils-1.9.4">Next</a>
+          <p>
+            Inetutils-1.9.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-expat" name="ch-system-expat"></a>6.38. Expat-2.2.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Expat package contains a stream oriented C library for parsing
+          XML.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">6.1 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.38.1. Installation of Expat
+        </h2>
+        <p>
+          Prepare Expat for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr --disable-static</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          If desired, install the documentation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">install -v -dm755 /usr/share/doc/expat-2.2.0
+install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.0</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-expat" name="contents-expat"></a>6.38.2. Contents
+          of Expat
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed program:</strong>
+              <span class="segbody">xmlwf</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libexpat.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/share/doc/expat-2.2.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xmlwf" name="xmlwf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xmlwf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a non-validating utility to check whether or not XML
+                    documents are well formed
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libexpat" name="libexpat"></a><span class=
+                    "term"><code class="filename">libexpat</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains API functions for parsing XML
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gperf.html" title="Gperf-3.0.4">Prev</a>
+          <p>
+            Gperf-3.0.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inetutils.html" title=
+          "Inetutils-1.9.4">Next</a>
+          <p>
+            Inetutils-1.9.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

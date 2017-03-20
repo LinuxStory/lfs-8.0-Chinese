@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      4.5.&nbsp;About SBUs
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;4.&nbsp;Final Preparations
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="settingenvironment.html" title=
+          "Setting Up the Environment">Prev</a>
+          <p>
+            Setting Up the Environment
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="abouttestsuites.html" title=
+          "About the Test Suites">Next</a>
+          <p>
+            About the Test Suites
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter04.html" title=
+          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="prepare-aboutsbus" name="prepare-aboutsbus"></a>4.5. About
+        SBUs
+      </h1>
+      <p>
+        Many people would like to know beforehand approximately how long it
+        takes to compile and install each package. Because Linux From Scratch
+        can be built on many different systems, it is impossible to provide
+        accurate time estimates. The biggest package (Glibc) will take
+        approximately 20 minutes on the fastest systems, but could take up to
+        three days on slower systems! Instead of providing actual times, the
+        Standard Build Unit (SBU) measure will be used instead.
+      </p>
+      <p>
+        The SBU measure works as follows. The first package to be compiled
+        from this book is Binutils in <a class="xref" href=
+        "../chapter05/chapter05.html" title=
+        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>.
+        The time it takes to compile this package is what will be referred to
+        as the Standard Build Unit or SBU. All other compile times will be
+        expressed relative to this time.
+      </p>
+      <p>
+        For example, consider a package whose compilation time is 4.5 SBUs.
+        This means that if a system took 10 minutes to compile and install
+        the first pass of Binutils, it will take <span class=
+        "emphasis"><em>approximately</em></span> 45 minutes to build this
+        example package. Fortunately, most build times are shorter than the
+        one for Binutils.
+      </p>
+      <p>
+        In general, SBUs are not entirely accurate because they depend on
+        many factors, including the host system's version of GCC. They are
+        provided here to give an estimate of how long it might take to
+        install a package, but the numbers can vary by as much as dozens of
+        minutes in some cases.
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          For many modern systems with multiple processors (or cores) the
+          compilation time for a package can be reduced by performing a
+          "parallel make" by either setting an environment variable or
+          telling the <span class="command"><strong>make</strong></span>
+          program how many processors are available. For instance, a Core2Duo
+          can support two simultaneous processes with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">export MAKEFLAGS='-j 2'</kbd>
+</pre>
+        <p>
+          or just building with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -j2</kbd>
+</pre>
+        <p>
+          When multiple processors are used in this way, the SBU units in the
+          book will vary even more than they normally would. In some cases,
+          the make step will simply fail. Analyzing the output of the build
+          process will also be more difficult because the lines of different
+          processes will be interleaved. If you run into a problem with a
+          build step, revert back to a single processor build to properly
+          analyze the error messages.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="settingenvironment.html" title=
+          "Setting Up the Environment">Prev</a>
+          <p>
+            Setting Up the Environment
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="abouttestsuites.html" title=
+          "About the Test Suites">Next</a>
+          <p>
+            About the Test Suites
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter04.html" title=
+          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

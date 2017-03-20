@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.46.&nbsp;Kmod-23
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xz.html" title="Xz-5.2.3">Prev</a>
+          <p>
+            Xz-5.2.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gettext.html" title=
+          "Gettext-0.19.8.1">Next</a>
+          <p>
+            Gettext-0.19.8.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-kmod" name="ch-system-kmod"></a>6.46. Kmod-23
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Kmod package contains libraries and utilities for loading
+          kernel modules
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">10.3 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.46.1. Installation of Kmod
+        </h2>
+        <p>
+          Prepare Kmod for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr          \
+            --bindir=/bin          \
+            --sysconfdir=/etc      \
+            --with-rootlibdir=/lib \
+            --with-xz              \
+            --with-zlib</kbd>
+</pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>--with-xz,
+              --with-zlib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                These options enable Kmod to handle compressed kernel
+                modules.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-rootlibdir=/lib</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option ensures different library related files are
+                placed in the correct directories.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite that can be run in the
+          LFS chroot environment. At a minimum the git program is required
+          and several tests will not run outside of a git repository.
+        </p>
+        <p>
+          Install the package, and create symlinks for compatibility with
+          Module-Init-Tools (the package that previously handled Linux kernel
+          modules):
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install
+
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+  ln -sfv ../bin/kmod /sbin/$target
+done
+
+ln -sfv kmod /bin/lsmod</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-kmod" name="contents-kmod"></a>6.46.2. Contents of
+          Kmod
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">depmod (link to kmod), insmod (link to
+              kmod), kmod, lsmod (link to kmod), modinfo (link to kmod),
+              modprobe (link to kmod), and rmmod (link to kmod)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed library:</strong>
+              <span class="segbody">libkmod.so</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="depmod" name="depmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>depmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a dependency file based on the symbols it finds
+                    in the existing set of modules; this dependency file is
+                    used by <span class=
+                    "command"><strong>modprobe</strong></span> to
+                    automatically load the required modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="insmod" name="insmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>insmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Installs a loadable module in the running kernel
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kmod" name="kmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Loads and unloads kernel modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lsmod" name="lsmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lsmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Lists currently loaded modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="modinfo" name="modinfo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>modinfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Examines an object file associated with a kernel module
+                    and displays any information that it can glean
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="modprobe" name="modprobe"></a><span class=
+                    "term"><span class=
+                    "command"><strong>modprobe</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Uses a dependency file, created by <span class=
+                    "command"><strong>depmod</strong></span>, to
+                    automatically load relevant modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rmmod" name="rmmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rmmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Unloads modules from the running kernel
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libkmod" name="libkmod"></a><span class=
+                    "term"><code class="filename">libkmod</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    This library is used by other programs to load and unload
+                    kernel modules
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xz.html" title="Xz-5.2.3">Prev</a>
+          <p>
+            Xz-5.2.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gettext.html" title=
+          "Gettext-0.19.8.1">Next</a>
+          <p>
+            Gettext-0.19.8.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

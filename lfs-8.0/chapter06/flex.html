@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.30.&nbsp;Flex-2.6.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-8.0">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 8.0
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="bison.html" title="Bison-3.0.4">Prev</a>
+          <p>
+            Bison-3.0.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <p>
+            Grep-3.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-flex" name="ch-system-flex"></a>6.30. Flex-2.6.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Flex package contains a utility for generating programs that
+          recognize patterns in text.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">32 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.30.1. Installation of Flex
+        </h2>
+        <p>
+          The build procedure assumes the <span class=
+          "application">help2man</span> program is available to create a man
+          page from the executable --help option. This is not present, so we
+          use an environment variable to skip this process. Now, prepare Flex
+          for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">HELP2MAN=/tools/bin/true \
+./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.6.3</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make</kbd>
+</pre>
+        <p>
+          To test the results (about 0.5 SBU), issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make check</kbd>
+</pre>
+        <p>
+          One test, <span class="emphasis"><em>cxx_restart</em></span>, is
+          known to fail.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          A few programs do not know about <span class=
+          "command"><strong>flex</strong></span> yet and try to run its
+          predecessor, <span class="command"><strong>lex</strong></span>. To
+          support those programs, create a symbolic link named <code class=
+          "filename">lex</code> that runs <code class="filename">flex</code>
+          in <span class="command"><strong>lex</strong></span> emulation
+          mode:
+        </p>
+        <pre class="userinput">
+<kbd class="command">ln -sv flex /usr/bin/lex</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-flex" name="contents-flex"></a>6.30.2. Contents of
+          Flex
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">flex, flex++ (link to flex), and lex
+              (link to flex)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libfl.so and libfl_pic.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directory:</strong>
+              <span class="segbody">/usr/share/doc/flex-2.6.3</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="flex" name="flex"></a><span class=
+                    "term"><span class=
+                    "command"><strong>flex</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A tool for generating programs that recognize patterns in
+                    text; it allows for the versatility to specify the rules
+                    for pattern-finding, eradicating the need to develop a
+                    specialized program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="flexpp" name="flexpp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>flex++</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    An extension of flex, is used for generating C++ code and
+                    classes. It is a symbolic link to <span class=
+                    "command"><strong>flex</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lex" name="lex"></a><span class=
+                    "term"><span class="command"><strong>lex</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A script that runs <span class=
+                    "command"><strong>flex</strong></span> in <span class=
+                    "command"><strong>lex</strong></span> emulation mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libfl" name="libfl"></a><span class=
+                    "term"><code class="filename">libfl</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The <code class="filename">flex</code> library
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="bison.html" title="Bison-3.0.4">Prev</a>
+          <p>
+            Bison-3.0.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <p>
+            Grep-3.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
