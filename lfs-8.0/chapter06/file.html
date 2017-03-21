@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The File package contains a utility for determining the type of a
-          given file or files.
+          File 软件包包含一个可以确定给定文件或某些文件类型的工具.
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">16 MB</span>
             </div>
           </div>
@@ -69,28 +68,28 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.12.1. Installation of File
+          6.12.1. 安装 File
         </h2>
         <p>
-          Prepare File for compilation:
+          准备编译文件:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -98,24 +97,23 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-file" name="contents-file"></a>6.12.2. Contents of
-          File
+          <a id="contents-file" name="contents-file"></a>6.12.2. File 软件包内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">file</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libmagic.so</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -133,9 +131,7 @@
                 </td>
                 <td>
                   <p>
-                    Tries to classify each given file; it does this by
-                    performing several tests&mdash;file system tests, magic
-                    number tests, and language tests
+                    尝试给每个指定文件分类; 通过几种测试实现&mdash;文件系统测试, 魔数测试, 和语言测试
                   </p>
                 </td>
               </tr>
@@ -148,9 +144,7 @@
                 </td>
                 <td>
                   <p>
-                    Contains routines for magic number recognition, used by
-                    the <span class="command"><strong>file</strong></span>
-                    program
+                    包含 <span class="command"><strong>file</strong></span> 程序使用的魔数识别例程
                   </p>
                 </td>
               </tr>
