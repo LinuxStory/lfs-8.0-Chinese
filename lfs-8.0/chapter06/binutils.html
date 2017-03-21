@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Binutils package contains a linker, an assembler, and other
-          tools for handling object files.
+          Binutils 软件包包含一个链接器、一个汇编器、以及其它处理目标文件的工具.
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">5.7 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">2.0 GB</span>
             </div>
           </div>
@@ -69,41 +68,37 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.13.1. Installation of Binutils
+          6.13.1. 安装 Binutils
         </h2>
         <p>
-          Verify that the PTYs are working properly inside the chroot
-          environment by performing a simple test:
+          通过一个简单的测试来验证 PTYs 在 chroot 环境下正常工作:
         </p>
         <pre class="userinput">
 <kbd class="command">expect -c "spawn ls"</kbd>
 </pre>
         <p>
-          This command should output the following:
+          这个命令应该输出如下:
         </p>
         <pre class="screen">
 <code class="computeroutput">spawn ls</code>
 </pre>
         <p>
-          If, instead, the output includes the message below, then the
-          environment is not set up for proper PTY operation. This issue
-          needs to be resolved before running the test suites for Binutils
-          and GCC:
+          如果输出包括下边的信息, 那么表示没有为 PTY 操作设置正确的环境变量. 在运行 Binutils
+          和GCC的测试套件前需要解决这个问题:
         </p>
         <pre class="screen">
 <code class="computeroutput">The system has no more ptys.
 Ask your system administrator to create more.</code>
 </pre>
         <p>
-          The Binutils documentation recommends building Binutils in a
-          dedicated build directory:
+          Binutils 软件包的文档建议在一个专用的 build 目录构建 Binutils 软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -v build
 cd       build</kbd>
 </pre>
         <p>
-          Prepare Binutils for compilation:
+          准备编译 Binutils:
         </p>
         <pre class="userinput">
 <kbd class="command">../configure --prefix=/usr       \
@@ -116,7 +111,7 @@ cd       build</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure parameters:</strong>
+            <strong>configure 参数的意义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -125,8 +120,7 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Build the gold linker and install it as ld.gold (along side
-                the default linker).
+                构建 gold 链接器而且命名为 ld.gold (安装在默认链接器的旁边).
               </p>
             </dd>
             <dt>
@@ -135,8 +129,7 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Build the original bdf linker and install it as both ld (the
-                default linker) and ld.bfd.
+                构建原生的 bdf 链接器, 将它安装为 ld (默认链接器) 和 ld.bfd.
               </p>
             </dd>
             <dt>
@@ -145,7 +138,7 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Enables plugin support for the linker.
+                开启链接器的插件支持.
               </p>
             </dd>
             <dt>
@@ -154,21 +147,20 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Use the installed zlib library rather than building the
-                included version.
+                使用已经安装的 zlib 库，而不是已经包含的版本.
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make tooldir=/usr</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the make parameter:</strong>
+            <strong>make 参数的意义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -177,17 +169,14 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Normally, the tooldir (the directory where the executables
-                will ultimately be located) is set to <code class=
-                "filename">$(exec_prefix)/$(target_alias)</code>. For
-                example, x86_64 machines would expand that to <code class=
-                "filename">/usr/x86_64-unknown-linux-gnu</code>. Because this
-                is a custom system, this target-specific directory in
-                <code class="filename">/usr</code> is not required.
+                一般来说,  tooldir (最终存放可执行文件的目录) 会被设置为 <code class=
+                "filename">$(exec_prefix)/$(target_alias)</code>. 例如
+                , x86_64 机器会把它扩展为 <code class="filename">
+                 /usr/x86_64-unknown-linux-gnu</code>. 因为这是个自定制的系统
+                , 并不需要 <code class="filename">/usr</code> 中的特定目标目录.
+                如果系统用于交叉编译(例如, 在 Intel 机器上生成能在 PowerPC 机器上执行的代码)
                 <code class="filename">$(exec_prefix)/$(target_alias)</code>
-                would be used if the system was used to cross-compile (for
-                example, compiling a package on an Intel machine that
-                generates code that can be executed on PowerPC machines).
+                 将被使用.
               </p>
             </dd>
           </dl>
@@ -195,21 +184,20 @@ cd       build</kbd>
         <div class="admon important">
           <img alt="[Important]" src="../images/important.png" />
           <h3>
-            Important
+            重要
           </h3>
           <p>
-            The test suite for Binutils in this section is considered
-            critical. Do not skip it under any circumstances.
+            本章节中的 Binutils 测试套件至关重要，任何情况下都不能跳过。
           </p>
         </div>
         <p>
-          Test the results:
+          测试编译结果:
         </p>
         <pre class="userinput">
 <kbd class="command">make -k check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make tooldir=/usr install</kbd>
@@ -218,30 +206,30 @@ cd       build</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-binutils" name="contents-binutils"></a>6.13.2.
-          Contents of Binutils
+          Binutils 内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">addr2line, ar, as, c++filt, elfedit,
               gprof, ld, ld.bfd, nm, objcopy, objdump, ranlib, readelf, size,
               strings, and strip</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libbfd.{a,so} and
               libopcodes.{a,so}</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/lib/ldscripts</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -259,11 +247,8 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Translates program addresses to file names and line
-                    numbers; given an address and the name of an executable,
-                    it uses the debugging information in the executable to
-                    determine which source file and line number are
-                    associated with the address
+                    转换程序地址为文件名称和行号; 给定一个地址和可执行文件的名称,
+                    它使用可执行文件中的调试信息来判断与该地址关联的源文件以及行号
                   </p>
                 </td>
               </tr>
@@ -276,7 +261,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates, modifies, and extracts from archives
+                    创建、更改以及抽取归档文件
                   </p>
                 </td>
               </tr>
@@ -289,8 +274,8 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    An assembler that assembles the output of <span class=
-                    "command"><strong>gcc</strong></span> into object files
+                    一个将 <span class=
+                    "command"><strong>gcc</strong></span> 的输出汇编到目标文件的汇编器
                   </p>
                 </td>
               </tr>
@@ -304,8 +289,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Used by the linker to de-mangle C++ and Java symbols and
-                    to keep overloaded functions from clashing
+                    链接器用来过滤 C++ 和 Java 符号以及防止重载函数冲突
                   </p>
                 </td>
               </tr>
@@ -319,7 +303,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Updates the ELF header of ELF files
+                    更新 ELF 文件的 ELF 文件头
                   </p>
                 </td>
               </tr>
@@ -333,7 +317,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays call graph profile data
+                    显示调用关系图配置数据
                   </p>
                 </td>
               </tr>
@@ -346,9 +330,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    A linker that combines a number of object and archive
-                    files into a single file, relocating their data and tying
-                    up symbol references
+                    一个将多个目标文件和归档文件合并为单一文件，重定位数据及绑定符号引用的链接器
                   </p>
                 </td>
               </tr>
@@ -362,8 +344,8 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Hard link to <span class=
-                    "command"><strong>ld</strong></span>
+                    到 <span class=
+                    "command"><strong>ld</strong></span> 的硬链接
                   </p>
                 </td>
               </tr>
@@ -376,7 +358,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists the symbols occurring in a given object file
+                    列出指定目标文件中出现的符号
                   </p>
                 </td>
               </tr>
@@ -390,7 +372,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Translates one type of object file into another
+                    转换某种类型的目标文件到另一种类型
                   </p>
                 </td>
               </tr>
@@ -404,10 +386,8 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays information about the given object file, with
-                    options controlling the particular information to
-                    display; the information shown is useful to programmers
-                    who are working on the compilation tools
+                    显示给定目标文件的信息，用选项可以控制显示特定信息；
+                    显示的信息对于使用编译工具的程序员非常有用
                   </p>
                 </td>
               </tr>
@@ -421,10 +401,8 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates an index of the contents of an archive and
-                    stores it in the archive; the index lists all of the
-                    symbols defined by archive members that are relocatable
-                    object files
+                    生成归档文件内容的索引并保存到归档文件；
+                    索引列出了所有归档文件成员——可重定位的目标文件定义的符号
                   </p>
                 </td>
               </tr>
@@ -438,7 +416,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays information about ELF type binaries
+                    显示 ELF 类型的二进制文件的信息
                   </p>
                 </td>
               </tr>
@@ -452,8 +430,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists the section sizes and the total size for the given
-                    object files
+                    列出所给目标文件各部分大小和总的大小
                   </p>
                 </td>
               </tr>
@@ -467,12 +444,8 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Outputs, for each given file, the sequences of printable
-                    characters that are of at least the specified length
-                    (defaulting to four); for object files, it prints, by
-                    default, only the strings from the initializing and
-                    loading sections while for other types of files, it scans
-                    the entire file
+                    对每个给定文件，输出不低于指定长度（默认是4）的可打印字符序列；
+                    对于目标文件，它默认只打印初始化和引导部分的字符串，而对于其它类型的文件扫描整个文件
                   </p>
                 </td>
               </tr>
@@ -486,7 +459,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    Discards symbols from object files
+                    从目标文件中去除符号
                   </p>
                 </td>
               </tr>
@@ -499,7 +472,7 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    The Binary File Descriptor library
+                    二进制文件描述库
                   </p>
                 </td>
               </tr>
@@ -512,11 +485,10 @@ cd       build</kbd>
                 </td>
                 <td>
                   <p>
-                    A library for dealing with opcodes&mdash;the <span class=
-                    "quote">&ldquo;<span class="quote">readable
-                    text</span>&rdquo;</span> versions of instructions for
-                    the processor; it is used for building utilities like
-                    <span class="command"><strong>objdump</strong></span>
+                    用于处理操作码—处理器指令的&mdash; <span class=
+                    "quote">&ldquo;<span class="quote">可读文本
+                    </span>&rdquo;</span> 版本的库; 用于构建类似
+                    <span class="command"><strong>objdump</strong></span> 的工具
                   </p>
                 </td>
               </tr>
