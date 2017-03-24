@@ -1,69 +1,69 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=utf-8" />
-    <title>
-      9.1.&nbsp;结束
-    </title>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
-    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
-    "text/css" media="print" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="Content-Type" content=
+	"application/xhtml+xml; charset=utf-8" />
+	<title>
+	  9.1.&nbsp;结束
+	</title>
+	<link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+	<meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+	<link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+	"text/css" media="print" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body class="lfs" id="lfs-8.0">
-    <div class="navheader">
-      <h4>
-        Linux From Scratch - Version 8.0
-      </h4>
-      <h3>
-        Chapter&nbsp;9.&nbsp;结束
-      </h3>
-      <ul>
-        <li class="prev">
-          <a accesskey="p" href="chapter09.html" title="The End">上一页</a>
-          <p>
-            注册
-          </p>
-        </li>
-        <li class="next">
-          <a accesskey="n" href="getcounted.html" title=
-          "Get Counted">下一页</a>
-          <p>
-            收获
-          </p>
-        </li>
-        <li class="up">
-          <a accesskey="u" href="chapter09.html" title=
-          "Chapter&nbsp;9.&nbsp;The End">返回</a>
-        </li>
-        <li class="home">
-          <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">首页</a>
-        </li>
-      </ul>
-    </div>
-    <div class="sect1" lang="en" xml:lang="en">
-      <h1 class="sect1">
-        <a id="ch-finish-theend" name="ch-finish-theend"></a>9.1. 结束
-      </h1>
-      <p>
-        干得漂亮! 新的LFS系统已经被安装好了! 我们希望你新通过使用崭新定制的Linux系统获得成功。
-      </p>
-      <p>
-        首先创建 <code class=
-        "filename">/etc/lfs-release</code> 文件。通过这个文件，你可以非常轻松地看出系统中安装的LFS是什么版本（对我们来说，可以看出你在哪里需要帮助）。 
-        运行下面的语句创建文件:
-      </p>
-      <pre class="userinput">
+	<div class="navheader">
+	  <h4>
+		Linux From Scratch - Version 8.0
+	  </h4>
+	  <h3>
+		Chapter&nbsp;9.&nbsp;结束
+	  </h3>
+	  <ul>
+		<li class="prev">
+		  <a accesskey="p" href="chapter09.html" title="The End">上一页</a>
+		  <p>
+			注册
+		  </p>
+		</li>
+		<li class="next">
+		  <a accesskey="n" href="getcounted.html" title=
+		  "Get Counted">下一页</a>
+		  <p>
+			收获
+		  </p>
+		</li>
+		<li class="up">
+		  <a accesskey="u" href="chapter09.html" title=
+		  "Chapter&nbsp;9.&nbsp;The End">返回</a>
+		</li>
+		<li class="home">
+		  <a accesskey="h" href="../index.html" title=
+		  "Linux From Scratch - Version 8.0 ">首页</a>
+		</li>
+	  </ul>
+	</div>
+	<div class="sect1" lang="en" xml:lang="en">
+	  <h1 class="sect1">
+		<a id="ch-finish-theend" name="ch-finish-theend"></a>9.1. 结束
+	  </h1>
+	  <p>
+		干得漂亮! 新的LFS系统已经被安装好了! 我们希望你新通过使用崭新定制的Linux系统获得成功。
+	  </p>
+	  <p>
+		首先创建 <code class=
+		"filename">/etc/lfs-release</code> 文件。通过这个文件，你可以非常轻松地看出系统中安装的LFS是什么版本（对我们来说，可以看出你在哪里需要帮助）。
+		运行下面的语句创建文件:
+	  </p>
+	  <pre class="userinput">
 <kbd class="command">echo 8.0 &gt; /etc/lfs-release</kbd>
 </pre>
-      <p>
+	  <p>
 	  这也是个好主意，通过创建文件来显示你的系统相对Linux基础标准(LSB)的异同。通过下面的语句来创建文件:
-      </p>
-      <pre class="userinput">
+	  </p>
+	  <pre class="userinput">
 <kbd class="command">cat &gt; /etc/lsb-release &lt;&lt; "EOF"
 DISTRIB_ID="Linux From Scratch"
 DISTRIB_RELEASE="8.0"
@@ -71,35 +71,35 @@ DISTRIB_CODENAME="&lt;your name here&gt;"
 DISTRIB_DESCRIPTION="Linux From Scratch"
 EOF</kbd>
 </pre>
-      <p>
-        确保在字段'DISTRIB_CODENAME'设置你自己系统的名字。
+	  <p>
+		确保在字段'DISTRIB_CODENAME'设置你自己系统的名字。
 
-      </p>
-    </div>
-    <div class="navfooter">
-      <ul>
-        <li class="prev">
-          <a accesskey="p" href="chapter09.html" title="The End">上一页</a>
-          <p>
-            结束
-          </p>
-        </li>
-        <li class="next">
-          <a accesskey="n" href="getcounted.html" title=
-          "Get Counted">下一页</a>
-          <p>注册
-            
-          </p>
-        </li>
-        <li class="up">
-          <a accesskey="u" href="chapter09.html" title=
-          "Chapter&nbsp;9.&nbsp;The End">返回</a>
-        </li>
-        <li class="home">
-          <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">首页</a>
-        </li>
-      </ul>
-    </div>
+	  </p>
+	</div>
+	<div class="navfooter">
+	  <ul>
+		<li class="prev">
+		  <a accesskey="p" href="chapter09.html" title="The End">上一页</a>
+		  <p>
+			结束
+		  </p>
+		</li>
+		<li class="next">
+		  <a accesskey="n" href="getcounted.html" title=
+		  "Get Counted">下一页</a>
+		  <p>注册
+
+		  </p>
+		</li>
+		<li class="up">
+		  <a accesskey="u" href="chapter09.html" title=
+		  "Chapter&nbsp;9.&nbsp;The End">返回</a>
+		</li>
+		<li class="home">
+		  <a accesskey="h" href="../index.html" title=
+		  "Linux From Scratch - Version 8.0 ">首页</a>
+		</li>
+	  </ul>
+	</div>
   </body>
 </html>
