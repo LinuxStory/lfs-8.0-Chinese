@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.44.&nbsp;Automake-1.15
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="autoconf.html" title=
-          "Autoconf-2.69">Prev</a>
+          "Autoconf-2.69">上一页</a>
           <p>
             Autoconf-2.69
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="xz.html" title="Xz-5.2.3">Next</a>
+          <a accesskey="n" href="xz.html" title="Xz-5.2.3">下一页</a>
           <p>
             Xz-5.2.3
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,18 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Automake package contains programs for generating Makefiles for
-          use with Autoconf.
+          Automake 软件包包含了使用 Autoconf 生成 Makefiles 的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU (about 7.5 SBU with
-              tests)</span>
+              <strong class="segtitle">预计构建时间:</strong>
+              <span class="segbody">少于 0.1 SBU (加上测试大约 7.5 SBU)</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">110 MB</span>
             </div>
           </div>
@@ -71,33 +69,31 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.44.1. Installation of Automake
+          6.44.1. Automake 安装过程
         </h2>
         <p>
-          First fix a warning that is caused by perl-5.22 and later:
+          首先修复由于 perl-5.22 及之后版本导致的一个警告。
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's:/\\\${:/\\\$\\{:' bin/automake.in</kbd>
 </pre>
         <p>
-          Prepare Automake for compilation:
+          准备编译 Automake:
         </p>
         <pre class="userinput">
 <kbd class=
 "command">./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.15</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          There are a couple of tests that incorrectly link to the wrong
-          version of the flex library, so we temporarily work around the
-          problem. Also, using the -j4 make option speeds up the tests, even
-          on systems with only one processor, due to internal delays in
-          individual tests. To test the results, issue:
+          有一些测试不正确地链接到了错误版本的 flex 库，所以我们临时的绕过这个问题。
+          并且，因为个别测试的内部延时，即使系统只有一个处理器，也可以使用 make 的 -j4 选项来加速这些测试。
+          测试编译结果，输入:
         </p>
         <pre class="userinput">
 <kbd class=
@@ -105,10 +101,10 @@
 make -j4 check</kbd>
 </pre>
         <p>
-          Four tests are known to fail.
+          已知有四个测试会失败。
         </p>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -117,18 +113,18 @@ make -j4 check</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-automake" name="contents-automake"></a>6.44.2.
-          Contents of Automake
+          Automake 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">aclocal, aclocal-1.15 (hard linked with
               aclocal), automake, and automake-1.15 (hard linked with
               automake)</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/share/aclocal-1.15,
               /usr/share/automake-1.15, and
               /usr/share/doc/automake-1.15</span>
@@ -137,7 +133,7 @@ make -j4 check</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -155,9 +151,8 @@ make -j4 check</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates <code class="filename">aclocal.m4</code> files
-                    based on the contents of <code class=
-                    "filename">configure.in</code> files
+                    根据 <code class="filename">configure.in</code> 文件的内容生成
+                    <code class="filename">aclocal.m4</code> 文件
                   </p>
                 </td>
               </tr>
@@ -171,8 +166,7 @@ make -j4 check</kbd>
                 </td>
                 <td>
                   <p>
-                    A hard link to <span class=
-                    "command"><strong>aclocal</strong></span>
+                    <span class="command"><strong>aclocal</strong></span>的硬连接
                   </p>
                 </td>
               </tr>
@@ -186,16 +180,12 @@ make -j4 check</kbd>
                 </td>
                 <td>
                   <p>
-                    A tool for automatically generating <code class=
-                    "filename">Makefile.in</code> files from <code class=
-                    "filename">Makefile.am</code> files [To create all the
-                    <code class="filename">Makefile.in</code> files for a
-                    package, run this program in the top-level directory. By
-                    scanning the <code class="filename">configure.in</code>
-                    file, it automatically finds each appropriate
-                    <code class="filename">Makefile.am</code> file and
-                    generates the corresponding <code class=
-                    "filename">Makefile.in</code> file.]
+                    根据 <code class="filename">Makefile.am</code> 文件自动生成
+                    <code class="filename">Makefile.in</code> 文件的工具。
+                    [为了创建一个软件包所有的 <code class="filename">Makefile.in</code> 文件
+                    你需要在顶级目录执行这个程序。通过扫描 <code class="filename">configure.in</code> 文件，它自动发现每个合适的 
+                    <code class="filename">Makefile.am</code> 文件，然后生成对应的 <code class=
+                    "filename">Makefile.in</code> 文件。]
                   </p>
                 </td>
               </tr>
@@ -209,8 +199,7 @@ make -j4 check</kbd>
                 </td>
                 <td>
                   <p>
-                    A hard link to <span class=
-                    "command"><strong>automake</strong></span>
+                    <span class="command"><strong>automake</strong></span>的硬链接
                   </p>
                 </td>
               </tr>
@@ -223,24 +212,24 @@ make -j4 check</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="autoconf.html" title=
-          "Autoconf-2.69">Prev</a>
+          "Autoconf-2.69">上一页</a>
           <p>
             Autoconf-2.69
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="xz.html" title="Xz-5.2.3">Next</a>
+          <a accesskey="n" href="xz.html" title="Xz-5.2.3">下一页</a>
           <p>
             Xz-5.2.3
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
