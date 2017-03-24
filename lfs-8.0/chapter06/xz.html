@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.45.&nbsp;Xz-5.2.3
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="automake.html" title=
-          "Automake-1.15">Prev</a>
+          "Automake-1.15">上一页</a>
           <p>
             Automake-1.15
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="kmod.html" title="Kmod-23">Next</a>
+          <a accesskey="n" href="kmod.html" title="Kmod-23">下一页</a>
           <p>
             Kmod-23
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -51,22 +51,20 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Xz package contains programs for compressing and decompressing
-          files. It provides capabilities for the lzma and the newer xz
-          compression formats. Compressing text files with <span class=
-          "command"><strong>xz</strong></span> yields a better compression
-          percentage than with the traditional <span class=
-          "command"><strong>gzip</strong></span> or <span class=
-          "command"><strong>bzip2</strong></span> commands.
+          Xz 软件包包含了用于压缩和解压文件的程序。它提供了 lzma 和新的 xz 压缩格式
+          的兼容性。使用 <span class="command"><strong>xz</strong></span> 
+          压缩文本文件有比传统的 <span class=
+          "command"><strong>gzip</strong></span> 或 <span class=
+          "command"><strong>bzip2</strong></span> 命令更好的压缩比。 
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.2 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">15 MB</span>
             </div>
           </div>
@@ -74,10 +72,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.45.1. Installation of Xz
+          6.45.1. Xz 安装过程
         </h2>
         <p>
-          Prepare Xz for compilation with:
+          准备编译 Xz:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr    \
@@ -85,20 +83,19 @@
             --docdir=/usr/share/doc/xz-5.2.3</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，输入:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package and make sure that all essential files are in
-          the correct directory:
+          安装软件包然后确保所有必须的文件在正确的目录:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -109,27 +106,27 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-xz" name="contents-xz"></a>6.45.2. Contents of Xz
+          <a id="contents-xz" name="contents-xz"></a>6.45.2. Xz 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">lzcat (link to xz), lzcmp (link to
-              xzdiff), lzdiff (link to xzdiff), lzegrep (link to xzgrep),
-              lzfgrep (link to xzgrep), lzgrep (link to xzgrep), lzless (link
-              to xzless), lzma (link to xz), lzmadec, lzmainfo, lzmore (link
-              to xzmore), unlzma (link to xz), unxz (link to xz), xz, xzcat
-              (link to xz), xzcmp (link to xzdiff), xzdec, xzdiff, xzegrep
-              (link to xzgrep), xzfgrep (link to xzgrep), xzgrep, xzless, and
+              <strong class="segtitle">安装的程序:</strong>
+              <span class="segbody">lzcat (链接到 xz), lzcmp (链接到
+              xzdiff), lzdiff (链接到 xzdiff), lzegrep (链接到 xzgrep),
+              lzfgrep (链接到 xzgrep), lzgrep (链接到 xzgrep), lzless (link
+              to xzless), lzma (链接到 xz), lzmadec, lzmainfo, lzmore (link
+              to xzmore), unlzma (链接到 xz), unxz (链接到 xz), xz, xzcat
+              (链接到 xz), xzcmp (链接到 xzdiff), xzdec, xzdiff, xzegrep
+              (链接到 xzgrep), xzfgrep (链接到 xzgrep), xzgrep, xzless, and
               xzmore</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">liblzma.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/include/lzma and
               /usr/share/doc/xz-5.2.3</span>
             </div>
@@ -137,7 +134,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -155,7 +152,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompresses to standard output
+                    解压到标准输出
                   </p>
                 </td>
               </tr>
@@ -169,8 +166,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>cmp</strong></span> on
-                    LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>cmp</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -184,8 +180,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>diff</strong></span>
-                    on LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>diff</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -199,8 +194,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>egrep</strong></span>
-                    on LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>egrep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -214,8 +208,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>fgrep</strong></span>
-                    on LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>fgrep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -229,8 +222,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>grep</strong></span>
-                    on LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>grep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -244,8 +236,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>less</strong></span>
-                    on LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>less</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -259,7 +250,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Compresses or decompresses files using the LZMA format
+                    使用 LZMA 格式压缩或解压文件
                   </p>
                 </td>
               </tr>
@@ -273,7 +264,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    A small and fast decoder for LZMA compressed files
+                    一个又小又快的 LZMA 压缩文件解码器
                   </p>
                 </td>
               </tr>
@@ -287,8 +278,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows information stored in the LZMA compressed file
-                    header
+                    显示保存在 LZMA 压缩文件头中的信息
                   </p>
                 </td>
               </tr>
@@ -302,8 +292,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>more</strong></span>
-                    on LZMA compressed files
+                    在 LZMA 压缩的文件上运行 <span class="command"><strong>more</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -317,7 +306,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompresses files using the LZMA format
+                    使用 LZMA 格式解压文件
                   </p>
                 </td>
               </tr>
@@ -331,7 +320,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompresses files using the XZ format
+                    使用 XZ 格式解压文件
                   </p>
                 </td>
               </tr>
@@ -344,7 +333,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Compresses or decompresses files using the XZ format
+                    使用 XZ 格式压缩或解压文件
                   </p>
                 </td>
               </tr>
@@ -358,7 +347,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompresses to standard output
+                    解压到标准输出
                   </p>
                 </td>
               </tr>
@@ -372,8 +361,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>cmp</strong></span> on
-                    XZ compressed files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>cmp</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -387,7 +375,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    A small and fast decoder for XZ compressed files
+                    一个又小又快的 XZ 压缩文件解码器
                   </p>
                 </td>
               </tr>
@@ -401,8 +389,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>diff</strong></span>
-                    on XZ compressed files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>diff</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -416,8 +403,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>egrep</strong></span>
-                    on XZ compressed files files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>egrep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -431,8 +417,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>fgrep</strong></span>
-                    on XZ compressed files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>fgrep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -446,8 +431,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>grep</strong></span>
-                    on XZ compressed files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>grep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -461,8 +445,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>less</strong></span>
-                    on XZ compressed files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>less</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -476,8 +459,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>more</strong></span>
-                    on XZ compressed files
+                    在 XZ 压缩的文件上运行 <span class="command"><strong>more</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -490,8 +472,7 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
                 </td>
                 <td>
                   <p>
-                    The library implementing lossless, block-sorting data
-                    compression, using the Lempel-Ziv-Markov chain algorithm
+                    这个库使用 Lemel-Ziv-Markov 链算法实现了无损的，块分类数据压缩
                   </p>
                 </td>
               </tr>
@@ -504,24 +485,24 @@ ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="automake.html" title=
-          "Automake-1.15">Prev</a>
+          "Automake-1.15">上一页</a>
           <p>
             Automake-1.15
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="kmod.html" title="Kmod-23">Next</a>
+          <a accesskey="n" href="kmod.html" title="Kmod-23">下一页</a>
           <p>
             Kmod-23
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
