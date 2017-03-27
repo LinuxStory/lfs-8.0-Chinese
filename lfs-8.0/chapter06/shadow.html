@@ -76,8 +76,7 @@
           </h3>
           <p>
             如果你希望强制使用强密码，在构建 Shadow前参考
-			If you would like to enforce the use of strong passwords, refer
-            to <a class="ulink" href=
+			<a class="ulink" href=
             "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/cracklib.html">
             http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/cracklib.html</a>
 			安装 CrackLib. 然后在<span class="command"><strong>configure</strong></span>命令后增加
@@ -97,8 +96,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
 </pre>
         <p>
           <a id="shadow-login_defs" name="shadow-login_defs"></a>除了默认的 <span class="emphasis"><em>crypt</em></span>方法外，还可使用更安全的 <span class=
-          "emphasis"><em>SHA-512</em></span> 方法进行密码加密，这允许密码的长度超过8位，
-          which also allows passwords longer than 8 characters. 有必要将用户邮箱目录从默认但是已经过时的 <code class=
+          "emphasis"><em>SHA-512</em></span> 方法进行密码加密，一样允许密码的长度超过8位。 有必要将用户邮箱目录从默认但是已经过时的 <code class=
           "filename">/var/spool/mail</code> 目录更改至现在常用的 <code class=
           "filename">/var/mail</code> 目录:
         </p>
@@ -109,7 +107,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
 </pre>
         <p>
           现在修正一个阻止 <span class=
-          "command"><strong>useradd</strong></span> 命令在 /etc/passwd 文件中设置 shell 条目的 bug. 这里，我们需要一个简短的补丁，可以直接在这里包含而无需单独的补丁文件:
+          "command"><strong>useradd</strong></span> 命令在 /etc/passwd 文件中设置 shell 条目的 bug. 这里，我们制作一个简短的补丁，可以直接在这里包含而无需单独的补丁文件:
         </p>
         <pre class="userinput">
 <kbd class="command">echo '--- src/useradd.c   (old)
@@ -197,7 +195,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          将放错的程序移动到正确的位置:
+          将程序放置到正确的位置:
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/bin/passwd /bin</kbd>
@@ -208,49 +206,35 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
           <a id="conf-shadow" name="conf-shadow"></a>6.25.2. 配置 Shadow
         </h2>
         <p>
-          该软件包包含了增、删、改用户和组的工具This package contains utilities to add, modify, and delete users
-          and groups; 设置和更改密码；并且执行其它管理任务。set and change their passwords; and perform other
-          administrative tasks. 有关 <span class=
-          "emphasis"><em>password shadowing</em></span> 的详细说明means, 请见see the
-          <code class="filename">doc/HOWTO</code> 文件file within the unpacked
-          source tree. If using Shadow support, keep in mind that programs
-          which need to verify passwords (display managers, FTP programs,
-          pop3 daemons, etc.) must be Shadow-compliant. That is, they need to
-          be able to work with shadowed passwords.
+          该软件包包含了增、删、改用户和组的工具; 设置和更改密码；并且执行其它管理任务。有关 <span class=
+          "emphasis"><em>password shadowing</em></span> 的详细说明means, 请见内核源码中的see the
+          <code class="filename">doc/HOWTO</code> 文件。 如果使用Shadow支持，请记住，需要验证密码的程序（显示管理器，FTP程序，pop3守护程序等）必须符合Shadow要求。 也就是说，他们需要能够使用影子( shadow )密码。
         </p>
         <p>
-          To enable shadowed passwords, run the following command:
+          为了能够让用户密码使用影子( shadow )密码，运行如下命令:
         </p>
         <pre class="userinput">
 <kbd class="command">pwconv</kbd>
 </pre>
         <p>
-          To enable shadowed group passwords, run:
+          为了能够让组密码使用影子( shadow )密码，运行:
         </p>
         <pre class="userinput">
 <kbd class="command">grpconv</kbd>
 </pre>
         <p>
-          Shadow's stock configuration for the <span class=
-          "command"><strong>useradd</strong></span> utility has a few caveats
-          that need some explanation. First, the default action for the
-          <span class="command"><strong>useradd</strong></span> utility is to
-          create the user and a group of the same name as the user. By
-          default the user ID (UID) and group ID (GID) numbers will begin
-          with 1000. This means if you don't pass parameters to <span class=
-          "command"><strong>useradd</strong></span>, each user will be a
-          member of a unique group on the system. If this behavior is
-          undesirable, you'll need to pass the <em class=
-          "parameter"><code>-g</code></em> parameter to <span class=
-          "command"><strong>useradd</strong></span>. The default parameters
-          are stored in the <code class=
-          "filename">/etc/default/useradd</code> file. You may need to modify
-          two parameters in this file to suit your particular needs.
+          Shadow 中关于 <span class=
+          "command"><strong>useradd</strong></span> 的配置有一些需要解释的注意事项。首先，
+          <span class="command"><strong>useradd</strong></span> 在创建用户时默认创建了与用户同名的组。默认情况下，用户ID（UID）和组ID（GID）编号将从1000开始。 这意味着如果你不加参数的使用 <span class=
+          "command"><strong>useradd</strong></span>, 每个用户都会对应一个单独的用户组, 若不想如此，就需要指定 <em class=
+          "parameter"><code>-g</code></em> 参数给<span class=
+          "command"><strong>useradd</strong></span>命令。默认参数被存储在 <code class=
+          "filename">/etc/default/useradd</code> 文件中。 你需要更改该文件中的两个参数来满足特定的需求。
         </p>
         <div class="variablelist">
           <p class="title">
             <strong><code class="filename">/etc/default/useradd</code>
-            Parameter Explanations</strong>
+            参数说明</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -259,20 +243,14 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
             </dt>
             <dd>
               <p>
-                This parameter sets the beginning of the group numbers used
-                in the /etc/group file. You can modify it to anything you
+                该参数设置/etc/group 文件中用户组号的开始值。该值可随需更改，但是需要注意 You can modify it to anything you
                 desire. Note that <span class=
-                "command"><strong>useradd</strong></span> will never reuse a
-                UID or GID. If the number identified in this parameter is
-                used, it will use the next available number after this. Note
-                also that if you don't have a group 1000 on your system the
-                first time you use <span class=
-                "command"><strong>useradd</strong></span> without the
-                <em class="parameter"><code>-g</code></em> parameter, you'll
-                get a message displayed on the terminal that says:
+                "command"><strong>useradd</strong></span> 命令不会重复使用
+                UID 或 GID. 如果给定的数字已经被用过，就会自动跳过它使用后一个数字。同样需要注意，如果你的系统中没有编号为1000的用户组，则在第一次使用<span class=
+                "command"><strong>useradd</strong></span> 命令却不加
+                <em class="parameter"><code>-g</code></em> 参数时, 你就会在终端上看到一条信息:
                 <code class="computeroutput">useradd: unknown GID
-                1000</code>. You may disregard this message and group number
-                1000 will be used.
+                1000</code>. 可以忽略它，用户组编号1000会自动采用。
               </p>
             </dd>
             <dt>
@@ -281,15 +259,11 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
             </dt>
             <dd>
               <p>
-                This parameter causes <span class=
-                "command"><strong>useradd</strong></span> to create a mailbox
-                file for the newly created user. <span class=
-                "command"><strong>useradd</strong></span> will make the group
-                ownership of this file to the <code class=
-                "systemitem">mail</code> group with 0660 permissions. If you
-                would prefer that these mailbox files are not created by
-                <span class="command"><strong>useradd</strong></span>, issue
-                the following command:
+                该参数会导致<span class=
+                "command"><strong>useradd</strong></span> 命令为新创建的用户创建一个邮箱文件。 <span class=
+                "command"><strong>useradd</strong></span> 命令将使这个<code class=
+                "systemitem">mail</code>组文件具备0660权限。如果你不想用
+                <span class="command"><strong>useradd</strong></span>创建邮箱文件, 如下操作:
               </p>
               <pre class="userinput">
 <kbd class="command">sed -i 's/yes/no/' /etc/default/useradd</kbd>
@@ -300,11 +274,11 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.25.3. Setting the root password
+          6.25.3. 设置 root 密码
         </h2>
         <p>
-          Choose a password for user <span class=
-          "emphasis"><em>root</em></span> and set it by running:
+          设置 <span class=
+          "emphasis"><em>root</em></span> 用户密码:
         </p>
         <pre class="userinput">
 <kbd class="command">passwd root</kbd>
@@ -312,13 +286,12 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-shadow" name="contents-shadow"></a>6.25.4. Contents
-          of Shadow
+          <a id="contents-shadow" name="contents-shadow"></a>6.25.4. Shadow 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">chage, chfn, chgpasswd, chpasswd, chsh,
               expiry, faillog, gpasswd, groupadd, groupdel, groupmems,
               groupmod, grpck, grpconv, grpunconv, lastlog, login, logoutd,
@@ -334,7 +307,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -352,8 +325,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to change the maximum number of days between
-                    obligatory password changes
+                    用于更改强制性密码更改的最大间隔天数
                   </p>
                 </td>
               </tr>
@@ -367,7 +339,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to change a user's full name and other information
+                    用于更改用户的全名和其他信息
                   </p>
                 </td>
               </tr>
@@ -381,7 +353,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to update group passwords in batch mode
+                    用于在批处理模式下更新用户密码
                   </p>
                 </td>
               </tr>
@@ -395,7 +367,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to update user passwords in batch mode
+                    用来更新用户Used to update user passwords in batch mode
                   </p>
                 </td>
               </tr>
@@ -409,7 +381,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to change a user's default login shell
+                    用于更改用户的默认登录 shell
                   </p>
                 </td>
               </tr>
@@ -423,8 +395,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Checks and enforces the current password expiration
-                    policy
+                    检查并强制执行当前的密码到期策略
                   </p>
                 </td>
               </tr>
@@ -438,9 +409,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to examine the log of login failures, to set a
-                    maximum number of failures before an account is blocked,
-                    or to reset the failure count
+                    用于检查登录失败的日志，在账户被阻止前去设置最大的失败次数或是重置失败次数。
                   </p>
                 </td>
               </tr>
