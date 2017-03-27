@@ -50,7 +50,7 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-		  attr软件包包含了一些实用程序用于管理文件系统对象上的扩展属性。
+		  attr 软件包包含了一些实用程序用于管理文件系统对象上的扩展属性。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
@@ -84,7 +84,7 @@
 <kbd class="command">sed -i -e "/SUBDIRS/s|man[25]||g" man/Makefile</kbd>
 </pre>
         <p>
-          为 Attr 的编译做准备:
+          准备编译 Attr 软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr \
@@ -92,7 +92,7 @@
             --disable-static</kbd>
 </pre>
         <p>
-          编译这个软件包:
+          编译该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
@@ -104,17 +104,17 @@
 <kbd class="command">make -j1 tests root-tests</kbd>
 </pre>
         <p>
-          安装这个软件包:
+          安装该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install install-dev install-lib
 chmod -v 755 /usr/lib/libattr.so</kbd>
 </pre>
         <p>
-          这个共享库需要被移动到 <code class=
+          该共享库需要被移动到 <code class=
           "filename">/lib</code>, 并且需要在<code class=
-          "filename">/usr/lib</code>目录下生成文件 <code class=
-          "filename">.so</code>:
+          "filename">/usr/lib</code>目录下生成 <code class=
+          "filename">.so</code> 文件:
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/lib/libattr.so.* /lib
@@ -228,7 +228,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

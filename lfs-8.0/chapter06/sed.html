@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.24.&nbsp;Sed-4.4
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="libcap.html" title="Libcap-2.25">Prev</a>
+          <a accesskey="p" href="libcap.html" title="Libcap-2.25">上一页</a>
           <p>
             Libcap-2.25
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="shadow.html" title="Shadow-4.4">Next</a>
+          <a accesskey="n" href="shadow.html" title="Shadow-4.4">下一页</a>
           <p>
             Shadow-4.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -50,16 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Sed package contains a stream editor.
+          Sed 软件包包含了一个流编辑器。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计编译时间:</strong>
               <span class="segbody">0.3 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">25 MB</span>
             </div>
           </div>
@@ -67,37 +67,36 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.24.1. Installation of Sed
+          6.24.1. 安装 Sed
         </h2>
         <p>
-          First fix an issue in the LFS environment and remove a failing
-          test:
+          首先修正了一个在 LFS 环境中的问题并且去除了一个失效的测试:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's/usr/tools/'       build-aux/help2man
 sed -i 's/panic-tests.sh//' Makefile.in</kbd>
 </pre>
         <p>
-          Prepare Sed for compilation:
+          准备编译 Sed 软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr --bindir=/bin</kbd>
 </pre>
         <p>
-          Compile the package and generate the HTML documentation:
+          编译该软件包并生成HTML文档:
         </p>
         <pre class="userinput">
 <kbd class="command">make
 make html</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          编译测试，如下:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package and its documentation:
+          安装该软件包和对应文档:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -107,24 +106,23 @@ install -m644 doc/sed.html /usr/share/doc/sed-4.4</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-sed" name="contents-sed"></a>6.24.2. Contents of
-          Sed
+          <a id="contents-sed" name="contents-sed"></a>6.24.2. Sed 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed program:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">sed</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/share/doc/sed-4.4</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -141,7 +139,7 @@ install -m644 doc/sed.html /usr/share/doc/sed-4.4</kbd>
                 </td>
                 <td>
                   <p>
-                    Filters and transforms text files in a single pass
+					单向过滤和转换文本文件
                   </p>
                 </td>
               </tr>
@@ -153,24 +151,24 @@ install -m644 doc/sed.html /usr/share/doc/sed-4.4</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="libcap.html" title="Libcap-2.25">Prev</a>
+          <a accesskey="p" href="libcap.html" title="Libcap-2.25">上一页</a>
           <p>
             Libcap-2.25
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="shadow.html" title="Shadow-4.4">Next</a>
+          <a accesskey="n" href="shadow.html" title="Shadow-4.4">下一页</a>
           <p>
             Shadow-4.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

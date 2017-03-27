@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.25.&nbsp;Shadow-4.4
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="sed.html" title="Sed-4.4">Prev</a>
+          <a accesskey="p" href="sed.html" title="Sed-4.4">上一页</a>
           <p>
             Sed-4.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="psmisc.html" title="Psmisc-22.21">Next</a>
+          <a accesskey="n" href="psmisc.html" title="Psmisc-22.21">下一页</a>
           <p>
             Psmisc-22.21
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -50,17 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Shadow package contains programs for handling passwords in a
-          secure way.
+          Shadow 软件包包含了以安全方式处理密码的程序
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计编译时间:</strong>
               <span class="segbody">0.2 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">42 MB</span>
             </div>
           </div>
@@ -68,31 +67,27 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.25.1. Installation of Shadow
+          6.25.1. 安装 Shadow
         </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            If you would like to enforce the use of strong passwords, refer
+            如果你希望强制使用强密码，在构建 Shadow前参考
+			If you would like to enforce the use of strong passwords, refer
             to <a class="ulink" href=
             "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/cracklib.html">
             http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/cracklib.html</a>
-            for installing CrackLib prior to building Shadow. Then add
-            <em class="parameter"><code>--with-libcrack</code></em> to the
-            <span class="command"><strong>configure</strong></span> command
-            below.
+			安装 CrackLib. 然后在<span class="command"><strong>configure</strong></span>命令后增加
+            <em class="parameter"><code>--with-libcrack</code></em> 参数。
           </p>
         </div>
         <p>
-          Disable the installation of the <span class=
-          "command"><strong>groups</strong></span> program and its man pages,
-          as Coreutils provides a better version. Also Prevent the
-          installation of manual pages that were already installed by the
-          <a class="xref" href="man-pages.html#man-pages"><code class=
-          "filename">man pages</code></a> package:
+          不要在此处安装 <span class=
+          "command"><strong>groups</strong></span> 程序和对应的帮助页面，
+		  因为 Coreutils 软件包里会提供一个更好的版本。同样也需要将手册页面的安装排除在<a class="xref" href="man-pages.html#man-pages"><code class="filename">帮助页面</code></a> 包安装过程之外:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's/groups$(EXEEXT) //' src/Makefile.in
@@ -101,15 +96,11 @@ find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
 find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
 </pre>
         <p>
-          <a id="shadow-login_defs" name="shadow-login_defs"></a>Instead of
-          using the default <span class="emphasis"><em>crypt</em></span>
-          method, use the more secure <span class=
-          "emphasis"><em>SHA-512</em></span> method of password encryption,
-          which also allows passwords longer than 8 characters. It is also
-          necessary to change the obsolete <code class=
-          "filename">/var/spool/mail</code> location for user mailboxes that
-          Shadow uses by default to the <code class=
-          "filename">/var/mail</code> location used currently:
+          <a id="shadow-login_defs" name="shadow-login_defs"></a>除了默认的 <span class="emphasis"><em>crypt</em></span>方法外，还可使用更安全的 <span class=
+          "emphasis"><em>SHA-512</em></span> 方法进行密码加密，这允许密码的长度超过8位，
+          which also allows passwords longer than 8 characters. 有必要将用户邮箱目录从默认但是已经过时的 <code class=
+          "filename">/var/spool/mail</code> 目录更改至现在常用的 <code class=
+          "filename">/var/mail</code> 目录:
         </p>
         <pre class="userinput">
 <kbd class=
@@ -117,11 +108,8 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs</kbd>
 </pre>
         <p>
-          Now fix a bug that prevents <span class=
-          "command"><strong>useradd</strong></span> from setting the shell
-          entry in the /etc/passwd file. In this case we need a short patch,
-          but can include it directly here without the need for a separate
-          file:
+          现在修正一个阻止 <span class=
+          "command"><strong>useradd</strong></span> 命令在 /etc/passwd 文件中设置 shell 条目的 bug. 这里，我们需要一个简短的补丁，可以直接在这里包含而无需单独的补丁文件:
         </p>
         <pre class="userinput">
 <kbd class="command">echo '--- src/useradd.c   (old)
@@ -148,11 +136,10 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            If you chose to build Shadow with Cracklib support, run the
-            following:
+            如果你选择了构建 Cracklib 支持下的 Shadow ，运行如下:
           </p>
           <pre class="userinput">
 <kbd class=
@@ -160,20 +147,19 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
 </pre>
         </div>
         <p>
-          Make a minor change to make the default useradd consistent with the
-          LFS groups file:
+          进行一个小更改，使默认的 useradd 与 LFS 组文件一致:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's/1000/999/' etc/useradd</kbd>
 </pre>
         <p>
-          Fix a security issue identified upstream:
+          修正一个上游发现的安全问题:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i -e '47 d' -e '60,65 d' libmisc/myname.c</kbd>
 </pre>
         <p>
-          Prepare Shadow for compilation:
+          准备编译 Shadow:
         </p>
         <pre class="userinput">
 <kbd class=
@@ -181,7 +167,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure option:</strong>
+            <strong>configure 选项的含义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -190,29 +176,28 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
             </dt>
             <dd>
               <p>
-                The maximum user name is 32 characters. Make the maximum
-                group name the same.
+                用户名的最大长度为 32 个字符。 用户组名称最大长度也是32个字符。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not come with a test suite.
+          该软件包不含测试套件.
         </p>
         <p>
-          Install the package:
+          安装该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Move a misplaced program to its proper location:
+          将放错的程序移动到正确的位置:
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/bin/passwd /bin</kbd>
@@ -220,15 +205,14 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="conf-shadow" name="conf-shadow"></a>6.25.2. Configuring
-          Shadow
+          <a id="conf-shadow" name="conf-shadow"></a>6.25.2. 配置 Shadow
         </h2>
         <p>
-          This package contains utilities to add, modify, and delete users
-          and groups; set and change their passwords; and perform other
-          administrative tasks. For a full explanation of what <span class=
-          "emphasis"><em>password shadowing</em></span> means, see the
-          <code class="filename">doc/HOWTO</code> file within the unpacked
+          该软件包包含了增、删、改用户和组的工具This package contains utilities to add, modify, and delete users
+          and groups; 设置和更改密码；并且执行其它管理任务。set and change their passwords; and perform other
+          administrative tasks. 有关 <span class=
+          "emphasis"><em>password shadowing</em></span> 的详细说明means, 请见see the
+          <code class="filename">doc/HOWTO</code> 文件file within the unpacked
           source tree. If using Shadow support, keep in mind that programs
           which need to verify passwords (display managers, FTP programs,
           pop3 daemons, etc.) must be Shadow-compliant. That is, they need to
@@ -470,8 +454,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to add and delete members and administrators to
-                    groups
+                    用于为用户组添加和删除成员和管理员
                   </p>
                 </td>
               </tr>
@@ -485,7 +468,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a group with the given name
+                    创建给定名称的用户组
                   </p>
                 </td>
               </tr>
@@ -499,7 +482,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Deletes the group with the given name
+                    删除给定名称的用户组
                   </p>
                 </td>
               </tr>
@@ -513,8 +496,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Allows a user to administer his/her own group membership
-                    list without the requirement of super user privileges.
+                    允许用户管理他/她自己的组成员列表，而不需要超级用户权限。
                   </p>
                 </td>
               </tr>
@@ -528,7 +510,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to modify the given group's name or GID
+                    被用来改变给定用户组的名称或者 GID
                   </p>
                 </td>
               </tr>
@@ -542,9 +524,9 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Verifies the integrity of the group files <code class=
-                    "filename">/etc/group</code> and <code class=
-                    "filename">/etc/gshadow</code>
+                    验证组文件 <code class=
+                    "filename">/etc/group</code> 和 <code class=
+                    "filename">/etc/gshadow</code>的完整性
                   </p>
                 </td>
               </tr>
@@ -558,8 +540,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates or updates the shadow group file from the normal
-                    group file
+                    用普通组文件创建或者更新shadow 组文件
                   </p>
                 </td>
               </tr>
@@ -573,9 +554,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Updates <code class="filename">/etc/group</code> from
-                    <code class="filename">/etc/gshadow</code> and then
-                    deletes the latter
+                    以<code class="filename">/etc/gshadow</code>内容为准更新 <code class="filename">/etc/group</code> 并删除前者
                   </p>
                 </td>
               </tr>
@@ -589,8 +568,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the most recent login of all users or of a given
-                    user
+                    报告所有用户或给定用户的最近登录情况
                   </p>
                 </td>
               </tr>
@@ -604,7 +582,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used by the system to let users sign on
+                    系统用来让用户登录
                   </p>
                 </td>
               </tr>
@@ -618,8 +596,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is a daemon used to enforce restrictions on log-on time
-                    and ports
+                    强制限制登录时间和端口的守护程序
                   </p>
                 </td>
               </tr>
@@ -633,7 +610,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to set the gid mapping of a user namespace
+                    用于设置用户命名空间的 GID 映射
                   </p>
                 </td>
               </tr>
@@ -647,7 +624,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to change the current GID during a login session
+                    用于在登录会话期间更改当前的 GID
                   </p>
                 </td>
               </tr>
@@ -661,7 +638,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to set the uid mapping of a user namespace
+                    用于设置用户命名空间的 UID 映射
                   </p>
                 </td>
               </tr>
@@ -675,8 +652,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to create or update an entire series of user
-                    accounts
+                    常被用作创建或者更新一系列的用户账号
                   </p>
                 </td>
               </tr>
@@ -690,9 +666,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays a message that an account is not available; it
-                    is designed to be used as the default shell for accounts
-                    that have been disabled
+                    当账户不可用的时候显示一个消息；它被设计用作已被禁用帐户的默认 shell
                   </p>
                 </td>
               </tr>
@@ -706,8 +680,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to change the password for a user or group
-                    account
+                    常被用来更改用户或者用户组账号的密码
                   </p>
                 </td>
               </tr>
@@ -721,9 +694,9 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Verifies the integrity of the password files <code class=
-                    "filename">/etc/passwd</code> and <code class=
-                    "filename">/etc/shadow</code>
+                    验证 <code class=
+                    "filename">/etc/passwd</code> 和 <code class=
+                    "filename">/etc/shadow</code> 密码文件的完整性
                   </p>
                 </td>
               </tr>
@@ -737,8 +710,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates or updates the shadow password file from the
-                    normal password file
+                    用普通密码文件创建或者更新 shadow 密码文件
                   </p>
                 </td>
               </tr>
@@ -752,9 +724,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Updates <code class="filename">/etc/passwd</code> from
-                    <code class="filename">/etc/shadow</code> and then
-                    deletes the latter
+                    以<code class="filename">/etc/shadow</code>内容为准更新 <code class="filename">/etc/passwd</code>，并删除前者
                   </p>
                 </td>
               </tr>
@@ -767,8 +737,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Executes a given command while the user's GID is set to
-                    that of the given group
+                    当用户的GID设置为给定组的GID时，执行给定的命令
                   </p>
                 </td>
               </tr>
@@ -781,7 +750,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs a shell with substitute user and group IDs
+                    运行带有指代用户和组ID的 shell
                   </p>
                 </td>
               </tr>
@@ -795,8 +764,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a new user with the given name, or updates the
-                    default new-user information
+                    用给定的名称创建一个新的用户，或者是更新默认的新用户信息
                   </p>
                 </td>
               </tr>
@@ -810,7 +778,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Deletes the given user account
+                    删除给定的用户账户
                   </p>
                 </td>
               </tr>
@@ -824,9 +792,7 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to modify the given user's login name, User
-                    Identification (UID), shell, initial group, home
-                    directory, etc.
+                    常用来更改给定用户的登录名、用户ID(UID) 、shell、初始用户组、 home路径等。
                   </p>
                 </td>
               </tr>
@@ -840,8 +806,8 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Edits the <code class="filename">/etc/group</code> or
-                    <code class="filename">/etc/gshadow</code> files
+                    编辑 <code class="filename">/etc/group</code> 或
+                    <code class="filename">/etc/gshadow</code> 文件
                   </p>
                 </td>
               </tr>
@@ -855,8 +821,8 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
                 </td>
                 <td>
                   <p>
-                    Edits the <code class="filename">/etc/passwd</code> or
-                    <code class="filename">/etc/shadow</code> files
+                    编辑 <code class="filename">/etc/passwd</code> 或
+                    <code class="filename">/etc/shadow</code> 文件
                   </p>
                 </td>
               </tr>
@@ -868,24 +834,24 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="sed.html" title="Sed-4.4">Prev</a>
+          <a accesskey="p" href="sed.html" title="Sed-4.4">上一页</a>
           <p>
             Sed-4.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="psmisc.html" title="Psmisc-22.21">Next</a>
+          <a accesskey="n" href="psmisc.html" title="Psmisc-22.21">下一页</a>
           <p>
             Psmisc-22.21
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
