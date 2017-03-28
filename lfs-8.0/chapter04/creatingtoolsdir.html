@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      4.2.&nbsp;Creating the $LFS/tools Directory
+      4.2.&nbsp;创建 $LFS/tools 文件夹
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,68 +19,49 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Final Preparations
+        第四章 最后的准备工作
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "Introduction">Prev</a>
+          "简介">上一页</a>
           <p>
-            Introduction
+            简介
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="addinguser.html" title=
-          "Adding the LFS User">Next</a>
+          "添加 LFS 用户">下一页</a>
           <p>
-            Adding the LFS User
+            添加 LFS 用户
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter04.html" title=
-          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+          "Chapter&nbsp;4.&nbsp;Final Preparations">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-tools-creatingtoolsdir" name=
-        "ch-tools-creatingtoolsdir"></a>4.2. Creating the $LFS/tools
-        Directory
+        "ch-tools-creatingtoolsdir"></a>4.2. 创建 $LFS/tools 文件夹
       </h1>
       <p>
-        All programs compiled in <a class="xref" href=
-        "../chapter05/chapter05.html" title=
-        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
-        will be installed under <code class="filename">$LFS/tools</code> to
-        keep them separate from the programs compiled in <a class="xref"
-        href="../chapter06/chapter06.html" title=
-        "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
-        6</a>. The programs compiled here are temporary tools and will not be
-        a part of the final LFS system. By keeping these programs in a
-        separate directory, they can easily be discarded later after their
-        use. This also prevents these programs from ending up in the host
-        production directories (easy to do by accident in <a class="xref"
-        href="../chapter05/chapter05.html" title=
-        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
-        5</a>).
+        <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>中编译的所有程序将安装在 <code class="filename">$LFS/tools</code> 文件夹下，以便和<a class="xref"href="../chapter06/chapter06.html" title="第六章&nbsp;安装基本系统软件">第六章</a>中编译的程序分离开来。这里编译的程序是临时工具，并非最终 LFS 系统的一部分。将这些编译后的临时工具保存在单独的目录，以方便在使用完成后直接删除。同时也防止了和最终的 LFS 系统相互冲突。（<a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>的工作很容易出现一些意料不到的问题。）
       </p>
       <p>
-        Create the required directory by running the following as
-        <code class="systemitem">root</code>:
+        使用 <code class="systemitem">root</code> 用户，通过以下命令来创建所需目录：
       </p>
       <pre class="userinput">
 <kbd class="command">mkdir -v $LFS/tools</kbd>
 </pre>
       <p>
-        The next step is to create a <code class="filename">/tools</code>
-        symlink on the host system. This will point to the newly-created
-        directory on the LFS partition. Run this command as <code class=
-        "systemitem">root</code> as well:
+        下一步就是在系统中创建一个 <code class="filename">/tools</code> 文件夹的符号链接，该链接指向 LFS 分区上创建的新的目录。使用 <code class= "systemitem">root</code> 用户来执行此命令：
       </p>
       <pre class="userinput">
 <kbd class="command">ln -sv $LFS/tools /</kbd>
@@ -88,18 +69,14 @@
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          The above command is correct. The <span class=
-          "command"><strong>ln</strong></span> command has a few syntactic
-          variations, so be sure to check <span class="command"><strong>info
-          coreutils ln</strong></span> and <code class=
-          "filename">ln(1)</code> before reporting what you may think is an
-          error.
+          上述命令是正确的。 <span class="command"><strong>ln</strong></span> 命令有一些语法上的变化，会检查 <span class="command"><strong>info coreutils ln</strong></span> 和 <code class="filename">ln(1)</code> 然后报告一个错误。
         </p>
       </div>
       <p>
+        创建的符号链接用来编译工具链，
         The created symlink enables the toolchain to be compiled so that it
         always refers to <code class="filename">/tools</code>, meaning that
         the compiler, assembler, and linker will work both in Chapter 5 (when
@@ -112,25 +89,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "Introduction">Prev</a>
+          "简介">上一页</a>
           <p>
-            Introduction
+            简介
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="addinguser.html" title=
-          "Adding the LFS User">Next</a>
+          "添加 LFS 用户">下一页</a>
           <p>
-            Adding the LFS User
+            添加 LFS 用户
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter04.html" title=
-          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+          "Chapter&nbsp;4.&nbsp;Final Preparations">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
