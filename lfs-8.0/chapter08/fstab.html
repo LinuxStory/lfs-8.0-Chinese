@@ -19,12 +19,12 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        第八章&nbsp;Making the LFS System Bootable
+        第八章&nbsp;使 LFS 系统可启动
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "Introduction">上一页</a>
+          "简介">上一页</a>
           <p>
             简介
           </p>
@@ -37,7 +37,7 @@
         </li>
         <li class="up">
           <a accesskey="u" href="chapter08.html" title=
-          "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">返回</a>
+          "第八章&nbsp;使 LFS 系统可启动">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -83,7 +83,7 @@ EOF</kbd>
       </p>
       <p>
         基于 MS-DOS 或者源于 Windows 的文件系统 (例如： vfat、ntfs、smbfs、cifs、iso9660 和 udf) 需要添加 <span class="quote">&ldquo;<span class=
-        "quote">iocharset</span>&rdquo;</span> 挂载项以便在文件名中的非 ASCII 字符能够被正确解析。该项的值应与你区域设置的字符集一致。这样做目的是让内核能够识别它。该项只有在相关的字符集定义已经被编译到内核或者被构建为模块时生效 (在文件系统 -> 本地语言支持中查看）。此外，vfat 和 smbfs 文件系统还需要添加 <span class="quote">&ldquo;<span class="quote">codepage</span>&rdquo;</span> 项。它应该被设置为你的国家 MS-DOS 下使用的代码页编号。例如，为了挂载 USB 闪存设备，ru_RU.KOI8-R 用户将需要在 <code class="filename">/etc/fstab</code> 中它挂载行的 “options” 部分的以下内容：
+        "quote">iocharset</span>&rdquo;</span> 挂载项以便在文件名中的非 ASCII 字符能够被正确解析。该项的值应与你语言环境的字符集一致。这样做目的是让内核能够识别它。该项只有在相关的字符集定义已经被编译到内核或者被构建为模块时生效 (在文件系统 -> 本地语言支持中查看）。此外，vfat 和 smbfs 文件系统还需要添加 <span class="quote">&ldquo;<span class="quote">codepage</span>&rdquo;</span> 项。它应该被设置为你的国家 MS-DOS 下使用的代码页编号。例如，为了挂载 USB 闪存设备，ru_RU.KOI8-R 用户将需要在 <code class="filename">/etc/fstab</code> 中它挂载行的 “options” 部分的以下内容：
        </p>
       <pre class="screen"><code class=
 "literal">noauto,user,quiet,showexec,iocharset=koi8r,codepage=866</code>
@@ -145,7 +145,7 @@ EOF</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "Introduction">上一页</a>
+          "简介">上一页</a>
           <p>
             简介
           </p>
@@ -158,7 +158,7 @@ EOF</kbd>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter08.html" title=
-          "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">返回</a>
+          "第八章&nbsp;使 LFS 系统可启动">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
