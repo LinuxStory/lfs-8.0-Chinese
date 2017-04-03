@@ -19,7 +19,7 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Final Preparations
+        第四章&nbsp;最后的准备工作
       </h3>
       <ul>
         <li class="prev">
@@ -38,7 +38,7 @@
         </li>
         <li class="up">
           <a accesskey="u" href="chapter04.html" title=
-          "Chapter&nbsp;4.&nbsp;Final Preparations">返回</a>
+          "第四章&nbsp;最后的准备工作">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -52,6 +52,7 @@
         添加 LFS 用户
       </h1>
       <p>
+        当使用 <code class="systemitem">root</code> 用户登陆时，一点小的错误就有可能破坏整个系统。因此，我们建议使用普通用户（非特权用户）构建这些软件包。 
         When logged in as user <code class="systemitem">root</code>, making a
         single mistake can damage or destroy a system. Therefore, we
         recommend building the packages in this chapter as an unprivileged
@@ -68,7 +69,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
 </pre>
       <div class="variablelist">
         <p class="title">
-          <strong>The meaning of the command line options:</strong>
+          <strong>命令中选项的含义：</strong>
         </p>
         <dl class="variablelist">
           <dt>
@@ -77,8 +78,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
           </dt>
           <dd>
             <p>
-              This makes <span class="command"><strong>bash</strong></span>
-              the default shell for user <code class="systemitem">lfs</code>.
+              设置 <span class="command"><strong>bash</strong></span> 为 <code class="systemitem">lfs</code> 用户的默认 shell；
             </p>
           </dd>
           <dt>
@@ -87,8 +87,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
           </dt>
           <dd>
             <p>
-              This option adds user <code class="systemitem">lfs</code> to
-              group <code class="systemitem">lfs</code>.
+              将 <code class="systemitem">lfs</code> 用户添加到 <code class="systemitem">lfs</code> 用户组；
             </p>
           </dd>
           <dt>
@@ -97,8 +96,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
           </dt>
           <dd>
             <p>
-              This creates a home directory for <code class=
-              "systemitem">lfs</code>.
+              为 <code class="systemitem">lfs</code> 用户创建 <code class="systemitem">home</code> 文件夹；
             </p>
           </dd>
           <dt>
@@ -107,10 +105,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
           </dt>
           <dd>
             <p>
-              This parameter prevents possible copying of files from a
-              skeleton directory (default is <code class=
-              "filename">/etc/skel</code>) by changing the input location to
-              the special null device.
+              这个选项是通过将输入位置更改为 <code class=="filename">/dev/null</code>, 从而阻止一些可能从默认的 <code class="filename">/etc/skel</code> 目录复制过来文件；
             </p>
           </dd>
           <dt>
@@ -119,12 +114,14 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
           </dt>
           <dd>
             <p>
-              This is the actual name for the created group and user.
+              要创建用户的实际名称。
             </p>
           </dd>
         </dl>
       </div>
       <p>
+        为 <code class="systemitem">lfs</code> 用户设置密码：
+        登陆为 <code class="systemitem">lfs</code> （
         To log in as <code class="systemitem">lfs</code> (as opposed to
         switching to user <code class="systemitem">lfs</code> when logged in
         as <code class="systemitem">root</code>, which does not require the
@@ -135,9 +132,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
 <kbd class="command">passwd lfs</kbd>
 </pre>
       <p>
-        Grant <code class="systemitem">lfs</code> full access to <code class=
-        "filename">$LFS/tools</code> by making <code class=
-        "systemitem">lfs</code> the directory owner:
+        将 <code class="filename">$LFS/tools</code> 目录的所有者更改为 <code class="systemitem">lfs</code> 用户，使 <code class="systemitem">lfs</code> 用户获取完全访问权限：
       </p>
       <pre class="userinput">
 <kbd class="command">chown -v lfs $LFS/tools</kbd>
@@ -150,9 +145,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
 <kbd class="command">chown -v lfs $LFS/sources</kbd>
 </pre>
       <p>
-        Next, login as user <code class="systemitem">lfs</code>. This can be
-        done via a virtual console, through a display manager, or with the
-        following substitute user command:
+        接下来以 <code class="systemitem">lfs</code> 用户登陆。可以通过虚拟控制台 (<code class="filename">Virtual Console</code>) 、显示管理器 (<code class="filename">Display Manager</code>) 或以下命令切换至 <code class="systemitem">lfs</code> 用户：
       </p>
       <pre class="userinput">
 <kbd class="command">su - lfs</kbd>
@@ -185,7 +178,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter04.html" title=
-          "Chapter&nbsp;4.&nbsp;Final Preparations">返回</a>
+          "第四章&nbsp;最后的准备工作">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
