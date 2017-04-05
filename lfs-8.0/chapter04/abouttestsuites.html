@@ -51,6 +51,7 @@
         "prepare-abouttestsuites"></a>4.6. 关于测试套件
       </h1>
       <p>
+        大多数软件包都提供了一个测试套件。运行相应的测试套件，可以提供 “正确性检查” ，即检查所有的编译是否正确。这个检查是验证该软件包是否正在以开发者的意图编译运行，并不能保证这个包没有 bug 。
         Most packages provide a test suite. Running the test suite for a
         newly built package is a good idea because it can provide a
         <span class="quote">&ldquo;<span class="quote">sanity
@@ -60,6 +61,7 @@
         not, however, guarantee that the package is totally bug free.
       </p>
       <p>
+        有些测试套件比其他测试套件更重要，比如说核心工具链软件包 GCC,  Binutils, 和 Glibc 。这些软件包在系统中处于非常重要的地位，因此进行测试是非常有必要的。 GCC 和 Glibc 的测试可能要花很长时间才能完成，特别是硬件运行速度较慢时，但依旧强烈推荐进行测试。
         Some test suites are more important than others. For example, the
         test suites for the core toolchain packages&mdash;GCC, Binutils, and
         Glibc&mdash;are of the utmost importance due to their central role in
@@ -70,7 +72,7 @@
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
           Experience has shown that there is little to be gained from running
@@ -90,17 +92,14 @@
           test suites are provided for the benefit of testers and developers,
           but they are strictly optional.
         </p>
-      </div>
+      </div> 
       <p>
-        A common issue with running the test suites for Binutils and GCC is
-        running out of pseudo terminals (PTYs). This can result in a high
-        number of failing tests. This may happen for several reasons, but the
-        most likely cause is that the host system does not have the
-        <code class="systemitem">devpts</code> file system set up correctly.
-        This issue is discussed in greater detail at <a class="ulink" href=
-        "http://www.linuxfromscratch.org/lfs/faq.html#no-ptys">http://www.linuxfromscratch.org/lfs/faq.html#no-ptys</a>.
+        运行 Binutils 和 GCC 的测试套件时，一个常见的问题是缺少伪终端 ( PTYs ) ，这有可能会导致在测试中出现大量的错误。有多种原因可能引起这种错误，最常见的原因是 “主机系统没能正确的配置 devpts 文件系统。关于这个问题在以下链接有更详细的讨论：
+        <p>
+        <a class="ulink" href="http://www.linuxfromscratch.org/lfs/faq.html#no-ptys">http://www.linuxfromscratch.org/lfs/faq.html#no-ptys</a>
       </p>
       <p>
+        有时，测试套件会失效，但是由于开发者
         Sometimes package test suites will fail, but for reasons which the
         developers are aware of and have deemed non-critical. Consult the
         logs located at <a class="ulink" href=

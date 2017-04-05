@@ -51,6 +51,7 @@
         <a id="prepare-aboutsbus" name="prepare-aboutsbus"></a>4.5. 关于 SBU
       </h1>
       <p>
+        大多数人都想知道编译和安装每个包大概需要多长时间，因为 Linux 系统可以安装在许多不同的硬件系统上，所以不可能提供准确的预估时间。比如说， 最大的软件包 (Glibc) 在最快的硬件系统上编译安装需要大约 20 分钟，但在较慢的硬件系统上可能需要长达三天的时间！再次不提供实际时间，而使用标准构建单位 (Standard Build Unit (SBU)) 来衡量。
         Many people would like to know beforehand approximately how long it
         takes to compile and install each package. Because Linux From Scratch
         can be built on many different systems, it is impossible to provide
@@ -60,6 +61,8 @@
         Standard Build Unit (SBU) measure will be used instead.
       </p>
       <p>
+        SBU 的测量原理如下：本书在 <a class="xref" href="../chapter05/chapter05.html" title=
+        "第五章&nbsp;构建临时系统">第五章</a> 编译的第一个包是 Binutils ，编译这个包所需的时间被称为标准构建单位或 SBU 。所有其它包的编译时间都以此来表示。
         The SBU measure works as follows. The first package to be compiled
         from this book is Binutils in <a class="xref" href=
         "../chapter05/chapter05.html" title=
@@ -69,6 +72,8 @@
         expressed relative to this time.
       </p>
       <p>
+        比如说，一个编译时间为 4.5 SBU 的包，这意味着如果在一个系统中花费了 10 分钟来编译和安装 Binutils ，则需要<span class=
+        "emphasis"><em>大约</em></span> 45 分钟来构建此包。不过幸运的是，大多数包构建时间都要比 Binutils 所用的短。
         For example, consider a package whose compilation time is 4.5 SBUs.
         This means that if a system took 10 minutes to compile and install
         the first pass of Binutils, it will take <span class=
@@ -77,6 +82,7 @@
         one for Binutils.
       </p>
       <p>
+        一般来说， SBU 并不完全准确。构建包所耗时间依赖许多因素，包括主机系统的 GCC 版本。在这里只是用来估计构建某个包所耗时间，但在有些情况下，误差可能多达几十分钟。
         In general, SBUs are not entirely accurate because they depend on
         many factors, including the host system's version of GCC. They are
         provided here to give an estimate of how long it might take to
@@ -86,9 +92,10 @@
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
+          对于具有多个物理处理器或者多内核处理器的现代硬件系统，可以通过设置环境变量来告知 <span class="command"><strong>make</strong></span> 程序有多少处理器核心可以用来并行处理，以减少包的编译时间。例如，酷睿 2 双核处理器 (Core2Duo) 可以同时支持两个进程：
           For many modern systems with multiple processors (or cores) the
           compilation time for a package can be reduced by performing a
           "parallel make" by either setting an environment variable or
@@ -100,12 +107,14 @@
 <kbd class="command">export MAKEFLAGS='-j 2'</kbd>
 </pre>
         <p>
+          或者在编译时使用以下参数：
           or just building with:
         </p>
         <pre class="userinput">
 <kbd class="command">make -j2</kbd>
 </pre>
         <p>
+          当使用多线程编译
           When multiple processors are used in this way, the SBU units in the
           book will vary even more than they normally would. In some cases,
           the make step will simply fail. Analyzing the output of the build
