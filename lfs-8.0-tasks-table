@@ -202,13 +202,13 @@ Table of Contents lfs-8.0 目录
             /etc/rc.d/init.d/reboot
             /etc/rc.d/init.d/halt
             /etc/rc.d/init.d/template
-            /etc/sysconfig/modules
-            /etc/sysconfig/createfiles
-            /etc/sysconfig/udev-retry
-            /sbin/ifup
-            /sbin/ifdown
-            /lib/services/ipv4-static
-            /lib/services/ipv4-static-route
+            /etc/sysconfig/modules             (@kuifu)
+            /etc/sysconfig/createfiles             (@kuifu)
+            /etc/sysconfig/udev-retry             (@kuifu)
+            /sbin/ifup             (@kuifu)
+            /sbin/ifdown             (@kuifu)
+            /lib/services/ipv4-static             (@kuifu)
+            /lib/services/ipv4-static-route             (@kuifu)
         E. Udev configuration rules                  (@qq296776435)
             55-lfs.rules                  (@qq296776435)
         F. LFS Licenses                  (@qq296776435)
