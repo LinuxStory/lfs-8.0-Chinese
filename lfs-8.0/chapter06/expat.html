@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.38.&nbsp;Expat-2.2.0
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gperf.html" title="Gperf-3.0.4">Prev</a>
+          <a accesskey="p" href="gperf.html" title="Gperf-3.0.4">上一页</a>
           <p>
             Gperf-3.0.4
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="inetutils.html" title=
-          "Inetutils-1.9.4">Next</a>
+          "Inetutils-1.9.4">下一页</a>
           <p>
             Inetutils-1.9.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Expat package contains a stream oriented C library for parsing
-          XML.
+          Expat 软件包，包含一个用于解析 XML 的面向流的 C 库。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计构建时间：</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">6.1 MB</span>
             </div>
           </div>
@@ -69,34 +68,34 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.38.1. Installation of Expat
+          6.38.1. 安装 Expat
         </h2>
         <p>
-          Prepare Expat for compilation:
+          准备编译 Expat：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr --disable-static</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          要测试结果，运行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          If desired, install the documentation:
+          如果需要的话，安装帮助文档：
         </p>
         <pre class="userinput">
 <kbd class="command">install -v -dm755 /usr/share/doc/expat-2.2.0
@@ -105,28 +104,27 @@ install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.0</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-expat" name="contents-expat"></a>6.38.2. Contents
-          of Expat
+          <a id="contents-expat" name="contents-expat"></a>6.38.2. Expat 包含内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed program:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">xmlwf</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">libexpat.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装目录：</strong>
               <span class="segbody">/usr/share/doc/expat-2.2.0</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -144,8 +142,7 @@ install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.0</kbd>
                 </td>
                 <td>
                   <p>
-                    is a non-validating utility to check whether or not XML
-                    documents are well formed
+                    一个检测 XML 文档格式是否完整的非验证工具
                   </p>
                 </td>
               </tr>
@@ -158,7 +155,7 @@ install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.0</kbd>
                 </td>
                 <td>
                   <p>
-                    contains API functions for parsing XML
+                    包含用于解析 XML 的 API 函数
                   </p>
                 </td>
               </tr>
@@ -170,25 +167,25 @@ install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.0</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gperf.html" title="Gperf-3.0.4">Prev</a>
+          <a accesskey="p" href="gperf.html" title="Gperf-3.0.4">上一页</a>
           <p>
             Gperf-3.0.4
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="inetutils.html" title=
-          "Inetutils-1.9.4">Next</a>
+          "Inetutils-1.9.4">下一页</a>
           <p>
             Inetutils-1.9.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

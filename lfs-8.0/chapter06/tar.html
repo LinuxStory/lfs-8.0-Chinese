@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.68.&nbsp;Tar-1.29
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="man-db.html" title="Man-DB-2.7.6.1">Prev</a>
+          <a accesskey="p" href="man-db.html" title="Man-DB-2.7.6.1">上一页</a>
           <p>
             Man-DB-2.7.6.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="texinfo.html" title="Texinfo-6.3">Next</a>
+          <a accesskey="n" href="texinfo.html" title="Texinfo-6.3">下一页</a>
           <p>
             Texinfo-6.3
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -50,16 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Tar package contains an archiving program.
+          Tar 软件包包含一个归档程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">构建约需时间：</strong>
               <span class="segbody">3.2 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间：</strong>
               <span class="segbody">40 MB</span>
             </div>
           </div>
@@ -67,10 +67,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.68.1. Installation of Tar
+          6.68.1. 安装 Tar
         </h2>
         <p>
-          Prepare Tar for compilation:
+          准备编译 Tar：
         </p>
         <pre class="userinput">
 <kbd class="command">FORCE_UNSAFE_CONFIGURE=1  \
@@ -79,7 +79,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义： </strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -88,29 +88,26 @@
             </dt>
             <dd>
               <p>
-                This forces the test for <code class="function">mknod</code>
-                to be run as root. It is generally considered dangerous to
-                run this test as the root user, but as it is being run on a
-                system that has only been partially built, overriding it is
-                OK.
+                强制以 root 用户运行 <code class="function">mknod</code>
+                测试。通常认为以 root 用户运行这个测试是危险的，但是在未构建完的系统上这样做是可以的。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results (about 1 SBU), issue:
+          用以下命令测试结果（约 1 SBU）：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -119,24 +116,23 @@ make -C doc install-html docdir=/usr/share/doc/tar-1.29</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-tar" name="contents-tar"></a>6.68.2. Contents of
-          Tar
+          <a id="contents-tar" name="contents-tar"></a>6.68.2.  Tar 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">tar</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装目录：</strong>
               <span class="segbody">/usr/share/doc/tar-1.29</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -153,8 +149,7 @@ make -C doc install-html docdir=/usr/share/doc/tar-1.29</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates, extracts files from, and lists the contents of
-                    archives, also known as tarballs
+                    创建，解压，显示归档文件内容，归档文件也被称为 tar 包。
                   </p>
                 </td>
               </tr>
@@ -166,24 +161,24 @@ make -C doc install-html docdir=/usr/share/doc/tar-1.29</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="man-db.html" title="Man-DB-2.7.6.1">Prev</a>
+          <a accesskey="p" href="man-db.html" title="Man-DB-2.7.6.1">上一页</a>
           <p>
             Man-DB-2.7.6.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="texinfo.html" title="Texinfo-6.3">Next</a>
+          <a accesskey="n" href="texinfo.html" title="Texinfo-6.3">下一页</a>
           <p>
             Texinfo-6.3
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

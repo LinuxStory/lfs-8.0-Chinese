@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.73.&nbsp;Cleaning Up
+      6.73.&nbsp;清理
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,47 +19,46 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件 
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="strippingagain.html" title=
-          "Stripping Again">Prev</a>
+          "再次清理">上一页</a>
           <p>
-            Stripping Again
+            再次清理
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="../chapter07/chapter07.html" title=
-          "System Configuration">Next</a>
+          "System Configuration">下一页</a>
           <p>
-            System Configuration
+            系统设置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件 ">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-system-revisedchroot" name=
-        "ch-system-revisedchroot"></a>6.73. Cleaning Up
+        "ch-system-revisedchroot"></a>6.73. 清除
       </h1>
       <p>
-        Finally, clean up some extra files left around from running tests:
+        最后，清除运行测试产生的额外文件：
       </p>
       <pre class="userinput">
 <kbd class="command">rm -rf /tmp/*</kbd>
 </pre>
       <p>
-        From now on, when reentering the chroot environment after exiting,
-        use the following modified chroot command:
+        从现在开始，当退出后重新进入 chroot 环境时，使用以下修改过的 chroot 命令：
       </p>
       <pre class="userinput">
 <kbd class="command">chroot "$LFS" /usr/bin/env -i              \
@@ -68,41 +67,30 @@
     /bin/bash --login</kbd>
 </pre>
       <p>
-        The reason for this is that the programs in <code class=
-        "filename">/tools</code> are no longer needed. Since they are no
-        longer needed you can delete the <code class="filename">/tools</code>
-        directory if so desired.
+        这样做的原因是不再需要 <code class=
+        "filename">/tools</code> 目录下的软件了。既然不需要它们你可以如愿删除 <code class="filename">/tools</code> 目录。
       </p>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          Removing <code class="filename">/tools</code> will also remove the
-          temporary copies of Tcl, Expect, and DejaGNU which were used for
-          running the toolchain tests. If you need these programs later on,
-          they will need to be recompiled and re-installed. The BLFS book has
-          instructions for this (see <a class="ulink" href=
-          "http://www.linuxfromscratch.org/blfs/">http://www.linuxfromscratch.org/blfs/</a>).
+          删除 <code class="filename">/tools</code> 目录也会移除 Tcl, Expect, 和 DejaGNU 的临时拷贝，这些拷贝是用来运行工具链测试的。如果你稍后需要这些程序，就需要重新编译安装它们。 BLFS 手册有关于此的说明（见 <a class="ulink" href=
+          "http://www.linuxfromscratch.org/blfs/">http://www.linuxfromscratch.org/blfs/</a>）。
         </p>
       </div>
       <p>
-        If the virtual kernel file systems have been unmounted, either
-        manually or through a reboot, ensure that the virtual kernel file
-        systems are mounted when reentering the chroot. This process was
-        explained in <a class="xref" href="kernfs.html#ch-system-bindmount"
-        title="6.2.2.&nbsp;Mounting and Populating /dev">Section&nbsp;6.2.2,
-        &ldquo;Mounting and Populating /dev&rdquo;</a> and <a class="xref"
+        如果没有挂载虚拟内和文件系统，请手动挂载或重启系统，确保重新进入 chroot 时虚拟内和文件系统已被挂载。这个步骤在 <a class="xref" href="kernfs.html#ch-system-bindmount"
+        title="6.2.2.&nbsp;挂载和填充 /dev">第&nbsp;6.2.2节，
+        &ldquo;挂载和填充 /dev &rdquo;</a> 和 <a class="xref"
         href="kernfs.html#ch-system-kernfsmount" title=
-        "6.2.3.&nbsp;Mounting Virtual Kernel File Systems">Section&nbsp;6.2.3,
-        &ldquo;Mounting Virtual Kernel File Systems&rdquo;</a>.
+        "6.2.3.&nbsp;挂载虚拟内核文件系统">第&nbsp;6.2.3节，
+        &ldquo;挂载虚拟内核文件系统&rdquo;</a>中给出了解释。
       </p>
       <p>
-        Finally, there were several static libraries that were not suppressed
-        earlier in the chapter in order to satisfy the regression tests in
-        several packages. These libraries are from binutils, bzip2,
-        e2fsprogs, flex, libtool, and zlib. If desired, remove them now:
+        最后，为了满足几个软件包中的回归测试，本章中有几个静态库未被清除。这些库来自 binutils, bzip2,
+        e2fsprogs, flex, libtool, and zlib。需要的话可以现在移除：
       </p>
       <pre class="userinput">
 <kbd class="command">rm -f /usr/lib/lib{bfd,opcodes}.a
@@ -118,25 +106,25 @@ rm -f /usr/lib/libz.a</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="strippingagain.html" title=
-          "Stripping Again">Prev</a>
+          "再次清理 ">上一页</a>
           <p>
-            Stripping Again
+            再次清理 
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="../chapter07/chapter07.html" title=
-          "System Configuration">Next</a>
+          "系统设置 ">下一页</a>
           <p>
-            System Configuration
+            系统设置 
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件 ">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
