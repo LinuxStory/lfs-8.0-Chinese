@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content=
     "application/xhtml+xml; charset=utf-8" />
     <title>
-      4.5.&nbsp;关于 SBU
+      4.5.&nbsp;关于时间单位 SBU
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -48,18 +48,16 @@
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="prepare-aboutsbus" name="prepare-aboutsbus"></a>4.5. 关于 SBU
+        <a id="prepare-aboutsbus" name="prepare-aboutsbus"></a>4.5. 关于时间单位 SBU
       </h1>
       <p>
-        大多数人都想知道编译和安装每个包大概需要多长时间，因为 Linux 系统可以安装在许多不同的硬件系统上，所以不可能提供准确的预估时间。比如说， 最大的软件包 (Glibc) 在最快的硬件系统上编译安装需要大约 20 分钟，但在较慢的硬件系统上可能需要长达三天的时间！再次不提供实际时间，而使用标准构建单位 (Standard Build Unit (SBU)) 来衡量。
+        大多数人都想知道编译和安装每个包大概需要多长时间，因为 Linux 系统可以安装在许多不同的硬件系统上，所以不可能提供准确的预估时间。比如说， 最大的软件包 (Glibc) 在最快的硬件系统上编译安装需要大约 20 分钟，但在较慢的硬件系统上可能需要长达三天的时间！在此不提供实际时间，而使用标准构建单位 (Standard Build Unit (SBU)) 来衡量。
       </p>
       <p>
-        SBU 的测量原理如下：本书在 <a class="xref" href="../chapter05/chapter05.html" title=
-        "第五章&nbsp;构建临时系统">第五章</a> 编译的第一个包是 Binutils ，编译这个包所需的时间被称为标准构建单位或 SBU 。所有其它包的编译时间都以此来表示。
+        SBU 的测量原理如下：本书在 <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a> 编译的第一个包是 Binutils ，编译这个包所需的时间被称为标准构建单位或 SBU 。所有其它包的编译时间都以此来表示。
       </p>
       <p>
-        比如说，一个编译时间为 4.5 SBU 的包，这意味着如果在一个系统中花费了 10 分钟来编译和安装 Binutils ，则需要<span class=
-        "emphasis"><em>大约</em></span> 45 分钟来构建此包。不过幸运的是，大多数包构建时间都要比 Binutils 所用的短。
+        比如说，一个编译时间为 4.5 SBU 的包，这意味着如果在一个系统中花费了 10 分钟来编译和安装 Binutils ，则需要<span class="emphasis"><em>大约</em></span> 45 分钟来构建此包。不过幸运的是，大多数包构建时间都要比 Binutils 所用的短。
       </p>
       <p>
         一般来说， SBU 并不完全准确。构建包所耗时间依赖许多因素，包括主机系统的 GCC 版本。在这里只是用来估计构建某个包所耗时间，但在有些情况下，误差可能多达几十分钟。

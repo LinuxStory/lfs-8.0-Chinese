@@ -52,8 +52,7 @@
         添加 LFS 用户
       </h1>
       <p>
-        当使用 <code class="systemitem">root</code> 用户登陆时，一点小的错误就有可能破坏整个系统。因此，我们建议使用普通用户（非特权用户）构建这些软件包。你可以使用自己的用户名，但是为了更容易配置所需的工作环境，请创建一个名为 <code class=
-        "systemitem">lfs</code> 的新用户组，并创建名字同为 <code class="systemitem">lfs</code> 的新用户作为该用户组的成员，然后在安装过程中将会使用此用户。以 <code class="systemitem">root</code> 用户，键入以下命令：
+        当使用 <code class="systemitem">root</code> 用户登陆时，一点小的错误就有可能破坏整个系统。因此，我们建议使用普通用户（非特权用户）构建这些软件包。你可以使用自己的用户名，但是为了更容易配置所需的工作环境，请创建一个名为 <code class="systemitem">lfs</code> 的新用户组，并创建名字同为 <code class="systemitem">lfs</code> 的新用户作为该用户组的成员，在安装过程中将会使用此用户。以 <code class="systemitem">root</code> 用户，键入以下命令：
       </p>
       <pre class="userinput">
 <kbd class="command">groupadd lfs
@@ -136,13 +135,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
 <kbd class="command">su - lfs</kbd>
 </pre>
       <p>
-        <span class="quote">&ldquo;<span class="quote"><em class="parameter"><code>-</code></em></span>&rdquo;</span>
-        是指完整切换到 <code class="systemitem">lfs</code> 用户环境，即 <span class=
-        "command"><strong>login shell</strong></span> ；如果不加
-        <span class="quote">&ldquo;<span class="quote"><em class="parameter"><code>-</code></em></span>&rdquo;</span>
-        则表示只切换到其他用户，即 <span class=
-        "command"><strong>non-login shell</strong></span> 。这两种切换用户的区别可以在 <code class=
-        "filename">bash(1)</code> 和 <span class="command"><strong>info bash</strong></span>
+        <span class="quote">&ldquo;<span class="quote"><em class="parameter"><code>-</code></em></span>&rdquo;</span> 是指完整切换到 <code class="systemitem">lfs</code> 用户环境，即 <span class="command"><strong>login shell</strong></span> ；如果不加 <span class="quote">&ldquo;<span class="quote"><em class="parameter"><code>-</code></em></span>&rdquo;</span> 则表示只切换到其他用户，即 <span class="command"><strong>non-login shell</strong></span> 。这两种切换用户的区别可以在 <code class="filename">bash(1)</code> 和 <span class="command"><strong>info bash</strong></span>
         中找到。
       </p>
     </div>

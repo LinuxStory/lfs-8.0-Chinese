@@ -30,9 +30,9 @@
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="aboutsbus.html" title="关于 SBU">下一页</a>
+          <a accesskey="n" href="aboutsbus.html" title="关于时间单位 SBU">下一页</a>
           <p>
-            关于 SBU
+            关于时间单位 SBU
           </p>
         </li>
         <li class="up">
@@ -51,11 +51,7 @@
         "ch-tools-settingenviron"></a>4.4. 配置环境
       </h1>
       <p>
-        Set up a good working environment by creating two new startup files
-        for the <span class="command"><strong>bash</strong></span> shell.
-        While logged in as user <code class="systemitem">lfs</code>, issue
-        the following command to create a new <code class=
-        "filename">.bash_profile</code>:
+        通过为 <span class="command"><strong>bash shell</strong></span> 创建两个文件，来建立初始的环境变量。以 <code class="systemitem">lfs</code> 用户登陆，使用以下命令创建新的 <code class="filename">.bash_profile</code> 文件：
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; ~/.bash_profile &lt;&lt; "EOF"
@@ -64,29 +60,10 @@
 EOF</kbd>
 </pre>
       <p>
-        When logged on as user <code class="systemitem">lfs</code>, the
-        initial shell is usually a <span class=
-        "emphasis"><em>login</em></span> shell which reads the <code class=
-        "filename">/etc/profile</code> of the host (probably containing some
-        settings and environment variables) and then <code class=
-        "filename">.bash_profile</code>. The <span class=
-        "command"><strong>exec env -i.../bin/bash</strong></span> command in
-        the <code class="filename">.bash_profile</code> file replaces the
-        running shell with a new one with a completely empty environment,
-        except for the <code class="envar">HOME</code>, <code class=
-        "envar">TERM</code>, and <code class="envar">PS1</code> variables.
-        This ensures that no unwanted and potentially hazardous environment
-        variables from the host system leak into the build environment. The
-        technique used here achieves the goal of ensuring a clean
-        environment.
+        当以 <code class="systemitem">lfs</code> 用户登陆时， shell 会先读取 <code class="filename">/etc/profile</code> （可能包含一些设置和环境变量），然后读取 <code class= "filename">.bash_profile</code> 。<span class="command"><strong>exec env -i.../bin/bash</strong></span> 命令是用一个空的 shell 替换正在运行的 shell ，并保留 <code class="envar">HOME</code>, <code class="envar">TERM</code> 和 <code class="envar">PS1</code> 变量。这确保了不会引入主机系统中任何不必要的或者具有潜在错误的环境变量到编译环境中去，通过该命令确保了干净的编译环境。
       </p>
       <p>
-        The new instance of the shell is a <span class=
-        "emphasis"><em>non-login</em></span> shell, which does not read the
-        <code class="filename">/etc/profile</code> or <code class=
-        "filename">.bash_profile</code> files, but rather reads the
-        <code class="filename">.bashrc</code> file instead. Create the
-        <code class="filename">.bashrc</code> file now:
+        如果使用了 <span class="command"><strong>non-login shell</strong></span> ，则不会读取 <code class="filename">/etc/profile</code> 或 <code class="filename">.bash_profile</code> 文件的，而是读取 <code class="filename">.bashrc</code> 文件。立即创建 <code class="filename">.bashrc</code> 文件：
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; ~/.bashrc &lt;&lt; "EOF"
@@ -100,64 +77,24 @@ export LFS LC_ALL LFS_TGT PATH</code>
 EOF</kbd>
 </pre>
       <p>
-        The <span class="command"><strong>set +h</strong></span> command
-        turns off <span class="command"><strong>bash</strong></span>'s hash
-        function. Hashing is ordinarily a useful feature&mdash;<span class=
-        "command"><strong>bash</strong></span> uses a hash table to remember
-        the full path of executable files to avoid searching the <code class=
-        "envar">PATH</code> time and again to find the same executable.
-        However, the new tools should be used as soon as they are installed.
-        By switching off the hash function, the shell will always search the
-        <code class="envar">PATH</code> when a program is to be run. As such,
-        the shell will find the newly compiled tools in <code class=
-        "filename">$LFS/tools</code> as soon as they are available without
-        remembering a previous version of the same program in a different
-        location.
+        <span class="command"><strong>set +h</strong></span> 命令关闭了 <span class="command"><strong>bash</strong></span> 的哈希功能。一般来说，该功能是一个有用的功能， <span class="command"><strong>bash</strong></span> 通过哈希表记住可执行文件的完整路径，以避免一次又一次的从 <code class="envar">PATH</code> 变量所包含的文件夹中搜索该可执行文件。但是，一旦安装了新的工具，就应该使用新安装的程序代替旧的。通过关闭哈希功能，每次运行一个工具时， shell 就需要在 <code class="filename">$LFS/tools</code> 中找新编译的工具，只要存在新编译的，就不会使用不同路径下同一程序的之前的版本；
       </p>
       <p>
-        Setting the user file-creation mask (umask) to 022 ensures that newly
-        created files and directories are only writable by their owner, but
-        are readable and executable by anyone (assuming default modes are
-        used by the <code class="function">open(2)</code> system call, new
-        files will end up with permission mode 644 and directories with mode
-        755).
+        将用户文件权限的掩码设置为 022 ，确保新创建的文件只能由文件所有者写入，但是可以由任何用户读取和执行（假设使用 <code class="function">open(2)</code> 为系统调用文件的的默认方式，则新文件的权限将为 644 ，新文件夹的权限为 755）。
       </p>
       <p>
-        The <code class="envar">LFS</code> variable should be set to the
-        chosen mount point.
+        设置 <code class="envar">LFS</code> 变量为安装系统分区的挂载点位置；
       </p>
       <p>
-        The <code class="envar">LC_ALL</code> variable controls the
-        localization of certain programs, making their messages follow the
-        conventions of a specified country. Setting <code class=
-        "envar">LC_ALL</code> to <span class="quote">&ldquo;<span class=
-        "quote">POSIX</span>&rdquo;</span> or <span class=
-        "quote">&ldquo;<span class="quote">C</span>&rdquo;</span> (the two
-        are equivalent) ensures that everything will work as expected in the
-        chroot environment.
+        <code class="envar">LC_ALL</code> 变量控制某些程序的本地化，使程序的输出遵循指定国家/地区的惯例。设置 <code class="envar">LC_ALL</code> 为 <span class="quote">&ldquo;<span class="quote">POSIX</span>&rdquo;</span> 或 <span class="quote">&ldquo;<span class="quote">C</span>&rdquo;</span> （两者是等效的），从而确保一切安装过程按照预期在 chroot 环境中进行。
       </p>
       <p>
-        The <code class="envar">LFS_TGT</code> variable sets a non-default,
-        but compatible machine description for use when building our cross
-        compiler and linker and when cross compiling our temporary toolchain.
-        More information is contained in <a class="xref" href=
-        "../chapter05/toolchaintechnotes.html" title=
-        "5.2.&nbsp;Toolchain Technical Notes">Section&nbsp;5.2,
-        &ldquo;Toolchain Technical Notes&rdquo;</a>.
+        <code class="envar">LFS_TGT</code> 变量设置一个非默认，但是兼容的主机系统描述。这个变量作用于构建交叉编译器和交叉编译临时工具链时使用。更多信息，请参见 <a class="xref" href="../chapter05/toolchaintechnotes.html" title="5.2.&nbsp; 工具链技术说明">5.2.&nbsp;工具链技术说明</a> 。
+      <p>
+        通过将 <code class="filename">/tools/bin</code> 放在标准 <code class="envar">PATH</code> 目录之前，确保了 <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a> 中安装的程序在安装后可以立即由 shell 调用。结合关闭哈希功能，从而规避了当 <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a> 中提供了新的程序时， shell 依旧调用旧程序的风险；
       </p>
       <p>
-        By putting <code class="filename">/tools/bin</code> ahead of the
-        standard <code class="envar">PATH</code>, all the programs installed
-        in <a class="xref" href="../chapter05/chapter05.html" title=
-        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
-        are picked up by the shell immediately after their installation.
-        This, combined with turning off hashing, limits the risk that old
-        programs are used from the host when the same programs are available
-        in the chapter 5 environment.
-      </p>
-      <p>
-        Finally, to have the environment fully prepared for building the
-        temporary tools, source the just-created user profile:
+        最后，执行下面的命令，让设置的环境变量生效：
       </p>
       <pre class="userinput">
 <kbd class="command">source ~/.bash_profile</kbd>
@@ -173,9 +110,9 @@ EOF</kbd>
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="aboutsbus.html" title="关于 SBU">下一页</a>
+          <a accesskey="n" href="aboutsbus.html" title="关于时间单位 SBU">下一页</a>
           <p>
-            关于 SBU
+            关于时间单位 SBU
           </p>
         </li>
         <li class="up">
