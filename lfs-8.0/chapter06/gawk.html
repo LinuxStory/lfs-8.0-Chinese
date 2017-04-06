@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.52.&nbsp;Gawk-4.1.4
     </title>
@@ -19,30 +19,30 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="diffutils.html" title=
-          "Diffutils-3.5">Prev</a>
+          "Diffutils-3.5">上一页</a>
           <p>
             Diffutils-3.5
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="findutils.html" title=
-          "Findutils-4.6.0">Next</a>
+          "Findutils-4.6.0">下一页</a>
           <p>
             Findutils-4.6.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -52,16 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Gawk package contains programs for manipulating text files.
+          Gawk 软件包包含处理文本文件的工具。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.3 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">36 MB</span>
             </div>
           </div>
@@ -69,34 +69,34 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.52.1. Installation of Gawk
+          6.52.1. 安装 Gawk
         </h2>
         <p>
-          Prepare Gawk for compilation:
+          为编译 Gawk 做准备：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，执行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          If desired, install the documentation:
+          如果需要，可安装文档：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -v /usr/share/doc/gawk-4.1.4
@@ -105,24 +105,23 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gawk" name="contents-gawk"></a>6.52.2. Contents of
-          Gawk
+          <a id="contents-gawk" name="contents-gawk"></a>6.52.2. Gawk 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">awk (link to gawk), gawk, gawk-4.1.4, and
               igawk</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">filefuncs.so, fnmatch.so, fork.so,
               inplace.so, ordchr.so, readdir.so, readfile.so, revoutput.so,
               revtwoway.so, rwarray.so, testext.so, and time.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">创建的目录：</strong>
               <span class="segbody">/usr/lib/gawk, /usr/libexec/awk,
               /usr/share/awk, and /usr/share/doc/gawk-4.1.4</span>
             </div>
@@ -130,13 +129,13 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
-            <colgroup>
+            <colgro返回>
               <col align="left" valign="top" />
               <col />
-            </colgroup>
+            </colgro返回>
             <tbody>
               <tr>
                 <td>
@@ -147,8 +146,9 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
                 </td>
                 <td>
                   <p>
-                    A link to <span class=
+                    指向 <span class=
                     "command"><strong>gawk</strong></span>
+                    的链接
                   </p>
                 </td>
               </tr>
@@ -162,8 +162,8 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
                 </td>
                 <td>
                   <p>
-                    A program for manipulating text files; it is the GNU
-                    implementation of <span class=
+                    一个处理文本文件的工具；是 GNU
+                    实现的 <span class=
                     "command"><strong>awk</strong></span>
                   </p>
                 </td>
@@ -178,8 +178,9 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
                 </td>
                 <td>
                   <p>
-                    A hard link to <span class=
+                    指向 <span class=
                     "command"><strong>gawk</strong></span>
+                    的硬链接
                   </p>
                 </td>
               </tr>
@@ -193,8 +194,8 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
                 </td>
                 <td>
                   <p>
-                    Gives <span class="command"><strong>gawk</strong></span>
-                    the ability to include files
+                    让 <span class="command"><strong>gawk</strong></span>
+                    可以 include 文件
                   </p>
                 </td>
               </tr>
@@ -207,25 +208,25 @@ cp    -v doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-4.1.4</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="diffutils.html" title=
-          "Diffutils-3.5">Prev</a>
+          "Diffutils-3.5">上一页</a>
           <p>
             Diffutils-3.5
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="findutils.html" title=
-          "Findutils-4.6.0">Next</a>
+          "Findutils-4.6.0">下一页</a>
           <p>
             Findutils-4.6.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
