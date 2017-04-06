@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.21.&nbsp;Attr-2.4.47
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="ncurses.html" title="Ncurses-6.0">Prev</a>
+          <a accesskey="p" href="ncurses.html" title="Ncurses-6.0">上一页</a>
           <p>
             Ncurses-6.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="acl.html" title="Acl-2.2.52">Next</a>
+          <a accesskey="n" href="acl.html" title="Acl-2.2.52">下一页</a>
           <p>
             Acl-2.2.52
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -50,17 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The attr package contains utilities to administer the extended
-          attributes on filesystem objects.
+		  attr 软件包包含了一些实用程序用于管理文件系统对象上的扩展属性。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计构建时间:</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">3.3 MB</span>
             </div>
           </div>
@@ -68,26 +67,24 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.21.1. Installation of Attr
+          6.21.1. 安装 Attr
         </h2>
         <p>
-          Modify the documentation directory so that it is a versioned
-          directory:
+          修改文档目录使其成为一个版本化的目录:
         </p>
         <pre class="userinput">
 <kbd class=
 "command">sed -i -e 's|/@pkg_name@|&amp;-@pkg_version@|' include/builddefs.in</kbd>
 </pre>
         <p>
-          Prevent installation of manual pages that were already installed by
-          the <a class="xref" href="man-pages.html#man-pages"><code class=
-          "filename">man pages</code></a> package:
+          将手册页面的安装排除在<a class="xref" href="man-pages.html#man-pages"><code class=
+          "filename">帮助页面</code></a> 包安装过程之外:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i -e "/SUBDIRS/s|man[25]||g" man/Makefile</kbd>
 </pre>
         <p>
-          Prepare Attr for compilation:
+          准备编译 Attr 软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr \
@@ -95,32 +92,29 @@
             --disable-static</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          The tests need to be run on a filesystem that supports extended
-          attributes such as the ext2, ext3, or ext4 filesystems. The tests
-          are also known to fail if running multiple simultaneous tests (-j
-          option greater than 1). To test the results, issue:
+          测试需要运行在支持扩展属性的文件系统上，如： ext2, ext3, 或 ext4 文件系统。已知该测试会在同时运行多个测试(-j 选项大于1)时出现失败。要测试结果，请执行以下操作：
         </p>
         <pre class="userinput">
 <kbd class="command">make -j1 tests root-tests</kbd>
 </pre>
         <p>
-          Install the package:
+          安装该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install install-dev install-lib
 chmod -v 755 /usr/lib/libattr.so</kbd>
 </pre>
         <p>
-          The shared library needs to be moved to <code class=
-          "filename">/lib</code>, and as a result the <code class=
-          "filename">.so</code> file in <code class=
-          "filename">/usr/lib</code> will need to be recreated:
+          该共享库需要被移动到 <code class=
+          "filename">/lib</code>, 并且需要在<code class=
+          "filename">/usr/lib</code>目录下生成 <code class=
+          "filename">.so</code> 文件:
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/lib/libattr.so.* /lib
@@ -129,29 +123,28 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-attr" name="contents-attr"></a>6.21.2. Contents of
-          Attr
+          <a id="contents-attr" name="contents-attr"></a>6.21.2. Attr 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">attr, getfattr, and setattr</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libattr.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
-              <span class="segbody">/usr/include/attr and
+              <strong class="segtitle">安装的目录:</strong>
+              <span class="segbody">/usr/include/attr 和
               /usr/share/doc/attr-2.4.47</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -169,7 +162,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Extends attributes on filesystem objects
+                    文件系统对象上的扩展属性
                   </p>
                 </td>
               </tr>
@@ -183,7 +176,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Gets the extended attributes of filesystem objects
+                    获取文件对象的扩展属性
                   </p>
                 </td>
               </tr>
@@ -197,7 +190,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Sets the extended attributes of filesystem objects
+                    设置文件对象的扩展属性
                   </p>
                 </td>
               </tr>
@@ -210,8 +203,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains the libbrary functions for manipulating extended
-                    attributes
+                    包含用于操作扩展属性的库函数
                   </p>
                 </td>
               </tr>
@@ -223,24 +215,24 @@ ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="ncurses.html" title="Ncurses-6.0">Prev</a>
+          <a accesskey="p" href="ncurses.html" title="Ncurses-6.0">上一页</a>
           <p>
             Ncurses-6.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="acl.html" title="Acl-2.2.52">Next</a>
+          <a accesskey="n" href="acl.html" title="Acl-2.2.52">下一页</a>
           <p>
             Acl-2.2.52
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
