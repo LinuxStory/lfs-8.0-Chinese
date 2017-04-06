@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      4.6.&nbsp;About the Test Suites
+      4.6.&nbsp;关于测试套件
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,118 +19,83 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Final Preparations
+        第四章&nbsp;最后的准备工作
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="aboutsbus.html" title="About SBUs">Prev</a>
+          <a accesskey="p" href="aboutsbus.html" title="关于时间单位 SBU">上一页</a>
           <p>
-            About SBUs
+            关于时间单位 SBU
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="../chapter05/chapter05.html" title=
-          "Constructing a Temporary System">Next</a>
+          "构建临时系统">下一页</a>
           <p>
-            Constructing a Temporary System
+            构建临时系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter04.html" title=
-          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+          "第四章&nbsp;最后的准备工作">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">主页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="prepare-abouttestsuites" name=
-        "prepare-abouttestsuites"></a>4.6. About the Test Suites
+        "prepare-abouttestsuites"></a>4.6. 关于测试套件
       </h1>
       <p>
-        Most packages provide a test suite. Running the test suite for a
-        newly built package is a good idea because it can provide a
-        <span class="quote">&ldquo;<span class="quote">sanity
-        check</span>&rdquo;</span> indicating that everything compiled
-        correctly. A test suite that passes its set of checks usually proves
-        that the package is functioning as the developer intended. It does
-        not, however, guarantee that the package is totally bug free.
+        大多数软件包都提供了一个测试套件。运行相应的测试套件，可以提供 “正确性检查” ，即检查所有的编译是否正确。这个检查是验证该软件包是否正在以开发者的意图编译运行，并不能保证这个包没有 bug 。
       </p>
       <p>
-        Some test suites are more important than others. For example, the
-        test suites for the core toolchain packages&mdash;GCC, Binutils, and
-        Glibc&mdash;are of the utmost importance due to their central role in
-        a properly functioning system. The test suites for GCC and Glibc can
-        take a very long time to complete, especially on slower hardware, but
-        are strongly recommended.
+        有些测试套件比其他测试套件更重要，比如说核心工具链软件包 GCC,  Binutils, 和 Glibc 。这些软件包在系统中处于非常重要的地位，因此进行测试是非常有必要的。 GCC 和 Glibc 的测试可能要花很长时间才能完成，特别是硬件运行速度较慢时，但依旧强烈推荐进行测试。
       </p>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          Experience has shown that there is little to be gained from running
-          the test suites in <a class="xref" href=
-          "../chapter05/chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
-          5</a>. There can be no escaping the fact that the host system
-          always exerts some influence on the tests in that chapter, often
-          causing inexplicable failures. Because the tools built in <a class=
-          "xref" href="../chapter05/chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
-          5</a> are temporary and eventually discarded, we do not recommend
-          running the test suites in <a class="xref" href=
-          "../chapter05/chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter
-          5</a> for the average reader. The instructions for running those
-          test suites are provided for the benefit of testers and developers,
-          but they are strictly optional.
+          经验表明，在 <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a> 中运行测试套件几乎不能完全通过。主机系统总是会对测试产生一定得影响，这极有可能会导致一些莫名其妙的错误。因为 <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a>构建的工具都是临时的，最后会被删掉，所以我们不建议普通读者在 <a class="xref" href="../chapter05/chapter05.html" title="第五章&nbsp;构建临时系统">第五章</a> 运行测试套件。这些测试套件是为测试人员和开发者准备的，并不是必须要运行的。
         </p>
-      </div>
+      </div> 
       <p>
-        A common issue with running the test suites for Binutils and GCC is
-        running out of pseudo terminals (PTYs). This can result in a high
-        number of failing tests. This may happen for several reasons, but the
-        most likely cause is that the host system does not have the
-        <code class="systemitem">devpts</code> file system set up correctly.
-        This issue is discussed in greater detail at <a class="ulink" href=
-        "http://www.linuxfromscratch.org/lfs/faq.html#no-ptys">http://www.linuxfromscratch.org/lfs/faq.html#no-ptys</a>.
+        运行 Binutils 和 GCC 的测试套件时，一个常见的问题是缺少伪终端 ( PTYs ) ，这有可能会导致在测试中出现大量的错误。有多种原因可能引起这种错误，最常见的原因是 “主机系统没能正确的配置 devpts 文件系统。关于这个问题在以下链接有更详细的讨论：
+        <p>
+        <a class="ulink" href="http://www.linuxfromscratch.org/lfs/faq.html#no-ptys">http://www.linuxfromscratch.org/lfs/faq.html#no-ptys</a>
       </p>
       <p>
-        Sometimes package test suites will fail, but for reasons which the
-        developers are aware of and have deemed non-critical. Consult the
-        logs located at <a class="ulink" href=
-        "http://www.linuxfromscratch.org/lfs/build-logs/8.0/">http://www.linuxfromscratch.org/lfs/build-logs/8.0/</a>
-        to verify whether or not these failures are expected. This site is
-        valid for all tests throughout this book.
+        有时，测试套件会报告错误，但是开发者知道并认为这是非关键性问题。请参阅位于 <a class="ulink" href="http://www.linuxfromscratch.org/lfs/build-logs/8.0/">http://www.linuxfromscratch.org/lfs/build-logs/8.0/</a> 的安装日志，以便验证这些错误是否是预期性的错误。此网站适用于本书中所有的测试。
       </p>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="aboutsbus.html" title="About SBUs">Prev</a>
+          <a accesskey="p" href="aboutsbus.html" title="关于时间单位 SBU">上一页</a>
           <p>
-            About SBUs
+            关于时间单位 SBU
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="../chapter05/chapter05.html" title=
-          "Constructing a Temporary System">Next</a>
+          "构建临时系统">下一页</a>
           <p>
-            Constructing a Temporary System
+            构建临时系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter04.html" title=
-          "Chapter&nbsp;4.&nbsp;Final Preparations">Up</a>
+          "第四章&nbsp;最后的准备工作">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">主页</a>
         </li>
       </ul>
     </div>
