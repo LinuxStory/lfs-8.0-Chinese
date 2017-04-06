@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.58.&nbsp;IPRoute2-4.9.0
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gzip.html" title="Gzip-1.8">Prev</a>
+          <a accesskey="p" href="gzip.html" title="Gzip-1.8">上一页</a>
           <p>
             Gzip-1.8
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="kbd.html" title="Kbd-2.0.4">Next</a>
+          <a accesskey="n" href="kbd.html" title="Kbd-2.0.4">下一页</a>
           <p>
             Kbd-2.0.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The IPRoute2 package contains programs for basic and advanced
-          IPV4-based networking.
+          IPRoute2 软件包包含基本和高级的基于 IPV4 网络的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.2 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">11 MB</span>
             </div>
           </div>
@@ -69,20 +68,18 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.58.1. Installation of IPRoute2
+          6.58.1. 安装 IPRoute2
         </h2>
         <p>
-          The <span class="command"><strong>arpd</strong></span> program
-          included in this package will not be built since it is dependent on
-          Berkeley DB, which is not installed in LFS. However, documentation
-          files and a directory for <span class=
-          "command"><strong>arpd</strong></span> will still be installed.
-          Prevent this by running the commands below. If the <span class=
-          "command"><strong>arpd</strong></span> binary is needed,
-          instructions for compiling Berkeley DB can be found in the BLFS
-          Book at <a class="ulink" href=
+          本软件包所包含的 <span class="command"><strong>arpd</strong></span> 程序由于其所依赖的
+          Berkeley DB 并未包含在 LFS 中，所以不会被构建。不过<span class=
+          "command"><strong>arpd</strong></span> 的文档和一个目录仍然会被安装。
+          可用以下命令避免安装。如果仍然需要 <span class=
+          "command"><strong>arpd</strong></span> 二进制，可以在 BLFS 指南
+          <a class="ulink" href=
           "http://www.linuxfromscratch.org/blfs/view/8.0/server/databases.html#db">
-          http://www.linuxfromscratch.org/blfs/view/8.0/server/databases.html#db</a>.
+          http://www.linuxfromscratch.org/blfs/view/8.0/server/databases.html#db</a>
+          中找到编译 Berkeley DB 的方法。
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i /ARPD/d Makefile
@@ -90,25 +87,26 @@ sed -i 's/arpd.8//' man/man8/Makefile
 rm -v doc/arpd.sgml</kbd>
 </pre>
         <p>
-          It is also necessary to disable building one module that requires
+          还必须禁用构建一个依赖于
           <a class="ulink" href=
           "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/iptables.html">
-          http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/iptables.html</a>.
+          http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/iptables.html</a>
+          的模块。
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's/m_ipt.o//' tc/Makefile</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not have a working test suite.
+          本软件包不包含能工作的测试套件。
         </p>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make DOCDIR=/usr/share/doc/iproute2-4.9.0 install</kbd>
@@ -117,18 +115,18 @@ rm -v doc/arpd.sgml</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-iproute2" name="contents-iproute2"></a>6.58.2.
-          Contents of IPRoute2
+          IPRoute2 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">bridge, ctstat (link to lnstat), genl,
               ifcfg, ifstat, ip, lnstat, nstat, routef, routel, rtacct,
               rtmon, rtpr, rtstat (link to lnstat), ss, and tc</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录：</strong>
               <span class="segbody">/etc/iproute2, /usr/lib/tc, and
               /usr/share/doc/iproute2-4.9.0,</span>
             </div>
@@ -136,7 +134,7 @@ rm -v doc/arpd.sgml</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -154,7 +152,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Configures network bridges
+                    设置网桥
                   </p>
                 </td>
               </tr>
@@ -168,7 +166,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Connection status utility
+                    连接状态工具
                   </p>
                 </td>
               </tr>
@@ -182,7 +180,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Generic netlink utility frontend
+                    通用的 netlink 工具前端
                   </p>
                 </td>
               </tr>
@@ -196,13 +194,13 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    A shell script wrapper for the <span class=
-                    "command"><strong>ip</strong></span> command [Note that
-                    it requires the <span class=
-                    "command"><strong>arping</strong></span> and <span class=
-                    "command"><strong>rdisk</strong></span> programs from the
-                    iputils package found at <a class="ulink" href=
-                    "http://www.skbuff.net/iputils/">http://www.skbuff.net/iputils/</a>.]
+                    <span class=
+                    "command"><strong>ip</strong></span> 命令的一种脚本封装
+                     [注意，它需要 iputils 软件包中的 <span class=
+                    "command"><strong>arping</strong></span> 和 <span class=
+                    "command"><strong>rdisk</strong></span> 程序，
+                    可以在 <a class="ulink" href=
+                    "http://www.skbuff.net/iputils/">http://www.skbuff.net/iputils/</a> 中找到。]
                   </p>
                 </td>
               </tr>
@@ -216,8 +214,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows the interface statistics, including the amount of
-                    transmitted and received packets by interface
+                    显示接口统计信息，包括每个接口的发送和接收的包的数量
                   </p>
                 </td>
               </tr>
@@ -230,53 +227,44 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    The main executable. It has several different functions:
+                    主要的可执行程序。它有几种不同的功能：
                   </p>
                   <p>
                     <span class="command"><strong>ip link <em class=
                     "replaceable"><code>&lt;device&gt;</code></em></strong></span>
-                    allows users to look at the state of devices and to make
-                    changes
+                    允许用户查看设备的状态并进行修改
                   </p>
                   <p>
                     <span class="command"><strong>ip addr</strong></span>
-                    allows users to look at addresses and their properties,
-                    add new addresses, and delete old ones
+                    允许用户查看地址及其属性，添加新地址，以及删除旧地址
                   </p>
                   <p>
                     <span class="command"><strong>ip neighbor</strong></span>
-                    allows users to look at neighbor bindings and their
-                    properties, add new neighbor entries, and delete old ones
+                    允许用户查看邻居绑定及其属性，添加新的邻居条目，以及删除旧条目
                   </p>
                   <p>
                     <span class="command"><strong>ip rule</strong></span>
-                    allows users to look at the routing policies and change
-                    them
+                    允许用户查看路由策略并进行修改
                   </p>
                   <p>
                     <span class="command"><strong>ip route</strong></span>
-                    allows users to look at the routing table and change
-                    routing table rules
+                    允许用户查看路由表并修改路由表规则
                   </p>
                   <p>
                     <span class="command"><strong>ip tunnel</strong></span>
-                    allows users to look at the IP tunnels and their
-                    properties, and change them
+                    允许用户查看 IP 隧道及其属性并进行修改
                   </p>
                   <p>
                     <span class="command"><strong>ip maddr</strong></span>
-                    allows users to look at the multicast addresses and their
-                    properties, and change them
+                    允许用户查看多播地址及其属性并进行修改
                   </p>
                   <p>
                     <span class="command"><strong>ip mroute</strong></span>
-                    allows users to set, change, or delete the multicast
-                    routing
+                    允许用户设置，修改或删除多播路由
                   </p>
                   <p>
                     <span class="command"><strong>ip monitor</strong></span>
-                    allows users to continuously monitor the state of
-                    devices, addresses and routes
+                    允许用户持续监控设备，地址及路由的状态
                   </p>
                 </td>
               </tr>
@@ -290,10 +278,9 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Provides Linux network statistics; it is a generalized
-                    and more feature-complete replacement for the old
+                    提供 Linux 网络统计数据；是旧的
                     <span class="command"><strong>rtstat</strong></span>
-                    program
+                    程序的一个更通用，功能更完善的替代品。
                   </p>
                 </td>
               </tr>
@@ -307,7 +294,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows network statistics
+                    显示网络统计信息
                   </p>
                 </td>
               </tr>
@@ -321,9 +308,8 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    A component of <span class="command"><strong>ip
-                    route</strong></span>. This is for flushing the routing
-                    tables
+                    <span class="command"><strong>ip
+                    route</strong></span> 的一个组件。用于清空路由表
                   </p>
                 </td>
               </tr>
@@ -337,9 +323,8 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    A component of <span class="command"><strong>ip
-                    route</strong></span>. This is for listing the routing
-                    tables
+                    <span class="command"><strong>ip
+                    route</strong></span> 的一个组件。用于列出路由表
                   </p>
                 </td>
               </tr>
@@ -353,8 +338,8 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays the contents of <code class=
-                    "filename">/proc/net/rt_acct</code>
+                    显示 <code class=
+                    "filename">/proc/net/rt_acct</code> 的内容
                   </p>
                 </td>
               </tr>
@@ -368,7 +353,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Route monitoring utility
+                    路由监视工具
                   </p>
                 </td>
               </tr>
@@ -382,8 +367,8 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Converts the output of <span class="command"><strong>ip
-                    -o</strong></span> back into a readable form
+                    将 <span class="command"><strong>ip
+                    -o</strong></span> 的输出转换成可读的形式
                   </p>
                 </td>
               </tr>
@@ -397,7 +382,7 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Route status utility
+                    路由状态工具
                   </p>
                 </td>
               </tr>
@@ -410,9 +395,8 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Similar to the <span class=
-                    "command"><strong>netstat</strong></span> command; shows
-                    active connections
+                    与 <span class=
+                    "command"><strong>netstat</strong></span> 命令类似；显示活动连接
                   </p>
                 </td>
               </tr>
@@ -425,30 +409,27 @@ rm -v doc/arpd.sgml</kbd>
                 </td>
                 <td>
                   <p>
-                    Traffic Controlling Executable; this is for Quality Of
-                    Service (QOS) and Class Of Service (COS) implementations
+                    流量控制可执行程序；用于实现服务质量（QOS）和服务等级（COS）
                   </p>
                   <p>
                     <span class="command"><strong>tc qdisc</strong></span>
-                    allows users to setup the queueing discipline
+                    允许用户设置排队规则
                   </p>
                   <p>
                     <span class="command"><strong>tc class</strong></span>
-                    allows users to setup classes based on the queuing
-                    discipline scheduling
+                    允许用户基于排队规则调度策略设置等级
                   </p>
                   <p>
                     <span class="command"><strong>tc
-                    estimator</strong></span> allows users to estimate the
-                    network flow into a network
+                    estimator</strong></span> 允许用户估算流入网络的流量
                   </p>
                   <p>
                     <span class="command"><strong>tc filter</strong></span>
-                    allows users to setup the QOS/COS packet filtering
+                    允许用户设置 QOS/COS 包过滤
                   </p>
                   <p>
                     <span class="command"><strong>tc policy</strong></span>
-                    allows users to setup the QOS/COS policies
+                    允许用户设置 QOS/COS 策略
                   </p>
                 </td>
               </tr>
@@ -460,24 +441,24 @@ rm -v doc/arpd.sgml</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gzip.html" title="Gzip-1.8">Prev</a>
+          <a accesskey="p" href="gzip.html" title="Gzip-1.8">上一页</a>
           <p>
             Gzip-1.8
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="kbd.html" title="Kbd-2.0.4">Next</a>
+          <a accesskey="n" href="kbd.html" title="Kbd-2.0.4">下一页</a>
           <p>
             Kbd-2.0.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

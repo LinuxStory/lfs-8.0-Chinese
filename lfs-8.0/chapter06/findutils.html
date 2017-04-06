@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.53.&nbsp;Findutils-4.6.0
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">Prev</a>
+          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">上一页</a>
           <p>
             Gawk-4.1.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="groff.html" title="Groff-1.22.3">Next</a>
+          <a accesskey="n" href="groff.html" title="Groff-1.22.3">下一页</a>
           <p>
             Groff-1.22.3
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -51,20 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Findutils package contains programs to find files. These
-          programs are provided to recursively search through a directory
-          tree and to create, maintain, and search a database (often faster
-          than the recursive find, but unreliable if the database has not
-          been recently updated).
+          Findutils 软件包包含用来查找文件的工具。这些工具可以在目录树中进行递归查找，并创建、维护和搜索数据库（一般会比递归查找快，但是如果不经常更新数据库的话结果不可靠）。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.9 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">48 MB</span>
             </div>
           </div>
@@ -72,16 +68,16 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.53.1. Installation of Findutils
+          6.53.1. 安装 Findutils
         </h2>
         <p>
-          First, suppress a test which on some machines can loop forever:
+          首先，关闭在某些机器上会无限循环的测试：
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i 's/test-lock..EXEEXT.//' tests/Makefile.in</kbd>
 </pre>
         <p>
-          Prepare Findutils for compilation:
+          为编译 Findutils 做准备：
         </p>
         <pre class="userinput">
 <kbd class=
@@ -89,7 +85,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -98,39 +94,37 @@
             </dt>
             <dd>
               <p>
-                This option changes the location of the <span class=
-                "command"><strong>locate</strong></span> database to be in
-                <code class="filename">/var/lib/locate</code>, which is
-                FHS-compliant.
+                这个选项把<span class=
+                "command"><strong>locate</strong></span> 数据库的位置改到
+                <code class="filename">/var/lib/locate</code>目录内，使其兼容
+                FHS 标准。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，执行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Some of the scripts in the LFS-Bootscripts package depend on
-          <span class="command"><strong>find</strong></span>. As <code class=
-          "filename">/usr</code> may not be available during the early stages
-          of booting, this program needs to be on the root partition. The
-          <span class="command"><strong>updatedb</strong></span> script also
-          needs to be modified to correct an explicit path:
+          LFS-Bootscripts 软件包中的一些脚本依赖于
+          <span class="command"><strong>find</strong></span>. 由于<code class=
+          "filename">/usr</code> 在启动前期有可能不可用，这个工具需要放在根分区上。为了修正一个路径
+          <span class="command"><strong>updatedb</strong></span> 脚本也需要修改：
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/bin/find /bin
@@ -140,12 +134,12 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-findutils" name="contents-findutils"></a>6.53.2.
-          Contents of Findutils
+          Findutils 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序</strong>
               <span class="segbody">code, find, locate, oldfind, updatedb,
               and xargs</span>
             </div>
@@ -153,7 +147,7 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -171,10 +165,9 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
                 </td>
                 <td>
                   <p>
-                    Was formerly used to produce <span class=
-                    "command"><strong>locate</strong></span> databases; it is
-                    the ancestor of <span class=
-                    "command"><strong>frcode</strong></span>
+                    之前被用来处理<span class=
+                    "command"><strong>locate</strong></span> 数据库；它是 <span class=
+                    "command"><strong>frcode</strong></span> 的前身
                   </p>
                 </td>
               </tr>
@@ -188,8 +181,7 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
                 </td>
                 <td>
                   <p>
-                    Searches given directory trees for files matching the
-                    specified criteria
+                    在给定的目录树中搜索匹配指定条件的文件
                   </p>
                 </td>
               </tr>
@@ -203,9 +195,7 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
                 </td>
                 <td>
                   <p>
-                    Searches through a database of file names and reports the
-                    names that contain a given string or match a given
-                    pattern
+                    在一个包含文件名的数据库中搜索并报告包含给定字符串或匹配给定模式的文件名
                   </p>
                 </td>
               </tr>
@@ -219,7 +209,7 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
                 </td>
                 <td>
                   <p>
-                    Older version of find, using a different algorithm
+                    老版本的 find，使用了不同的算法
                   </p>
                 </td>
               </tr>
@@ -233,11 +223,8 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
                 </td>
                 <td>
                   <p>
-                    Updates the <span class=
-                    "command"><strong>locate</strong></span> database; it
-                    scans the entire file system (including other file
-                    systems that are currently mounted, unless told not to)
-                    and puts every file name it finds into the database
+                    更新 <span class=
+                    "command"><strong>locate</strong></span> 数据库；它会扫描整个文件系统（包括当前被挂载的其他文件系统，除非被明确告知跳过）然后将它找到的所有文件名存入数据库
                   </p>
                 </td>
               </tr>
@@ -251,7 +238,7 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
                 </td>
                 <td>
                   <p>
-                    Can be used to apply a given command to a list of files
+                    用来对一系列文件执行给定的命令
                   </p>
                 </td>
               </tr>
@@ -263,24 +250,24 @@ sed -i 's|find:=${BINDIR}|find:=/bin|' /usr/bin/updatedb</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">Prev</a>
+          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">上一页</a>
           <p>
             Gawk-4.1.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="groff.html" title="Groff-1.22.3">Next</a>
+          <a accesskey="n" href="groff.html" title="Groff-1.22.3">下一页</a>
           <p>
             Groff-1.22.3
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

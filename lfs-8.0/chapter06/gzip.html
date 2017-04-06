@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.57.&nbsp;Gzip-1.8
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="less.html" title="Less-481">Prev</a>
+          <a accesskey="p" href="less.html" title="Less-481">上一页</a>
           <p>
             Less-481
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="iproute2.html" title=
-          "IPRoute2-4.9.0">Next</a>
+          "IPRoute2-4.9.0">下一页</a>
           <p>
             IPRoute2-4.9.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Gzip package contains programs for compressing and
-          decompressing files.
+          Gzip 软件包包含压缩和解压缩文件的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">19 MB</span>
             </div>
           </div>
@@ -69,34 +68,34 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.57.1. Installation of Gzip
+          6.57.1. 安装 Gzip
         </h2>
         <p>
-          Prepare Gzip for compilation:
+          准备编译 Gzip ：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，执行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Move a program that needs to be on the root filesystem:
+          移动需要存放于根文件系统的程序
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/bin/gzip /bin</kbd>
@@ -104,22 +103,20 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gzip" name="contents-gzip"></a>6.57.2. Contents of
-          Gzip
+          <a id="contents-gzip" name="contents-gzip"></a>6.57.2. Gzip 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">gunzip, gzexe, gzip, uncompress (hard
-              link with gunzip), zcat, zcmp, zdiff, zegrep, zfgrep, zforce,
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">gunzip, gzexe, gzip, uncompress （gunzip 的硬链接）, zcat, zcmp, zdiff, zegrep, zfgrep, zforce,
               zgrep, zless, zmore, and znew</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -137,7 +134,7 @@
                 </td>
                 <td>
                   <p>
-                    Decompresses gzipped files
+                    解压 gzip 压缩的文件
                   </p>
                 </td>
               </tr>
@@ -151,7 +148,7 @@
                 </td>
                 <td>
                   <p>
-                    Creates self-decompressing executable files
+                    创建自解压的可执行文件
                   </p>
                 </td>
               </tr>
@@ -165,7 +162,7 @@
                 </td>
                 <td>
                   <p>
-                    Compresses the given files using Lempel-Ziv (LZ77) coding
+                    用 Lempel-Ziv (LZ77) 编码压缩指定文件
                   </p>
                 </td>
               </tr>
@@ -179,7 +176,7 @@
                 </td>
                 <td>
                   <p>
-                    Decompresses compressed files
+                    解压压缩过的文件
                   </p>
                 </td>
               </tr>
@@ -193,7 +190,7 @@
                 </td>
                 <td>
                   <p>
-                    Decompresses the given gzipped files to standard output
+                    将指定的 gzip 压缩文件解压到标准输出
                   </p>
                 </td>
               </tr>
@@ -207,8 +204,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>cmp</strong></span> on
-                    gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>cmp</strong></span>
                   </p>
                 </td>
               </tr>
@@ -222,8 +218,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>diff</strong></span>
-                    on gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>diff</strong></span>
                   </p>
                 </td>
               </tr>
@@ -237,8 +232,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>egrep</strong></span>
-                    on gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>egrep</strong></span>
                   </p>
                 </td>
               </tr>
@@ -252,8 +246,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>fgrep</strong></span>
-                    on gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>fgrep</strong></span>
                   </p>
                 </td>
               </tr>
@@ -267,11 +260,9 @@
                 </td>
                 <td>
                   <p>
-                    Forces a <code class="filename">.gz</code> extension on
-                    all given files that are gzipped files, so that
-                    <span class="command"><strong>gzip</strong></span> will
-                    not compress them again; this can be useful when file
-                    names were truncated during a file transfer
+                    对指定文件中所有 gzip 压缩文件强制使用 <code class="filename">.gz</code> 扩展名，
+                    这样 <span class="command"><strong>gzip</strong></span> 就不会再次对其进行压缩；
+                    这在文件传输过程中文件名被截断时很有用
                   </p>
                 </td>
               </tr>
@@ -285,8 +276,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>grep</strong></span>
-                    on gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>grep</strong></span>
                   </p>
                 </td>
               </tr>
@@ -300,8 +290,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>less</strong></span>
-                    on gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>less</strong></span>
                   </p>
                 </td>
               </tr>
@@ -315,8 +304,7 @@
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>more</strong></span>
-                    on gzipped files
+                    对 gzip 压缩文件运行 <span class="command"><strong>more</strong></span>
                   </p>
                 </td>
               </tr>
@@ -330,10 +318,10 @@
                 </td>
                 <td>
                   <p>
-                    Re-compresses files from <span class=
-                    "command"><strong>compress</strong></span> format to
+                    将 <span class=
+                    "command"><strong>compress</strong></span> 格式的压缩文件重新压缩为
                     <span class="command"><strong>gzip</strong></span>
-                    format&mdash;<code class="filename">.Z</code> to
+                    格式&mdash; 也就是 <code class="filename">.Z</code> 转为
                     <code class="filename">.gz</code>
                   </p>
                 </td>
@@ -346,25 +334,25 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="less.html" title="Less-481">Prev</a>
+          <a accesskey="p" href="less.html" title="Less-481">上一页</a>
           <p>
             Less-481
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="iproute2.html" title=
-          "IPRoute2-4.9.0">Next</a>
+          "IPRoute2-4.9.0">下一页</a>
           <p>
             IPRoute2-4.9.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
