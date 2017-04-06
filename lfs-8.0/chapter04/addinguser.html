@@ -52,16 +52,8 @@
         添加 LFS 用户
       </h1>
       <p>
-        当使用 <code class="systemitem">root</code> 用户登陆时，一点小的错误就有可能破坏整个系统。因此，我们建议使用普通用户（非特权用户）构建这些软件包。 
-        When logged in as user <code class="systemitem">root</code>, making a
-        single mistake can damage or destroy a system. Therefore, we
-        recommend building the packages in this chapter as an unprivileged
-        user. You could use your own user name, but to make it easier to set
-        up a clean working environment, create a new user called <code class=
-        "systemitem">lfs</code> as a member of a new group (also named
-        <code class="systemitem">lfs</code>) and use this user during the
-        installation process. As <code class="systemitem">root</code>, issue
-        the following commands to add the new user:
+        当使用 <code class="systemitem">root</code> 用户登陆时，一点小的错误就有可能破坏整个系统。因此，我们建议使用普通用户（非特权用户）构建这些软件包。你可以使用自己的用户名，但是为了更容易配置所需的工作环境，请创建一个名为 <code class=
+        "systemitem">lfs</code> 的新用户组，并创建名字同为 <code class="systemitem">lfs</code> 的新用户作为该用户组的成员，然后在安装过程中将会使用此用户。以 <code class="systemitem">root</code> 用户，键入以下命令：
       </p>
       <pre class="userinput">
 <kbd class="command">groupadd lfs
@@ -121,12 +113,6 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
       </div>
       <p>
         为 <code class="systemitem">lfs</code> 用户设置密码：
-        登陆为 <code class="systemitem">lfs</code> （
-        To log in as <code class="systemitem">lfs</code> (as opposed to
-        switching to user <code class="systemitem">lfs</code> when logged in
-        as <code class="systemitem">root</code>, which does not require the
-        <code class="systemitem">lfs</code> user to have a password), give
-        <code class="systemitem">lfs</code> a password:
       </p>
       <pre class="userinput">
 <kbd class="command">passwd lfs</kbd>
@@ -138,8 +124,7 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
 <kbd class="command">chown -v lfs $LFS/tools</kbd>
 </pre>
       <p>
-        If a separate working directory was created as suggested, give user
-        <code class="systemitem">lfs</code> ownership of this directory:
+        如果按照建议创建了单独的工作目录，请使用以下命令将该目录的拥有者更改为 <code class="systemitem">lfs</code> 用户：
       </p>
       <pre class="userinput">
 <kbd class="command">chown -v lfs $LFS/sources</kbd>
@@ -151,13 +136,14 @@ useradd -s /bin/bash -g lfs -m -k /dev/null lfs</kbd>
 <kbd class="command">su - lfs</kbd>
 </pre>
       <p>
-        The <span class="quote">&ldquo;<span class="quote"><em class=
-        "parameter"><code>-</code></em></span>&rdquo;</span> instructs
-        <span class="command"><strong>su</strong></span> to start a login
-        shell as opposed to a non-login shell. The difference between these
-        two types of shells can be found in detail in <code class=
-        "filename">bash(1)</code> and <span class="command"><strong>info
-        bash</strong></span>.
+        <span class="quote">&ldquo;<span class="quote"><em class="parameter"><code>-</code></em></span>&rdquo;</span>
+        是指完整切换到 <code class="systemitem">lfs</code> 用户环境，即 <span class=
+        "command"><strong>login shell</strong></span> ；如果不加
+        <span class="quote">&ldquo;<span class="quote"><em class="parameter"><code>-</code></em></span>&rdquo;</span>
+        则表示只切换到其他用户，即 <span class=
+        "command"><strong>non-login shell</strong></span> 。这两种切换用户的区别可以在 <code class=
+        "filename">bash(1)</code> 和 <span class="command"><strong>info bash</strong></span>
+        中找到。
       </p>
     </div>
     <div class="navfooter">
