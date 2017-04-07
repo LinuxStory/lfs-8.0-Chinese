@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.23.&nbsp;Libcap-2.25
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="acl.html" title="Acl-2.2.52">Prev</a>
+          <a accesskey="p" href="acl.html" title="Acl-2.2.52">上一页</a>
           <p>
             Acl-2.2.52
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="sed.html" title="Sed-4.4">Next</a>
+          <a accesskey="n" href="sed.html" title="Sed-4.4">下一页</a>
           <p>
             Sed-4.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -51,19 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Libcap package implements the user-space interfaces to the
-          POSIX 1003.1e capabilities available in Linux kernels. These
-          capabilities are a partitioning of the all powerful root privilege
-          into a set of distinct privileges.
+          Libcap 软件包实现了用户空间接口获得内核中可用的 POSIX 1003.1e 标准能力(capability)。这些能力(capability)将强力的root权限分解成一系列的独立权限。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计构建时间:</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">1.3 MB</span>
             </div>
           </div>
@@ -71,25 +68,25 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.23.1. Installation of Libcap
+          6.23.1. 安装 Libcap
         </h2>
         <p>
-          Prevent a static library from being installed:
+          防止安装静态库:
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i '/install.*STALIBNAME/d' libcap/Makefile</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not come with a test suite.
+          该软件包不含测试套件.
         </p>
         <p>
-          Install the package:
+          安装该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make RAISE_SETFCAP=no lib=lib prefix=/usr install
@@ -97,7 +94,7 @@ chmod -v 755 /usr/lib/libcap.so</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the make option:</strong>
+            <strong> make 选项的含义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -106,10 +103,8 @@ chmod -v 755 /usr/lib/libcap.so</kbd>
             </dt>
             <dd>
               <p>
-                This parameter skips trying to use <span class=
-                "command"><strong>setcap</strong></span> on itself. This
-                avoids an installation error if the kernel or file system
-                does not support extended capabilities.
+                该参数忽略了在安装过程中使用 <span class=
+                "command"><strong>setcap</strong></span> 命令. 这避免了当内核或者文件系统不支持扩展能力(capability)时出现的安装错误。
               </p>
             </dd>
             <dt>
@@ -118,19 +113,18 @@ chmod -v 755 /usr/lib/libcap.so</kbd>
             </dt>
             <dd>
               <p>
-                This parameter installs the library in <code class=
-                "filename">$prefix/lib</code> rather than <code class=
-                "filename">$prefix/lib64</code> on x86_64. It has no effect
-                on x86.
+                该参数会在 x86_64 系统上将库安装在 <code class=
+                "filename">$prefix/lib</code> 而不是在 <code class=
+                "filename">$prefix/lib64</code> 。在x86系统上无作用。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          The shared library needs to be moved to <code class=
-          "filename">/lib</code>, and as a result the <code class=
-          "filename">.so</code> file in <code class=
-          "filename">/usr/lib</code> will need to be recreated:
+		  该共享库需要被移动到 <code class=
+          "filename">/lib</code>, 并且需要在<code class=
+          "filename">/usr/lib</code>目录下生成 <code class=
+          "filename">.so</code> 文件:
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/lib/libcap.so.* /lib
@@ -139,25 +133,24 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-libcap" name="contents-libcap"></a>6.23.2. Contents
-          of Libcap
+          <a id="contents-libcap" name="contents-libcap"></a>6.23.2. Libcap 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">capsh, getcap, getpcaps, and
               setcap</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libcap.so</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -175,8 +168,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
                 </td>
                 <td>
                   <p>
-                    A shell wrapper to explore and constrain capability
-                    support
+                    一个探索和约束能力(capability)支持的 shell 包装
                   </p>
                 </td>
               </tr>
@@ -190,7 +182,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Examines file capabilities
+                    获取文件具有的能力(capability)
                   </p>
                 </td>
               </tr>
@@ -204,7 +196,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays the capabilities on the queried process(es)
+					获取进程具有的能力(capability)
                   </p>
                 </td>
               </tr>
@@ -217,8 +209,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains the library functions for manipulating POSIX
-                    1003.1e capabilities
+					包含用于操作POSIX 1003.1e能力(capability)的库函数
                   </p>
                 </td>
               </tr>
@@ -232,7 +223,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Sets file capabilities
+					设置文件具有的能力(capability)
                   </p>
                 </td>
               </tr>
@@ -244,24 +235,24 @@ ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="acl.html" title="Acl-2.2.52">Prev</a>
+          <a accesskey="p" href="acl.html" title="Acl-2.2.52">上一页</a>
           <p>
             Acl-2.2.52
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="sed.html" title="Sed-4.4">Next</a>
+          <a accesskey="n" href="sed.html" title="Sed-4.4">下一页</a>
           <p>
             Sed-4.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

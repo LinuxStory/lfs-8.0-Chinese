@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.30.&nbsp;Flex-2.6.3
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="bison.html" title="Bison-3.0.4">Prev</a>
+          <a accesskey="p" href="bison.html" title="Bison-3.0.4">上一页</a>
           <p>
             Bison-3.0.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <a accesskey="n" href="grep.html" title="Grep-3.0">下一页</a>
           <p>
             Grep-3.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -50,17 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Flex package contains a utility for generating programs that
-          recognize patterns in text.
+          Flex 软件包包含了一个可生成程序的工具，用于识别文本中的模式(pattern)。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">32 MB</span>
             </div>
           </div>
@@ -68,49 +67,41 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.30.1. Installation of Flex
+          6.30.1. 安装 Flex
         </h2>
         <p>
-          The build procedure assumes the <span class=
-          "application">help2man</span> program is available to create a man
-          page from the executable --help option. This is not present, so we
-          use an environment variable to skip this process. Now, prepare Flex
-          for compilation:
+          构建过程假定 <span class=
+          "application">help2man</span> 程序可用，它可从执行命令的 --help 选项输出中生成帮助页面。然而该程序并不存在，所以我们使用一个环境变量来跳过这个过程。现在，准备编译 Flex:
         </p>
         <pre class="userinput">
 <kbd class="command">HELP2MAN=/tools/bin/true \
 ./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.6.3</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results (about 0.5 SBU), issue:
+          如需测试 (约 0.5 SBU), 运行:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          One test, <span class="emphasis"><em>cxx_restart</em></span>, is
-          known to fail.
+          已知其中一个测试 <span class="emphasis"><em>cxx_restart</em></span>会失败.
         </p>
         <p>
-          Install the package:
+          安装该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          A few programs do not know about <span class=
-          "command"><strong>flex</strong></span> yet and try to run its
-          predecessor, <span class="command"><strong>lex</strong></span>. To
-          support those programs, create a symbolic link named <code class=
-          "filename">lex</code> that runs <code class="filename">flex</code>
-          in <span class="command"><strong>lex</strong></span> emulation
-          mode:
+          一些程序并不知道 <span class=
+          "command"><strong>flex</strong></span> 并且试图运行其前身 <span class="command"><strong>lex</strong></span>. 为了支持这些程序, 创建一个名为<code class=
+          "filename">lex</code> 的符号链接，实际上是运行了 flex 的 <span class="command"><strong>lex</strong></span> 仿真模式:
         </p>
         <pre class="userinput">
 <kbd class="command">ln -sv flex /usr/bin/lex</kbd>
@@ -118,29 +109,28 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-flex" name="contents-flex"></a>6.30.2. Contents of
-          Flex
+          <a id="contents-flex" name="contents-flex"></a>6.30.2. Flex 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">flex, flex++ (link to flex), and lex
               (link to flex)</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libfl.so and libfl_pic.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装的路径:</strong>
               <span class="segbody">/usr/share/doc/flex-2.6.3</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -158,10 +148,7 @@
                 </td>
                 <td>
                   <p>
-                    A tool for generating programs that recognize patterns in
-                    text; it allows for the versatility to specify the rules
-                    for pattern-finding, eradicating the need to develop a
-                    specialized program
+                    一个用来生成一些程序的工具，这些程序用于识别文本中的模式; 它考虑到了功能的多用途性，可指定模式发现的规则，也就无需为此再开发特定的程序。
                   </p>
                 </td>
               </tr>
@@ -175,9 +162,8 @@
                 </td>
                 <td>
                   <p>
-                    An extension of flex, is used for generating C++ code and
-                    classes. It is a symbolic link to <span class=
-                    "command"><strong>flex</strong></span>
+                    一个 flex 拓展功能，用来生成 C++ 代码和类，是<span class=
+                    "command"><strong>flex</strong></span>的符号链接
                   </p>
                 </td>
               </tr>
@@ -190,9 +176,9 @@
                 </td>
                 <td>
                   <p>
-                    A script that runs <span class=
-                    "command"><strong>flex</strong></span> in <span class=
-                    "command"><strong>lex</strong></span> emulation mode
+                    一个令<span class=
+                    "command"><strong>flex</strong></span> 以 <span class=
+                    "command"><strong>lex</strong></span> 仿真模式运行的脚本。
                   </p>
                 </td>
               </tr>
@@ -205,7 +191,7 @@
                 </td>
                 <td>
                   <p>
-                    The <code class="filename">flex</code> library
+                     <code class="filename">flex</code> 类库
                   </p>
                 </td>
               </tr>
@@ -217,24 +203,24 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="bison.html" title="Bison-3.0.4">Prev</a>
+          <a accesskey="p" href="bison.html" title="Bison-3.0.4">上一页</a>
           <p>
             Bison-3.0.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <a accesskey="n" href="grep.html" title="Grep-3.0">下一页</a>
           <p>
             Grep-3.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
