@@ -51,20 +51,18 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Bzip2 package contains programs for compressing and
-          decompressing files. Compressing text files with <span class=
-          "command"><strong>bzip2</strong></span> yields a much better
-          compression percentage than with the traditional <span class=
-          "command"><strong>gzip</strong></span>.
+          Bzip2 软件包包含压缩和解压缩的程序。 用 <span class="command"><strong>bzip2
+          </strong></span> 压缩文本能获得比传统 <span class=
+          "command"><strong>gzip</strong></span> 更好的压缩比。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">less than 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">0.9 MB</span>
             </div>
           </div>
@@ -72,31 +70,30 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.18.1. Installation of Bzip2
+          6.18.1. 安装 Bzip2
         </h2>
         <p>
-          Apply a patch that will install the documentation for this package:
+          使用能为这个软件包安装帮助文档的补丁:
         </p>
         <pre class="userinput">
 <kbd class="command">patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch</kbd>
 </pre>
         <p>
-          The following command ensures installation of symbolic links are
-          relative:
+          下面的命令确保安装的符号链接是相对链接:
         </p>
         <pre class="userinput">
 <kbd class=
 "command">sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile</kbd>
 </pre>
         <p>
-          Ensure the man pages are installed into the correct location:
+          确认 man 页面安装到了正确的位置:
         </p>
         <pre class="userinput">
 <kbd class=
 "command">sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile</kbd>
 </pre>
         <p>
-          Prepare Bzip2 for compilation with:
+          准备编译 Bzip2:
         </p>
         <pre class="userinput">
 <kbd class="command">make -f Makefile-libbz2_so
@@ -104,7 +101,7 @@ make clean</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the make parameter:</strong>
+            <strong>make 参数的含义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -113,32 +110,29 @@ make clean</kbd>
             </dt>
             <dd>
               <p>
-                This will cause Bzip2 to be built using a different
-                <code class="filename">Makefile</code> file, in this case the
-                <code class="filename">Makefile-libbz2_so</code> file, which
-                creates a dynamic <code class="filename">libbz2.so</code>
-                library and links the Bzip2 utilities against it.
+                这会使用不同的different <code class="filename">Makefile</code> 文件编译 Bzip2, 在这里是
+                <code class="filename">Makefile-libbz2_so</code> , 它会创建动态
+                <code class="filename">libbz2.so</code> 库, 并把它链接到 Bzip2 工具。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile and test the package:
+          编译和测试软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Install the programs:
+          安装程序:
         </p>
         <pre class="userinput">
 <kbd class="command">make PREFIX=/usr install</kbd>
 </pre>
         <p>
-          Install the shared <span class=
-          "command"><strong>bzip2</strong></span> binary into the
-          <code class="filename">/bin</code> directory, make some necessary
-          symbolic links, and clean up:
+          安装使用动态链接库的 <span class=
+          "command"><strong>bzip2</strong></span> 二进制文件到
+          <code class="filename">/bin</code> 目录, 创建一些必须的符号链接并清理:
         </p>
         <pre class="userinput">
 <kbd class="command">cp -v bzip2-shared /bin/bzip2
@@ -151,31 +145,30 @@ ln -sv bzip2 /bin/bzcat</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-bzip2" name="contents-bzip2"></a>6.18.2. Contents
-          of Bzip2
+          <a id="contents-bzip2" name="contents-bzip2"></a>6.18.2. Bzip2 软件包内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">bunzip2 (link to bzip2), bzcat (link to
               bzip2), bzcmp (link to bzdiff), bzdiff, bzegrep (link to
               bzgrep), bzfgrep (link to bzgrep), bzgrep, bzip2, bzip2recover,
               bzless (link to bzmore), and bzmore</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libbz2.{a,so}</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装目录:</strong>
               <span class="segbody">/usr/share/doc/bzip2-1.0.6</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -193,7 +186,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompresses bzipped files
+                    解压 bzip 压缩的文件
                   </p>
                 </td>
               </tr>
@@ -207,7 +200,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Decompresses to standard output
+                    解压到标准输出
                   </p>
                 </td>
               </tr>
@@ -221,8 +214,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>cmp</strong></span> on
-                    bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>cmp</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -236,8 +228,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>diff</strong></span>
-                    on bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>diff</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -251,8 +242,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>egrep</strong></span>
-                    on bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>egrep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -266,8 +256,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>fgrep</strong></span>
-                    on bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>fgrep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -281,8 +270,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>grep</strong></span>
-                    on bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>grep</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -296,13 +284,10 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Compresses files using the Burrows-Wheeler block sorting
-                    text compression algorithm with Huffman coding; the
-                    compression rate is better than that achieved by more
-                    conventional compressors using <span class=
-                    "quote">&ldquo;<span class=
-                    "quote">Lempel-Ziv</span>&rdquo;</span> algorithms, like
-                    <span class="command"><strong>gzip</strong></span>
+                    使用哈夫曼编码的 Burrows-Wheeler 块排序文本压缩算法压缩文件；压缩率比传统的用 
+                    <span class="quote">&ldquo;<span class=
+                    "quote">Lempel-Ziv</span>&rdquo;</span>  算法的压缩器要好，比如
+                    <span class="command"><strong>gzip</strong></span> 。
                   </p>
                 </td>
               </tr>
@@ -316,7 +301,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Tries to recover data from damaged bzipped files
+                    尝试从损坏的 bzip 压缩文件中恢复数据
                   </p>
                 </td>
               </tr>
@@ -330,8 +315,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>less</strong></span>
-                    on bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>less</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -345,8 +329,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs <span class="command"><strong>more</strong></span>
-                    on bzipped files
+                    对 bzip 压缩的文件运行 <span class="command"><strong>more</strong></span> 命令
                   </p>
                 </td>
               </tr>
@@ -359,8 +342,7 @@ ln -sv bzip2 /bin/bzcat</kbd>
                 </td>
                 <td>
                   <p>
-                    The library implementing lossless, block-sorting data
-                    compression, using the Burrows-Wheeler algorithm
+                    用 Burrows-Wheeler 算法实现的无损的块排序数据压缩库
                   </p>
                 </td>
               </tr>
