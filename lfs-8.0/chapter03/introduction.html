@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      3.1.&nbsp;Introduction
+      3.1.&nbsp;简介
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,100 +19,72 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;3.&nbsp;Packages and Patches
+       第三章 软件包与补丁
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter03.html" title=
-          "Packages and Patches">Prev</a>
+          "软件包与补丁">上一页</a>
           <p>
-            Packages and Patches
+            软件包与补丁
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="packages.html" title="All Packages">Next</a>
+          <a accesskey="n" href="packages.html" title="所有的软件包">下一页</a>
           <p>
-            All Packages
+           所有的软件包
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter03.html" title=
-          "Chapter&nbsp;3.&nbsp;Packages and Patches">Up</a>
+          "第三章 软件包与补丁">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="materials-introduction" name="materials-introduction"></a>3.1.
-        Introduction
+        <a id="materials-introduction" name="materials-introduction"></a>3.1. 简介
       </h1>
       <p>
-        This chapter includes a list of packages that need to be downloaded
-        in order to build a basic Linux system. The listed version numbers
-        correspond to versions of the software that are known to work, and
-        this book is based on their use. We highly recommend against using
-        newer versions because the build commands for one version may not
-        work with a newer version. The newest package versions may also have
-        problems that require work-arounds. These work-arounds will be
-        developed and stabilized in the development version of the book.
+        本章列出了一个需要下载的软件包列表，它们用来构建一个基本的 Linux 系统。所列出来的版本号对应着该软件的确定可以正常工作的版本，本书是以它们为基础的。我们强烈反对使用更新一些的版本，因为某个版本能用的编译指令可能并不适用于新版本。最新的软件包也可能会有问题而需要做些修补。我们会在本书的开发版本中解决这些问题并固定下来。
       </p>
       <p>
-        Download locations may not always be accessible. If a download
-        location has changed since this book was published, Google (<a class=
-        "ulink" href="http://www.google.com/">http://www.google.com/</a>)
-        provides a useful search engine for most packages. If this search is
-        unsuccessful, try one of the alternative means of downloading
-        discussed at <a class="ulink" href=
-        "http://www.linuxfromscratch.org/lfs/packages.html#packages">http://www.linuxfromscratch.org/lfs/packages.html#packages</a>.
+        下载位置可能不会一直有效。如果在本书发布后下载位置变了，Google (<a class="ulink" href="http://www.google.com/">http://www.google.com/</a>)提供的搜索引擎可以找到大多数软件包。如果搜不到，试试这里 <a class="ulink" href="http://www.linuxfromscratch.org/lfs/packages.html#packages">http://www.linuxfromscratch.org/lfs/packages.html#packages</a>提到的其他下载地址。
       </p>
       <p>
-        Downloaded packages and patches will need to be stored somewhere that
-        is conveniently available throughout the entire build. A working
-        directory is also required to unpack the sources and build them.
-        <code class="filename">$LFS/sources</code> can be used both as the
-        place to store the tarballs and patches and as a working directory.
-        By using this directory, the required elements will be located on the
-        LFS partition and will be available during all stages of the building
-        process.
+        下载好的软件包和补丁需要保存在某个地方，以方便在整个构建过程中都能有效访问。另外还需要一个工作目录用于解压源代码并执行编译。可以用目录
+        <code class="filename">$LFS/sources</code> 保存软件包和补丁，同时作为工作目录。放到这个目录，所有需要的元素都在 LFS 分区中，因此在构建过程中的所有阶段都可以访问。
       </p>
       <p>
-        To create this directory, execute the following command, as user
-        <code class="systemitem">root</code>, before starting the download
-        session:
+        在开始下载任务之前，先用
+        <code class="systemitem">root</code> 用户执行下面的命令创建这个目录：
       </p>
       <pre class="userinput">
 <kbd class="command">mkdir -v $LFS/sources</kbd>
 </pre>
       <p>
-        Make this directory writable and sticky. <span class=
-        "quote">&ldquo;<span class="quote">Sticky</span>&rdquo;</span> means
-        that even if multiple users have write permission on a directory,
-        only the owner of a file can delete the file within a sticky
-        directory. The following command will enable the write and sticky
-        modes:
+        设置目录的写权限和粘滞位。 <span class=
+        "quote">&ldquo;<span class="quote">粘滞位</span>&rdquo;</span>意思是就算有多个用户对某个目录有写权限，只有该文件的主人才能删除一个粘滞位目录里的文件。下面的命令可以设置写权限和粘滞位模式：
       </p>
       <pre class="userinput">
 <kbd class="command">chmod -v a+wt $LFS/sources</kbd>
 </pre>
       <p>
-        An easy way to download all of the packages and patches is by using
-        <a class="ulink" href="../wget-list">wget-list</a> as an input to
-        <span class="command"><strong>wget</strong></span>. For example:
+        下载所有软件包和补丁的一个简单方式是使用 <a class="ulink" href="../wget-list">wget-list</a> 作为
+        <span class="command"><strong>wget</strong></span>的输入。例如：
       </p>
       <pre class="userinput">
 <kbd class=
 "command">wget --input-file=wget-list --continue --directory-prefix=$LFS/sources</kbd>
 </pre>
       <p>
-        Additionally, starting with LFS-7.0, there is a separate file,
-        <a class="ulink" href="../md5sums">md5sums</a>, which can be used to
-        verify that all the correct packages are available before proceeding.
-        Place that file in <code class="filename">$LFS/sources</code> and
-        run:
+       另外，从 LFS-7.0 开始，这儿有一个单独的文件
+        <a class="ulink" href="../md5sums">md5sums</a>, 可以用来在开始前校验所有的文件是否都正确。
+       将这个文件拷贝到 <code class="filename">$LFS/sources</code> 并执行：
       </p>
       <pre class="userinput">
 <kbd class="command">pushd $LFS/sources
@@ -124,24 +96,24 @@ popd</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter03.html" title=
-          "Packages and Patches">Prev</a>
+          "软件包与补丁">上一页</a>
           <p>
-            Packages and Patches
+            软件包与补丁
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="packages.html" title="All Packages">Next</a>
+          <a accesskey="n" href="packages.html" title="所有的软件包">下一页</a>
           <p>
-            All Packages
+            所有的软件包
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter03.html" title=
-          "Chapter&nbsp;3.&nbsp;Packages and Patches">Up</a>
+          "第三章 软件包与补丁">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
