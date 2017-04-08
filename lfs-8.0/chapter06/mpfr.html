@@ -50,16 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The MPFR package contains functions for multiple precision math.
+          MPFR 软件包包含多精度数学函数库。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.8 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">45 MB</span>
             </div>
           </div>
@@ -67,10 +67,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.15.1. Installation of MPFR
+          6.15.1. 安装 MPFR
         </h2>
         <p>
-          Prepare MPFR for compilation:
+          准备编译 MPFR:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr        \
@@ -79,7 +79,7 @@
             --docdir=/usr/share/doc/mpfr-3.1.5</kbd>
 </pre>
         <p>
-          Compile the package and generate the HTML documentation:
+          编译软件包并生成 HTML 文档:
         </p>
         <pre class="userinput">
 <kbd class="command">make
@@ -88,21 +88,20 @@ make html</kbd>
         <div class="admon important">
           <img alt="[Important]" src="../images/important.png" />
           <h3>
-            Important
+            重要
           </h3>
           <p>
-            The test suite for MPFR in this section is considered critical.
-            Do not skip it under any circumstances.
+            本节中 MPFR 的测试套件至关重要，任何情况下都不能跳过。
           </p>
         </div>
         <p>
-          Test the results and ensure that all tests passed:
+          测试编译结果确保所有的测试都通过:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package and its documentation:
+          安装软件包和文档:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -111,24 +110,23 @@ make install-html</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-mpfr" name="contents-mpfr"></a>6.15.2. Contents of
-          MPFR
+          <a id="contents-mpfr" name="contents-mpfr"></a>6.15.2. MPFR 软件包内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Libraries:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libmpfr.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装的文件夹:</strong>
               <span class="segbody">/usr/share/doc/mpfr-3.1.5</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -145,7 +143,7 @@ make install-html</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains multiple-precision math functions
+                    包含多精度数学函数
                   </p>
                 </td>
               </tr>
