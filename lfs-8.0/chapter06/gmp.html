@@ -51,17 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The GMP package contains math libraries. These have useful
-          functions for arbitrary precision arithmetic.
+          GMP 软件包包含一些数学库。这对一些任意精度的运算很有用。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">1.3 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">59 MB</span>
             </div>
           </div>
@@ -69,20 +68,17 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.14.1. Installation of GMP
+          6.14.1. 安装 GMP
         </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            If you are building for 32-bit x86, but you have a CPU which is
-            capable of running 64-bit code <span class=
-            "emphasis"><em>and</em></span> you have specified <code class=
-            "envar">CFLAGS</code> in the environment, the configure script
-            will attempt to configure for 64-bits and fail. Avoid this by
-            invoking the configure command below with
+            如果你是在 32-bit 的 x86 系统进行编译, 但是你的 CPU 可以运行 64-bit 代码<span class=
+            "emphasis"><em>而且</em></span> 你在环境中指定了 <code class=
+            "envar">CFLAGS</code>, 配置脚本会尝试配置 64-bits 并导致失败。 用下面的命令调用配置脚本来避免这个问题
           </p>
           <pre class="userinput">
 <kbd class="command"><em class=
@@ -90,7 +86,7 @@
 </pre>
         </div>
         <p>
-          Prepare GMP for compilation:
+          准备编译 GMP :
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr    \
@@ -100,7 +96,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the new configure options:</strong>
+            <strong>新配置选项的含义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -109,7 +105,7 @@
             </dt>
             <dd>
               <p>
-                This parameter enables C++ support
+                这个参数启用 C++ 支持
               </p>
             </dd>
             <dt>
@@ -118,14 +114,13 @@
             </dt>
             <dd>
               <p>
-                This variable specifies the correct place for the
-                documentation.
+                这个变量用于指定保存文档的正确位置。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package and generate the HTML documentation:
+          编译软件包并生成 HTML 文档:
         </p>
         <pre class="userinput">
 <kbd class="command">make
@@ -134,15 +129,14 @@ make html</kbd>
         <div class="admon important">
           <img alt="[Important]" src="../images/important.png" />
           <h3>
-            Important
+            重要
           </h3>
           <p>
-            The test suite for GMP in this section is considered critical. Do
-            not skip it under any circumstances.
+            本章节 GMP 的测试套件至关重要。 任何情况下都不能跳过。
           </p>
         </div>
         <p>
-          Test the results:
+          测试结果:
         </p>
         <pre class="userinput">
 <kbd class="command">make check 2&gt;&amp;1 | tee gmp-check-log</kbd>
@@ -150,28 +144,23 @@ make html</kbd>
         <div class="admon caution">
           <img alt="[Caution]" src="../images/caution.png" />
           <h3>
-            Caution
+            警告
           </h3>
           <p>
-            The code in gmp is highly optimized for the processor where it is
-            built. Occasionally, the code that detects the processor
-            misidentifies the system capabilities and there will be errors in
-            the tests or other applications using the gmp libraries with the
-            message "Illegal instruction". In this case, gmp should be
-            reconfigured with the option --build=x86_64-unknown-linux-gnu and
-            rebuilt.
+            gmp 的代码已近针对构建的处理器进行高度优化。偶尔, 当代码检测到处理器不能识别
+            系统测试就会出错或者其他使用 gmp 库的程序出现错误消息 "Illegal instruction"。
+            这种情况下, gmp 应该使用选项 --build=x86_64-unknown-linux-gnu 进行重新配置和构建。
           </p>
         </div>
         <p>
-          Ensure that all 190 tests in the test suite passed. Check the
-          results by issuing the following command:
+          确保测试套件中的190个测试全部通过。 使用下面的命令查看测试结果:
         </p>
         <pre class="userinput">
 <kbd class=
 "command">awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log</kbd>
 </pre>
         <p>
-          Install the package and its documentation:
+          安装包和文档:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
@@ -180,24 +169,23 @@ make install-html</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gmp" name="contents-gmp"></a>6.14.2. Contents of
-          GMP
+          <a id="contents-gmp" name="contents-gmp"></a>6.14.2. GMP 内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Libraries:</strong>
-              <span class="segbody">libgmp.so and libgmpxx.so</span>
+              <strong class="segtitle">安装的库:</strong>
+              <span class="segbody">libgmp.so 和 libgmpxx.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装的文件夹:</strong>
               <span class="segbody">/usr/share/doc/gmp-6.1.2</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -214,7 +202,7 @@ make install-html</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains precision math functions
+                    包括精度数学函数
                   </p>
                 </td>
               </tr>
@@ -227,7 +215,7 @@ make install-html</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains C++ precision math functions
+                    包括 C++ 精度数学函数
                   </p>
                 </td>
               </tr>
