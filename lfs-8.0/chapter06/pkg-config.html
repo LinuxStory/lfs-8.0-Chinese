@@ -51,18 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The pkg-config package contains a tool for passing the include path
-          and/or library paths to build tools during the configure and make
-          file execution.
+          pkg-config 软件包包含一个在配置和 make 文件运行时把 include 路径和库路径传递给编译工具的工具。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">28 MB</span>
             </div>
           </div>
@@ -70,10 +68,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.19.1. Installation of Pkg-config
+          6.19.1. 安装 Pkg-config
         </h2>
         <p>
-          Prepare Pkg-config for compilation:
+          准备编译 Pkg-config:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr              \
@@ -84,7 +82,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the new configure options:</strong>
+            <strong>新配置选项的含义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -93,8 +91,7 @@
             </dt>
             <dd>
               <p>
-                This will allow pkg-config to use its internal version of
-                Glib because an external version is not available in LFS.
+                这会让 pkg-config 使用它自己内部版本的 Glib，因为在 LFS 中没有可用的外部版本。
               </p>
             </dd>
             <dt>
@@ -103,8 +100,7 @@
             </dt>
             <dd>
               <p>
-                This option prevents the build system from using compiler
-                flags which cause build failure when building with GCC 6.
+                这个选项防止编译系统使用会导致 GCC 6 编译失败的编译器选项。
               </p>
             </dd>
             <dt>
@@ -113,26 +109,25 @@
             </dt>
             <dd>
               <p>
-                This option disables the creation of an undesired hard link
-                to the pkg-config program.
+                这个选项取消创建到 pkg-config 程序的不必要的硬链接。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试编译结果，执行下面的命令:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -141,23 +136,23 @@
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-pkgconfig" name="contents-pkgconfig"></a>6.19.2.
-          Contents of Pkg-config
+          Pkg-config 软件包内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed program:</strong>
+              <strong class="segtitle">安装的软件:</strong>
               <span class="segbody">pkg-config</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装目录:</strong>
               <span class="segbody">/usr/share/doc/pkg-config-0.29.1</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -175,8 +170,7 @@
                 </td>
                 <td>
                   <p>
-                    returns meta information for the specified library or
-                    package
+                    返回指定库或软件包的元信息
                   </p>
                 </td>
               </tr>
