@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      7.4.&nbsp;Managing Devices
+      7.4. 管理设备
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,93 +19,62 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;7.&nbsp;System Configuration
+        第七章 系统配置
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="udev.html" title=
-          "Overview of Device and Module Handling">Prev</a>
+          "设备及模块管理综述">上一页</a>
           <p>
-            Overview of Device and Module Handling
+            设备及模块管理综述
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="network.html" title=
-          "General Network Configuration">Next</a>
+          "通用网络配置">下一页</a>
           <p>
-            General Network Configuration
+            通用网络配置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-scripts-symlinks" name="ch-scripts-symlinks"></a>7.4.
-        Managing Devices
+        <a id="ch-scripts-symlinks" name="ch-scripts-symlinks"></a>7.4. 管理设备
       </h1>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.4.1. Network Devices
+          7.4.1. 网络设备
         </h2>
-        <p>
-          Udev, by default, names network devices according to Firmware/BIOS
-          data or physical characteristics like the bus, slot, or MAC
-          address. The purpose of this naming convention is to ensure that
-          network devices are named consistently and not based on the time
-          the network card was discovered. For example, on a computer having
-          two network cards made by Intel and Realtek, the network card
-          manufactured by Intel may become eth0 and the Realtek card becomes
-          eth1. In some cases, after a reboot the cards get renumbered the
-          other way around.
+        <p>默认情况下，Udev 根据固件/BIOS 数据或总线、插槽、MAC 地址等物理特性来命名网络设备。此命名约定的目的是确保网络设备的名称一致，而不是基于网卡发现的时间。例如，在有分别由 Intel 和 Realtek 制造的两个网卡的计算机上，由 Intel 制造的网卡可能变成 eth0，同时 Realtek 制造的网卡变成 eth1。在某些情况下，重新启动后，网卡会重新以相反的顺序编号。
         </p>
-        <p>
-          In the new naming scheme, typical network device names would then
-          be something like enp5s0 or wlp3s0. If this naming convention is
-          not desired, the traditional naming scheme or a custom scheme can
-          be implemented.
+        <p>在新的命名方案中，典型的网络设备名称将类似于 enp5s0 或 wlp3s0。如果不需要这个命名约定，那么可以实现传统的命名方案或自定义方案。
         </p>
         <div class="sect3">
           <h3 class="sect3">
-            7.4.1.1. Disabling Persistent Naming on the Kernel Command Line
+            7.4.1.1. 禁用内核命令行上的持久性命名
           </h3>
-          <p>
-            The traditional naming scheme using eth0, eth1, etc can be
-            restored by adding <strong class=
-            "userinput"><code>net.ifnames=0</code></strong> on the kernel
-            command line. This is most appropriate for those systems that
-            have only one ethernet device of the same type. Laptops often
-            have multiple ethernet connections that are named eth0 and wlan0
-            and are also candidates for this method. The command line is
-            passed in the GRUB configuration file. See <a class="xref" href=
-            "../chapter08/grub.html#grub-cfg" title=
-            "8.4.4.&nbsp;Creating the GRUB Configuration File">Section&nbsp;8.4.4,
-            &ldquo;Creating the GRUB Configuration File&rdquo;</a>.
+          <p>通过在内核命令行中添加 <strong class="userinput"><code>net.ifnames=0</code></strong> 可以恢复使用 eth0，eth1 等的传统命名方案。这对于只有同一类型的以太网设备的系统最为合适。笔记本电脑通常有多个以太网连接，名称为 eth0 和 wlan0，也适合此方法。命令行在 GRUB 配置文件中传递。请参见 <a class="xref" href="../chapter08/grub.html#grub-cfg" title="8.4.4 &ldquo;创建 GRUB 配置文件&rdquo;">8.4.4 &ldquo;创建 GRUB 配置文件&rdquo;</a>。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.4.1.2. Creating Custom Udev Rules
+            7.4.1.2. 创建自定义 Udev 规则
           </h3>
-          <p>
-            The naming scheme can be customized by creating custom Udev
-            rules. A script has been included that generates the initial
-            rules. Generate these rules by running:
+          <p>可以通过创建自定义 Udev 规则来自定义命名方案。目前已经存在生成初始规则的脚本，可以通过运行以下命令生成这些规则：
           </p>
           <pre class="install">
 <kbd class="command">bash /lib/udev/init-net-rules.sh</kbd>
 </pre>
-          <p>
-            Now, inspect the <code class=
-            "filename">/etc/udev/rules.d/70-persistent-net.rules</code> file,
-            to find out which name was assigned to which network device:
+          <p>现在，检查 <code class="filename">/etc/udev/rules.d/70-persistent-net.rules</code> 文件，找出分配给网络设备的名称：
           </p>
           <pre class="userinput">
 <kbd class="command">cat /etc/udev/rules.d/70-persistent-net.rules</kbd>
@@ -113,180 +82,90 @@
           <div class="admon note">
             <img alt="[Note]" src="../images/note.png" />
             <h3>
-              Note
+              注意
             </h3>
-            <p>
-              In some cases such as when MAC addresess have been assigned to
-              a network card manually or in a virtual environment such as
-              Qemu or Xen, the network rules file may not have been generated
-              because addresses are not consistently assigned. In these
-              cases, this method cannot be used.
+            <p>在某些情况下，例如当 MAC 地址已经手动分配给网卡或虚拟环境（如 Qemu 或 Xen）时，网络规则文件可能因为地址未被一致地分配的原因未被生成。在这种情况下无法使用此方法。
             </p>
           </div>
-          <p>
-            The file begins with a comment block followed by two lines for
-            each NIC. The first line for each NIC is a commented description
-            showing its hardware IDs (e.g. its PCI vendor and device IDs, if
-            it's a PCI card), along with its driver in parentheses, if the
-            driver can be found. Neither the hardware ID nor the driver is
-            used to determine which name to give an interface; this
-            information is only for reference. The second line is the Udev
-            rule that matches this NIC and actually assigns it a name.
+          <p>该文件以注释块开始，之后，每个 NIC 有两行相关的内容，其中第一行是显示其硬件 ID 的注释描述（例如，如果它是 PCI 卡，则是其 PCI 供应商和设备 ID），以及在括号中显示其驱动程序（如果可以找到驱动程序的话）。硬件 ID 和驱动程序都不用来确定接口的名称; 此信息仅供参考。第二行是匹配此 NIC 的 Udev 规则，实际上为其分配了名称。
           </p>
-          <p>
-            All Udev rules are made up of several keys, separated by commas
-            and optional whitespace. This rule's keys and an explanation of
-            each of them are as follows:
+          <p>所有 Udev 规则由若干键值组成，用逗号和可选的空格分隔。此规则的键值和其解释分别如下：
           </p>
           <div class="itemizedlist">
             <ul>
               <li class="listitem">
                 <p>
-                  <code class="literal">SUBSYSTEM=="net"</code> - This tells
-                  Udev to ignore devices that are not network cards.
+                  <code class="literal">SUBSYSTEM=="net"</code> - 告诉 Udev 忽略不是网卡的设备。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  <code class="literal">ACTION=="add"</code> - This tells
-                  Udev to ignore this rule for a uevent that isn't an add
-                  ("remove" and "change" uevents also happen, but don't need
-                  to rename network interfaces).
+                  <code class="literal">ACTION=="add"</code> - 告诉 Udev 忽略不是 "add" 的 uevent 的规则（"remove" 和 "change" 的 uevents 也会出现，但不需要重命名网络接口）。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  <code class="literal">DRIVERS=="?*"</code> - This exists so
-                  that Udev will ignore VLAN or bridge sub-interfaces
-                  (because these sub-interfaces do not have drivers). These
-                  sub-interfaces are skipped because the name that would be
-                  assigned would collide with their parent devices.
+                  <code class="literal">DRIVERS=="?*"</code> - 使 Udev 忽略 VLAN 或网桥子接口（因为这些子接口没有驱动程序）。由于将被分配的名称将与其父设备相冲突，这些子接口将被跳过。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  <code class="literal">ATTR{address}</code> - The value of
-                  this key is the NIC's MAC address.
+                  <code class="literal">ATTR{address}</code> - 该键值为 NIC 的 MAC 地址。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  <code class="literal">ATTR{type}=="1"</code> - This ensures
-                  the rule only matches the primary interface in the case of
-                  certain wireless drivers, which create multiple virtual
-                  interfaces. The secondary interfaces are skipped for the
-                  same reason that VLAN and bridge sub-interfaces are
-                  skipped: there would be a name collision otherwise.
+                  <code class="literal">ATTR{type}=="1"</code> - 确保在某些无线驱动程序的情况下（这种情况会创建多个虚拟接口），该规则仅与主接口相匹配。因为与跳过 VLAN 和网桥子接口相同的原因（否则会出现名称冲突），跳过辅助接口。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  <code class="literal">NAME</code> - The value of this key
-                  is the name that Udev will assign to this interface.
+                  <code class="literal">NAME</code> - 该键值为 Udev 将分配给此接口的名称。
                 </p>
               </li>
             </ul>
           </div>
           <p>
-            The value of <code class="literal">NAME</code> is the important
-            part. Make sure you know which name has been assigned to each of
-            your network cards before proceeding, and be sure to use that
-            <code class="literal">NAME</code> value when creating your
-            configuration files below.
+             <code class="literal">NAME</code> 的键值是重要的组成部分。确保在继续之前知道分配给每个网卡的名称，并在创建配置文件时确保使用该 <code class="literal">NAME</code> 键值。
           </p>
         </div>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.4.2. CD-ROM symlinks
+          7.4.2. CD-ROM 符号链接
         </h2>
         <p>
-          Some software that you may want to install later (e.g., various
-          media players) expect the <code class="filename">/dev/cdrom</code>
-          and <code class="filename">/dev/dvd</code> symlinks to exist, and
-          to point to a CD-ROM or DVD-ROM device. Also, it may be convenient
-          to put references to those symlinks into <code class=
-          "filename">/etc/fstab</code>. Udev comes with a script that will
-          generate rules files to create these symlinks for you, depending on
-          the capabilities of each device, but you need to decide which of
-          two modes of operation you wish to have the script use.
+          之后可能要安装的某些软件（例如各种媒体播放器）需要 <code class="filename">/dev/cdrom</code> 和 <code class="filename">/dev/dvd</code> 符号链接存在并指向 CD-ROM 或 DVD-ROM 设备。将这些符号链接的引用放入 <code class="filename">/etc/fstab</code> 可能很方便。Udev 附带一个脚本，它会根据每个设备的功能生成规则文件来创建这些符号链接，但是需要确定使用脚本的两种操作模式。
         </p>
         <p>
-          First, the script can operate in <span class=
-          "quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>
-          mode (used by default for USB and FireWire devices), where the
-          rules it creates depend on the physical path to the CD or DVD
-          device. Second, it can operate in <span class=
-          "quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> mode
-          (default for IDE and SCSI devices), where the rules it creates
-          depend on identification strings stored in the CD or DVD device
-          itself. The path is determined by Udev's <span class=
-          "command"><strong>path_id</strong></span> script, and the
-          identification strings are read from the hardware by its
-          <span class="command"><strong>ata_id</strong></span> or
-          <span class="command"><strong>scsi_id</strong></span> programs,
-          depending on which type of device you have.
+          首先，脚本可以以 <span class="quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span> 模式运行（默认情况下用于 USB 和 FireWire 设备），其中创建的规则取决于 CD 或 DVD 设备的物理路径。其次，它可以以 <span class="quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> 模式运行（IDE 和 SCSI 设备默认），其中创建的规则取决于存储在 CD 或 DVD 设备本身中的标识字符串。该路径由 Udev 的 <span class="command"><strong>path_id</strong></span> 脚本确定，并且通过其 <span class="command"><strong>ata_id</strong></span> 或 <span class="command"><strong>scsi_id</strong></span> 程序从硬件中读取标识字符串，具体取决于拥有的设备类型。
         </p>
         <p>
-          There are advantages to each approach; the correct approach to use
-          will depend on what kinds of device changes may happen. If you
-          expect the physical path to the device (that is, the ports and/or
-          slots that it plugs into) to change, for example because you plan
-          on moving the drive to a different IDE port or a different USB
-          connector, then you should use the <span class=
-          "quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> mode.
-          On the other hand, if you expect the device's identification to
-          change, for example because it may die, and you would replace it
-          with a different device with the same capabilities and which is
-          plugged into the same connectors, then you should use the
-          <span class="quote">&ldquo;<span class=
-          "quote">by-path</span>&rdquo;</span> mode.
+          每种方法都有自己的优势; 使用方法的正确与否取决于设备可能发生什么样的更改。如果希望设备的物理路径（即插入的端口和/或插槽）可以更改，例如计划将驱动器移动到其他 IDE 端口或不同的 USB连接器，那么应该使用 <span class="quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> 模式。另一方面，如果希望设备的标识可以更改，例如设备可能会死机，之后将其替换为具有相同功能的其他设备，并将其插入相同的连接器，那么应该使用 <span class="quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span> 模式。
         </p>
         <p>
-          If either type of change is possible with your drive, then choose a
-          mode based on the type of change you expect to happen more often.
+          如果驱动器两种情况都有可能发生，那么请根据预期发生更多的情况选择一种模式。
         </p>
         <div class="admon important">
           <img alt="[Important]" src="../images/important.png" />
           <h3>
-            Important
+            重要
           </h3>
           <p>
-            External devices (for example, a USB-connected CD drive) should
-            not use by-path persistence, because each time the device is
-            plugged into a new external port, its physical path will change.
-            All externally-connected devices will have this problem if you
-            write Udev rules to recognize them by their physical path; the
-            problem is not limited to CD and DVD drives.
+            外部设备（例如 USB 连接的 CD 驱动器）不应使用 <span class="quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span> 模式，因为每次将设备插入新的外部端口时，其物理路径将发生变化。如果写入 Udev 规则以通过其物理路径识别它们，那么所有外部连接的设备都将出现此问题; 该问题不仅限于 CD 和 DVD 驱动器。
           </p>
         </div>
         <p>
-          If you wish to see the values that the Udev scripts will use, then
-          for the appropriate CD-ROM device, find the corresponding directory
-          under <code class="filename">/sys</code> (e.g., this can be
-          <code class="filename">/sys/block/hdd</code>) and run a command
-          similar to the following:
+          如果希望知道 Udev 脚本将使用的键值，那么对于相应的 CD-ROM 设备，请在 <code class="filename">/sys</code> 下找到相应的目录（例如 <code class="filename">/sys/block/hdd</code>），并运行类似于以下的命令：
         </p>
         <pre class="userinput">
 <kbd class="command">udevadm test /sys/block/hdd</kbd>
 </pre>
         <p>
-          Look at the lines containing the output of various *_id programs.
-          The <span class="quote">&ldquo;<span class=
-          "quote">by-id</span>&rdquo;</span> mode will use the ID_SERIAL
-          value if it exists and is not empty, otherwise it will use a
-          combination of ID_MODEL and ID_REVISION. The <span class=
-          "quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>
-          mode will use the ID_PATH value.
+          观察包含各种 *_id 程序的输出行的内容。<span class="quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> 模式将使用 ID_SERIAL 值（如果它存在且不为空），否则将使用 ID_MODEL 和 ID_REVISION 的组合。<span class="quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>模式将使用 ID_PATH 值。
         </p>
         <p>
-          If the default mode is not suitable for your situation, then the
-          following modification can be made to the <code class=
-          "filename">/etc/udev/rules.d/83-cdrom-symlinks.rules</code> file,
-          as follows (where <em class="replaceable"><code>mode</code></em> is
-          one of <span class="quote">&ldquo;<span class=
-          "quote">by-id</span>&rdquo;</span> or <span class=
-          "quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span>):
+          如果默认模式不适合您的情况，则可以对 <code class="filename">/etc/udev/rules.d/83-cdrom-symlinks.rules</code> 文件进行修改，如下所示（其中 <em class="replaceable"><code>mode</code></em> 为 <span class="quote">&ldquo;<span class="quote">by-id</span>&rdquo;</span> 或 <span class="quote">&ldquo;<span class="quote">by-path</span>&rdquo;</span> 二者之一）：
         </p>
         <pre class="userinput">
 <kbd class="command">sed -i -e 's/"write_cd_rules"/"write_cd_rules <em class=
@@ -294,65 +173,28 @@
     /etc/udev/rules.d/83-cdrom-symlinks.rules</kbd>
 </pre>
         <p>
-          Note that it is not necessary to create the rules files or symlinks
-          at this time, because you have bind-mounted the host's <code class=
-          "filename">/dev</code> directory into the LFS system, and we assume
-          the symlinks exist on the host. The rules and symlinks will be
-          created the first time you boot your LFS system.
+          请注意，此时不需要创建规则文件或符号链接，因为您已将主机的 <code class="filename">/dev</code> 目录绑定到 LFS 系统中，同时我们假设主机上存在符号链接。首次引导 LFS 系统时，将创建规则和符号链接。
         </p>
         <p>
-          However, if you have multiple CD-ROM devices, then the symlinks
-          generated at that time may point to different devices than they
-          point to on your host, because devices are not discovered in a
-          predictable order. The assignments created when you first boot the
-          LFS system will be stable, so this is only an issue if you need the
-          symlinks on both systems to point to the same device. If you need
-          that, then inspect (and possibly edit) the generated <code class=
-          "filename">/etc/udev/rules.d/70-persistent-cd.rules</code> file
-          after booting, to make sure the assigned symlinks match what you
-          need.
+          但是，如果您有多个 CD-ROM 设备，那么当时生成的符号链接可能指向与主机上已指向设备不同的设备，因为无法预测设备发现的顺序。首次启动 LFS 系统时创建的分配将是稳定的，因此，此问题仅出现在需要两个系统的符号链接指向同一设备的情况下。如果需要，请在启动后检查（可能需要编辑）生成的 <code class="filename">/etc/udev/rules.d/70-persistent-cd.rules</code> 文件，以确保所分配的符号链接符合您所需要的。
         </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.4.3. Dealing with duplicate devices
+          7.4.3. 重复设备的处理
         </h2>
         <p>
-          As explained in <a class="xref" href="udev.html" title=
-          "7.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;7.3,
-          &ldquo;Overview of Device and Module Handling&rdquo;</a>, the order
-          in which devices with the same function appear in <code class=
-          "filename">/dev</code> is essentially random. E.g., if you have a
-          USB web camera and a TV tuner, sometimes <code class=
-          "filename">/dev/video0</code> refers to the camera and <code class=
-          "filename">/dev/video1</code> refers to the tuner, and sometimes
-          after a reboot the order changes to the opposite one. For all
-          classes of hardware except sound cards and network cards, this is
-          fixable by creating Udev rules for custom persistent symlinks. The
-          case of network cards is covered separately in <a class="xref"
-          href="network.html" title=
-          "7.5.&nbsp;General Network Configuration">Section&nbsp;7.5,
-          &ldquo;General Network Configuration&rdquo;</a>, and sound card
-          configuration can be found in <a class="ulink" href=
-          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/devices.html">
-          BLFS</a>.
+          如 <a class="xref" href="udev.html" title=
+          "7.3 &ldquo;设备及模块管理综述&rdquo;">7.3 &ldquo;设备及模块管理综述&rdquo;</a> 中所述，<code class="filename">/dev</code> 中显示的具有相同功能的设备的顺序基本上是随机的。例如，如果您有 USB 网络摄像机和电视调谐器，有时 <code class="filename">/dev/video0</code> 指摄像机同时 <code class="filename">/dev/video1</code> 指调谐器，有时在重新启动后，顺序变为相反的。对于除了声卡和网卡的所有类别的硬件，可以通过自定义持久性符号链接创建 Udev 规则来修复。网卡的情况将在 <a class="xref" href="network.html" title="7.5 &ldquo;通用网络配置&rdquo;"> 7.5 &ldquo;通用网络配置&rdquo;</a> 中谈到，声卡配置可以在 <a class="ulink" href="http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/devices.html">BLFS</a> 中找到。
         </p>
         <p>
-          For each of your devices that is likely to have this problem (even
-          if the problem doesn't exist in your current Linux distribution),
-          find the corresponding directory under <code class=
-          "filename">/sys/class</code> or <code class=
-          "filename">/sys/block</code>. For video devices, this may be
-          <code class="filename">/sys/class/video4linux/video<em class=
-          "replaceable"><code>X</code></em></code>. Figure out the attributes
-          that identify the device uniquely (usually, vendor and product IDs
-          and/or serial numbers work):
+          对于每个可能出现此问题的设备（即使您当前的 Linux 发行版中不存在问题），请在 <code class="filename">/sys/class</code> 或 <code class="filename">/sys/block</code> 下找到相应的目录。对于视频设备，目录可能是 <code class="filename">/sys/class/video4linux/video<em class="replaceable"><code>X</code></em></code>。找出能够唯一标识设备的属性（通常，供应商和产品 ID 和/或序列号是有用的）：
         </p>
         <pre class="userinput">
 <kbd class="command">udevadm info -a -p /sys/class/video4linux/video0</kbd>
 </pre>
         <p>
-          Then write rules that create the symlinks, e.g.:
+          然后编写创建符号链接的规则，例如：
         </p>
         <pre class="userinput">
 <kbd class=
@@ -367,13 +209,7 @@ KERNEL=="video*", ATTRS{device}=="0x036f", ATTRS{vendor}=="0x109e", \
 EOF</kbd>
 </pre>
         <p>
-          The result is that <code class="filename">/dev/video0</code> and
-          <code class="filename">/dev/video1</code> devices still refer
-          randomly to the tuner and the web camera (and thus should never be
-          used directly), but there are symlinks <code class=
-          "filename">/dev/tvtuner</code> and <code class=
-          "filename">/dev/webcam</code> that always point to the correct
-          device.
+          以上操作的结果是 <code class="filename">/dev/video0</code> 和 <code class="filename">/dev/video1</code> 设备仍然可能随机指向到调谐器和网络摄像机（因此不应该直接使用），但是符号链接 <code class="filename">/dev/tvtuner</code> 与 <code class="filename">/dev/webcam</code> 总是指向到正确的设备。
         </p>
       </div>
     </div>
@@ -381,25 +217,25 @@ EOF</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="udev.html" title=
-          "Overview of Device and Module Handling">Prev</a>
+          "设备及模块管理综述">上一页</a>
           <p>
-            Overview of Device and Module Handling
+            设备及模块管理综述
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="network.html" title=
-          "General Network Configuration">Next</a>
+          "通用网络配置">下一页</a>
           <p>
-            General Network Configuration
+            通用网络配置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
