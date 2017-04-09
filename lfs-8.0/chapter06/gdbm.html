@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.36.&nbsp;GDBM-1.12
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="libtool.html" title="Libtool-2.4.6">Prev</a>
+          <a accesskey="p" href="libtool.html" title="Libtool-2.4.6">上一页</a>
           <p>
             Libtool-2.4.6
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">Next</a>
+          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">下一页</a>
           <p>
             Gperf-3.0.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -50,20 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The GDBM package contains the GNU Database Manager. It is a library
-          of database functions that use extensible hashing and work similar
-          to the standard UNIX dbm. The library provides primitives for
-          storing key/data pairs, searching and retrieving the data by its
-          key and deleting a key along with its data.
+          GDBM 软件包，包含了 GNU 数据库管理器。它是一个数据库函数库，使用可扩展散列，工作方法类似于标准 UNIX 数据库管理器。该库提供了存储键/数据对、根据键搜索和检索数据、删除键和数据的原语。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间：</strong>
               <span class="segbody">0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">9 MB</span>
             </div>
           </div>
@@ -71,10 +67,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.36.1. Installation of GDBM
+          6.36.1. 安装 GDBM
         </h2>
         <p>
-          Prepare GDBM for compilation:
+          准备编译 GDMB：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr \
@@ -83,7 +79,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure option:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -92,27 +88,25 @@
             </dt>
             <dd>
               <p>
-                This switch enables the libgdbm compatibility library to be
-                built, as some packages outside of LFS may require the older
-                DBM routines it provides.
+                此选项开启 libgdbm 兼容库的编译，因为 LFS 之外某些软件包可能需要它提供的旧的 DBM 例程。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          要测试结果，运行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -120,24 +114,23 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gdbm" name="contents-gdbm"></a>6.36.2. Contents of
-          GDBM
+          <a id="contents-gdbm" name="contents-gdbm"></a>6.36.2. GDBM 包含内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">gdbm_dump, gdbm_load, and gdbmtool</span>
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">gdbm_dump, gdbm_load, 和 gdbmtool</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
-              <span class="segbody">libgdbm.so and libgdbm_compat.so</span>
+              <strong class="segtitle">安装的库：</strong>
+              <span class="segbody">libgdbm.so 和 libgdbm_compat.so</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -155,7 +148,7 @@
                 </td>
                 <td>
                   <p>
-                    Dumps a GDBM database to a file
+                    将一个 GDBM 数据库导出为一个文件
                   </p>
                 </td>
               </tr>
@@ -169,7 +162,7 @@
                 </td>
                 <td>
                   <p>
-                    Recreates a GDBM database from a dump file
+                    从一个导出的文件重建一个 GDBM 数据库
                   </p>
                 </td>
               </tr>
@@ -183,7 +176,7 @@
                 </td>
                 <td>
                   <p>
-                    Tests and modifies a GDBM database
+                    测试和修改一个 GDBM 数据库
                   </p>
                 </td>
               </tr>
@@ -196,7 +189,7 @@
                 </td>
                 <td>
                   <p>
-                    Contains functions to manipulate a hashed database
+                    包含操作散列数据库的函数
                   </p>
                 </td>
               </tr>
@@ -210,7 +203,7 @@
                 </td>
                 <td>
                   <p>
-                    Compatibility library containing older DBM functions
+                    兼容库，包含旧的 DBM 函数
                   </p>
                 </td>
               </tr>
@@ -222,24 +215,24 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="libtool.html" title="Libtool-2.4.6">Prev</a>
+          <a accesskey="p" href="libtool.html" title="Libtool-2.4.6">上一页</a>
           <p>
             Libtool-2.4.6
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">Next</a>
+          <a accesskey="n" href="gperf.html" title="Gperf-3.0.4">下一页</a>
           <p>
             Gperf-3.0.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

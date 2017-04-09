@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.48.&nbsp;Procps-ng-3.3.12
     </title>
@@ -19,30 +19,30 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="gettext.html" title=
-          "Gettext-0.19.8.1">Prev</a>
+          "Gettext-0.19.8.1">上一页</a>
           <p>
             Gettext-0.19.8.1
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="e2fsprogs.html" title=
-          "E2fsprogs-1.43.4">Next</a>
+          "E2fsprogs-1.43.4">下一页</a>
           <p>
             E2fsprogs-1.43.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -53,16 +53,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Procps-ng package contains programs for monitoring processes.
+          Procps-ng 软件包包含了用于检测进程的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间:</strong>
               <span class="segbody">0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">14 MB</span>
             </div>
           </div>
@@ -70,10 +70,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.48.1. Installation of Procps-ng
+          6.48.1. Procps 安装过程-ng
         </h2>
         <p>
-          Now prepare procps-ng for compilation:
+          准备编译 procps-ng:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr                            \
@@ -85,7 +85,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义:</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -94,23 +94,22 @@
             </dt>
             <dd>
               <p>
-                This switch disables building the <span class=
-                "command"><strong>kill</strong></span> command that will be
-                installed by the Util-linux package.
+              　这个选项禁止了编译会被 Util-linux 软件包安装的 <span class=
+                "command"><strong>kill</strong></span> 命令。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          The test suite needs some custom modifications for LFS. Remove the
-          test that fails when scripting does not use a tty device. To run
-          the test suite, run the following commands:
+        　测试套件需要为 LFS 做一些定制的修改。
+        　删除当脚本没有使用一个 tty 设备会失败的测试。　
+          要运行测试套件，执行下面的命令：
         </p>
         <pre class="userinput">
 <kbd class=
@@ -118,18 +117,16 @@
 make check</kbd>
 </pre>
         <p>
-          One ps test may fail, but passes if the tests are rerun at the end
-          of Chapter 6.
+        　一个 ps 的测试可能会失败，不过如果在第六章结束的时候测试会重新运行的话就忽略它吧。
         </p>
         <p>
-          Install the package:
+          安装软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Finally, move essential libraries to a location that can be found
-          if <code class="filename">/usr</code> is not mounted.
+        　最后，将必要的库移动到一个即使 <code class="filename">/usr</code> 没有挂载也可以发现的地方。
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/lib/libprocps.so.* /lib
@@ -144,17 +141,17 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">free, pgrep, pidof, pkill, pmap, ps,
               pwdx, slabtop, sysctl, tload, top, uptime, vmstat, w, and
               watch</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库:</strong>
               <span class="segbody">libprocps.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录:</strong>
               <span class="segbody">/usr/include/proc and
               /usr/share/doc/procps-ng-3.3.12</span>
             </div>
@@ -162,7 +159,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -180,8 +177,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the amount of free and used memory (both physical
-                    and swap memory) in the system
+                  　报告系统可用和已用内存（包括物理内存与交换分区）的数量
                   </p>
                 </td>
               </tr>
@@ -195,8 +191,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Looks up processes based on their name and other
-                    attributes
+                  　通过进程的名字和其他属性查找进程
                   </p>
                 </td>
               </tr>
@@ -210,7 +205,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the PIDs of the given programs
+                  　报告指定程序的 PID
                   </p>
                 </td>
               </tr>
@@ -224,8 +219,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Signals processes based on their name and other
-                    attributes
+                    　通过进程的名字和其他属性向进程发送信号
                   </p>
                 </td>
               </tr>
@@ -239,7 +233,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the memory map of the given process
+                  　报告指定进程的内存映像
                   </p>
                 </td>
               </tr>
@@ -252,7 +246,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists the current running processes
+                  　列出正在运行的进程
                   </p>
                 </td>
               </tr>
@@ -266,7 +260,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the current working directory of a process
+                  　报告一个进程的当前工作目录
                   </p>
                 </td>
               </tr>
@@ -280,8 +274,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays detailed kernel slap cache information in real
-                    time
+                  　实时显示详细的内核 slap 缓存信息
                   </p>
                 </td>
               </tr>
@@ -295,7 +288,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Modifies kernel parameters at run time
+                  　在运行时修改内核参数
                   </p>
                 </td>
               </tr>
@@ -309,7 +302,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Prints a graph of the current system load average
+                  　打印出当前系统平均负载的图
                   </p>
                 </td>
               </tr>
@@ -322,9 +315,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays a list of the most CPU intensive processes; it
-                    provides an ongoing look at processor activity in real
-                    time
+                  　显示一个使用 CPU 最密集的进程的列表; 它提供了实时显示处理器活动的方法
                   </p>
                 </td>
               </tr>
@@ -338,8 +329,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports how long the system has been running, how many
-                    users are logged on, and the system load averages
+                  　报告系统已经运行了多久，有多少用户已登录，和系统的平均负载
                   </p>
                 </td>
               </tr>
@@ -353,9 +343,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports virtual memory statistics, giving information
-                    about processes, memory, paging, block Input/Output (IO),
-                    traps, and CPU activity
+                  　报告虚拟内存统计，提供处理器，内存，页面，块输入/输出, traps 和 CPU 活动的信息
                   </p>
                 </td>
               </tr>
@@ -368,8 +356,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows which users are currently logged on, where, and
-                    since when
+                  　显示哪些用户当前已登录，他们来自哪里以及从何时开始登录
                   </p>
                 </td>
               </tr>
@@ -383,9 +370,8 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs a given command repeatedly, displaying the first
-                    screen-full of its output; this allows a user to watch
-                    the output change over time
+                  　反复的执行一个指定命令，满屏显示它的输出；这可以让用户观察
+                  　程序输出随时间的变化
                   </p>
                 </td>
               </tr>
@@ -398,8 +384,7 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains the functions used by most programs in this
-                    package
+                  　包含了这个软件包大多数程序使用的函数
                   </p>
                 </td>
               </tr>
@@ -412,25 +397,25 @@ ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="gettext.html" title=
-          "Gettext-0.19.8.1">Prev</a>
+          "Gettext-0.19.8.1">上一页</a>
           <p>
             Gettext-0.19.8.1
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="e2fsprogs.html" title=
-          "E2fsprogs-1.43.4">Next</a>
+          "E2fsprogs-1.43.4">下一页</a>
           <p>
             E2fsprogs-1.43.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

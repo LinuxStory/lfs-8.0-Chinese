@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.26.&nbsp;Psmisc-22.21
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="shadow.html" title="Shadow-4.4">Prev</a>
+          <a accesskey="p" href="shadow.html" title="Shadow-4.4">上一页</a>
           <p>
             Shadow-4.4
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="iana-etc.html" title=
-          "Iana-Etc-2.30">Next</a>
+          "Iana-Etc-2.30">下一页</a>
           <p>
             Iana-Etc-2.30
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -52,17 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Psmisc package contains programs for displaying information
-          about running processes.
+          Psmisc 软件包包含用于显示进程信息的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计构建时间:</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间:</strong>
               <span class="segbody">4.0 MB</span>
             </div>
           </div>
@@ -70,34 +69,33 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.26.1. Installation of Psmisc
+          6.26.1. 安装 Psmisc
         </h2>
         <p>
-          Prepare Psmisc for compilation:
+          准备编译 Psmisc 软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not come with a test suite.
+          该软件包不含测试套件。
         </p>
         <p>
-          Install the package:
+          安装该软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Finally, move the <span class=
-          "command"><strong>killall</strong></span> and <span class=
-          "command"><strong>fuser</strong></span> programs to the location
-          specified by the FHS:
+          最终，将<span class=
+          "command"><strong>killall</strong></span> 和 <span class=
+          "command"><strong>fuser</strong></span> 程序移至 FHS 指定的位置:
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/bin/fuser   /bin
@@ -106,13 +104,12 @@ mv -v /usr/bin/killall /bin</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-psmisc" name="contents-psmisc"></a>6.26.2. Contents
-          of Psmisc
+          <a id="contents-psmisc" name="contents-psmisc"></a>6.26.2. Psmisc 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序:</strong>
               <span class="segbody">fuser, killall, peekfd, prtstat, pstree,
               and pstree.x11 (link to pstree)</span>
             </div>
@@ -120,7 +117,7 @@ mv -v /usr/bin/killall /bin</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -138,8 +135,7 @@ mv -v /usr/bin/killall /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the Process IDs (PIDs) of processes that use the
-                    given files or file systems
+                    报告正在使用特定文件或者文件系统的进程ID(PIDs)
                   </p>
                 </td>
               </tr>
@@ -153,8 +149,7 @@ mv -v /usr/bin/killall /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    Kills processes by name; it sends a signal to all
-                    processes running any of the given commands
+                    杀死指定名称的进程; 它向所有名称相符的进程发送一个信号
                   </p>
                 </td>
               </tr>
@@ -168,8 +163,7 @@ mv -v /usr/bin/killall /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    Peek at file descriptors of a running process, given its
-                    PID
+                    查看运行过程的文件描述符，给出了它的PID
                   </p>
                 </td>
               </tr>
@@ -183,7 +177,7 @@ mv -v /usr/bin/killall /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    Prints information about a process
+                    打印进程信息
                   </p>
                 </td>
               </tr>
@@ -197,7 +191,7 @@ mv -v /usr/bin/killall /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays running processes as a tree
+                    以树形结构显示正在运行的进程
                   </p>
                 </td>
               </tr>
@@ -211,9 +205,8 @@ mv -v /usr/bin/killall /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    Same as <span class=
-                    "command"><strong>pstree</strong></span>, except that it
-                    waits for confirmation before exiting
+                    与 <span class=
+                    "command"><strong>pstree</strong></span>命令类似, 但是该命令会在退出前等待确认
                   </p>
                 </td>
               </tr>
@@ -225,25 +218,25 @@ mv -v /usr/bin/killall /bin</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="shadow.html" title="Shadow-4.4">Prev</a>
+          <a accesskey="p" href="shadow.html" title="Shadow-4.4">上一页</a>
           <p>
             Shadow-4.4
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="iana-etc.html" title=
-          "Iana-Etc-2.30">Next</a>
+          "Iana-Etc-2.30">下一页</a>
           <p>
             Iana-Etc-2.30
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.33.&nbsp;Bash-4.4
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="readline.html" title="Readline-7.0">Prev</a>
+          <a accesskey="p" href="readline.html" title="Readline-7.0">上一页</a>
           <p>
             Readline-7.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="bc.html" title="Bc-1.06.95">Next</a>
+          <a accesskey="n" href="bc.html" title="Bc-1.06.95">下一页</a>
           <p>
             Bc-1.06.95
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -50,16 +50,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Bash package contains the Bourne-Again SHell.
+          Bash 软件包，包含 Bourne-Again SHell。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间：</strong>
               <span class="segbody">1.7 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">56 MB</span>
             </div>
           </div>
@@ -67,16 +67,16 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.33.1. Installation of Bash
+          6.33.1. 安装 Bash
         </h2>
         <p>
-          Incorporate some upstream fixes:
+          合并一些上游的补丁：
         </p>
         <pre class="userinput">
 <kbd class="command">patch -Np1 -i ../bash-4.4-upstream_fixes-1.patch</kbd>
 </pre>
         <p>
-          Prepare Bash for compilation:
+          准备编译 Bash：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr                       \
@@ -86,7 +86,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the new configure option:</strong>
+            <strong>新选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -95,49 +95,41 @@
             </dt>
             <dd>
               <p>
-                This option tells Bash to use the <code class=
-                "filename">readline</code> library that is already installed
-                on the system rather than using its own readline version.
+                这个选项让 Bash 使用已安装的 <code class="filename">readline</code> 库，而不是使用它自带的版本。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Skip down to <span class="quote">&ldquo;<span class="quote">Install
-          the package</span>&rdquo;</span> if not running the test suite.
+          如果不需要运行测试套件的话，跳至<span class="quote">&ldquo;<span class="quote">安装软件包</span>&rdquo;</span>部分继续。
         </p>
         <p>
-          To prepare the tests, ensure that the <code class=
-          "systemitem">nobody</code> user can write to the sources tree:
+          如要准备测试，请确保 <code class="systemitem">nobody</code> 用户能够写入源文件树：
         </p>
         <pre class="userinput">
 <kbd class="command">chown -Rv nobody .</kbd>
 </pre>
         <p>
-          Now, run the tests as the <code class="systemitem">nobody</code>
-          user:
+          现在以 <code class="systemitem">nobody</code> 用户的身份运行测试：
         </p>
         <pre class="userinput">
 <kbd class="command">su nobody -s /bin/bash -c "PATH=$PATH make tests"</kbd>
 </pre>
         <p>
-          Install the package and move the main executable to <code class=
-          "filename">/bin</code>:
+          安装软件包，并将主要的可执行文件移至 <code class="filename">/bin</code>:
         </p>
         <pre class="userinput">
 <kbd class="command">make install
 mv -vf /usr/bin/bash /bin</kbd>
 </pre>
         <p>
-          Run the newly compiled <span class=
-          "command"><strong>bash</strong></span> program (replacing the one
-          that is currently being executed):
+          运行新编译的 <span class="command"><strong>bash</strong></span>（替换当前正在执行的那个）：
         </p>
         <pre class="userinput">
 <kbd class="command">exec /bin/bash --login +h</kbd>
@@ -145,37 +137,32 @@ mv -vf /usr/bin/bash /bin</kbd>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            The parameters used make the <span class=
-            "command"><strong>bash</strong></span> process an interactive
-            login shell and continue to disable hashing so that new programs
-            are found as they become available.
+            这些参数使 <span class="command"><strong>bash</strong></span> 运行一个交互式的登录 shell，并暂时禁用文件校验，这样新文件一旦就位就能使用了。
           </p>
         </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-bash" name="contents-bash"></a>6.33.2. Contents of
-          Bash
+          <a id="contents-bash" name="contents-bash"></a>6.33.2. Bash 包含内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">bash, bashbug, and sh (link to
-              bash)</span>
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">bash，bashbug，和 sh （链接到 bash）</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directory:</strong>
+              <strong class="segtitle">安装目录：</strong>
               <span class="segbody">/usr/share/doc/bash-4.4</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -193,10 +180,7 @@ mv -vf /usr/bin/bash /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    A widely-used command interpreter; it performs many types
-                    of expansions and substitutions on a given command line
-                    before executing it, thus making this interpreter a
-                    powerful tool
+                    一个被广泛使用的命令解释器；在执行特定命令行之前，它能够进行多种拓展和替换，这从而使之成为一个强大的工具。
                   </p>
                 </td>
               </tr>
@@ -210,9 +194,7 @@ mv -vf /usr/bin/bash /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    A shell script to help the user compose and mail standard
-                    formatted bug reports concerning <span class=
-                    "command"><strong>bash</strong></span>
+                    一个 shell 脚本，帮助用户撰写并发送标准格式的 <span class="command"><strong>bash</strong></span> 错误报告。
                   </p>
                 </td>
               </tr>
@@ -225,14 +207,7 @@ mv -vf /usr/bin/bash /bin</kbd>
                 </td>
                 <td>
                   <p>
-                    A symlink to the <span class=
-                    "command"><strong>bash</strong></span> program; when
-                    invoked as <span class=
-                    "command"><strong>sh</strong></span>, <span class=
-                    "command"><strong>bash</strong></span> tries to mimic the
-                    startup behavior of historical versions of <span class=
-                    "command"><strong>sh</strong></span> as closely as
-                    possible, while conforming to the POSIX standard as well
+                    一个链接到 <span class="command"><strong>bash</strong></span> 的符号链接；若通过 <span class="command"><strong>sh</strong></span> 调用，<span class="command"><strong>bash</strong></span> 在启动时会尽量模仿老版本 <span class="command"><strong>sh</strong></span> 的行为，以便符合 POSIX 标准。
                   </p>
                 </td>
               </tr>
@@ -244,24 +219,24 @@ mv -vf /usr/bin/bash /bin</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="readline.html" title="Readline-7.0">Prev</a>
+          <a accesskey="p" href="readline.html" title="Readline-7.0">上一页</a>
           <p>
             Readline-7.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="bc.html" title="Bc-1.06.95">Next</a>
+          <a accesskey="n" href="bc.html" title="Bc-1.06.95">下一页</a>
           <p>
             Bc-1.06.95
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
