@@ -3,9 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      7.5.&nbsp;General Network Configuration
+      7.5.&nbsp;General Network Configuration 
+      7.5.&nbsp;通用网络配置
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -21,28 +22,45 @@
       <h3>
         Chapter&nbsp;7.&nbsp;System Configuration
       </h3>
+      <h3>
+        第七章&nbsp;系统配置
+      </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="symlinks.html" title=
           "Managing Devices">Prev</a>
+          <a accesskey="p" href="symlinks.html" title=
+          "Managing Devices">上一页</a>
           <p>
             Managing Devices
+          </p>
+	  <p>
+	    设备管理
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="usage.html" title=
           "System V Bootscript Usage and Configuration">Next</a>
+          <a accesskey="n" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">下一页</a>
           <p>
             System V Bootscript Usage and Configuration
+          </p>
+	  <p>
+            System V 启动脚本用法和设置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0 ">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -50,23 +68,37 @@
       <h1 class="sect1">
         <a id="ch-scripts-network" name="ch-scripts-network"></a>7.5. General
         Network Configuration
+        <a id="ch-scripts-network" name="ch-scripts-network"></a>
+      	7.5 通用网络配置
       </h1>
       <p>
         This section only applies if a network card is to be configured.
       </p>
       <p>
+	本节内容只用于配置网卡
+      </p>
+      <p>
         If a network card will not be used, there is likely no need to create
         any configuration files relating to network cards. If that is the
-        case, you will need to remove the <code class=
+        case, you will need to remove the<code class=
         "filename">network</code> symlinks from all run-level directories
         (<code class="filename">/etc/rc.d/rc*.d</code>) after the bootscripts
         are installed in <a class="xref" href="bootscripts.html" title=
         "7.2.&nbsp;LFS-Bootscripts-20150222">Section&nbsp;7.2,
         &ldquo;LFS-Bootscripts-20150222&rdquo;</a>.
       </p>
+        如果不使用某张网卡，那么就不必为其创建任何配置文件。这种情况下，在启动脚本安装后，需要从(<code class="filename">/etc/rc.d/rc*.d</code>)中移除<code class=
+        "filename">network</code> 链接。
+        <a class="xref" href="bootscripts.html" title=
+        "7.2.&nbsp;LFS-Bootscripts-20150222">Section&nbsp;7.2,
+        &ldquo;LFS-Bootscripts-20150222&rdquo;</a>.
+      </p>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
           7.5.1. Creating Network Interface Configuration Files
+        </h2>
+        <h2 class="sect2">
+          7.5.1. 创建网络接口配置文件
         </h2>
         <p>
           Which interfaces are brought up and down by the network script
@@ -79,6 +111,17 @@
           this file are attributes to this interface, such as its IP
           address(es), subnet masks, and so forth. It is necessary that the
           stem of the filename be <span class=
+          "emphasis"><em>ifconfig</em></span>.
+        </p>
+        <p>
+	  网络接口的开启和关闭由<code class=
+          "filename">/etc/sysconfig/</code>中的网络配置脚本决定。
+          所有需要配置的接口都应当在该文件夹下有一个配置文件。
+          比如 <code class=
+          "filename">ifconfig.xyz</code>, <span class=
+          "quote">&ldquo;<span class="quote">xyz</span>&rdquo;</span> is
+          由网卡的名字决定 (e.g. eth0)。这个文件中包含网卡接口的属性，比如 IP 地址，子网掩码等。
+          文件名必须是<span class=
           "emphasis"><em>ifconfig</em></span>.
         </p>
         <div class="admon note">
@@ -97,10 +140,20 @@
             or ifconfig.eth0) or your network interface will not be
             initialized during the boot process.
           </p>
+          <p>
+	    如果未进行上一节的配置过程，Udev 会根据系统的物理特点给网卡接口命名，比如 enp2s1。
+	    如果你不确定接口的名字，你可以开机后运行<span class=
+            "command"><strong>ip link</strong></span>命令。再强调一次，ifconfig.xyz 必须对应正确的网卡接口名（比如，ifconfig.enp2s1
+	    或 ifconfig.eth0），否则，网卡接口在启动阶段将无法初始化。
+          </p>
         </div>
         <p>
           The following command creates a sample file for the <span class=
           "emphasis"><em>eth0</em></span> device with a static IP address:
+        </p>
+        <p>
+          下面创建为 <span class=
+          "emphasis"><em>eth0</em></span> 设备创建一个包含静态 IP 地址的样本配置文件。
         </p>
         <pre class="userinput">
 <kbd class="command">cd /etc/sysconfig/
@@ -119,6 +172,9 @@ EOF</kbd>
           match the proper setup.
         </p>
         <p>
+	  这些变量的值必须在每一个文件中修改以保证设置正确。
+        </p>
+        <p>
           If the <code class="envar">ONBOOT</code> variable is set to
           <span class="quote">&ldquo;<span class=
           "quote">yes</span>&rdquo;</span> the System V network script will
@@ -131,9 +187,20 @@ EOF</kbd>
           <span class="command"><strong>ifdown</strong></span> commands.
         </p>
         <p>
+          如果 <code class="envar">ONBOOT</code> 变量设置为
+          <span class="quote">&ldquo;<span class=
+          "quote">yes</span>&rdquo;</span> System V 网络脚本会在系统启动时唤醒网卡。如果设置为<span class=
+          "quote">&ldquo;<span class="quote">yes</span>&rdquo;</span>以外的值，网络脚本会忽略该网卡，也不会被唤醒。
+          网卡接口可以由 <span class="command"><strong>ifup</strong></span> 和
+          <span class="command"><strong>ifdown</strong></span> 命令手动开启或关闭。
+        </p>
+        <p>
           The <code class="envar">IFACE</code> variable defines the interface
           name, for example, eth0. It is required for all network device
           configuration files.
+        </p>
+        <p>
+          <code class="envar">IFACE</code> 决定所有网络设备配置文件所需的网卡名称，例如，enth0。
         </p>
         <p>
           The <code class="envar">SERVICE</code> variable defines the method
@@ -144,9 +211,12 @@ EOF</kbd>
           Configuration Protocol (DHCP), which is addressed in the BLFS book.
         </p>
         <p>
-          The <code class="envar">GATEWAY</code> variable should contain the
-          default gateway IP address, if one is present. If not, then comment
-          out the variable entirely.
+          <code class="envar">SERVICE</code> 变量决定获取 IP 地址的方式。
+          LFS-Bootscripts 包有一个 IP 赋值格式模块通过在<code class="filename">/lib/services/</code>
+	  文件夹中创建补充文件来提供其他 IP 赋值方法。其主要用于 BLFS 书中强调的动态主机配置协议。
+        </p>
+        <p>
+          如果有<code class="envar">GATEWAY</code> 变量，其应当包含默认网关 IP 地址，否则注释掉它。
         </p>
         <p>
           The <code class="envar">PREFIX</code> variable contains the number
@@ -161,14 +231,26 @@ EOF</kbd>
           If omitted, the PREFIX defaults to 24.
         </p>
         <p>
+          <code class="envar">PREFIX</code> 变量包含子网中使用的位。
+	  IP 地址中的每个字节有八位。如果子网掩码是 255.255.255.0 ，那么它使用前三个字节（24位）来确定网络数量。
+	  如果子网掩码是 255.255.255.240，那么它使用前 28 位。超过 24 位的前缀通常由 DSL 和 基于电缆的互联网服务提供商使用。
+	  根据你的特定子网修改<code class="envar">PREFIX</code>变量，如果变量不存在，默认值为 24。
+        </p>
+        <p>
           For more information see the <span class=
           "command"><strong>ifup</strong></span> man page.
+        </p>
+        <p>
+          了解更多详细信息可查看 <span class=
+          "command"><strong>ifup</strong></span> 命令帮助。
         </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="resolv.conf" name="resolv.conf"></a>7.5.2. Creating the
           /etc/resolv.conf File
+          <a id="resolv.conf" name="resolv.conf"></a>7.5.2. 创建 
+          /etc/resolv.conf 文件
         </h2>
         <p>
           If the system is going to be connected to the Internet, it will
@@ -179,6 +261,10 @@ EOF</kbd>
           "filename">/etc/resolv.conf</code>. Create the file by running the
           following:
         </p>
+        <p>
+	如果系统要连接到互联网，则需要通过域名服务（DNS）的名称解析方法将域名解析为 IP 地址，反之亦然。最好的办法是将从 ISP 和网络管理员手中获取的 DNS 服务器 IP 地址<code class =
+	  “filename”> /etc/resolv.conf </ code>。运行以下命令创建文件：
+	</p>
         <pre class="userinput">
 <kbd class="command">cat &gt; /etc/resolv.conf &lt;&lt; "EOF"
 <code class="literal"># Begin /etc/resolv.conf
@@ -198,6 +284,11 @@ EOF</kbd>
           the man page for resolv.conf for more details.
         </p>
         <p>
+          <code class="varname">domain</code> 语句可移除或用 
+          replaced with a <code class="varname">search</code> 语句替代。
+	  查看 resolv.conf 的帮助页面获取更多信息。
+        </p>
+        <p>
           Replace <em class="replaceable"><code>&lt;IP address of the
           nameserver&gt;</code></em> with the IP address of the DNS most
           appropriate for the setup. There will often be more than one entry
@@ -205,6 +296,12 @@ EOF</kbd>
           you only need or want one DNS server, remove the second
           <span class="emphasis"><em>nameserver</em></span> line from the
           file. The IP address may also be a router on the local network.
+        </p>
+        <p>
+          用最适合配置的 DNS IP 地址替代<em class="replaceable"><code>&lt;IP address of the
+          nameserver&gt;</code></em> 。一般多于一个入口（需要第二个服务器回馈容量）
+	  如果你只需要或只想有一个 DNS 服务器，从文件中删除
+          <span class="emphasis"><em>nameserver</em></span> 行。该 IP 也可能是本地网络中的一个路由器。 
         </p>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
@@ -214,12 +311,17 @@ EOF</kbd>
           <p>
             The Google Public IPv4 DNS addresses are 8.8.8.8 and 8.8.4.4.
           </p>
+          <p>
+	    谷歌公共 IPv4 DNS 地址是 8.8.8.8 和 8.8.4.4
+          </p>
         </div>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="ch-scripts-hostname" name="ch-scripts-hostname"></a>7.5.3.
           Configuring the system hostname
+          <a id="ch-scripts-hostname" name="ch-scripts-hostname"></a>7.5.3.
+          设置主机名
         </h2>
         <p>
           During the boot process, the file <code class=
@@ -227,8 +329,15 @@ EOF</kbd>
           system's hostname.
         </p>
         <p>
+          启动过程中 <code class=
+          "filename">/etc/hostname</code> 用于创建系统主机名。
+        </p>
+        <p>
           Create the <code class="filename">/etc/hostname</code> file and
           enter a hostname by running:
+        </p>
+        <p>
+          运行下列命令创建 <code class="filename">/etc/hostname</code> 文件：
         </p>
         <pre class="userinput">
 <kbd class="command">echo "<em class=
@@ -240,16 +349,28 @@ EOF</kbd>
           Fully Qualified Domain Name (FQDN) here. That information is put in
           the <code class="filename">/etc/hosts</code> file.
         </p>
+        <p>
+          用主机名替代这里的<em class="replaceable"><code>&lt;lfs&gt;</code></em>
+          不要在这里输入全称域名。那些信息放在
+           <code class="filename">/etc/hosts</code> 文件中。
+        </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="ch-scripts-hosts" name="ch-scripts-hosts"></a>7.5.4.
           Customizing the /etc/hosts File
         </h2>
+          <a id="ch-scripts-hosts" name="ch-scripts-hosts"></a>7.5.4.
+	  自定义 /etc/hosts 文件 
+        </h2>
         <p>
           Decide on the IP address, fully-qualified domain name (FQDN), and
           possible aliases for use in the <code class=
           "filename">/etc/hosts</code> file. The syntax is:
+        </p>
+        <p>
+          <code class=
+          "filename">/etc/hosts</code>用于确定 IP 的全称域名和可能用到的别名。语法如下:
         </p>
         <pre class="screen">
 <code class="literal">IP_address myhost.example.org aliases</code>
@@ -261,8 +382,12 @@ EOF</kbd>
           address is in the private network IP address range. Valid ranges
           are:
         </p>
+        <p>
+	  除非这台电脑将外网可见（比如，有一个注册域名和有效的已分配 IP 地址&mdash; 大多数用户并没有），请确保
+	  这些 IP 处于内网 IP 段。有效范围是：
+        </p>
         <pre class="screen">
-<code class="literal">Private Network Address Range      Normal Prefix
+<code class="literal">有效 IP 段      正常前缀
 10.0.0.1 - 10.255.255.254           8
 172.x.0.1 - 172.x.255.254           16
 192.168.y.1 - 192.168.y.254         24</code>
@@ -272,16 +397,28 @@ EOF</kbd>
           range 0-255.
         </p>
         <p>
+	  x 可以是 16-31 之间的任何数，y 可以是 0-255 之间的任何数。
+        </p>
+        <p>
           A valid private IP address could be 192.168.1.1. A valid FQDN for
           this IP could be lfs.example.org.
+        </p>
+        <p>
+	  一个有效的 IP 地址可以是 192.168.1.1。该 IP 对应的全称域名可是 lfs.example.org
         </p>
         <p>
           Even if not using a network card, a valid FQDN is still required.
           This is necessary for certain programs to operate correctly.
         </p>
         <p>
+	  在不使用网卡的情况下，全称域名依然是必须的，一些程序的正常运行依赖于此。
+        </p>
+        <p>
           Create the <code class="filename">/etc/hosts</code> file by
           running:
+        </p>
+        <p>
+          运行下列代码创建<code class="filename">/etc/hosts</code> 文件：
         </p>
         <pre class="userinput">
 <kbd class="command">cat &gt; /etc/hosts &lt;&lt; "EOF"
@@ -296,17 +433,18 @@ EOF</kbd>
 EOF</kbd>
 </pre>
         <p>
-          The <em class="replaceable"><code>&lt;192.168.1.1&gt;</code></em>
-          and <em class=
-          "replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> values
-          need to be changed for specific uses or requirements (if assigned
-          an IP address by a network/system administrator and the machine
-          will be connected to an existing network). The optional alias
-          name(s) can be omitted.
+          <em class="replaceable"><code>&lt;192.168.1.1&gt;</code></em>
+          和<em class=
+          "replaceable"><code>&lt;HOSTNAME.example.org&gt;</code></em> 的值应根据特定用途和要求修改（如果网络或系统管理员赋予一个IP地址，那么设备将接入当前网络。
+	  可选别名可以移除。
         </p>
         <p>
           If a network card is not going to be configured, create the
           <code class="filename">/etc/hosts</code> file by running:
+        </p>
+        <p>
+	  如果不配置某个网卡，运行下列命令创建
+          <code class="filename">/etc/hosts</code>文件：
         </p>
         <pre class="userinput">
 <kbd class="command">cat &gt; /etc/hosts &lt;&lt; "EOF"
@@ -326,24 +464,38 @@ EOF</kbd>
         <li class="prev">
           <a accesskey="p" href="symlinks.html" title=
           "Managing Devices">Prev</a>
+          <a accesskey="p" href="symlinks.html" title=
+          "Managing Devices">上一页</a>
           <p>
             Managing Devices
+          </p>
+          <p>
+            设备管理
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="usage.html" title=
           "System V Bootscript Usage and Configuration">Next</a>
+          <a accesskey="n" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">下一页</a>
           <p>
             System V Bootscript Usage and Configuration
+          </p>
+          <p>
+	    System V 启动脚本用法和配置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0 ">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
