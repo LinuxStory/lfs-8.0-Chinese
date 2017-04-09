@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset= UTF-8" />
     <title>
-      Typography
+      排版约定
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,88 +19,74 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Preface
+        前言
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="prerequisites.html" title=
-          "Prerequisites">Prev</a>
+          "宿主系统需求">上一页</a>
           <p>
-            Prerequisites
+            宿主系统需求
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="organization.html" title=
-          "Structure">Next</a>
+          "结构">Next</a>
           <p>
-            Structure
+            本书结构
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+          <a accesskey="u" href="preface.html" title="序章">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="pre-typography" name="pre-typography"></a>vii. Typography
+        <a id="pre-typography" name="pre-typography"></a>vii. 排版约定
       </h1>
       <p>
-        To make things easier to follow, there are a few typographical
-        conventions used throughout this book. This section contains some
-        examples of the typographical format found throughout Linux From
-        Scratch.
+        为了能更轻松地阅读，这里有一些全书使用的排版约定。这个部分包括一些来自 Linux From Scratch 中的排版格式例子。
       </p>
       <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
       <p>
-        This form of text is designed to be typed exactly as seen unless
-        otherwise noted in the surrounding text. It is also used in the
-        explanation sections to identify which of the commands is being
-        referenced.
+        这种形式的文本被设计成完全按照看到的样子输入，除非在周围文本中另有说明。它也用在解释部分，用以指出引用的是哪个命令。
       </p>
       <p>
-        In some cases, a logical line is extended to two or more physical
-        lines with a backslash at the end of the line.
+        某些情况下，一个逻辑行会通过在行末添加反斜杠被折叠为两个或者更多的物理行。
       </p>
       <pre class="userinput">
 <kbd class="command">CC="gcc -B/usr/bin/" ../binutils-2.18/configure \
   --prefix=/tools --disable-nls --disable-werror</kbd>
 </pre>
       <p>
-        Note that the backslash must be followed by an immediate return.
-        Other whitespace characters like spaces or tab characters will create
-        incorrect results.
+        注意，反斜杠后面必须紧跟一个回车符。其它空格字符，例如空格和tab键会导致错误结果。
       </p>
       <pre class="screen">
 <code class=
 "computeroutput">install-info: unknown option '--dir-file=/mnt/lfs/usr/info/dir'</code>
 </pre>
       <p>
-        This form of text (fixed-width text) shows screen output, usually as
-        the result of commands issued. This format is also used to show
-        filenames, such as <code class="filename">/etc/ld.so.conf</code>.
+        这种形式的文本（定宽文本）显示屏幕输出，通常是所运行命令的输出结果。 这种形式也用来显示文件名，例如<code class="filename">/etc/ld.so.conf</code>.
       </p>
       <p>
-        <span class="emphasis"><em>Emphasis</em></span>
+        <span class="emphasis"><em>强调</em></span>
       </p>
       <p>
-        This form of text is used for several purposes in the book. Its main
-        purpose is to emphasize important points or items.
+        这种形式的文本在本书中有多重目的。主要目的是强调重要的内容或项目。
       </p>
       <p>
         <a class="ulink" href=
         "http://www.linuxfromscratch.org/">http://www.linuxfromscratch.org/</a>
       </p>
       <p>
-        This format is used for hyperlinks both within the LFS community and
-        to external pages. It includes HOWTOs, download locations, and
-        websites.
+        这种格式用来表示 LFS 社区内部及外部网页的超链接。包括 HOWTO，下载地址和网站等。
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; $LFS/etc/group &lt;&lt; "EOF"
@@ -110,73 +96,60 @@ bin:x:1:
 EOF</kbd>
 </pre>
       <p>
-        This format is used when creating configuration files. The first
-        command tells the system to create the file <code class=
-        "filename">$LFS/etc/group</code> from whatever is typed on the
-        following lines until the sequence End Of File (EOF) is encountered.
-        Therefore, this entire section is generally typed as seen.
+        这种格式在创建配置文件中会使用。第一个命令告诉系统新建一个文件<code class=
+        "filename">$LFS/etc/group</code> ，不论在后面的行中输入了什么，直到遇到文件终结符（EOF）。因此，这整个部分正如看到的那样输入。
       </p>
       <p>
-        <em class="replaceable"><code>&lt;REPLACED TEXT&gt;</code></em>
+        <em class="replaceable"><code>&lt;需要替换的文本&gt;</code></em>
       </p>
       <p>
-        This format is used to encapsulate text that is not to be typed as
-        seen or for copy-and-paste operations.
+		这种格式是用来封装文本不能输入或复制和粘贴操作。
       </p>
       <p>
         <em class="replaceable"><code>[OPTIONAL TEXT]</code></em>
       </p>
       <p>
-        This format is used to encapsulate text that is optional.
+        这种格式是用来封装可选文本的。
       </p>
       <p>
         <code class="filename">passwd(5)</code>
       </p>
       <p>
-        This format is used to refer to a specific manual (man) page. The
-        number inside parentheses indicates a specific section inside the
-        manuals. For example, <span class=
-        "command"><strong>passwd</strong></span> has two man pages. Per LFS
-        installation instructions, those two man pages will be located at
-        <code class="filename">/usr/share/man/man1/passwd.1</code> and
-        <code class="filename">/usr/share/man/man5/passwd.5</code>. When the
-        book uses <code class="filename">passwd(5)</code> it is specifically
-        referring to <code class=
+        这种格式用来表示特定的手册 (man) 页面。括号内的数字表示该手册的特定部分。例如， <span class=
+        "command"><strong>passwd</strong></span>有两个手册页面。在 LFS 安装说明中，这两个手册页面会表示为
+        <code class="filename">/usr/share/man/man1/passwd.1</code> 以及
+        <code class="filename">/usr/share/man/man5/passwd.5</code>. 当书中使用<code class="filename">passwd(5)</code> 时它特指 <code class=
         "filename">/usr/share/man/man5/passwd.5</code>. <span class=
-        "command"><strong>man passwd</strong></span> will print the first man
-        page it finds that matches <span class="quote">&ldquo;<span class=
-        "quote">passwd</span>&rdquo;</span>, which will be <code class=
-        "filename">/usr/share/man/man1/passwd.1</code>. For this example, you
-        will need to run <span class="command"><strong>man 5
-        passwd</strong></span> in order to read the specific page being
-        referred to. It should be noted that most man pages do not have
-        duplicate page names in different sections. Therefore, <span class=
+        "command"><strong>man passwd</strong></span> 会输出它找到匹配<span class="quote">&ldquo;<span class=
+        "quote">passwd</span>&rdquo;</span>, 的第一个手册页面，也就是 <code class=
+        "filename">/usr/share/man/man1/passwd.1</code>. 在这个例子中，你需要执行<span class="command"><strong>man 5
+        passwd</strong></span> 才能阅读指定的手册页面。应该注意的是，大部分的手册页面在不同部分不会有重复的页面名字。因此，<span class=
         "command"><strong>man <em class="replaceable"><code>&lt;program
-        name&gt;</code></em></strong></span> is generally sufficient.
+        name&gt;</code></em></strong></span> 通常就足够了。
       </p>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="prerequisites.html" title=
-          "Prerequisites">Prev</a>
+          "宿主系统需求">上一页</a>
           <p>
-            Prerequisites
+            宿主系统需求
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="organization.html" title=
-          "Structure">Next</a>
+          "本书结构">下一页</a>
           <p>
-            Structure
+            本书结构
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="preface.html" title="Preface">Up</a>
+          <a accesskey="u" href="preface.html" title="序章">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
