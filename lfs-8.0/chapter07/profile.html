@@ -92,6 +92,25 @@
 	<code class="filename">/etc</code> 中的文件提供全局设置。如果家目录存在相同的文件，该文件将覆盖全局设置。
       </p>
       <p>
+        An interactive login shell is started after a successful login, using
+        <span class="command"><strong>/bin/login</strong></span>, by reading
+        the <code class="filename">/etc/passwd</code> file. An interactive
+        non-login shell is started at the command-line (e.g., <code class=
+        "prompt">[prompt]$</code><span class=
+        "command"><strong>/bin/bash</strong></span>). A non-interactive shell
+        is usually present when a shell script is running. It is
+        non-interactive because it is processing a script and not waiting for
+        user input between commands.
+      </p>
+      <p>
+      <span class="command"><strong>/bin/login</strong></span>通过读取<code class="filename">/etc/passwd</code> 文件登录成功后，即可启动交互式登录shell。
+      在命令行启动交互式非登录shell（例如<code class=
+        "prompt">[prompt]$</code><span class=
+        "command"><strong>/bin/bash</strong></span>）。 
+      shell 脚本运行时通常会出现非交式shell。它是非交互式的，
+      因为它正在处理脚本而不等待命令之间的用户输入。
+      </p>
+      <p>
         For more information, see <span class="command"><strong>info
         bash</strong></span> under the <span class="emphasis"><em>Bash
         Startup Files and Interactive Shells</em></span> section.
