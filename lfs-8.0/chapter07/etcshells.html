@@ -3,9 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       7.9.&nbsp;Creating the /etc/shells File
+    </title>
+    <title>
+      7.9.&nbsp;创建 /etc/shells 文件
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -21,28 +24,45 @@
       <h3>
         Chapter&nbsp;7.&nbsp;System Configuration
       </h3>
+      <h3>
+        第七章&nbsp;系统配置
+      </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="inputrc.html" title=
           "Creating the /etc/inputrc File">Prev</a>
+          <a accesskey="p" href="inputrc.html" title=
+          "创建 /etc/inputrc 文件">上一页 </a>
           <p>
             Creating the /etc/inputrc File
+          </p>
+          <p>
+           创建 /etc/inputrc 文件 
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="../chapter08/chapter08.html" title=
           "Making the LFS System Bootable">Next</a>
+          <a accesskey="n" href="../chapter08/chapter08.html" title=
+          "启动 LFS 系统">下一页</a>
           <p>
             Making the LFS System Bootable
+          </p>
+          <p>
+            启动 LFS 系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+	  <a accesskey="u" href="chapter07.html" title=
+          "第七章&nbsp;系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0 ">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -50,6 +70,7 @@
       <h1 class="sect1">
         <a id="ch-config-shells" name="ch-config-shells"></a>7.9. Creating
         the /etc/shells File
+        <a id="ch-config-shells" name="ch-config-shells"></a>7.9. 创建 /etc/shells 文件 
       </h1>
       <p>
         The <code class="filename">shells</code> file contains a list of
@@ -59,10 +80,20 @@
         directory structure (/).
       </p>
       <p>
+        <code class="filename">shells</code> 文件包含一个系统中登录 shell 的列表
+         应用程序通过这个文件判断某个 shell 是否有效，
+         每个 shell 都应当有一行包含 shell 绝对路径的语句。
+      </p>
+      <p>
         For example, this file is consulted by <span class=
         "command"><strong>chsh</strong></span> to determine whether an
         unprivileged user may change the login shell for her own account. If
         the command name is not listed, the user will be denied of change.
+      </p>
+      <p>
+        例如，<span class=
+        "command"><strong>chsh</strong></span>访问这个文件来确定某个非管理员用户是否可能改变她账户下的登录 shell
+        如果命令并没有列入其中，该用户的更改将被拒绝。
       </p>
       <p>
         It is a requirement for applications such as <span class=
@@ -70,6 +101,12 @@
         it can't find <code class="filename">/etc/shells</code>, or FTP
         daemons which traditionally disallow access to users with shells not
         included in this file.
+      </p>
+      <p>
+        它是一些应用程序的必要文件，例如<span class=
+        "application">GDM</span> 在找不到
+        <code class="filename">/etc/shells</code>的情况下不会弹出图形浏览器, 还有一些 FTP 守护进程将
+	拒绝 shell 未包含在该文件中的用户访问。
       </p>
       <pre class="root">
 <kbd class="command">cat &gt; /etc/shells &lt;&lt; "EOF"
@@ -87,24 +124,38 @@ EOF</kbd>
         <li class="prev">
           <a accesskey="p" href="inputrc.html" title=
           "Creating the /etc/inputrc File">Prev</a>
+          <a accesskey="p" href="inputrc.html" title=
+          "创建 /etc/inputrc 文件">上一页</a>
           <p>
             Creating the /etc/inputrc File
+          </p>
+          <p>
+            创建 /etc/inputrc 文件 
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="../chapter08/chapter08.html" title=
           "Making the LFS System Bootable">Next</a>
+          <a accesskey="n" href="../chapter08/chapter08.html" title=
+          "启动 LFS 系统">下一页</a>
           <p>
             Making the LFS System Bootable
+          </p>
+          <p>
+           启动 LFS 系统 
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "第七章&nbsp;系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0 ">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
