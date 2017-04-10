@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      2.4.&nbsp;Creating a New Partition
+      2.4. 创建一个新分区
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,251 +19,149 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;2.&nbsp;Preparing the Host System
+        第 2 章 准备宿主系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="stages.html" title=
-          "Building LFS in Stages">Prev</a>
+          "逐步构建 LFS">上一页</a>
           <p>
-            Building LFS in Stages
+            逐步构建 LFS
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="creatingfilesystem.html" title=
-          "Creating a File System on the Partition">Next</a>
+          "在新分区上创建一个文件系统">下一页</a>
           <p>
-            Creating a File System on the Partition
+            在新分区上创建一个文件系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="space-creatingpartition" name=
-        "space-creatingpartition"></a>2.4. Creating a New Partition
+        "space-creatingpartition"></a>2.4. 创建一个新分区
       </h1>
       <p>
-        Like most other operating systems, LFS is usually installed on a
-        dedicated partition. The recommended approach to building an LFS
-        system is to use an available empty partition or, if you have enough
-        unpartitioned space, to create one.
+        如同其它的许多操作系统一样，LFS 经常被安装在一个专一的分区上。推荐的构建一个 LFS 系统的方式是使用一个可用的空分区，或者如果你有足够的未分区空间的话，创建一个。
       </p>
       <p>
-        A minimal system requires a partition of around 6 gigabytes (GB).
-        This is enough to store all the source tarballs and compile the
-        packages. However, if the LFS system is intended to be the primary
-        Linux system, additional software will probably be installed which
-        will require additional space. A 20 GB partition is a reasonable size
-        to provide for growth. The LFS system itself will not take up this
-        much room. A large portion of this requirement is to provide
-        sufficient free temporary storage as well as for adding additional
-        capabilities after LFS is complete. Additionally, compiling packages
-        can require a lot of disk space which will be reclaimed after the
-        package is installed.
+        一个最小的系统需要一个大约 6GB 的分区。这足够存储所有的源码归档并编译软件包。然而，如果 LFS 系统将被准备用作主要的 Linux 系统，其它可能会被安装的软件就需要额外的空间。比较适当的是使用一个 20GB 的分区来提供这些增长。LFS 系统本身将不会占据这么大的空间。这个需求中很大一部分是用来提供充足的空闲临时存储，以及在 LFS 完成后为其增加额外的能力。另外，编译软件包会需要大量的磁盘空间，虽然它们在软件包安装完之后会被释放。
       </p>
       <p>
-        Because there is not always enough Random Access Memory (RAM)
-        available for compilation processes, it is a good idea to use a small
-        disk partition as <code class="systemitem">swap</code> space. This is
-        used by the kernel to store seldom-used data and leave more memory
-        available for active processes. The <code class=
-        "systemitem">swap</code> partition for an LFS system can be the same
-        as the one used by the host system, in which case it is not necessary
-        to create another one.
+        因为编译过程并不总是有足够的可用内存（RAM），使用一个小磁盘分区作为<code class="systemitem">交换</code>空间是一个好主意。它被内核用来存储较少使用的数据以为活跃经常留出更多的可用内存。LFS 系统的<code class="systemitem">交换</code>分区能够使用宿主系统所使用的那一个，这意味着不必要创建一个新的。
       </p>
       <p>
-        Start a disk partitioning program such as <span class=
-        "command"><strong>cfdisk</strong></span> or <span class=
-        "command"><strong>fdisk</strong></span> with a command line option
-        naming the hard disk on which the new partition will be
-        created&mdash;for example <code class="filename">/dev/sda</code> for
-        the primary Integrated Drive Electronics (IDE) disk. Create a Linux
-        native partition and a <code class="systemitem">swap</code>
-        partition, if needed. Please refer to <code class=
-        "filename">cfdisk(8)</code> or <code class="filename">fdisk(8)</code>
-        if you do not yet know how to use the programs.
+        运行一个例如 <span class="command><strong>cfdisk</strong></span> 或者 <span class="command><strong>fdisk</strong></span> 之类的分区工具，使用一个命令行参数来命名将被用来创建新分区的第一 IDE 磁盘——比如 <code class="filename">/dev/sda</code>。如果需要的话，创建一个 Linux 本地分区和一个<code class="systemitem">交换</code>分区。如果你现在还不知道如何使用这些程序，请参考 <code class="filename">cfdisk(8)</code> 或者 <code class="filename">fdisk(8)</code>。
       </p>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          For experienced users, other partitioning schemes are possible. The
-          new LFS system can be on a software <a class="ulink" href=
-          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/raid.html">RAID</a>
-          array or an <a class="ulink" href=
-          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/aboutlvm.html">
-          LVM</a> logical volume. However, some of these options require an
-          <a class="ulink" href=
-          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/initramfs.html">
-          initramfs</a>, which is an advanced topic. These partitioning
-          methodologies are not recommended for first time LFS users.
+          对于有经验的用户，可以使用其它的分区方案。新的 LFS 系统可以在一个软件 <a class="ulink" href="http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/raid.html">RAID</a> 阵列或者一个 <a class="ulink" href="http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/aboutlvm.html">LVM</a> 逻辑卷上。然而，其中一些选项需要一个 <a class="ulink" href="http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/initramfs.html">initramfs</a>，而那是一个高级的话题。对一个首次 LFS 用户来说并不推荐这些分区方法。
         </p>
       </div>
       <p>
-        Remember the designation of the new partition (e.g., <code class=
-        "filename">sda5</code>). This book will refer to this as the LFS
-        partition. Also remember the designation of the <code class=
-        "systemitem">swap</code> partition. These names will be needed later
-        for the <code class="filename">/etc/fstab</code> file.
+        记住新分区的标志（例如，<code class="filename">sda5</a>）。本书将以此作为 LFS 分区。同时还要记住<code class="systemitem">交换</code>分区的标志。待会 <code class="filename">/etc/fstab</code> 文件将需要这些名字。
       </p>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          2.4.1. Other Partition Issues
+          2.4.1. 其它分区问题
         </h2>
         <p>
-          Requests for advice on system partitioning are often posted on the
-          LFS mailing lists. This is a highly subjective topic. The default
-          for most distributions is to use the entire drive with the
-          exception of one small swap partition. This is not optimal for LFS
-          for several reasons. It reduces flexibility, makes sharing of data
-          across multiple distributions or LFS builds more difficult, makes
-          backups more time consuming, and can waste disk space through
-          inefficient allocation of file system structures.
+          在 LFS 的邮件列表中经常有对系统分区建议的请求。其实这是一个高度主观的话题。对于大多数发行版来说默认会使用吃了一个小的交换分区之外的整个盘。但是基于这些原因，这对于 LFS 来说不是最优的。它限制了灵活性，让横跨多个发行版的或者 LFS 构建的数据共享变得更加艰难，让备份变得更加耗时，并且会因为效率低下的文件系统结构的分配而浪费磁盘空间。
         </p>
         <div class="sect3">
           <h3 class="sect3">
-            2.4.1.1. The Root Partition
+            2.4.1.1. 根分区
           </h3>
           <p>
-            A root LFS partition (not to be confused with the <code class=
-            "filename">/root</code> directory) of ten gigabytes is a good
-            compromise for most systems. It provides enough space to build
-            LFS and most of BLFS, but is small enough so that multiple
-            partitions can be easily created for experimentation.
+            对于大多数系统来说，一个 10GB 的根分区（注意不要跟 <code class="filename">/root</code> 目录混淆）是一个好的折衷。它提供了足够构建 LFS 和大多数 BLFS 的空间，并且它足够小以至于能够轻易创建多个分区来继续体验。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            2.4.1.2. The Swap Partition
+            2.4.1.2. 交换分区
           </h3>
           <p>
-            Most distributions automatically create a swap partition.
-            Generally the recommended size of the swap partition is about
-            twice the amount of physical RAM, however this is rarely needed.
-            If disk space is limited, hold the swap partition to two
-            gigabytes and monitor the amount of disk swapping.
+            很多发行版会自动创建交换分区。一般来说推荐的交换分区大小是大约两倍物理内存，然而很多时候它并不需要这么多。如果磁盘空间很局限，那么让交换分区保持 2GB 并且监视磁盘交换总量。
           </p>
           <p>
-            Swapping is never good. Generally you can tell if a system is
-            swapping by just listening to disk activity and observing how the
-            system reacts to commands. The first reaction to swapping should
-            be to check for an unreasonable command such as trying to edit a
-            five gigabyte file. If swapping becomes a normal occurrence, the
-            best solution is to purchase more RAM for your system.
+            交换并不总是好的。一般来说你能从监听磁盘活动和观察系统对命令的反应来判断系统是否发生了交换。对于交换的第一反应应该是检查是否存在不合理的命令，例如试图编辑一个 5GB 的文件。如果交换成了常态，最好的解决方案就是为你的系统购买更多的 RAM。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            2.4.1.3. The Grub Bios Partition
+            2.4.1.3. Grub Bios 分区
           </h3>
           <p>
-            If the <span class="emphasis"><em>boot disk</em></span> has been
-            partitioned with a GUID Partition Table (GPT), then a small,
-            typically 1 MB, partition must be created if it does not already
-            exist. This partition is not formatted, but must be available for
-            GRUB to use during installation of the boot loader. This
-            partition will normally be labeled 'BIOS Boot' if using
-            <span class="command"><strong>fdisk</strong></span> or have a
-            code of <span class="emphasis"><em>EF02</em></span> if using
-            <span class="command"><strong>gdisk</strong></span>.
+            如果<span class="emphasis"><em>启动磁盘</em></span>是 GPT 分区的话，那么需要创建一个很小的，通常是 1MB 的分区，如果它不存在的话。这个分区没有被格式化，但是必须在引导阶段可以被 GRUB 使用。这个分区经常被标识为 “BIOS Boot”（如果是使用 <span class="command"><strong>fdisk</strong></span> 的话）或者有个 <span class="emphasis"><em>EF02</em></span> 的编码（如果是使用 <span class="command"><strong>gdisk</strong></span> 的话）。
           </p>
           <div class="admon note">
             <img alt="[Note]" src="../images/note.png" />
             <h3>
-              Note
+              注意
             </h3>
             <p>
-              The Grub Bios partition must be on the drive that the BIOS uses
-              to boot the system. This is not necessarily the same drive
-              where the LFS root partition is located. Disks on a system may
-              use different partition table types. The requirment for this
-              partition depends only on the partition table type of the boot
-              disk.
+              Grub Bios 分区必须存在于 BIOS 用来引导系统的驱动器上。它不需要跟 LFS 根分区在同一个驱动器上。系统上的磁盘可能使用不用的分区表类型。对这个分区的需求只取决与引导磁盘的分区表类型。
             </p>
           </div>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            2.4.1.4. Convenience Partitions
+            2.4.1.4. 方便的分区
           </h3>
           <p>
-            There are several other partitions that are not required, but
-            should be considered when designing a disk layout. The following
-            list is not comprehensive, but is meant as a guide.
+            有几个其它分区，虽然没有被要求到，但是在设计磁盘布局时必须被考虑到。下面的列表不是通用的，只是作为一个指引。
           </p>
           <div class="itemizedlist">
             <ul>
               <li class="listitem">
                 <p>
-                  /boot &ndash; Highly recommended. Use this partition to
-                  store kernels and other booting information. To minimize
-                  potential boot problems with larger disks, make this the
-                  first physical partition on your first disk drive. A
-                  partition size of 100 megabytes is quite adequate.
+                  /boot &ndash; 强烈建议。使用这个分区来存储内核和其它引导信息。为了减少使用大硬盘时的可能隐含的引导问题，请将这个分区作为你第一个磁盘驱动器上的第一个物理分区。一个 100MB 的分区大小就足够了。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  /home &ndash; Highly recommended. Share your home directory
-                  and user customization across multiple distributions or LFS
-                  builds. The size is generally fairly large and depends on
-                  available disk space.
+                  /home &ndash; 强烈建议。横跨多个发行版或者 LFS 构建地共享你的家目录和用户自定义配置。它一般来说相当大，取决于可用磁盘空间。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  /usr &ndash; A separate /usr partition is generally used if
-                  providing a server for a thin client or diskless
-                  workstation. It is normally not needed for LFS. A size of
-                  five gigabytes will handle most installations.
+                  /usr &ndash; 一个独立的 /usr 分区一般被用来提供作为瘦终端的服务器或者一个无盘工作证。对 LFS 来说它一般不需要。5GB 就能够掌握大多数安装的情况。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  /opt &ndash; This directory is most useful for BLFS where
-                  multiple installations of large packages like Gnome or KDE
-                  can be installed without embedding the files in the /usr
-                  hierarchy. If used, 5 to 10 gigabytes is generally
+                  /opt &ndash; 这个路径对 BLFS 来说很有用，因为像 Gnome 和 KDE 那样的大软件包能够不嵌入 /usr 的层次结构而安装。如果需要的话，5GB 到 10GB 一般来说足够了。
                   adequate.
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  /tmp &ndash; A separate /tmp directory is rare, but useful
-                  if configuring a thin client. This partition, if used, will
-                  usually not need to exceed a couple of gigabytes.
+                  /tmp &ndash; 一个单独的 /tmp 分区很罕见，但是如果配置瘦客户端的话会很有用。如果使用了的话，这个分区一般不需要超过几个 GB。
                 </p>
               </li>
               <li class="listitem">
                 <p>
-                  /usr/src &ndash; This partition is very useful for
-                  providing a location to store BLFS source files and share
-                  them across LFS builds. It can also be used as a location
-                  for building BLFS packages. A reasonably large partition of
-                  30-50 gigabytes allows plenty of room.
+                  /usr/src &ndash; 这个分区对提供存储 BLFS 源码文件的地方并且跨 LFS 构建地共享它们很有用。它也可以被用作构建 BLFS 包的位置。一个可以理解的大分区，大约 30GB 到 50GB，能允许如此大的空间。
                 </p>
               </li>
             </ul>
           </div>
           <p>
-            Any separate partition that you want automatically mounted upon
-            boot needs to be specified in the <code class=
-            "filename">/etc/fstab</code>. Details about how to specify
-            partitions will be discussed in <a class="xref" href=
-            "../chapter08/fstab.html" title=
-            "8.2.&nbsp;Creating the /etc/fstab File">Section&nbsp;8.2,
-            &ldquo;Creating the /etc/fstab File&rdquo;</a>.
+            你想在启动时自动挂载的任何独立分区都需要在 <code class="filename">/etc/fstab</code> 中指定。关于指定分区的详情，我们将在 <a class="xref" href="../chapter08/fstab.html" title="8.2. 创建 /etc/fstab 文件">8.2 节 “创建 /etc/fstab 文件”</a>中讨论。
           </p>
         </div>
       </div>
@@ -272,25 +170,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="stages.html" title=
-          "Building LFS in Stages">Prev</a>
+          "逐步构建 LFS">上一页</a>
           <p>
-            Building LFS in Stages
+            逐步构建 LFS
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="creatingfilesystem.html" title=
-          "Creating a File System on the Partition">Next</a>
+          "在新分区上创建一个文件系统">下一页</a>
           <p>
-            Creating a File System on the Partition
+            在新分区上创建一个文件系统
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
