@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      2.5.&nbsp;Creating a File System on the Partition
+      2.5. 在新分区上创建一个文件系统
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,45 +19,40 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;2.&nbsp;Preparing the Host System
+        第 2 章 准备宿主系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="creatingpartition.html" title=
-          "Creating a New Partition">Prev</a>
+          "创建一个新分区">上一页</a>
           <p>
-            Creating a New Partition
+            创建一个新分区
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="aboutlfs.html" title=
-          "Setting The $LFS Variable">Next</a>
+          "设置 $LFS 变量">下一页</a>
           <p>
-            Setting The $LFS Variable
+            设置 $LFS 变量
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="space-creatingfilesystem" name=
-        "space-creatingfilesystem"></a>2.5. Creating a File System on the
-        Partition
+        "space-creatingfilesystem"></a>2.5. 在新分区上创建一个文件系统
       </h1>
       <p>
-        Now that a blank partition has been set up, the file system can be
-        created. LFS can use any file system recognized by the Linux kernel,
-        but the most common types are ext3 and ext4. The choice of file
-        system can be complex and depends on the characteristics of the files
-        and the size of the partition. For example:
+        现在一个空白的分区已经被建立起来了，文件系统可以被创建了。LFS 可以使用 Linux 内核能够识别的任何操作系统，但是最通用的是 ext3 和 ext4。文件系统的选择可以很复杂，并且取决于文件的特性和分区的大小。例如；
       </p>
       <div class="variablelist">
         <dl class="variablelist">
@@ -66,8 +61,7 @@
           </dt>
           <dd>
             <p>
-              is suitable for small partitions that are updated infrequently
-              such as /boot.
+              它适合于不经常更新的小分区，例如 /boot。
             </p>
           </dd>
           <dt>
@@ -75,9 +69,7 @@
           </dt>
           <dd>
             <p>
-              is an upgrade to ext2 that includes a journal to help recover
-              the partition's status in the case of an unclean shutdown. It
-              is commonly used as a general purpose file system.
+              是 ext2 的升级版，包括了一个在不干净的关机时用来恢复分区状态的日志。它被广泛地用来作为一个通用目的的文件系统。
             </p>
           </dd>
           <dt>
@@ -85,67 +77,55 @@
           </dt>
           <dd>
             <p>
-              is the latest version of the ext file system family of
-              partition types. It provides several new capabilities including
-              nano-second timestamps, creation and use of very large files
-              (16 TB), and speed improvements.
+              是 ext 文件系统家族的分区类型中的最新版。它提供了一些新的能力，比如纳秒（10^-9 秒）级的时间戳，对超大文件（16TB）的创建和使用，还有速度上的提升。
             </p>
           </dd>
         </dl>
       </div>
       <p>
-        Other file systems, including FAT32, NTFS, ReiserFS, JFS, and XFS are
-        useful for specialized purposes. More information about these file
-        systems can be found at <a class="ulink" href=
-        "http://en.wikipedia.org/wiki/Comparison_of_file_systems">http://en.wikipedia.org/wiki/Comparison_of_file_systems</a>.
+        其它的文件系统，包括 FAT32, NTFS, ReiserFS, JFS 和 XFS，对特定目的来说会有用。关于这些文件系统的信息可以在 <a class="ulink" href="http://en.wikipedia.org/wiki/Comparison_of_file_systems">http://en.wikipedia.org/wiki/Comparison_of_file_systems</a> 中找到。
       </p>
       <p>
-        LFS assumes that the root file system (/) is of type ext4. To create
-        an <code class="systemitem">ext4</code> file system on the LFS
-        partition, run the following:
+        LFS 假定根文件系统（/）是 ext4 的。想在 LFS 分区上创建一个 <code class="systemitem">ext4</code> 文件系统的话，运行：
       </p>
       <pre class="userinput">
 <kbd class="command">mkfs -v -t ext4 /dev/<em class=
 "replaceable"><code>&lt;xxx&gt;</code></em></kbd>
 </pre>
       <p>
-        If you are using an existing <code class="systemitem">swap</code>
-        partition, there is no need to format it. If a new <code class=
-        "systemitem">swap</code> partition was created, it will need to be
-        initialized with this command:
+        如果你使用一个已经存在的<code class="systemitem">交换</code>分区，那么没必要格式化它。如果创建了一个新的<code class="systemitem">交换</code>分区，那么需要用以下命令来初始化；
       </p>
       <pre class="userinput">
 <kbd class="command">mkswap /dev/<em class=
 "replaceable"><code>&lt;yyy&gt;</code></em></kbd>
 </pre>
       <p>
-        Replace <em class="replaceable"><code>&lt;yyy&gt;</code></em> with
-        the name of the <code class="systemitem">swap</code> partition.
+        将 <em class="replaceable"><code>&lt;yyy&gt;</code></em> 替换为<code class="systemitem">交换</code>分区的名称。
       </p>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="creatingpartition.html" title=
-          "Creating a New Partition">Prev</a>
+          "创建一个新分区">上一页</a>
           <p>
-            Creating a New Partition
+            创建一个新分区
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="aboutlfs.html" title=
-          "Setting The $LFS Variable">Next</a>
+          "设置 $LFS 变量">下一页</a>
           <p>
-            Setting The $LFS Variable
+            设置 $LFS 变量
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
