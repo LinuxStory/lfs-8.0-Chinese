@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      2.3.&nbsp;Building LFS in Stages
+      2.3. 逐步构建 LFS
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,59 +19,52 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;2.&nbsp;Preparing the Host System
+        第 2 章 准备宿主系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="hostreqs.html" title=
-          "Host System Requirements">Prev</a>
+          "宿主系统需求">上一页</a>
           <p>
-            Host System Requirements
+            宿主系统需求
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="creatingpartition.html" title=
-          "Creating a New Partition">Next</a>
+          "创建一个新分区">下一页</a>
           <p>
-            Creating a New Partition
+            创建一个新分区
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="stages" name="stages"></a>2.3. Building LFS in Stages
+        <a id="stages" name="stages"></a>2.3. 逐步构建 LFS
       </h1>
       <p>
-        LFS is designed to be built in one session. That is, the instructions
-        assume that the system will not be shut down during the process. That
-        does not mean that the system has to be done in one sitting. The
-        issue is that certain procedures have to be re-accomplished after a
-        reboot if resuming LFS at different points.
+        LFS 被设计为在一次会话中构建，或者说这些命令假定全过程中系统不会被关机。这并不意味着需要一次性完成这个系统，而是说，如果重启后在不同的状态下继续 LFS 的话，有一些特定的过程就需要被再重做一遍。
       </p>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          2.3.1. Chapters 1-4
+          2.3.1. 第一章到第四章
         </h2>
         <p>
-          These chapters are accomplished on the host system. When
-          restarting, be careful of the following:
+          这些章节是在宿主系统中完成的。如果重启的话，请注意以下的点：
         </p>
         <div class="itemizedlist">
           <ul>
             <li class="listitem">
               <p>
-                Procedures done as the root user after Section 2.4 need to
-                have the LFS environment variable set <span class=
-                "emphasis"><em>FOR THE ROOT USER</em></span>.
+                2.4 节之后，使用 root 用户执行的过程需要<span class="emphasis"><em>为 root 用户设置</em></span>的 LFS 环境变量。
               </p>
             </li>
           </ul>
@@ -79,34 +72,23 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          2.3.2. Chapter 5
+          2.3.2. 第五章
         </h2>
         <div class="itemizedlist">
           <ul>
             <li class="listitem">
               <p>
-                The /mnt/lfs partition must be mounted.
+                /mnt/lfs 分区必须被挂载。
               </p>
             </li>
             <li class="listitem">
               <p>
-                <span class="emphasis"><em>ALL</em></span> instructions in
-                Chapter 5 must be done by user <span class=
-                "emphasis"><em>lfs</em></span>. A <span class=
-                "command"><strong>su - lfs</strong></span> needs to be done
-                before any task in Chapter 5.
+                第五章中的<span class="emphasis"><em>所有</em></span>命令需要以 <span class="emphasis"><em>lfs</em></span> 用户执行。在第五章中完成任何任务之前均需要 <span class="command"><strong>su - lfs</strong></span>。
               </p>
             </li>
             <li class="listitem">
               <p>
-                The procedures in <a class="xref" href=
-                "../chapter05/generalinstructions.html" title=
-                "5.3.&nbsp;General Compilation Instructions">Section&nbsp;5.3,
-                &ldquo;General Compilation Instructions&rdquo;</a> are
-                critical. If there is any doubt about installing a package,
-                ensure any previously expanded tarballs are removed,
-                re-extract the package files, and complete all instructions
-                in that section.
+                <a class="xref" href="../chapter05/generalinstructions.html" title="5.3. 通用编译说明">5.3 节“通用编译说明”</a>中的过程是很关键的。如果在安装某个包时有疑问，请确保删除之前的任何展开了的归档文件，然后重新提取，接着继续完成那一节中的命令。
               </p>
             </li>
           </ul>
@@ -114,34 +96,23 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          2.3.3. Chapters 6-8
+          2.3.3. 第六章到第八章
         </h2>
         <div class="itemizedlist">
           <ul>
             <li class="listitem">
               <p>
-                The /mnt/lfs partition must be mounted.
+                /mnt/lfs 分区必须被挂载。
               </p>
             </li>
             <li class="listitem">
               <p>
-                When entering chroot, the LFS environment variable must be
-                set for root. The LFS variable is not used otherwise.
+                当进入 chroot 时，LFS 环境变量必须为 root 而设，否则 LFS 变量将不会被用到。
               </p>
             </li>
             <li class="listitem">
               <p>
-                The virtual file systems must be mounted. This can be done
-                before or after entering chroot by changing to a host virtual
-                terminal and, as root, running the commands in <a class=
-                "xref" href="../chapter06/kernfs.html#ch-system-bindmount"
-                title=
-                "6.2.2.&nbsp;Mounting and Populating /dev">Section&nbsp;6.2.2,
-                &ldquo;Mounting and Populating /dev&rdquo;</a> and <a class=
-                "xref" href="../chapter06/kernfs.html#ch-system-kernfsmount"
-                title=
-                "6.2.3.&nbsp;Mounting Virtual Kernel File Systems">Section&nbsp;6.2.3,
-                &ldquo;Mounting Virtual Kernel File Systems&rdquo;</a>.
+                必须挂载虚拟文件系统。这个可以在通过切换到宿主的虚拟终端来进入 chroot，或者以 root 用户来运行 <a class="xref" href="../chapter06/kernfs.html#ch-system-bindmount" title="6.2.2. 挂载并激活 /dev">6.2.2. 节 “挂载并激活 /dev”</a>和 <a class="xref" href="../chapter06/kernfs.html#ch-system-kernfsmount" title="6.2.3. 挂载虚拟内核文件系统">6.2.3 节 “挂载虚拟内核文件系统”</a>的命令之前或之后执行。
               </p>
             </li>
           </ul>
@@ -152,25 +123,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="hostreqs.html" title=
-          "Host System Requirements">Prev</a>
+          "宿主系统需求">上一页</a>
           <p>
-            Host System Requirements
+            宿主系统需求
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="creatingpartition.html" title=
-          "Creating a New Partition">Next</a>
+          "创建一个新分区">下一页</a>
           <p>
-            Creating a New Partition
+            创建一个新分区
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

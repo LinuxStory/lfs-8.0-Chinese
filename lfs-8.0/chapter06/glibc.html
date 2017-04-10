@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.9.&nbsp;Glibc-2.25
     </title>
@@ -19,30 +19,30 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第 6 章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="man-pages.html" title=
-          "Man-pages-4.09">Prev</a>
+          "Man-pages-4.09">上一页</a>
           <p>
             Man-pages-4.09
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="adjusting.html" title=
-          "Adjusting the Toolchain">Next</a>
+          "调整工具链">下一页</a>
           <p>
-            Adjusting the Toolchain
+            调整工具链
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第 6 章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,19 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Glibc package contains the main C library. This library
-          provides the basic routines for allocating memory, searching
-          directories, opening and closing files, reading and writing files,
-          string handling, pattern matching, arithmetic, and so on.
+          Glibc 软件包包括了主要的 C 语言库。这个库提供了诸如分配内存、搜索目录、打开关闭文件、读写文件、字符串处理、模式匹配、代数运算等等的基本例程。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">估计构建时间：</strong>
               <span class="segbody">20 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">占用磁盘大小：</strong>
               <span class="segbody">1.5 GB</span>
             </div>
           </div>
@@ -72,35 +69,25 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.9.1. Installation of Glibc
+          6.9.1. Glibc 的安装
         </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            The Glibc build system is self-contained and will install
-            perfectly, even though the compiler specs file and linker are
-            still pointing to <code class="filename">/tools</code>. The specs
-            and linker cannot be adjusted before the Glibc install because
-            the Glibc autoconf tests would give false results and defeat the
-            goal of achieving a clean build.
+            Glibc 构建系统是自我包含的，并且将会如期安装，哪怕编译器的指定文件和链接器仍然指向 <code class="filename">/tools</code>。配置和链接器不能在 Glibc 安装之前调整，因为 Glibc 的 autoconf 测试将会给出假的结果，并且阻止我们完成一个干净的构建的目标。
           </p>
         </div>
         <p>
-          Some of the Glibc programs use non-FHS compilant <code class=
-          "filename">/var/db</code> directory to store their runtime data.
-          Apply the following patch to make such programs store their runtime
-          data in the FHS-compliant locations:
+          一些 Glibc 程序使用不遵守 FHS 的 <code class="filename">/var/db</code> 路径来存储它们的运行时数据。使用以下的补丁来确保这样的程序在一个遵守 FHS 的路径中存储它们的运行时数据。
         </p>
         <pre class="userinput">
 <kbd class="command">patch -Np1 -i ../glibc-2.25-fhs-1.patch</kbd>
 </pre>
         <p>
-          Create a symlink for LSB compliance and, for x86_64, a
-          compatibility symlink required for the dynamic loader to function
-          correctly:
+          为 LSB 创建符号链接，并且为 x86_64 创建一个让动态链接器可以正常工作而需要的兼容符号链接。
         </p>
         <pre class="userinput">
 <kbd class="command">case $(uname -m) in
@@ -112,15 +99,14 @@
 esac</kbd>
 </pre>
         <p>
-          The Glibc documentation recommends building Glibc in a dedicated
-          build directory:
+          Glibc 的文档推荐在一个专用的目录中构建它：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -v build
 cd       build</kbd>
 </pre>
         <p>
-          Prepare Glibc for compilation:
+          准备编译 Glibc：
         </p>
         <pre class="userinput">
 <kbd class="command">../configure --prefix=/usr                   \
@@ -130,7 +116,7 @@ cd       build</kbd>
              libc_cv_slibdir=/lib</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
@@ -138,106 +124,75 @@ cd       build</kbd>
         <div class="admon important">
           <img alt="[Important]" src="../images/important.png" />
           <h3>
-            Important
+            重要
           </h3>
           <p>
-            In this section, the test suite for Glibc is considered critical.
-            Do not skip it under any circumstance.
+            本节中，Glibc 的测试套件是非常重要的。任何情况下都不要跳过它。
           </p>
         </div>
         <p>
-          Generally a few tests do not pass, but you can generally ignore any
-          of the test failures listed below. Now test the build results:
+          通常来说一小部分测试会不能通过，但是你一般可以忽略下面列出的一些失败原因。使用以下命令测试构建结果：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          You will probably see some test failures. The Glibc test suite is
-          somewhat dependent on the host system. This is a list of the most
-          common issues seen for this version of LFS:
+          你可能会看到一些测试失败的结果。Glibc 测试套件是有点依赖于主机系统的。下面列出这个版本的 LFS 最经常看到的问题：
         </p>
         <div class="itemizedlist">
           <ul>
             <li class="listitem">
               <p>
-                <span class="emphasis"><em>posix/tst-getaddrinfo4</em></span>
-                will always fail due to not having the necessary networking
-                applications when the tests are run. <span class=
-                "emphasis"><em>posix/tst-getaddrinfo5</em></span> is also
-                known to fail on some architectures.
+                <span class="emphasis"><em>posix/tst-getaddrinfo4</em></span> 会经常因为测试在运行时的一个缺失的网络应用而失败。<span class="emphasis"><em>posix/tst-getaddrinfo5</em></span> 也已经被了解到在一些架构上会失败。
               </p>
             </li>
             <li class="listitem">
               <p>
-                The <span class="emphasis"><em>rt/tst-cputimer1</em></span>
-                and <span class="emphasis"><em>rt/tst-cpuclock2</em></span>
-                tests have been known to fail. The reason is not completely
-                understood, but indications are that minor timing issues can
-                trigger these failures.
+                <span class="emphasis"><em>rt/tst-cputimer1</em></span> 和 <span class="emphasis"><em>rt/tst-cpuclock2</em></span> 测试已经知道会失败。其原因尚不清楚，但是有迹象表明，太小的时间问题能够触发这些失败。
               </p>
             </li>
             <li class="listitem">
               <p>
-                The math tests sometimes fail when running on systems where
-                the CPU is not a relatively new Intel or AMD processor.
+                如果运行的系统所使用的 CPU 不是相对新 的 Intel 或 AMD 处理器的话，数学测试有时会失败。
               </p>
             </li>
             <li class="listitem">
               <p>
-                The <span class=
-                "emphasis"><em>nptl/tst-thread-affinity-{pthread,pthread2,sched}</em></span>
-                tests may fail for reasons that have not been determined.
+                <span class=
+                "emphasis"><em>nptl/tst-thread-affinity-{pthread,pthread2,sched}</em></span> 测试可能失败，其原因尚不明朗。
               </p>
             </li>
             <li class="listitem">
               <p>
-                Other tests known to fail on some architectures are
-                malloc/tst-malloc-usable and nptl/tst-cleanupx4.
+                已知的在其它架构上可能失败的测试包括 malloc/tst-malloc-usable 和 nptl/tst-cleanupx4。
               </p>
             </li>
           </ul>
         </div>
         <p>
-          Though it is a harmless message, the install stage of Glibc will
-          complain about the absence of <code class=
-          "filename">/etc/ld.so.conf</code>. Prevent this warning with:
+          Glibc 在安装过程中可能会抱怨 <code class="filename">/etc/ld.so.conf</code> 的缺失，虽然它并无大碍。使用这个命令来防止警告：
         </p>
         <pre class="userinput">
 <kbd class="command">touch /etc/ld.so.conf</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Install the configuration file and runtime directory for
-          <span class="command"><strong>nscd</strong></span>:
+          为 <span class="command"><strong>nscd</strong></span> 安装配置文件和运行时目录：
         </p>
         <pre class="userinput">
 <kbd class="command">cp -v ../nscd/nscd.conf /etc/nscd.conf
 mkdir -pv /var/cache/nscd</kbd>
 </pre>
         <p>
-          Next, install the locales that can make the system respond in a
-          different language. None of the locales are required, but if some
-          of them are missing, the test suites of future packages would skip
-          important testcases.
+          下一步，安装地区配置，这些可以让系统对响应不同的语言。这些地区并不是必须的。但是如果它们缺失了一部分，那么后续的软件包的测试套件将可能跳过重要的测试情况。
         </p>
         <p>
-          Individual locales can be installed using the <span class=
-          "command"><strong>localedef</strong></span> program. E.g., the
-          first <span class="command"><strong>localedef</strong></span>
-          command below combines the <code class=
-          "filename">/usr/share/i18n/locales/cs_CZ</code> charset-independent
-          locale definition with the <code class=
-          "filename">/usr/share/i18n/charmaps/UTF-8.gz</code> charmap
-          definition and appends the result to the <code class=
-          "filename">/usr/lib/locale/locale-archive</code> file. The
-          following instructions will install the minimum set of locales
-          necessary for the optimal coverage of tests:
+          可以使用 <span class="command"><strong>localedef</strong></span> 来安装独立的地区。例如，下面的第一个 <span class="command"><strong>localedef</strong></span> 命令将 <code class="filename">/usr/share/i18n/locales/cs_CZ</code> 这个字符集无关的地区定义与 <code class="filename">/usr/share/i18n/charmaps/UTF-8.gz</code> 字符映射表绑定在一起，同时将结果附加到 <code class= "filename">/usr/lib/locale/locale-archive</code> 文件。下列的命令将安装最优化的测试所需要的最小的地区集合：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -pv /usr/lib/locale
@@ -264,42 +219,31 @@ localedef -i tr_TR -f UTF-8 tr_TR.UTF-8
 localedef -i zh_CN -f GB18030 zh_CN.GB18030</kbd>
 </pre>
         <p>
-          In addition, install the locale for your own country, language and
-          character set.
+          另外，为你的国家，语言和字符集安装地区。
         </p>
         <p>
-          Alternatively, install all locales listed in the <code class=
-          "filename">glibc-2.25/localedata/SUPPORTED</code> file (it includes
-          every locale listed above and many more) at once with the following
-          time-consuming command:
+          相对应地，使用下面这个很耗时的命令立刻安装在 <code class="filename">glibc-2.25/localedata/SUPPORTED</code> 文件中列出的所有地区（它包括了上面列出的全部，以及更多）：
         </p>
         <pre class="userinput">
 <kbd class="command">make localedata/install-locales</kbd>
 </pre>
         <p>
-          Then use the <span class=
-          "command"><strong>localedef</strong></span> command to create and
-          install locales not listed in the <code class=
-          "filename">glibc-2.25/localedata/SUPPORTED</code> file in the
-          unlikely case you need them.
+          然后使用 <span class="command"><strong>localedef</strong></span> 命令来创建并安装在 <code class="filename">glibc-2.25/localedata/SUPPORTED</code> 文件中没有列出的地区，如果那些地区很罕见而你又需要它们的话。
         </p>
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="conf-glibc" name="conf-glibc"></a>6.9.2. Configuring Glibc
+          <a id="conf-glibc" name="conf-glibc"></a>6.9.2. 配置 Glibc
         </h2>
         <div class="sect3">
           <h3 class="sect3">
-            6.9.2.1. Adding nsswitch.conf
+            6.9.2.1. 添加 nsswitch.conf
           </h3>
           <p>
-            The <code class="filename">/etc/nsswitch.conf</code> file needs
-            to be created because the Glibc defaults do not work well in a
-            networked environment.
+            The 因为 Glibc 的默认配置在网络环境下难以如期工作，因此 <code class="filename">/etc/nsswitch.conf</code> 文件需要被创建。
           </p>
           <p>
-            Create a new file <code class=
-            "filename">/etc/nsswitch.conf</code> by running the following:
+            通过运行以下命令创建 <code class="filename">/etc/nsswitch.conf</code>：
           </p>
           <pre class="userinput">
 <kbd class="command">cat &gt; /etc/nsswitch.conf &lt;&lt; "EOF"
@@ -323,10 +267,10 @@ EOF</kbd>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            6.9.2.2. Adding time zone data
+            6.9.2.2. 添加时区信息
           </h3>
           <p>
-            Install and set up the time zone data with the following:
+            使用以下命令安装并配置时区信息：
           </p>
           <pre class="userinput">
 <kbd class="command">tar -xf ../../tzdata2016j.tar.gz
@@ -347,7 +291,7 @@ unset ZONEINFO</kbd>
 </pre>
           <div class="variablelist">
             <p class="title">
-              <strong>The meaning of the zic commands:</strong>
+              <strong>zic 命令的含义：</strong>
             </p>
             <dl class="variablelist">
               <dt>
@@ -356,17 +300,7 @@ unset ZONEINFO</kbd>
               </dt>
               <dd>
                 <p>
-                  This creates posix time zones, without any leap seconds. It
-                  is conventional to put these in both <code class=
-                  "filename">zoneinfo</code> and <code class=
-                  "filename">zoneinfo/posix</code>. It is necessary to put
-                  the POSIX time zones in <code class=
-                  "filename">zoneinfo</code>, otherwise various test-suites
-                  will report errors. On an embedded system, where space is
-                  tight and you do not intend to ever update the time zones,
-                  you could save 1.9MB by not using the <code class=
-                  "filename">posix</code> directory, but some applications or
-                  test-suites might produce some failures.
+                  它创建不记录闰秒的 POSIX 时区。它能很方便地被放进 <code class="filename">zoneinfo</code> 和 <code class="filename">zoneinfo/posix</code>。需要将这个 POSIX 时区放进 <code class="filename">zoneinfo</code>，否则大量的测试套件将报错。在一个空间很紧凑的嵌入式系统上，如果你不想更新时区，你可以通过不使用 <code class="filename">posix</code> 目录来节省 1.9MB 空间，但是一些应用或者测试套件可能产生错误。
                 </p>
               </dd>
               <dt>
@@ -375,11 +309,7 @@ unset ZONEINFO</kbd>
               </dt>
               <dd>
                 <p>
-                  This creates right time zones, including leap seconds. On
-                  an embedded system, where space is tight and you do not
-                  intend to ever update the time zones, or care about the
-                  correct time, you could save 1.9MB by omitting the
-                  <code class="filename">right</code> directory.
+                  它创建包括闰秒的正确的时区。在一个空间很紧凑的嵌入式系统上，如果你不想更新时区，或者很在意正确的时间，你可以通过省略 <code class="filename">right</code> 目录来节省 1.9MB 空间。
                 </p>
               </dd>
               <dt>
@@ -388,66 +318,40 @@ unset ZONEINFO</kbd>
               </dt>
               <dd>
                 <p>
-                  This creates the <code class="filename">posixrules</code>
-                  file. We use New York because POSIX requires the daylight
-                  savings time rules to be in accordance with US rules.
+                  它创建 <code class="filename">posixrules</code> 文件。我们使用纽约是因为 POSIX 需要对照美国规则和夏令时规则。
                 </p>
               </dd>
             </dl>
           </div>
           <p>
-            One way to determine the local time zone is to run the following
-            script:
+            一个决定当地时区的方式是运行下面的脚本:
           </p>
           <pre class="userinput">
 <kbd class="command">tzselect</kbd>
 </pre>
           <p>
-            After answering a few questions about the location, the script
-            will output the name of the time zone (e.g., <span class=
-            "emphasis"><em>America/Edmonton</em></span>). There are also some
-            other possible time zones listed in <code class=
-            "filename">/usr/share/zoneinfo</code> such as <span class=
-            "emphasis"><em>Canada/Eastern</em></span> or <span class=
-            "emphasis"><em>EST5EDT</em></span> that are not identified by the
-            script but can be used.
+            在回答了少数几个关于时区的问题的之后，这个脚本将输出时区的名称（例如 <span class="emphasis"><em>America/Edmonton</em></span>）。并且有些时区，例如 <span class="emphasis"><em>Canada/Eastern</em></span> 或者 <span class="emphasis"><em>EST5EDT</em></span>，虽然这个脚本不能识别它们，但是它在 <code class="filename">/usr/share/zoneinfo</code> 中被列出了，所以它们也是可用的。
           </p>
           <p>
-            Then create the <code class="filename">/etc/localtime</code> file
-            by running:
+            然后通过运行以下命令来创建 <code class="filename">/etc/localtime</code>:
           </p>
           <pre class="userinput">
 <kbd class="command">cp -v /usr/share/zoneinfo/<em class=
 "replaceable"><code>&lt;xxx&gt;</code></em> /etc/localtime</kbd>
 </pre>
           <p>
-            Replace <em class="replaceable"><code>&lt;xxx&gt;</code></em>
-            with the name of the time zone selected (e.g., Canada/Eastern).
+            将 <em class="replaceable"><code>&lt;xxx&gt;</code></em> 替换为任何你选择的时区（例如 Canada/Eastern）。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            <a id="conf-ld" name="conf-ld"></a>6.9.2.3. Configuring the
-            Dynamic Loader
+            <a id="conf-ld" name="conf-ld"></a>6.9.2.3. 配置动态加载器
           </h3>
           <p>
-            By default, the dynamic loader (<code class=
-            "filename">/lib/ld-linux.so.2</code>) searches through
-            <code class="filename">/lib</code> and <code class=
-            "filename">/usr/lib</code> for dynamic libraries that are needed
-            by programs as they are run. However, if there are libraries in
-            directories other than <code class="filename">/lib</code> and
-            <code class="filename">/usr/lib</code>, these need to be added to
-            the <code class="filename">/etc/ld.so.conf</code> file in order
-            for the dynamic loader to find them. Two directories that are
-            commonly known to contain additional libraries are <code class=
-            "filename">/usr/local/lib</code> and <code class=
-            "filename">/opt/lib</code>, so add those directories to the
-            dynamic loader's search path.
+            默认地，动态加载器（<code class="filename">/lib/ld-linux.so.2</code>）会程序运行的时候在 <code class="filename">/lib</code> 和 <code class="filename">/usr/lib</code> 中搜索它需要的动态库。然而，如果库在除了 <code class="filename">/lib</code> 和 <code class="filename">/usr/lib</code> 之外的目录的话，他们就需要按照动态加载器寻找它们的顺序将它们添加进 <code class="filename">/etc/ld.so.conf</code> 文件。<code class="filename">/usr/local/lib</code> 和 <code class="filename">/opt/lib</code> 是两个熟知的包含附加库的目录，所以将这些路径添加进动态加载器的搜索路径中。
           </p>
           <p>
-            Create a new file <code class="filename">/etc/ld.so.conf</code>
-            by running the following:
+            通过运行下面的命令来创建 <code class="filename">/etc/ld.so.conf</code>：
           </p>
           <pre class="userinput">
 <kbd class="command">cat &gt; /etc/ld.so.conf &lt;&lt; "EOF"
@@ -458,10 +362,7 @@ unset ZONEINFO</kbd>
 EOF</kbd>
 </pre>
           <p>
-            If desired, the dynamic loader can also search a directory and
-            include the contents of files found there. Generally the files in
-            this include directory are one line specifying the desired
-            library path. To add this capability run the following commands:
+            如果有要求的话，动态加载器也会搜索一个路径并将找到的文件内容添加进去。通常来说，在被包括的路径中的这样的文件有一行指定了需要的库的路径。运行以下的命令来添加这样的能力：
           </p>
           <pre class="userinput">
 <kbd class="command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
@@ -475,20 +376,19 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-glibc" name="contents-glibc"></a>6.9.3. Contents of
-          Glibc
+          <a id="contents-glibc" name="contents-glibc"></a>6.9.3. Glibc 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装了的程序：</strong>
               <span class="segbody">catchsegv, gencat, getconf, getent,
               iconv, iconvconfig, ldconfig, ldd, lddlibc4, locale, localedef,
               makedb, mtrace, nscd, pldd, rpcgen, sln, sotruss, sprof,
               tzselect, xtrace, zdump, and zic</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装了的库：</strong>
               <span class="segbody">ld-2.25.so, libBrokenLocale.{a,so},
               libSegFault.so, libanl.{a,so}, libc.{a,so}, libc_nonshared.a,
               libcidn.so, libcrypt.{a,so}, libdl.{a,so}, libg.a, libieee.a,
@@ -500,7 +400,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
               libutil.{a,so}</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装了的目录：</strong>
               <span class="segbody">/usr/include/arpa, /usr/include/bits,
               /usr/include/gnu, /usr/include/net, /usr/include/netash,
               /usr/include/netatalk, /usr/include/netax25,
@@ -517,7 +417,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简短的描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -535,8 +435,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Can be used to create a stack trace when a program
-                    terminates with a segmentation fault
+                    当程序以一个段错误终止时候，它能用来创建一个堆栈轨迹
                   </p>
                 </td>
               </tr>
@@ -550,7 +449,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates message catalogues
+                    生成消息归类
                   </p>
                 </td>
               </tr>
@@ -564,8 +463,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays the system configuration values for file system
-                    specific variables
+                    显示文件系统特定变量的系统配置值
                   </p>
                 </td>
               </tr>
@@ -579,7 +477,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Gets entries from an administrative database
+                    获得管理员数据库的入口
                   </p>
                 </td>
               </tr>
@@ -593,7 +491,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Performs character set conversion
+                    进行字符集转换
                   </p>
                 </td>
               </tr>
@@ -607,9 +505,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates fastloading <span class=
-                    "command"><strong>iconv</strong></span> module
-                    configuration files
+                    创建用来快速加载 <span class="command"><strong>iconv</strong></span> 模块的配置文件
                   </p>
                 </td>
               </tr>
@@ -623,7 +519,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Configures the dynamic linker runtime bindings
+                    配置动态链接器的运行时绑定
                   </p>
                 </td>
               </tr>
@@ -636,8 +532,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports which shared libraries are required by each given
-                    program or shared library
+                    报告给定的程序或共享库所需要的共享库
                   </p>
                 </td>
               </tr>
@@ -651,8 +546,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Assists <span class="command"><strong>ldd</strong></span>
-                    with object files
+                    用对象文件辅助 <span class="command"><strong>ldd</strong></span>
                   </p>
                 </td>
               </tr>
@@ -666,7 +560,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Prints various information about the current locale
+                    显示当前地区的大量信息
                   </p>
                 </td>
               </tr>
@@ -680,7 +574,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Compiles locale specifications
+                    编译地区定义
                   </p>
                 </td>
               </tr>
@@ -694,7 +588,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a simple database from textual input
+                    为文本输入创建一个简易数据库
                   </p>
                 </td>
               </tr>
@@ -708,8 +602,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Reads and interprets a memory trace file and displays a
-                    summary in human-readable format
+                    读取并解析一个内存轨迹文件，并将结果显示为可阅读的格式
                   </p>
                 </td>
               </tr>
@@ -723,8 +616,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    A daemon that provides a cache for the most common name
-                    service requests
+                    一个提供最常用的名称解析服务请求的缓存的守护进程
                   </p>
                 </td>
               </tr>
@@ -738,7 +630,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists dynamic shared objects used by running processes
+                    列出运行中的进程中所使用的动态的共享对象
                   </p>
                 </td>
               </tr>
@@ -752,8 +644,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates C code to implement the Remote Procedure Call
-                    (RPC) protocol
+                    产生实现远程过程调用（RPC）协议的 C 语言代码
                   </p>
                 </td>
               </tr>
@@ -766,8 +657,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    A statically linked <span class=
-                    "command"><strong>ln</strong></span> program
+                    一个静态链接的 <span class="command"><strong>ln</strong></span> 程序
                   </p>
                 </td>
               </tr>
@@ -781,8 +671,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Traces shared library procedure calls of a specified
-                    command
+                    追踪特定命令调用过程的共享库
                   </p>
                 </td>
               </tr>
@@ -796,7 +685,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Reads and displays shared object profiling data
+                    读取并显示共享对象的详细数据
                   </p>
                 </td>
               </tr>
@@ -810,8 +699,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Asks the user about the location of the system and
-                    reports the corresponding time zone description
+                    向用户询问系统的位置，并报告对应的时区描述
                   </p>
                 </td>
               </tr>
@@ -825,8 +713,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Traces the execution of a program by printing the
-                    currently executed function
+                    通过显示现在运行的函数来追踪程序的执行情况
                   </p>
                 </td>
               </tr>
@@ -840,7 +727,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The time zone dumper
+                    时区转储器
                   </p>
                 </td>
               </tr>
@@ -853,7 +740,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The time zone compiler
+                    时区编译器
                   </p>
                 </td>
               </tr>
@@ -866,7 +753,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The helper program for shared library executables
+                    共享库的可执行文件的帮助程序
                   </p>
                 </td>
               </tr>
@@ -880,11 +767,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Used internally by Glibc as a gross hack to get broken
-                    programs (e.g., some Motif applications) running. See
-                    comments in <code class=
-                    "filename">glibc-2.25/locale/broken_cur_max.c</code> for
-                    more information
+                    在 Glibc 内部使用，作为一个粗暴的 hack 来运行损坏了的程序（例如，一些 Motif 应用）。详情请看 <code class="filename">glibc-2.25/locale/broken_cur_max.c</code> 中的注释。
                   </p>
                 </td>
               </tr>
@@ -897,8 +780,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The segmentation fault signal handler, used by
-                    <span class="command"><strong>catchsegv</strong></span>
+                    段错误信号的处理程序，由 <span class="command"><strong>catchsegv</strong></span> 使用
                   </p>
                 </td>
               </tr>
@@ -911,7 +793,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    An asynchronous name lookup library
+                    异步的名称查看库
                   </p>
                 </td>
               </tr>
@@ -924,7 +806,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The main C library
+                    主要的 C 库
                   </p>
                 </td>
               </tr>
@@ -937,9 +819,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Used internally by Glibc for handling internationalized
-                    domain names in the <code class=
-                    "function">getaddrinfo()</code> function
+                    在 Glibc 内部使用，在 <code class="function">getaddrinfo()</code> 函数中处理国际化的域名
                   </p>
                 </td>
               </tr>
@@ -952,7 +832,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The cryptography library
+                    密码学库
                   </p>
                 </td>
               </tr>
@@ -965,7 +845,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The dynamic linking interface library
+                    动态链接界面库
                   </p>
                 </td>
               </tr>
@@ -978,9 +858,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Dummy library containing no functions. Previously was a
-                    runtime library for <span class=
-                    "command"><strong>g++</strong></span>
+                    不包含任何函数的空库。在过去，它是 <span class="command"><strong>g++</strong></span> 的运行时库
                   </p>
                 </td>
               </tr>
@@ -993,10 +871,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Linking in this module forces error handling rules for
-                    math functions as defined by the Institute of Electrical
-                    and Electronic Engineers (IEEE). The default is POSIX.1
-                    error handling
+                    在这个模块中的链接会强迫对数学函数的错误处理依照 IEEE 规范进行。默认是 POSIX.1 错误处理
                   </p>
                 </td>
               </tr>
@@ -1009,7 +884,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The mathematical library
+                    数学库
                   </p>
                 </td>
               </tr>
@@ -1022,7 +897,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Turns on memory allocation checking when linked to
+                    如果它被链接到的话，会打开内存分配的检查
                   </p>
                 </td>
               </tr>
@@ -1035,9 +910,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Used by <span class=
-                    "command"><strong>memusage</strong></span> to help
-                    collect information about the memory usage of a program
+                    由 <span class="command"><strong>memusage</strong></span> 使用，帮助收集一个程序的内存使用的信息
                   </p>
                 </td>
               </tr>
@@ -1050,7 +923,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The network services library
+                    网络服务库
                   </p>
                 </td>
               </tr>
@@ -1063,9 +936,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The Name Service Switch libraries, containing functions
-                    for resolving host names, user names, group names,
-                    aliases, services, protocols, etc.
+                    名称解析切换库，包括了解析主机名、用户名、组名、别名、服务器、协议名等等的函数。
                   </p>
                 </td>
               </tr>
@@ -1078,7 +949,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    The POSIX threads library
+                    POSIX 线程库
                   </p>
                 </td>
               </tr>
@@ -1091,8 +962,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains functions for creating, sending, and
-                    interpreting packets to the Internet domain name servers
+                    包括了向因特网域名服务器创建、发送和解析包的函数
                   </p>
                 </td>
               </tr>
@@ -1105,7 +975,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains functions providing miscellaneous RPC services
+                    提供杂项 RPC 服务的函数
                   </p>
                 </td>
               </tr>
@@ -1118,8 +988,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains functions providing most of the interfaces
-                    specified by the POSIX.1b Realtime Extension
+                    包含了提供由 POSIX.1b 实时扩展所定义的绝大多数接口的函数
                   </p>
                 </td>
               </tr>
@@ -1132,8 +1001,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains functions useful for building debuggers for
-                    multi-threaded programs
+                    包含了对构建多线程程序的调试器很有用的函数
                   </p>
                 </td>
               </tr>
@@ -1146,9 +1014,7 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains code for <span class="quote">&ldquo;<span class=
-                    "quote">standard</span>&rdquo;</span> functions used in
-                    many different Unix utilities
+                    包含了在许多不同的 Unix 工具中使用的<span class="quote">&ldquo;<span class="quote">标准</span>&rdquo;</span>函数
                   </p>
                 </td>
               </tr>
@@ -1161,25 +1027,25 @@ mkdir -pv /etc/ld.so.conf.d</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="man-pages.html" title=
-          "Man-pages-4.09">Prev</a>
+          "Man-pages-4.09">上一页</a>
           <p>
             Man-pages-4.09
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="adjusting.html" title=
-          "Adjusting the Toolchain">Next</a>
+          "调整工具链">下一页</a>
           <p>
-            Adjusting the Toolchain
+            调整工具链
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第 6 章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

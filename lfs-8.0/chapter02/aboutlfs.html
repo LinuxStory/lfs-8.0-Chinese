@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      2.6.&nbsp;Setting The $LFS Variable
+      2.6. 设置 $LFS 变量
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,102 +19,70 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;2.&nbsp;Preparing the Host System
+        第 2 章 准备宿主系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="creatingfilesystem.html" title=
-          "Creating a File System on the Partition">Prev</a>
+          "在新分区上创建一个文件系统">上一页</a>
           <p>
-            Creating a File System on the Partition
+            在新分区上创建一个文件系统
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="mounting.html" title=
-          "Mounting the New Partition">Next</a>
+          "挂载新分区">下一页</a>
           <p>
-            Mounting the New Partition
+            挂载新分区
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-partitioning-aboutlfs" name=
-        "ch-partitioning-aboutlfs"></a>2.6. Setting The $LFS Variable
+        "ch-partitioning-aboutlfs"></a>2.6. 设置 $LFS 变量
       </h1>
       <p>
-        Throughout this book, the environment variable <code class=
-        "envar">LFS</code> will be used several times. You should ensure that
-        this variable is always defined throughout the LFS build process. It
-        should be set to the name of the directory where you will be building
-        your LFS system - we will use <code class="filename">/mnt/lfs</code>
-        as an example, but the directory choice is up to you. If you are
-        building LFS on a separate partition, this directory will be the
-        mount point for the partition. Choose a directory location and set
-        the variable with the following command:
+        在整本书中，<code class="envar">LFS</code> 环境变量会被使用若干次。你需要确保在每个 LFS 构建过程中这个变量总是被定义了。它应该被设置为你将用来构建你的 LFS 系统的路径的名字——我们会以 <code class="filename">/mnt/lfs</code> 作为例子，但是这个路径的选择随便你。如果你在一个独立的分区上构建 LFS，这个路径将是那个分区的挂载点。选择一个目录位置，并且使用以下命令来设置它：
       </p>
       <pre class="userinput">
 <kbd class="command">export LFS=<em class=
 "replaceable"><code>/mnt/lfs</code></em></kbd>
 </pre>
       <p>
-        Having this variable set is beneficial in that commands such as
-        <span class="command"><strong>mkdir -v $LFS/tools</strong></span> can
-        be typed literally. The shell will automatically replace <span class=
-        "quote">&ldquo;<span class="quote">$LFS</span>&rdquo;</span> with
-        <span class="quote">&ldquo;<span class=
-        "quote">/mnt/lfs</span>&rdquo;</span> (or whatever the variable was
-        set to) when it processes the command line.
+        设置这个变量对诸如 <span class="command"><strong>mkdir -v $LFS/tools</strong></span> 之类的命令有好处，因为那样就能够被真正地输入。Shell 在解释这个命令行时将会自动地把 <span class="quote">&ldquo;<span class="quote">$LFS</span>&rdquo;</span> 替换为 <span class="quote">&ldquo;<span class="quote">/mnt/lfs</span>&rdquo;</span> （或者任何它被设置的变量）
       </p>
       <div class="admon caution">
         <img alt="[Caution]" src="../images/caution.png" />
         <h3>
-          Caution
+          当心
         </h3>
         <p>
-          Do not forget to check that <code class="envar">LFS</code> is set
-          whenever you leave and reenter the current working environment
-          (such as when doing a <span class=
-          "command"><strong>su</strong></span> to <code class=
-          "systemitem">root</code> or another user). Check that the
-          <code class="envar">LFS</code> variable is set up properly with:
+          每次你离开并重新进入当前的工作环境时（例如，执行 <span class="command"><strong>su</strong></span> 到 <code class="systemitem">root</code> 或其它用户时），不要忘记检查一下 <code class="envar">LFS</code> 是否被设置了。使用以下命令检查一下 <code class="envar">LFS</code> 是否被正确设置：
         </p>
         <pre class="userinput">
 <kbd class="command">echo $LFS</kbd>
 </pre>
         <p>
-          Make sure the output shows the path to your LFS system's build
-          location, which is <code class="filename">/mnt/lfs</code> if the
-          provided example was followed. If the output is incorrect, use the
-          command given earlier on this page to set <code class=
-          "envar">$LFS</code> to the correct directory name.
+          确保输出显示了你的 LFS 系统的构建路径，如果你跟随着这个例子的话它应该是 <code class="filename">/mnt/lfs</code>。如果输出不正确，使用本页前面提过的命令来设置 <code class="envar">$LFS</code> 为一个正确的目录名称。
         </p>
       </div>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          One way to ensure that the <code class="envar">LFS</code> variable
-          is always set is to edit the <code class=
-          "filename">.bash_profile</code> file in both your personal home
-          directory and in <code class="filename">/root/.bash_profile</code>
-          and enter the export command above. In addition, the shell
-          specified in the <code class="filename">/etc/passwd</code> file for
-          all users that need the <code class="envar">LFS</code> variable
-          needs to be bash to ensure that the <code class=
-          "filename">/root/.bash_profile</code> file is incorporated as a
-          part of the login process.
+          一个确保 <code class="envar">LFS</code> 变量总是被设置的方式是编辑你的个人家目录中的 <code class="filename">.bash_profile</code> 文件和 <code class="filename">/root/.bash_profile</code> 并输入上面提到的 export 命令。另外，在 <code class="filename">/etc/passwd</code> 中指定的需要 <code class="envar">LFS</code> 变量的所有用户的 shell 都需要是 bash，以确保 <code class="filename">/root/.bash_profile</code> 被包含在登录过程中的一部分。
         </p>
       </div>
     </div>
@@ -122,25 +90,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="creatingfilesystem.html" title=
-          "Creating a File System on the Partition">Prev</a>
+          "在新分区上创建一个文件系统">上一页</a>
           <p>
-            Creating a File System on the Partition
+            在新分区上创建一个文件系统
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="mounting.html" title=
-          "Mounting the New Partition">Next</a>
+          "挂载新分区">下一页</a>
           <p>
-            Mounting the New Partition
+            挂载新分区
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter02.html" title=
-          "Chapter&nbsp;2.&nbsp;Preparing the Host System">Up</a>
+          "第 2 章 准备宿主系统">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
