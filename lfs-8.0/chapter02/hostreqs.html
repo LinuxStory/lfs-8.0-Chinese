@@ -51,15 +51,7 @@
         <a id="pre-hostreqs" name="pre-hostreqs"></a>2.2. 宿主系统需求
       </h1>
       <p>
-        你的宿主系统应该拥有这些软件，并且其版本号不应低于以下列出的。
-        对于大多数现代的 Linux 发行版来说，这不应该成为一个问题。
-        另外还需要注意，许多发行版会经常以 <span class=
-        "quote">&ldquo;<span class=
-        "quote">&lt;package-name&gt;-devel</span>&rdquo;</span> 或者
-        <span class="quote">&ldquo;<span class=
-        "quote">&lt;package-name&gt;-dev</span>&rdquo;</span> 的形式，
-        将软件的头文件放在分开的软件包中。如果你使用的发行版提供这类软件包的话，
-        请记得安装它们。
+        你的宿主系统应该拥有这些软件，并且其版本号不应低于以下列出的。对于大多数现代的 Linux 发行版来说，这不应该成为一个问题。另外还需要注意，许多发行版会经常以 <span class="quote">&ldquo;<span class="quote">&lt;package-name&gt;-devel</span>&rdquo;</span> 或者 <span class="quote">&ldquo;<span class="quote">&lt;package-name&gt;-dev</span>&rdquo;</span> 的形式，将软件的头文件放在分开的软件包中。如果你使用的发行版提供这类软件包的话，请记得安装它们。
       </p>
       <p>
         以下列出的软件包的更早版本可能仍然能够符合预期地工作，但是这并没有被测试过。
@@ -68,21 +60,17 @@
         <ul class="compact">
           <li class="listitem">
             <p>
-              <span class="strong"><strong>Bash-3.2</strong></span> （/bin/sh
-              应该是一个指向 bash 的符号链接或者硬链接）
+              <span class="strong"><strong>Bash-3.2</strong></span>（/bin/sh 应该是一个指向 bash 的符号链接或者硬链接）
             </p>
           </li>
           <li class="listitem">
             <p>
-              <span class="strong"><strong>Binutils-2.17</strong></span>
-              （不推荐 2.27 以后的版本，因为它们并没有被测试过）
+              <span class="strong"><strong>Binutils-2.17</strong></span>（不推荐 2.27 以后的版本，因为它们并没有被测试过）
             </p>
           </li>
           <li class="listitem">
             <p>
-              <span class="strong"><strong>Bison-2.3</strong></span>
-              （/usr/bin/yacc 应该是一个指向 bison 的链接，或者是一个运行 bison
-              的小脚本）
+              <span class="strong"><strong>Bison-2.3</strong></span>（/usr/bin/yacc 应该是一个指向 bison 的链接，或者是一个运行 bison的小脚本）
             </p>
           </li>
           <li class="listitem">
@@ -107,16 +95,12 @@
           </li>
           <li class="listitem">
             <p>
-              <span class="strong"><strong>Gawk-4.0.1</strong></span>
-              (/usr/bin/awk 应该是一个指向 gawk 的链接)
+              <span class="strong"><strong>Gawk-4.0.1</strong></span>（/usr/bin/awk 应该是一个指向 gawk 的链接）
             </p>
           </li>
           <li class="listitem">
             <p>
-              <span class="strong"><strong>GCC-4.7</strong></span> 包括 C++
-              编译器，<span class=
-              "command"><strong>g++</strong></span>（不推荐 6.3.0 以后的版本，
-              因为它们并没有被测试过）
+              <span class="strong"><strong>GCC-4.7</strong></span> 包括 C++ 编译器，<span class="command"><strong>g++</strong></span>（不推荐 6.3.0 以后的版本，因为它们并没有被测试过）
             </p>
             <div class="admon note">
               <img alt="[Note]" src="../images/note.png" />
@@ -124,20 +108,13 @@
                 说明
               </h3>
               <p>
-                有报告称，在一些发行版上，GCC 所使用的库可能出现不一致的状态，
-                并且已经影响到了一些 LFS 包的构建。可以检查一下 /usr/lib 目录下
-                （可能的话再检查 /usr/lib64）是否有 libgmp.la, libmpfr.la，和
-                libmpc.la。
-                这三个文件或者都存在，或者都不存在，不应该是只有一个或者两个的情况。
-                如果在你的系统上出现了这个问题，可以重命名或者删除这些 .la 文件，
-                或者安装它们所对应的缺失了软件包。
+                有报告称，在一些发行版上，GCC 所使用的库可能出现不一致的状态，并且已经影响到了一些 LFS 包的构建。可以检查一下 /usr/lib 目录下（可能的话再检查 /usr/lib64）是否有 libgmp.la, libmpfr.la，和 libmpc.la。这三个文件或者都存在，或者都不存在，不应该是只有一个或者两个的情况。如果在你的系统上出现了这个问题，可以重命名或者删除这些 .la 文件，或者安装它们所对应的缺失了软件包。
               </p>
             </div>
           </li>
           <li class="listitem">
             <p>
-              <span class="strong"><strong>Glibc-2.11</strong></span>
-              （不推荐 2.25 以后的版本，因为它们并没有被测试过）
+              <span class="strong"><strong>Glibc-2.11</strong></span>（不推荐 2.25 以后的版本，因为它们并没有被测试过）
             </p>
           </li>
           <li class="listitem">
@@ -152,23 +129,13 @@
           </li>
           <li class="listitem">
             <p>
-              <span class="strong"><strong>Linux
-              Kernel-2.6.32</strong></span>
+              <span class="strong"><strong>Linux Kernel-2.6.32</strong></span>
             </p>
             <p>
-              之所以要求这个内核版本，是因为在第 6 章中构建 <span class=
-              "application">glibc</span> 时，我们指定这个版本作为开发者的推荐版本。
-              同样，udev 也依赖于这个版本。
+              之所以要求这个内核版本，是因为在第 6 章中构建 <span class="application">glibc</span> 时，我们指定这个版本作为开发者的推荐版本。同样，udev 也依赖于这个版本。
             </p>
             <p>
-              如果你的宿主内核比 2.6.32 早的话，你需要将你的内核替换为更新的内核。
-              有两种方式可以达到目的。首先检查一下你的 Linux 维护者是否已经提供了
-              2.6.32 或者更新的内核包。如果是的话，你不妨安装它。
-              如果你的维护者没有提供一个可以接受的内核包，或者你不太想安装它的话，
-              你可以自己编译它。在 <a class="xref" href=
-              "../chapter08/chapter08.html" title=
-              "Chapter&nbsp;8.&nbsp;Making the LFS System Bootable">第 8 章</a>
-              中有关于编译内核和配置引导器（假定宿主机使用 GRUB）的指导。
+              如果你的宿主内核比 2.6.32 早的话，你需要将你的内核替换为更新的内核。有两种方式可以达到目的。首先检查一下你的 Linux 维护者是否已经提供了 2.6.32 或者更新的内核包。如果是的话，你不妨安装它。如果你的维护者没有提供一个可以接受的内核包，或者你不太想安装它的话，你可以自己编译它。在 <a class="xref" href="../chapter08/chapter08.html" title="第 8 章 让 LFS 系统可引导">第 8 章</a> 中有关于编译内核和配置引导器（假定宿主机使用 GRUB）的指导。
             </p>
           </li>
           <li class="listitem">
@@ -219,10 +186,7 @@
           注意
         </h3>
         <p>
-          注意，本书中构建 LFS 使用的指令都假定你使用了上面提到的符号链接。
-          指向其它软件的符号链接（例如 dash, mawk 等等）可能符合预期地工作，
-          但是这并没有被测试过，也可能不被 LFS 开发团队所支持，
-          并且可能需要使用不同于书中的描述的指令，或者对一些软件包的额外的补丁。
+          注意，本书中构建 LFS 使用的指令都假定你使用了上面提到的符号链接。指向其它软件的符号链接（例如 dash, mawk 等等）可能符合预期地工作，但是这并没有被测试过，也可能不被 LFS 开发团队所支持，并且可能需要使用不同于书中的描述的指令，或者对一些软件包的额外的补丁。
         </p>
       </div>
       <h2>
@@ -307,8 +271,7 @@ EOF
 bash library-check.sh</kbd>
 </pre>
       <p>
-       在这个脚本中列出的这三个文件或者都存在，或者都不存在，
-       不应该是只存在一个或者两个的情况。
+       在这个脚本中列出的这三个文件或者都存在，或者都不存在，不应该是只存在一个或者两个的情况。
       </p>
     </div>
     <div class="navfooter">
