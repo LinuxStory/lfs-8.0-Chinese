@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.51.&nbsp;Diffutils-3.5
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp; 安装基本的系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="coreutils.html" title=
-          "Coreutils-8.26">Prev</a>
+          "Coreutils-8.26">上一页</a>
           <p>
             Coreutils-8.26
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gawk.html" title="Gawk-4.1.4">Next</a>
+          <a accesskey="n" href="gawk.html" title="Gawk-4.1.4">下一页</a>
           <p>
             Gawk-4.1.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,17 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Diffutils package contains programs that show the differences
-          between files or directories.
+          Diffutils 是实现显示文件和目录差异的软件包
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间:</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间:</strong>
               <span class="segbody">30 MB</span>
             </div>
           </div>
@@ -70,35 +69,35 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.51.1. Installation of Diffutils
+          6.51.1. 安装 Diffutils
         </h2>
         <p>
-          First fix a file so locale files are installed:
+          首先修复文件安装区域文件:
         </p>
         <pre class="userinput">
 <kbd class=
 "command">sed -i 's:= @mkdir_p@:= /bin/mkdir -p:' po/Makefile.in.in</kbd>
 </pre>
         <p>
-          Prepare Diffutils for compilation:
+          配置 Diffutils:
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包:
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          安装前检查:
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装:
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -107,19 +106,19 @@
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-diffutils" name="contents-diffutils"></a>6.51.2.
-          Contents of Diffutils
+          Diffutils 软件包内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">cmp, diff, diff3, and sdiff</span>
+              <strong class="segtitle">安装的程序:</strong>
+              <span class="segbody">cmp, diff, diff3, 和 sdiff</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -136,8 +135,7 @@
                 </td>
                 <td>
                   <p>
-                    Compares two files and reports whether or in which bytes
-                    they differ
+                    比较两个文件并报告差异
                   </p>
                 </td>
               </tr>
@@ -151,8 +149,7 @@
                 </td>
                 <td>
                   <p>
-                    Compares two files or directories and reports which lines
-                    in the files differ
+                    比较两个文件或目录并报告文件中的差异行
                   </p>
                 </td>
               </tr>
@@ -166,7 +163,7 @@
                 </td>
                 <td>
                   <p>
-                    Compares three files line by line
+                    逐行比较三个文件
                   </p>
                 </td>
               </tr>
@@ -180,7 +177,7 @@
                 </td>
                 <td>
                   <p>
-                    Merges two files and interactively outputs the results
+                    合并两个文件，并且交互输出结果
                   </p>
                 </td>
               </tr>
@@ -193,24 +190,24 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="coreutils.html" title=
-          "Coreutils-8.26">Prev</a>
+          "Coreutils-8.26">上一页</a>
           <p>
             Coreutils-8.26
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gawk.html" title="Gawk-4.1.4">Next</a>
+          <a accesskey="n" href="gawk.html" title="Gawk-4.1.4">下一页</a>
           <p>
             Gawk-4.1.4
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

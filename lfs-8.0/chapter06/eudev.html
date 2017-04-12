@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.65.&nbsp;Eudev-3.2.1
     </title>
@@ -19,30 +19,30 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        Chapter&nbsp;6.&nbsp; 安装基本的系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="sysvinit.html" title=
-          "Sysvinit-2.88dsf">Prev</a>
+          "Sysvinit-2.88dsf">上一页</a>
           <p>
             Sysvinit-2.88dsf
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="util-linux.html" title=
-          "Util-linux-2.29.1">Next</a>
+          "Util-linux-2.29.1">下一页</a>
           <p>
             Util-linux-2.29.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -58,11 +58,11 @@
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计编译时间：</strong>
               <span class="segbody">0.2 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">78 MB</span>
             </div>
           </div>
@@ -70,25 +70,24 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.65.1. Installation of Eudev
+          6.65.1. 安装Eudev
         </h2>
         <p>
-          First, fix a test script:
+          首先准备一个测试脚本：
         </p>
         <pre class="userinput">
 <kbd class=
 "command">sed -r -i 's|/usr(/bin/test)|\1|' test/udev-test.pl</kbd>
 </pre>
         <p>
-          Next, remove an unneeded line that causes a build failure:
+          接下来，去除一个会导致编译失败的匹配行：
         </p>
         <pre class="userinput">
 <kbd class=
 "command">sed -i '/keyboard_lookup_key/d' src/udev/udev-builtin-keyboard.c</kbd>
 </pre>
         <p>
-          Next, add a workaround to prevent the /tools directory from being
-          hard coded into Eudev binary files library locations:
+          接下来，添加一个工作环境，防止tools工作目录找不到编译eudev二进制文件的库位置：
         </p>
         <pre class="userinput">
 <kbd class="command">cat &gt; config.cache &lt;&lt; "EOF"
@@ -98,7 +97,7 @@ BLKID_CFLAGS="-I/tools/include"
 EOF</kbd>
 </pre>
         <p>
-          Prepare Eudev for compilation:
+          预编译：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr           \
@@ -114,34 +113,32 @@ EOF</kbd>
             --config-cache</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">LIBRARY_PATH=/tools/lib make</kbd>
 </pre>
         <p>
-          Create some directories now that are needed for tests, but will
-          also be used as a part of installation:
+          创建一些测试用的目录，当让也是软件包安装的一部分：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -pv /lib/udev/rules.d
 mkdir -pv /etc/udev/rules.d</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试结果，发布：
         </p>
         <pre class="userinput">
 <kbd class="command">make LD_LIBRARY_PATH=/tools/lib check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make LD_LIBRARY_PATH=/tools/lib install</kbd>
 </pre>
         <p>
-          Install some custom rules and support files useful in an LFS
-          environment:
+          在LFS环境下安装一些自定义规则和有用的支持文件：
         </p>
         <pre class="userinput">
 <kbd class="command">tar -xvf ../udev-lfs-20140408.tar.bz2
@@ -150,49 +147,46 @@ make -f udev-lfs-20140408/Makefile.lfs install</kbd>
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="conf-eudev" name="conf-eudev"></a>6.65.2. Configuring Eudev
+          <a id="conf-eudev" name="conf-eudev"></a>6.65.2. 配置 Eudev
         </h2>
         <p>
-          Information about hardware devices is maintained in the
-          <code class="filename">/etc/udev/hwdb.d</code> and <code class=
-          "filename">/usr/lib/udev/hwdb.d</code> directories. <span class=
-          "application">Eudev</span> needs that information to be compiled
-          into a binary database <code class=
-          "filename">/etc/udev/hwdb.bin</code>. Create the initial database:
+          有关硬件设备的信息保存在
+          <code class="filename">/etc/udev/hwdb.d</code> 和 <code class=
+          "filename">/usr/lib/udev/hwdb.d</code> 目录中. <span class=
+          "application">Eudev</span> 需要将这这些信息编译进二级制数据库 <code class=
+          "filename">/etc/udev/hwdb.bin</code>. 创建初始数据库：
         </p>
         <pre class="userinput">
 <kbd class="command">LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update</kbd>
 </pre>
         <p>
-          This command needs to be run each time the hardware information is
-          updated.
+          每次硬件信息更新时，都需要运行此命令。
         </p>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-eudev" name="contents-eudev"></a>6.65.3. Contents
-          of Eudev
+          <a id="contents-eudev" name="contents-eudev"></a>6.65.3. Eudev包含的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">udevadm and udevd</span>
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">udevadm 和 udevd</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">libudev.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
-              <span class="segbody">/etc/udev, /lib/udev, and
+              <strong class="segtitle">安装的目录：</strong>
+              <span class="segbody">/etc/udev, /lib/udev, 和
               /usr/share/doc/udev-20140408</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -210,10 +204,7 @@ make -f udev-lfs-20140408/Makefile.lfs install</kbd>
                 </td>
                 <td>
                   <p>
-                    Generic udev administration tool: controls the udevd
-                    daemon, provides info from the Udev database, monitors
-                    uevents, waits for uevents to finish, tests Udev
-                    configuration, and triggers uevents for a given device
+                    通用的udev管理工具：控制udevd守护进程，提供来自udev数据库的信息，监控用户事件，等待用户事件结束，测试udev配置，并且对给定的设备出发用户事件。
                   </p>
                 </td>
               </tr>
@@ -227,10 +218,8 @@ make -f udev-lfs-20140408/Makefile.lfs install</kbd>
                 </td>
                 <td>
                   <p>
-                    A daemon that listens for uevents on the netlink socket,
-                    creates devices and runs the configured external programs
-                    in response to these uevents
-                  </p>
+                    一个监听来自netlink的用户事件的守护进程，创建设备并且配置外部程序来相应这些用户事件
+                    </p>
                 </td>
               </tr>
               <tr>
@@ -242,7 +231,7 @@ make -f udev-lfs-20140408/Makefile.lfs install</kbd>
                 </td>
                 <td>
                   <p>
-                    A library interface to udev device information
+                    连接udev设备信息的库的接口
                   </p>
                 </td>
               </tr>
@@ -255,8 +244,7 @@ make -f udev-lfs-20140408/Makefile.lfs install</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains Udev configuration files, device permissions,
-                    and rules for device naming
+                    包含Udev配置文件，设备权限和设备命名规则
                   </p>
                 </td>
               </tr>
@@ -269,25 +257,25 @@ make -f udev-lfs-20140408/Makefile.lfs install</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="sysvinit.html" title=
-          "Sysvinit-2.88dsf">Prev</a>
+          "Sysvinit-2.88dsf">上一页</a>
           <p>
             Sysvinit-2.88dsf
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="util-linux.html" title=
-          "Util-linux-2.29.1">Next</a>
+          "Util-linux-2.29.1">下一页</a>
           <p>
             Util-linux-2.29.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

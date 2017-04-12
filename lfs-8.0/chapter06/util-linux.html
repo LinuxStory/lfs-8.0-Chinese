@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.66.&nbsp;Util-linux-2.29.1
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        Chapter&nbsp;6.&nbsp; 安装基本的系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="eudev.html" title="Eudev-3.2.1">Prev</a>
+          <a accesskey="p" href="eudev.html" title="Eudev-3.2.1">上一页</a>
           <p>
             Eudev-3.2.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="man-db.html" title="Man-DB-2.7.6.1">Next</a>
+          <a accesskey="n" href="man-db.html" title="Man-DB-2.7.6.1">下一页</a>
           <p>
             Man-DB-2.7.6.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -51,18 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Util-linux package contains miscellaneous utility programs.
-          Among them are utilities for handling file systems, consoles,
-          partitions, and messages.
+          Util-linux软件包包含各种有用的程序。其中包括处理文件系统，控制台，分区和消息的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计编译时间：</strong>
               <span class="segbody">1.0 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">164 MB</span>
             </div>
           </div>
@@ -70,15 +68,14 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.66.1. FHS compliance notes
+          6.66.1. FHS 兼容性注意事项
         </h2>
         <p>
-          The FHS recommends using the <code class=
-          "filename">/var/lib/hwclock</code> directory instead of the usual
-          <code class="filename">/etc</code> directory as the location for
-          the <code class="filename">adjtime</code> file. First create a
-          directory to enable storage for the <span class=
-          "command"><strong>hwclock</strong></span> program:
+          FHS 推荐使用 <code class=
+          "filename">/var/lib/hwclock</code> 目录，而不是通常的
+          <code class="filename">/etc</code> 目录作为 
+           <code class="filename">adjtime</code> 文件的位置. 首先新建目录用于存储 <span class=
+          "command"><strong>hwclock</strong></span> 程序：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -pv /var/lib/hwclock</kbd>
@@ -86,10 +83,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.66.2. Installation of Util-linux
+          6.66.2. 安装 Util-linux
         </h2>
         <p>
-          Prepare Util-linux for compilation:
+          预编译：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
@@ -107,32 +104,26 @@
             --without-systemdsystemunitdir</kbd>
 </pre>
         <p>
-          The --disable and --without options prevent warnings about building
-          components that require packages not in LFS or are inconsistent
-          with programs installed by other packages.
+          --disable 和 --without 选项用于防止出现关于LFS中缺少构建组件需要的软件包或其他软件包安装的程序不一致的警告。
         </p>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          If desired, run the test suite as a non-root user:
+          如果需要的话，以非root用户运行测试套件：
         </p>
         <div class="admon warning">
           <img alt="[Warning]" src="../images/warning.png" />
           <h3>
-            Warning
+            警告
           </h3>
           <p>
-            Running the test suite as the root user can be harmful to your
-            system. To run it, the CONFIG_SCSI_DEBUG option for the kernel
-            must be available in the currently running system, and must be
-            built as a module. Building it into the kernel will prevent
-            booting. For complete coverage, other BLFS packages must be
-            installed. If desired, this test can be run after rebooting into
-            the completed LFS system and running:
+            以root用户运行测试套件会对系统有害。为了运行测试套件，必须保证当前运行的系统中用于内核的CONFIG_SCSI_DEBUG选项可用，还必须保证以
+			一个模块的方式编译。把它构建到内核中可以防止启动。为了全面覆盖，还必须安装其他的BLFS软件包。如果需要的话，可以在重启进入完整的系
+			统后用一下命令运行该测试：
           </p>
           <pre class="userinput">
 <kbd class="command">bash tests/run.sh --srcdir=$PWD --builddir=$PWD</kbd>
@@ -145,15 +136,14 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            One test above, tests/ts/ipcs/limits2, will fail when the host is
-            using a recent kernel. The failure can safely be ignored.
+            在上面的测试中，如果用最新的内核，tests/ts/ipcs/limits2 会失败。可以安全地忽略该失败。
           </p>
         </div>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -162,7 +152,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-utillinux" name="contents-utillinux"></a>6.66.3.
-          Contents of Util-linux
+          安装的程序
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
@@ -186,12 +176,12 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
               zramctl</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库</strong>
               <span class="segbody">libblkid.so, libfdisk.so, libmount.so,
               libsmartcols.so, and libuuid.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装的目录：</strong>
               <span class="segbody">/usr/include/blkid,
               /usr/include/libfdisk, /usr/include/libmount,
               /usr/include/libsmartcols, /usr/include/uuid,
@@ -201,7 +191,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要介绍
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -219,7 +209,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Informs the Linux kernel of new partitions
+                    通知Linux内核有新的分区
                   </p>
                 </td>
               </tr>
@@ -233,9 +223,8 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Opens a tty port, prompts for a login name, and then
-                    invokes the <span class=
-                    "command"><strong>login</strong></span> program
+                    打开一个tty端口, 提示输入登录名，然后调用 <span class=
+                    "command"><strong>login</strong></span> 程序
                   </p>
                 </td>
               </tr>
@@ -249,7 +238,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Discards sectors on a device
+                    丢弃设备上的扇区
                   </p>
                 </td>
               </tr>
@@ -263,8 +252,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A command line utility to locate and print block device
-                    attributes
+                    用于定位和打印块设备属性的命令行工具
                   </p>
                 </td>
               </tr>
@@ -278,8 +266,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Allows users to call block device ioctls from the command
-                    line
+                    允许用户在命令行中调用块设备的 ioctls
                   </p>
                 </td>
               </tr>
@@ -292,7 +279,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays a simple calendar
+                    显示一个简单的日历
                   </p>
                 </td>
               </tr>
@@ -306,7 +293,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Manipulates the partition table of the given device
+                    管理指定设备的分区表
                   </p>
                 </td>
               </tr>
@@ -320,7 +307,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Modifies the state of CPUs
+                    更改 CPU 的状态
                   </p>
                 </td>
               </tr>
@@ -334,7 +321,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Manipulates real-time attributes of a process
+                    管理进程的的实时属性
                   </p>
                 </td>
               </tr>
@@ -347,7 +334,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Filters out reverse line feeds
+                    过滤掉反向换行符
                   </p>
                 </td>
               </tr>
@@ -361,10 +348,8 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Filters <span class=
-                    "command"><strong>nroff</strong></span> output for
-                    terminals that lack some capabilities, such as
-                    overstriking and half-lines
+                    为终端过滤缺少某些功能，例如加粗和半行的 <span class=
+                    "command"><strong>nroff</strong></span> 输出
                   </p>
                 </td>
               </tr>
@@ -378,7 +363,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Filters out the given columns
+                    过滤掉指定的列
                   </p>
                 </td>
               </tr>
@@ -392,7 +377,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Formats a given file into multiple columns
+                    格式化指定文件为多列
                   </p>
                 </td>
               </tr>
@@ -406,8 +391,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Sets the function of the Ctrl+Alt+Del key combination to
-                    a hard or a soft reset
+                    设置 Ctrl+Alt+Del 组合键的功能为硬或软复位
                   </p>
                 </td>
               </tr>
@@ -421,7 +405,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Asks the Linux kernel to remove a partition
+                    请求 Linux 内核移除一个分区
                   </p>
                 </td>
               </tr>
@@ -435,7 +419,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Dumps the kernel boot messages
+                    转储内核启动信息
                   </p>
                 </td>
               </tr>
@@ -449,7 +433,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Ejects removable media
+                    弹出可移除媒体
                   </p>
                 </td>
               </tr>
@@ -463,7 +447,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Preallocates space to a file
+                    为文件预分配空间
                   </p>
                 </td>
               </tr>
@@ -477,7 +461,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Low-level formats a floppy disk
+                    低级别格式化软盘
                   </p>
                 </td>
               </tr>
@@ -491,7 +475,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Manipulates the partition table of the given device
+                    管理指定设备的分区表
                   </p>
                 </td>
               </tr>
@@ -505,8 +489,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Finds a file system by label or Universally Unique
-                    Identifier (UUID)
+                    通过标签或通用唯一标识符（UUID）查找文件系统
                   </p>
                 </td>
               </tr>
@@ -520,8 +503,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Is a command line interface to the libmount library for
-                    work with mountinfo, fstab and mtab files
+                    libmount 库中用于和 mountinfo、fstab 和 mtab 文件工作的命令行接口
                   </p>
                 </td>
               </tr>
@@ -535,8 +517,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Acquires a file lock and then executes a command with the
-                    lock held
+                    请求一个文件锁，然后用所持有的锁执行命令
                   </p>
                 </td>
               </tr>
@@ -550,7 +531,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to check, and optionally repair, file systems
+                    用于检查或者修复文件系统
                   </p>
                 </td>
               </tr>
@@ -564,8 +545,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Performs a consistency check on the Cramfs file system on
-                    the given device
+                    在指定设备的 Cramfs 文件系统上进行一致性检查
                   </p>
                 </td>
               </tr>
@@ -579,8 +559,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Performs a consistency check on the Minix file system on
-                    the given device
+                    在指定设备的 Minix 文件系统上进行一致性检查
                   </p>
                 </td>
               </tr>
@@ -594,8 +573,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Is a very simple wrapper around FIFREEZE/FITHAW ioctl
-                    kernel driver operations
+                    FIFREEZE/FITHAW ioctl 内核驱动操作的简单封装
                   </p>
                 </td>
               </tr>
@@ -609,7 +587,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Discards unused blocks on a mounted filesystem
+                   丢弃已挂载的文件系统中未使用的块
                   </p>
                 </td>
               </tr>
@@ -623,7 +601,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Parses options in the given command line
+                    解析给定命令行中的选项
                   </p>
                 </td>
               </tr>
@@ -637,8 +615,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Dumps the given file in hexadecimal or in another given
-                    format
+                    以十六进制或其它指定格式转储给定文件
                   </p>
                 </td>
               </tr>
@@ -652,9 +629,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Reads or sets the system's hardware clock, also called
-                    the Real-Time Clock (RTC) or Basic Input-Output System
-                    (BIOS) clock
+                    读取或设置系统硬件时钟，也称为实时时钟（RTC）或基本输入输出系统（BIOS）时钟
                   </p>
                 </td>
               </tr>
@@ -668,7 +643,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A symbolic link to setarch
+                    到 setarch 的符号链接
                   </p>
                 </td>
               </tr>
@@ -682,8 +657,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Gets or sets the io scheduling class and priority for a
-                    program
+                    为某个程序获取或设置 io 调度类和优先级
                   </p>
                 </td>
               </tr>
@@ -697,7 +671,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates various IPC resources
+                    创建多种 IPC（进程间通信） 资源
                   </p>
                 </td>
               </tr>
@@ -711,8 +685,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Removes the given Inter-Process Communication (IPC)
-                    resource
+                    移除指定的进程间通信（IPC）资源
                   </p>
                 </td>
               </tr>
@@ -726,7 +699,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Provides IPC status information
+                    提供 IPC 状态信息
                   </p>
                 </td>
               </tr>
@@ -740,7 +713,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the size of an iso9660 file system
+                    报告 iso9660 文件系统的大小
                   </p>
                 </td>
               </tr>
@@ -754,7 +727,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Sends signals to processes
+                    向进程发送信号
                   </p>
                 </td>
               </tr>
@@ -768,10 +741,8 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows which users last logged in (and out), searching
-                    back through the <code class=
-                    "filename">/var/log/wtmp</code> file; it also shows
-                    system boots, shutdowns, and run-level changes
+                    通过反向查找 <code class=
+                    "filename">/var/log/wtmp</code> 文件显示上次登录（注销）的用户；同时还显示系统启动、关闭以及运行时级别更改
                   </p>
                 </td>
               </tr>
@@ -785,8 +756,8 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows the failed login attempts, as logged in
-                    <code class="filename">/var/log/btmp</code>
+                    根据
+                    <code class="filename">/var/log/btmp</code>中的日志显示失败的登录尝试
                   </p>
                 </td>
               </tr>
@@ -800,7 +771,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Attaches a line discipline to a serial line
+                    向行中添加行规则
                   </p>
                 </td>
               </tr>
@@ -814,7 +785,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A symbolic link to setarch
+                    到 setarch 的符号链接
                   </p>
                 </td>
               </tr>
@@ -828,7 +799,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A symbolic link to setarch
+                    到 setarch 的符号链接
                   </p>
                 </td>
               </tr>
@@ -842,7 +813,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Enters the given message into the system log
+                    输入给定的信息到系统日志
                   </p>
                 </td>
               </tr>
@@ -856,7 +827,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays lines that begin with the given string
+                    显示以指定字符串开头的行
                   </p>
                 </td>
               </tr>
@@ -870,7 +841,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Sets up and controls loop devices
+                    设置和控制环路设备
                   </p>
                 </td>
               </tr>
@@ -884,8 +855,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists information about all or selected block devices in
-                    a tree-like format
+                    以类似树的形式列出所有或指定块设备的信息
                   </p>
                 </td>
               </tr>
@@ -899,7 +869,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Prints CPU architecture information
+                    打印 CPU 架构信息
                   </p>
                 </td>
               </tr>
@@ -913,8 +883,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Prints information on IPC facilities currently employed
-                    in the system
+                    打印当前系统中使用的IPC设备信息
                   </p>
                 </td>
               </tr>
@@ -928,7 +897,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists local system locks
+                    列出本地系统锁
                   </p>
                 </td>
               </tr>
@@ -942,7 +911,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Lists information about users, groups and system accounts
+                    列出关于用户、组和系统账号的信息
                   </p>
                 </td>
               </tr>
@@ -956,9 +925,8 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Generates magic cookies (128-bit random hexadecimal
-                    numbers) for <span class=
-                    "command"><strong>xauth</strong></span>
+                    为 <span class=
+                    "command"><strong>xauth</strong></span>生成 magic cookies（128位随机十六进制数）
                   </p>
                 </td>
               </tr>
@@ -972,8 +940,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Controls whether other users can send messages to the
-                    current user's terminal
+                    控制其它用户是否可以向当前用户终端发送信息
                   </p>
                 </td>
               </tr>
@@ -987,8 +954,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Builds a file system on a device (usually a hard disk
-                    partition)
+                    在设备上构建文件系统（通常是一个硬盘分区）
                   </p>
                 </td>
               </tr>
@@ -1002,7 +968,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a Santa Cruz Operations (SCO) bfs file system
+                    创建 Santa Cruz Operations（SCO） bfs 文件系统
                   </p>
                 </td>
               </tr>
@@ -1016,7 +982,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a cramfs file system
+                    创建 cramfs 文件系统
                   </p>
                 </td>
               </tr>
@@ -1030,7 +996,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates a Minix file system
+                    创建 Minix 文件系统
                   </p>
                 </td>
               </tr>
@@ -1044,8 +1010,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Initializes the given device or file to be used as a swap
-                    area
+                    初始化指定设备或文件作为交换空间使用
                   </p>
                 </td>
               </tr>
@@ -1059,7 +1024,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A filter for paging through text one screen at a time
+                    用于每次显示文本一页的过滤器
                   </p>
                 </td>
               </tr>
@@ -1073,8 +1038,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Attaches the file system on the given device to a
-                    specified directory in the file-system tree
+                    在文件系统树中挂载文件系统到给定设备的指定目录
                   </p>
                 </td>
               </tr>
@@ -1088,7 +1052,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Checks if the directory is a mountpoint
+                    检查目录是否是一个挂载点
                   </p>
                 </td>
               </tr>
@@ -1102,7 +1066,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows the symbolic links in the given pathnames
+                    显示给定路径名称的符号链接
                   </p>
                 </td>
               </tr>
@@ -1116,7 +1080,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs a program with namespaces of other processes
+                    在其他进程的命名空间中运行程序
                   </p>
                 </td>
               </tr>
@@ -1130,8 +1094,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Tells the kernel about the presence and numbering of
-                    on-disk partitions
+                    在其他进程的命名空间中运行程序
                   </p>
                 </td>
               </tr>
@@ -1144,7 +1107,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays a text file one screen full at a time
+                    每次显示一屏文本文件
                   </p>
                 </td>
               </tr>
@@ -1158,8 +1121,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Makes the given file system the new root file system of
-                    the current process
+                    使指定文件系统作为当前进程的新的根文件系统
                   </p>
                 </td>
               </tr>
@@ -1173,7 +1135,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Get and set a process' resource limits
+                    获取或设置进程资源限制
                   </p>
                 </td>
               </tr>
@@ -1186,7 +1148,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Bind a Linux raw character device to a block device
+                    绑定 Linux 原始字符设备到一个块设备
                   </p>
                 </td>
               </tr>
@@ -1200,7 +1162,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Reads kernel profiling information
+                    读取内核分析信息
                   </p>
                 </td>
               </tr>
@@ -1214,8 +1176,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Renames the given files, replacing a given string with
-                    another
+                    重命名指定文件，用另一个字符串替换指定字符串
                   </p>
                 </td>
               </tr>
@@ -1229,7 +1190,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Alters the priority of running processes
+                    更改运行中进程的优先级
                   </p>
                 </td>
               </tr>
@@ -1243,7 +1204,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Asks the Linux kernel to resize a partition
+                    请求 Linux 内核重新设置分区大小
                   </p>
                 </td>
               </tr>
@@ -1256,7 +1217,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Reverses the lines of a given file
+                    反转指定文件的行
                   </p>
                 </td>
               </tr>
@@ -1270,8 +1231,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to enter a system sleep state until specified wakeup
-                    time
+                    用于进入系统睡眠状态知道指定的唤醒时间
                   </p>
                 </td>
               </tr>
@@ -1285,7 +1245,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Makes a typescript of a terminal session
+                    生成终端会话的打字稿
                   </p>
                 </td>
               </tr>
@@ -1299,7 +1259,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Plays back typescripts using timing information
+                    用定时信息播放打字稿
                   </p>
                 </td>
               </tr>
@@ -1313,8 +1273,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Changes reported architecture in a new program
-                    environment and sets personality flags
+                    在新程序环境中更改报告架构并设置个性标签
                   </p>
                 </td>
               </tr>
@@ -1328,7 +1287,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs the given program in a new session
+                    在新会话中运行指定程序
                   </p>
                 </td>
               </tr>
@@ -1342,7 +1301,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Sets terminal attributes
+                    设置终端属性
                   </p>
                 </td>
               </tr>
@@ -1356,7 +1315,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A disk partition table manipulator
+                    磁盘分区表管理器
                   </p>
                 </td>
               </tr>
@@ -1370,10 +1329,8 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Allows <code class="systemitem">root</code> to log in; it
-                    is normally invoked by <span class=
-                    "command"><strong>init</strong></span> when the system
-                    goes into single user mode
+                    允许 <code class="systemitem">root</code> t登录; 通常当系统进入单用户模式时由 <span class=
+                    "command"><strong>init</strong></span>调用
                   </p>
                 </td>
               </tr>
@@ -1387,7 +1344,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Allows to change swaparea UUID and label
+                    允许更改交换空间 UUID 和标签
                   </p>
                 </td>
               </tr>
@@ -1401,7 +1358,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Disables devices and files for paging and swapping
+                    停用设备和文件的分页和交换机制
                   </p>
                 </td>
               </tr>
@@ -1415,8 +1372,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Enables devices and files for paging and swapping and
-                    lists the devices and files currently in use
+                   启用设备和文件的分页和交换机制并列出当前使用的设备和文件
                   </p>
                 </td>
               </tr>
@@ -1430,8 +1386,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Switches to another filesystem as the root of the mount
-                    tree
+                    切换到另一个文件系统并把当前路径作为挂载树的根
                   </p>
                 </td>
               </tr>
@@ -1445,9 +1400,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Tracks the growth of a log file; displays the last 10
-                    lines of a log file, then continues displaying any new
-                    entries in the log file as they are created
+                    跟踪日志文件的的增长；显示日志文件的最后 10 行然后继续显示日志文件中 添加的任何新条目
                   </p>
                 </td>
               </tr>
@@ -1461,7 +1414,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Retrieves or sets a process' CPU affinity
+                    检索或设置一个进程的 CPU 亲和性
                   </p>
                 </td>
               </tr>
@@ -1474,8 +1427,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A filter for translating underscores into escape
-                    sequences indicating underlining for the terminal in use
+                    将强调转换为转义序列以表示强调正在使用的终端的过滤器
                   </p>
                 </td>
               </tr>
@@ -1489,7 +1441,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Disconnects a file system from the system's file tree
+                    断开文件系统到系统文件树的连接
                   </p>
                 </td>
               </tr>
@@ -1503,7 +1455,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A symbolic link to setarch
+                    到 setarch 的符号链接
                   </p>
                 </td>
               </tr>
@@ -1517,7 +1469,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Runs a program with some namespaces unshared from parent
+                    用一些父进程非共享的名字空间运行程序
                   </p>
                 </td>
               </tr>
@@ -1531,8 +1483,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays the content of the given login file in a more
-                    user-friendly format
+                    以更友好的格式显示指定登录文件的内容
                   </p>
                 </td>
               </tr>
@@ -1546,8 +1497,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A daemon used by the UUID library to generate time-based
-                    UUIDs in a secure and guranteed-unique fashion
+                    UUID 库用于生成基于时间的安全和保证唯一的 UUID 的守护进程
                   </p>
                 </td>
               </tr>
@@ -1561,10 +1511,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Creates new UUIDs. Each new UUID can reasonably be
-                    considered unique among all UUIDs created, on the local
-                    system and on other systems, in the past and in the
-                    future
+                    创建新的 UUID。在所有创建的 UUID 中，在本地系统或其它系统， 在之前和以后，每个新的 UUID 都可以被认为是唯一的
                   </p>
                 </td>
               </tr>
@@ -1578,9 +1525,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Displays the contents of a file or, by default, its
-                    standard input, on the terminals of all currently logged
-                    in users
+                    在终端上显示所有当前登录用户的文件内容，或者默认的标准输出
                   </p>
                 </td>
               </tr>
@@ -1594,7 +1539,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Shows hardware watchdog status
+                    显示硬件看门狗状态
                   </p>
                 </td>
               </tr>
@@ -1608,8 +1553,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports the location of the binary, source, and man page
-                    for the given command
+                    报告指定命令的二进制文件、源代码或者 man 手册的位置
                   </p>
                 </td>
               </tr>
@@ -1623,7 +1567,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Wipes a filesystem signature from a device
+                    从设备中擦除文件系统签名
                   </p>
                 </td>
               </tr>
@@ -1637,7 +1581,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A symbolic link to setarch
+                    到 setarch 的符号链接
                   </p>
                 </td>
               </tr>
@@ -1651,8 +1595,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    A program to set up and control zram (compressed ram
-                    disk) devices
+                    用于设置和控制 zram（压缩后的 ram 磁盘）的程序
                   </p>
                 </td>
               </tr>
@@ -1665,8 +1608,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains routines for device identification and token
-                    extraction
+                    包含用于设备识别和标记提取的例程
                   </p>
                 </td>
               </tr>
@@ -1679,7 +1621,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains routines for manipulating partition tables
+                    包含操作分区表的例程
                   </p>
                 </td>
               </tr>
@@ -1692,8 +1634,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains routines for block device mounting and
-                    unmounting
+                    包含用于块设备挂载和卸载的例程
                   </p>
                 </td>
               </tr>
@@ -1706,8 +1647,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains routines for aiding screen output in tabular
-                    form
+                    包含以表格形式进行屏幕输出的例程
                   </p>
                 </td>
               </tr>
@@ -1720,8 +1660,7 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
                 </td>
                 <td>
                   <p>
-                    Contains routines for generating unique identifiers for
-                    objects that may be accessible beyond the local system
+                    包含用于生成在本地系统之上可访问对象的唯一标识符的例程
                   </p>
                 </td>
               </tr>
@@ -1733,24 +1672,24 @@ su nobody -s /bin/bash -c "PATH=$PATH make -k check"</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="eudev.html" title="Eudev-3.2.1">Prev</a>
+          <a accesskey="p" href="eudev.html" title="Eudev-3.2.1">上一页</a>
           <p>
             Eudev-3.2.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="man-db.html" title="Man-DB-2.7.6.1">Next</a>
+          <a accesskey="n" href="man-db.html" title="Man-DB-2.7.6.1">下一页</a>
           <p>
             Man-DB-2.7.6.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
