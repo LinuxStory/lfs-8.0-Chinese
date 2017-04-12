@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.64.&nbsp;Sysvinit-2.88dsf
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        Chapter&nbsp;6.&nbsp; 安装基本的系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="sysklogd.html" title=
-          "Sysklogd-1.5.1">Prev</a>
+          "Sysklogd-1.5.1">上一页</a>
           <p>
             Sysklogd-1.5.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="eudev.html" title="Eudev-3.2.1">Next</a>
+          <a accesskey="n" href="eudev.html" title="Eudev-3.2.1">下一页</a>
           <p>
             Eudev-3.2.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,17 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Sysvinit package contains programs for controlling the startup,
-          running, and shutdown of the system.
+          Sysvinit软件包包含了控制系统启动、运行和关机的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计编译时间；</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间；</strong>
               <span class="segbody">1.1 MB</span>
             </div>
           </div>
@@ -70,27 +69,26 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.64.1. Installation of Sysvinit
+          6.64.1. 安装Sysvinit软件包
         </h2>
         <p>
-          First, apply a patch that removes several programs installed by
-          other packages, clarifies a message, and fixes a compiler warning:
+          首先，安装一个补丁，用来移除其他软件包安装的几个程序，清除信息，解决编译警告；
         </p>
         <pre class="userinput">
 <kbd class=
 "command">patch -Np1 -i ../sysvinit-2.88dsf-consolidated-1.patch</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包；
         </p>
         <pre class="userinput">
 <kbd class="command">make -C src</kbd>
 </pre>
         <p>
-          This package does not come with a test suite.
+          这个软件包没有附带测试程序。
         </p>
         <p>
-          Install the package:
+          安装软件包；
         </p>
         <pre class="userinput">
 <kbd class="command">make -C src install</kbd>
@@ -99,12 +97,12 @@
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-sysvinit" name="contents-sysvinit"></a>6.64.2.
-          Contents of Sysvinit
+          Sysvinit包含的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序；</strong>
               <span class="segbody">bootlogd, fstab-decode, halt, init,
               killall5, poweroff (link to halt), reboot (link to halt),
               runlevel, shutdown, and telinit (link to init)</span>
@@ -113,7 +111,7 @@
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -131,7 +129,7 @@
                 </td>
                 <td>
                   <p>
-                    Logs boot messages to a log file
+                    把启动信息记录到一个日志文件里
                   </p>
                 </td>
               </tr>
@@ -145,7 +143,7 @@
                 </td>
                 <td>
                   <p>
-                    Run a command with fstab-encoded arguments
+                    运行一个带有fstab-encoded参数的命令
                   </p>
                 </td>
               </tr>
@@ -159,13 +157,10 @@
                 </td>
                 <td>
                   <p>
-                    Normally invokes <span class=
-                    "command"><strong>shutdown</strong></span> with the
-                    <em class="parameter"><code>-h</code></em> option, except
-                    when already in run-level 0, then it tells the kernel to
-                    halt the system; it notes in the file <code class=
-                    "filename">/var/log/wtmp</code> that the system is being
-                    brought down
+                    系统运行级别为0，halt告诉内核关闭系统，否则等同于调用 <span class=
+                    "command"><strong>shutdown</strong></span> 带
+                    <em class="parameter"><code>-h</code></em> 参数； 将系统将要关机的事件记录到 <code class=
+                    "filename">/var/log/wtmp</code> 文件里。
                   </p>
                 </td>
               </tr>
@@ -179,10 +174,7 @@
                 </td>
                 <td>
                   <p>
-                    The first process to be started when the kernel has
-                    initialized the hardware which takes over the boot
-                    process and starts all the proceses specified in its
-                    configuration file
+                    内核初始化完硬件之后，接管启动进程和启动在配置文件中所有指定程序的第一个进程。
                   </p>
                 </td>
               </tr>
@@ -196,8 +188,7 @@
                 </td>
                 <td>
                   <p>
-                    Sends a signal to all processes, except the processes in
-                    its own session so it will not kill its parent shell
+                    发送信号给所有进程，除非进程在自己会话中并且不会杀死它的父进程。
                   </p>
                 </td>
               </tr>
@@ -211,8 +202,7 @@
                 </td>
                 <td>
                   <p>
-                    Tells the kernel to halt the system and switch off the
-                    computer (see <span class=
+                    告诉内核关闭系统并且关掉计算机 (见 <span class=
                     "command"><strong>halt</strong></span>)
                   </p>
                 </td>
@@ -227,7 +217,7 @@
                 </td>
                 <td>
                   <p>
-                    Tells the kernel to reboot the system (see <span class=
+                    告诉内核重启系统 (见 <span class=
                     "command"><strong>halt</strong></span>)
                   </p>
                 </td>
@@ -242,9 +232,8 @@
                 </td>
                 <td>
                   <p>
-                    Reports the previous and the current run-level, as noted
-                    in the last run-level record in <code class=
-                    "filename">/var/run/utmp</code>
+                    报告上次和当前的运行级别，比如被记录在 <code class=
+                    "filename">/var/run/utmp</code>文件中的上次运行级别记录。
                   </p>
                 </td>
               </tr>
@@ -258,8 +247,7 @@
                 </td>
                 <td>
                   <p>
-                    Brings the system down in a secure way, signaling all
-                    processes and notifying all logged-in users
+                    以一种安全的方式关机，向所有进程发信号并且通知所有登录系统的用户。
                   </p>
                 </td>
               </tr>
@@ -273,8 +261,8 @@
                 </td>
                 <td>
                   <p>
-                    Tells <span class="command"><strong>init</strong></span>
-                    which run-level to change to
+                    告知 <span class="command"><strong>init</strong></span>
+                    将系统放置在特定的运行级别上。
                   </p>
                 </td>
               </tr>
@@ -287,24 +275,24 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="sysklogd.html" title=
-          "Sysklogd-1.5.1">Prev</a>
+          "Sysklogd-1.5.1">上一页</a>
           <p>
             Sysklogd-1.5.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="eudev.html" title="Eudev-3.2.1">Next</a>
+          <a accesskey="n" href="eudev.html" title="Eudev-3.2.1">下一页</a>
           <p>
             Eudev-3.2.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

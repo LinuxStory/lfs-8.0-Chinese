@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       6.63.&nbsp;Sysklogd-1.5.1
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        Chapter&nbsp;6.&nbsp; 安装基本的系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="patch.html" title="Patch-2.7.5">Prev</a>
+          <a accesskey="p" href="patch.html" title="Patch-2.7.5">上一页</a>
           <p>
             Patch-2.7.5
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="sysvinit.html" title=
-          "Sysvinit-2.88dsf">Next</a>
+          "Sysvinit-2.88dsf">下一页</a>
           <p>
             Sysvinit-2.88dsf
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,17 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Sysklogd package contains programs for logging system messages,
-          such as those given by the kernel when unusual things happen.
+          Sysklogd 包含记录系统日志信息的程序，比如内核处理意外事务的日志。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计编译时间：</strong>
+              <span class="segbody">少于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">0.6 MB</span>
             </div>
           </div>
@@ -70,11 +69,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.63.1. Installation of Sysklogd
+          6.63.1. 安装 Sysklogd
         </h2>
         <p>
-          First, fix problems that causes a segmentation fault under some
-          conditions in klogd and fix an obsolete program construct:
+          首先解决某些情况下在klogd中引起段错误的问题，并且解决一些过时的程序构建：
         </p>
         <pre class="userinput">
 <kbd class=
@@ -82,16 +80,16 @@
 sed -i 's/union wait/int/' syslogd.c</kbd>
 </pre>
         <p>
-          Compile the package:
+          编译软件包；
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          This package does not come with a test suite.
+          这个软件包没有附带测试程序。
         </p>
         <p>
-          Install the package:
+          安装软件包；
         </p>
         <pre class="userinput">
 <kbd class="command">make BINDIR=/sbin install</kbd>
@@ -99,12 +97,11 @@ sed -i 's/union wait/int/' syslogd.c</kbd>
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="conf-sysklogd" name="conf-sysklogd"></a>6.63.2. Configuring
+          <a id="conf-sysklogd" name="conf-sysklogd"></a>6.63.2. 配置
           Sysklogd
         </h2>
         <p>
-          Create a new <code class="filename">/etc/syslog.conf</code> file by
-          running the following:
+          通过下面的命令行 <code class="filename">/etc/syslog.conf</code> 文件：
         </p>
         <pre class="userinput">
 <kbd class="command">cat &gt; /etc/syslog.conf &lt;&lt; "EOF"
@@ -125,19 +122,19 @@ EOF</kbd>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-sysklogd" name="contents-sysklogd"></a>6.63.3.
-          Contents of Sysklogd
+          Sysklogd包含的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">klogd and syslogd</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -155,8 +152,7 @@ EOF</kbd>
                 </td>
                 <td>
                   <p>
-                    A system daemon for intercepting and logging kernel
-                    messages
+                    一个系统守护进程，截获并记录linux内核日志信息
                   </p>
                 </td>
               </tr>
@@ -170,11 +166,8 @@ EOF</kbd>
                 </td>
                 <td>
                   <p>
-                    Logs the messages that system programs offer for logging
-                    [Every logged message contains at least a date stamp and
-                    a hostname, and normally the program's name too, but that
-                    depends on how trusting the logging daemon is told to
-                    be.]
+                    记录下系统里所有提供日志记录的程序给出的日志和信息内容。
+                    [每一个被记录的消息至少包含时间戳和主机名，通常也包括程序名字，但是可信性有待商榷。
                   </p>
                 </td>
               </tr>
@@ -186,25 +179,25 @@ EOF</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="patch.html" title="Patch-2.7.5">Prev</a>
+          <a accesskey="p" href="patch.html" title="Patch-2.7.5">上一页</a>
           <p>
             Patch-2.7.5
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="sysvinit.html" title=
-          "Sysvinit-2.88dsf">Next</a>
+          "Sysvinit-2.88dsf">下一页</a>
           <p>
             Sysvinit-2.88dsf
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
