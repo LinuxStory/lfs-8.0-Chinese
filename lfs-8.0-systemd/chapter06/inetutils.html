@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       6.39.&nbsp;Inetutils-1.9.4
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章&nbsp;安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="expat.html" title="Expat-2.2.0">Prev</a>
+          <a accesskey="p" href="expat.html" title="Expat-2.2.0">上一页</a>
           <p>
             Expat-2.2.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="perl.html" title="Perl-5.24.1">Next</a>
+          <a accesskey="n" href="perl.html" title="Perl-5.24.1">下一页</a>
           <p>
             Perl-5.24.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">首页</a>
         </li>
       </ul>
     </div>
@@ -51,16 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Inetutils package contains programs for basic networking.
+          Inetutils 软件包，包含基本网络程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">预计构建时间：</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">27 MB</span>
             </div>
           </div>
@@ -68,10 +68,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.39.1. Installation of Inetutils
+          6.39.1. 安装 Inetutils
         </h2>
         <p>
-          Prepare Inetutils for compilation:
+          准备编译 Inetutils：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr        \
@@ -86,7 +86,7 @@
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -95,11 +95,7 @@
             </dt>
             <dd>
               <p>
-                This option prevents Inetutils from installing the
-                <span class="command"><strong>logger</strong></span> program,
-                which is used by scripts to pass messages to the System Log
-                Daemon. Do not install it because Util-linux installs a more
-                recent version.
+                此选项防止 Inetutils 安装 <span class="command"><strong>logger</strong></span> 程序，脚本使用此程序向系统日志守护进程传递消息。不要安装它，因为 Util-linux 会安装一个较新的版本。
               </p>
             </dd>
             <dt>
@@ -108,11 +104,7 @@
             </dt>
             <dd>
               <p>
-                This option disables the building of the Inetutils
-                <span class="command"><strong>whois</strong></span> client,
-                which is out of date. Instructions for a better <span class=
-                "command"><strong>whois</strong></span> client are in the
-                BLFS book.
+                此选项禁止构建 Inetutils 的 <span class="command"><strong>whois</strong></span> 客户端，因为它是旧的版本。在 BLFS 书中会指导你构建一个更好的 <span class="command"><strong>whois</strong></span> 客户端。
               </p>
             </dd>
             <dt>
@@ -121,11 +113,7 @@
             </dt>
             <dd>
               <p>
-                These parameters disable building obsolete programs that
-                should not be used due to security issues. The functions
-                provided by these programs can be provided by the
-                <span class="application">openssh</span> package in the BLFS
-                book.
+                这些参数禁用了废弃程序的构建，由于安全问题而不该使用这些程序。它们所提供的函数可以由 BLFS 书中的 <span class="application">openssh</span> 软件包提供。
               </p>
             </dd>
             <dt>
@@ -134,37 +122,31 @@
             </dt>
             <dd>
               <p>
-                This disables the installation of the various network servers
-                included as part of the Inetutils package. These servers are
-                deemed not appropriate in a basic LFS system. Some are
-                insecure by nature and are only considered safe on trusted
-                networks. Note that better replacements are available for
-                many of these servers.
+                此参数禁用了多个网络服务程序的安装，它们是 Inetutils 软件包的一部分。这些服务程序被认为不适用于基础的 LFS 系统。有些程序本来就不安全，只在可信网络中才能被认为是安全的。注意，它们中很多都有更好的替代品。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          要测试结果，运行：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Move some programs so they are available if <code class=
-          "filename">/usr</code> is not accessible:
+          移动一些程序，这样在 <code class="filename">/usr</code> 无法访问时它们仍然可用。
         </p>
         <pre class="userinput">
 <kbd class="command">mv -v /usr/bin/{hostname,ping,ping6,traceroute} /bin
@@ -173,21 +155,20 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-inetutils" name="contents-inetutils"></a>6.39.2.
-          Contents of Inetutils
+          <a id="contents-inetutils" name="contents-inetutils"></a>6.39.2. Inetutils 包含内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">dnsdomainname, ftp, ifconfig, hostname,
-              ping, ping6, talk, telnet, tftp, and traceroute</span>
+              ping, ping6, talk, telnet, tftp, 和 traceroute</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -205,7 +186,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Show the system's DNS domain name
+                    显示系统的 DNS 域名
                   </p>
                 </td>
               </tr>
@@ -218,7 +199,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Is the file transfer protocol program
+                    文件传输协议程序
                   </p>
                 </td>
               </tr>
@@ -232,7 +213,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Reports or sets the name of the host
+                    报告或者设置主机名称
                   </p>
                 </td>
               </tr>
@@ -246,7 +227,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Manages network interfaces
+                    管理网络接口
                   </p>
                 </td>
               </tr>
@@ -260,8 +241,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Sends echo-request packets and reports how long the
-                    replies take
+                    发送请求响应包，并报告响应用时
                   </p>
                 </td>
               </tr>
@@ -275,8 +255,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    A version of <span class=
-                    "command"><strong>ping</strong></span> for IPv6 networks
+                    <span class="command"><strong>ping</strong></span> 用于 IPv6 网络的版本。
                   </p>
                 </td>
               </tr>
@@ -290,7 +269,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Is used to chat with another user
+                    用来和另一个用户交谈
                   </p>
                 </td>
               </tr>
@@ -304,7 +283,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    An interface to the TELNET protocol
+                    TELNET 协议的一个接口
                   </p>
                 </td>
               </tr>
@@ -318,7 +297,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    A trivial file transfer program
+                    一个文件传输小程序
                   </p>
                 </td>
               </tr>
@@ -332,9 +311,7 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
                 </td>
                 <td>
                   <p>
-                    Traces the route your packets take from the host you are
-                    working on to another host on a network, showing all the
-                    intermediate hops (gateways) along the way
+                    追踪当前主机发送到网络上另一台主机的数据包的路径，显示沿路的所有中间跃点（网关）。
                   </p>
                 </td>
               </tr>
@@ -346,24 +323,24 @@ mv -v /usr/bin/ifconfig /sbin</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="expat.html" title="Expat-2.2.0">Prev</a>
+          <a accesskey="p" href="expat.html" title="Expat-2.2.0">上一页</a>
           <p>
             Expat-2.2.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="perl.html" title="Perl-5.24.1">Next</a>
+          <a accesskey="n" href="perl.html" title="Perl-5.24.1">下一页</a>
           <p>
             Perl-5.24.1
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章&nbsp;安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">首页</a>
         </li>
       </ul>
     </div>
