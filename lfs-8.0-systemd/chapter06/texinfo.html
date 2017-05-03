@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.68.&nbsp;Texinfo-6.3
+      6.69.&nbsp;Texinfo-6.3
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -13,55 +13,54 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-8.0-systemd">
+  <body class="lfs" id="lfs-8.0">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 8.0-systemd
+        Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="tar.html" title="Tar-1.29">Prev</a>
+          <a accesskey="p" href="tar.html" title="Tar-1.29">上一页</a>
           <p>
             Tar-1.29
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="vim.html" title="Vim-8.0.069">Next</a>
+          <a accesskey="n" href="vim.html" title="Vim-8.0.069">下一页</a>
           <p>
             Vim-8.0.069
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-texinfo" name="ch-system-texinfo"></a>6.68.
+        <a id="ch-system-texinfo" name="ch-system-texinfo"></a>6.69.
         Texinfo-6.3
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Texinfo package contains programs for reading, writing, and
-          converting info pages.
+          Texinfo 软件包包含阅读、撰写、转换信息页的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">构建约需时间：</strong>
               <span class="segbody">0.5 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间：</strong>
               <span class="segbody">108 MB</span>
             </div>
           </div>
@@ -69,17 +68,17 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.68.1. Installation of Texinfo
+          6.69.1. 安装 Texinfo
         </h2>
         <p>
-          Prepare Texinfo for compilation:
+          准备编译 Texinfo：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr --disable-static</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -88,43 +87,40 @@
             </dt>
             <dd>
               <p>
-                In this case, the top-level configure script will complain
-                that this is an unrecognized option, but the configure script
-                for XSParagraph recognizes it and uses it to disable
-                installing a static <code class=
-                "filename">XSParagraph.a</code> to <code class=
-                "filename">/usr/lib/texinfo</code>.
+                在此情况下，顶级配置脚本不能识别这个选项，但是 XSParagraph 的脚本能识别此选项，并屏蔽安装静态 <code class=
+                "filename">XSParagraph.a</code> 到 <code class=
+                "filename">/usr/lib/texinfo</code>目录。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          用以下命令测试结果：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包： 
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Optionally, install the components belonging in a TeX installation:
+          可选地，安装从属于 TeX 安装的组件：
         </p>
         <pre class="userinput">
 <kbd class="command">make TEXMF=/usr/share/texmf install-tex</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the make parameter:</strong>
+            <strong> make 指令参数的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -133,22 +129,14 @@
             </dt>
             <dd>
               <p>
-                The <code class="envar">TEXMF</code> makefile variable holds
-                the location of the root of the TeX tree if, for example, a
-                TeX package will be installed later.
+                <code class="envar">TEXMF</code> 生成文件变量保存了 TeX 程序要被安装到的目标目录。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          The Info documentation system uses a plain text file to hold its
-          list of menu entries. The file is located at <code class=
-          "filename">/usr/share/info/dir</code>. Unfortunately, due to
-          occasional problems in the Makefiles of various packages, it can
-          sometimes get out of sync with the info pages installed on the
-          system. If the <code class="filename">/usr/share/info/dir</code>
-          file ever needs to be recreated, the following optional commands
-          will accomplish the task:
+          Info 文档系统使用纯文本文档来记录其菜单条目。此文件在 <code class=
+          "filename">/usr/share/info/dir</code> 。不幸的是，由于有的软件包的 Makefile 的问题，此目录有时不能与系统已安装的信息页同步。如果不需要重建 <code class="filename">/usr/share/info/dir</code> 文件，下面的可选命令将完成这个任务：
         </p>
         <pre class="userinput">
 <kbd class="command">pushd /usr/share/info
@@ -161,23 +149,23 @@ popd</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-texinfo" name="contents-texinfo"></a>6.68.2.
-          Contents of Texinfo
+          <a id="contents-texinfo" name="contents-texinfo"></a>6.69.2.
+          Texinfo 的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
+              <strong class="segtitle">安装的程序：</strong>
               <span class="segbody">info, install-info, makeinfo (link to
               texi2any), pdftexi2dvi, pod2texi, texi2any, texi2dvi, texi2pdf,
               and texindex</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">XSParagraph.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装目录：</strong>
               <span class="segbody">/usr/share/texinfo and
               /usr/lib/texinfo</span>
             </div>
@@ -185,7 +173,7 @@ popd</kbd>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -203,12 +191,9 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to read info pages which are similar to man pages,
-                    but often go much deeper than just explaining all the
-                    available command line options [For example, compare
-                    <span class="command"><strong>man bison</strong></span>
-                    and <span class="command"><strong>info
-                    bison</strong></span>.]
+                    读取和 man 页面相似的信息页，但通常比仅解释所有可用的命令行选项更加深入 [ 例如，比较 <span class="command"><strong>man bison</strong></span>
+                    和 <span class="command"><strong>info
+                    bison</strong></span>。]
                   </p>
                 </td>
               </tr>
@@ -222,9 +207,8 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to install info pages; it updates entries in the
-                    <span class="command"><strong>info</strong></span> index
-                    file
+                    安装 info 页面；它会更新条目到
+                    <span class="command"><strong>info</strong></span> 索引
                   </p>
                 </td>
               </tr>
@@ -238,8 +222,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Translates the given Texinfo source documents into info
-                    pages, plain text, or HTML
+                    将所给的 Texinfo 源文档转换为 info 页面，纯文本，或 HTML
                   </p>
                 </td>
               </tr>
@@ -253,8 +236,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to format the given Texinfo document into a Portable
-                    Document Format (PDF) file
+                    将所给的 Texinfo 源文档转换为 PDF 文件
                   </p>
                 </td>
               </tr>
@@ -268,7 +250,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Converts Pod to Texinfo format
+                    将 Pod 转换为 Texinfo 格式
                   </p>
                 </td>
               </tr>
@@ -282,8 +264,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Translate Texinfo source documentation to various other
-                    formats
+                    将所给的 Texinfo 源文档转换为其他格式
                   </p>
                 </td>
               </tr>
@@ -297,8 +278,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to format the given Texinfo document into a
-                    device-independent file that can be printed
+                    将所给的 Texinfo 源文档转换为可打印的 div 格式
                   </p>
                 </td>
               </tr>
@@ -312,8 +292,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to format the given Texinfo document into a Portable
-                    Document Format (PDF) file
+                    将所给的 Texinfo 源文档转换为 PDF 文件
                   </p>
                 </td>
               </tr>
@@ -327,7 +306,7 @@ popd</kbd>
                 </td>
                 <td>
                   <p>
-                    Used to sort Texinfo index files
+                    排序 Texinfo 索引文件
                   </p>
                 </td>
               </tr>
@@ -339,24 +318,24 @@ popd</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="tar.html" title="Tar-1.29">Prev</a>
+          <a accesskey="p" href="tar.html" title="Tar-1.29">上一页</a>
           <p>
             Tar-1.29
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="vim.html" title="Vim-8.0.069">Next</a>
+          <a accesskey="n" href="vim.html" title="Vim-8.0.069">下一页</a>
           <p>
             Vim-8.0.069
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.70.&nbsp;About Debugging Symbols
+      6.71.&nbsp;关于调试标志
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -13,119 +13,106 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-8.0-systemd">
+  <body class="lfs" id="lfs-8.0">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 8.0-systemd
+        Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="vim.html" title="Vim-8.0.069">Prev</a>
+          <a accesskey="p" href="vim.html" title="Vim-8.0.069">上一页</a>
           <p>
             Vim-8.0.069
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="strippingagain.html" title=
-          "Stripping Again">Next</a>
+          "再次清理">下一页</a>
           <p>
-            Stripping Again
+            再次清理
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-aboutdebug" name="ch-system-aboutdebug"></a>6.70.
-        About Debugging Symbols
+        <a id="ch-system-aboutdebug" name="ch-system-aboutdebug"></a>6.71.
+        关于调试标志
       </h1>
       <p>
-        Most programs and libraries are, by default, compiled with debugging
-        symbols included (with <span class=
-        "command"><strong>gcc</strong></span>'s <em class=
-        "parameter"><code>-g</code></em> option). This means that when
-        debugging a program or library that was compiled with debugging
-        information included, the debugger can provide not only memory
-        addresses, but also the names of the routines and variables.
+        大部分软件和库默认是带调试选项编译的（像 <span class=
+        "command"><strong>gcc</strong></span> 的 <em class=
+        "parameter"><code>-g</code></em> 选项）。这意味着调试带有调试信息的程序或库时，调试器不仅可以给出内存地址，还能显示程序和变量的名称。
       </p>
       <p>
-        However, the inclusion of these debugging symbols enlarges a program
-        or library significantly. The following is an example of the amount
-        of space these symbols occupy:
+        但是包含这些调试标志编译会显著增加程序或库的体积。下面的例子显示了这些调试标志有多占空间：
       </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
-              A <span class="command"><strong>bash</strong></span> binary
-              with debugging symbols: 1200 KB
+              含调试符号编译的 <span class="command"><strong>bash</strong></span> 二进制文件： 1200 KB
             </p>
           </li>
           <li class="listitem">
             <p>
-              A <span class="command"><strong>bash</strong></span> binary
-              without debugging symbols: 480 KB
+              不含调试符号编译的 <span class="command"><strong>bash</strong></span> 二进制文件： 480 KB
             </p>
           </li>
           <li class="listitem">
             <p>
-              Glibc and GCC files (<code class="filename">/lib</code> and
-              <code class="filename">/usr/lib</code>) with debugging symbols:
+              含调试符号编译的 Glibc 和 GCC (<code class="filename">/lib</code> and
+              <code class="filename">/usr/lib</code>) 二进制文件：
               87 MB
             </p>
           </li>
           <li class="listitem">
             <p>
-              Glibc and GCC files without debugging symbols: 16 MB
+              不含调试符号编译的 Glibc 和 GCC 二进制文件： 16 MB
             </p>
           </li>
         </ul>
       </div>
       <p>
-        Sizes may vary depending on which compiler and C library were used,
-        but when comparing programs with and without debugging symbols, the
-        difference will usually be a factor between two and five.
+        程序大小或许取决于所使用的编译器和库，但带调试标志编译通常比不带调试标志编译出的程序大二到五倍。
       </p>
       <p>
-        Because most users will never use a debugger on their system
-        software, a lot of disk space can be regained by removing these
-        symbols. The next section shows how to strip all debugging symbols
-        from the programs and libraries.
+        由于大部分用户永远不会用到他们系统软件的调试器，我们可以通过去除调试标志来节省磁盘空间。下一部分将会展示如何清除所有程序和库的调试标志。
       </p>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="vim.html" title="Vim-8.0.069">Prev</a>
+          <a accesskey="p" href="vim.html" title="Vim-8.0.069">上一页</a>
           <p>
             Vim-8.0.069
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="strippingagain.html" title=
-          "Stripping Again">Next</a>
+          "再次清理">下一页</a>
           <p>
-            Stripping Again
+            再次清理
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
