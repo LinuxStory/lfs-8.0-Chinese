@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.66.&nbsp;Man-DB-2.7.6.1
+      6.67.&nbsp;Man-DB-2.7.6.1
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -13,56 +13,55 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-8.0-systemd">
+  <body class="lfs" id="lfs-8.0">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 8.0-systemd
+        Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="util-linux.html" title=
-          "Util-linux-2.29.1">Prev</a>
+          "Util-linux-2.29.1">上一页</a>
           <p>
             Util-linux-2.29.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="tar.html" title="Tar-1.29">Next</a>
+          <a accesskey="n" href="tar.html" title="Tar-1.29">下一页</a>
           <p>
             Tar-1.29
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-man-db" name="ch-system-man-db"></a>6.66.
+        <a id="ch-system-man-db" name="ch-system-man-db"></a>6.67.
         Man-DB-2.7.6.1
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Man-DB package contains programs for finding and viewing man
-          pages.
+          Man-DB 软件包包含用于查找和浏览 man 页面的程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">构建约需时间：</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">需要磁盘空间：</strong>
               <span class="segbody">30 MB</span>
             </div>
           </div>
@@ -70,10 +69,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          6.66.1. Installation of Man-DB
+          6.67.1. 安装 Man-DB
         </h2>
         <p>
-          Prepare Man-DB for compilation:
+          准备编译 Man-DB：
         </p>
         <pre class="userinput">
 <kbd class="command">./configure --prefix=/usr                        \
@@ -83,11 +82,12 @@
             --enable-cache-owner=bin             \
             --with-browser=/usr/bin/lynx         \
             --with-vgrind=/usr/bin/vgrind        \
-            --with-grap=/usr/bin/grap</kbd>
+            --with-grap=/usr/bin/grap            \
+            --with-systemdtmpfilesdir=</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -96,9 +96,8 @@
             </dt>
             <dd>
               <p>
-                This disables making the <span class=
-                "command"><strong>man</strong></span> program setuid to user
-                <code class="systemitem">man</code>.
+                为 <code class="systemitem">man</code> 用户禁止 <span class=
+                "command"><strong>man</strong></span> 程序调用 setuid 。
               </p>
             </dd>
             <dt>
@@ -107,7 +106,7 @@
             </dt>
             <dd>
               <p>
-                This makes the system-wide cache files be owned by user bin.
+                改变系统缓存文件拥有者为用户 bin 。
               </p>
             </dd>
             <dt>
@@ -116,65 +115,47 @@
             </dt>
             <dd>
               <p>
-                These three parameters are used to set some default programs.
-                <span class="command"><strong>lynx</strong></span> is a
-                text-based web browser (see BLFS for installation
-                instructions), <span class=
-                "command"><strong>vgrind</strong></span> converts program
-                sources to Groff input, and <span class=
-                "command"><strong>grap</strong></span> is useful for
-                typesetting graphs in Groff documents. The <span class=
-                "command"><strong>vgrind</strong></span> and <span class=
-                "command"><strong>grap</strong></span> programs are not
-                normally needed for viewing manual pages. They are not part
-                of LFS or BLFS, but you should be able to install them
-                yourself after finishing LFS if you wish to do so.
+                这三个参数用来设置一些默认程序。
+                <span class="command"><strong>lynx</strong></span> 是一个基于文本的网络的网页浏览器（见 BLFS 安装指引），<span class=
+                "command"><strong>vgrind</strong></span> 将程序源码转化为 Groff 输入，<span class=
+                "command"><strong>grap</strong></span> 在 Groff 文档排版图时非常有用。<span class=
+                "command"><strong>vgrind</strong></span> 和 <span class=
+                "command"><strong>grap</strong></span> 程序在浏览手册时通常不需要。它们通常不是 LFS 和 BFLS 的一部分，如果你需要的话可以在安装完 LFS 后自行安装。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          To test the results, issue:
+          测试结果：
         </p>
         <pre class="userinput">
 <kbd class="command">make check</kbd>
 </pre>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
-        <p>
-          Remove a reference to a non-existent user:
-        </p>
-        <pre class="userinput">
-<kbd class=
-"command">sed -i "s:man man:root root:g" /usr/lib/tmpfiles.d/man-db.conf</kbd>
-</pre>
       </div>
-      <div class="sect2" lang="en" xml:lang="en">
+      <div class="sect2" lang="en" xml:l	ang="en">
         <h2 class="sect2">
-          6.66.2. Non-English Manual Pages in LFS
+          6.67.2. LFS 中的非英语手册
         </h2>
         <p>
-          The following table shows the character set that Man-DB assumes
-          manual pages installed under <code class=
-          "filename">/usr/share/man/&lt;ll&gt;</code> will be encoded with.
-          In addition to this, Man-DB correctly determines if manual pages
-          installed in that directory are UTF-8 encoded.
+          下面的表格假定 Man-DB 手册页安装到 <code class=
+          "filename">/usr/share/man/&lt;ll&gt;</code> 的编码。除此之外，Man-DB 能检测安装到此目录下的手册是不是 utf-8 编码。
         </p>
         <div class="table">
-          <a id="idp46551720159344" name="idp46551720159344"></a>
+          <a id="idp46180293418544" name="idp46180293418544"></a>
           <p class="title">
-            <strong>Table&nbsp;6.1.&nbsp;Expected character encoding of
-            legacy 8-bit manual pages</strong>
+            <strong>表&nbsp;6.1.&nbsp;手册的传统 8 位字符编码</strong>
           </p>
           <div class="table-contents">
             <table summary=
@@ -189,16 +170,16 @@
               <thead>
                 <tr>
                   <th>
-                    Language (code)
+                    语言 (代码)
                   </th>
                   <th>
-                    Encoding
+                    编码
                   </th>
                   <th>
-                    Language (code)
+                    语言 (代码)
                   </th>
                   <th>
-                    Encoding
+                    编码
                   </th>
                 </tr>
               </thead>
@@ -518,39 +499,38 @@
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            Manual pages in languages not in the list are not supported.
+            手册不支持不在此列表中的语言。
           </p>
         </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-man-db" name="contents-man-db"></a>6.66.3. Contents
-          of Man-DB
+          <a id="contents-man-db" name="contents-man-db"></a>6.67.3. Man-DB 内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">accessdb, apropos (link to whatis),
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">accessdb, apropos (链接到 whatis),
               catman, lexgrog, man, mandb, manpath, and whatis</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed libraries:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">libman.so and libmandb.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
+              <strong class="segtitle">安装目录：</strong>
               <span class="segbody">/usr/lib/man-db, /usr/lib/tmpfiles.d,
-              /usr/libexec/man-db, and /usr/share/doc/man-db-2.7.6.1</span>
+              /usr/libexec/man-db, 和 /usr/share/doc/man-db-2.7.6.1</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -568,9 +548,8 @@
                 </td>
                 <td>
                   <p>
-                    Dumps the <span class=
-                    "command"><strong>whatis</strong></span> database
-                    contents in human-readable form
+                    将 <span class=
+                    "command"><strong>whatis</strong></span> 数据库中的内容转储为可阅读格式
                   </p>
                 </td>
               </tr>
@@ -584,10 +563,8 @@
                 </td>
                 <td>
                   <p>
-                    Searches the <span class=
-                    "command"><strong>whatis</strong></span> database and
-                    displays the short descriptions of system commands that
-                    contain a given string
+                    搜索 <span class=
+                    "command"><strong>whatis</strong></span> 数据库并显示含所查找字符串的系统命令的简述
                   </p>
                 </td>
               </tr>
@@ -601,7 +578,7 @@
                 </td>
                 <td>
                   <p>
-                    Creates or updates the pre-formatted manual pages
+                    创建或更新预格式化的手册页
                   </p>
                 </td>
               </tr>
@@ -615,8 +592,7 @@
                 </td>
                 <td>
                   <p>
-                    Displays one-line summary information about a given
-                    manual page
+                    显示所提供的手册页的一行概要
                   </p>
                 </td>
               </tr>
@@ -629,7 +605,7 @@
                 </td>
                 <td>
                   <p>
-                    Formats and displays the requested manual page
+                    格式化显示请求的手册页
                   </p>
                 </td>
               </tr>
@@ -643,8 +619,8 @@
                 </td>
                 <td>
                   <p>
-                    Creates or updates the <span class=
-                    "command"><strong>whatis</strong></span> database
+                    创建或更新 <span class=
+                    "command"><strong>whatis</strong></span> 数据库
                   </p>
                 </td>
               </tr>
@@ -658,9 +634,7 @@
                 </td>
                 <td>
                   <p>
-                    Displays the contents of $MANPATH or (if $MANPATH is not
-                    set) a suitable search path based on the settings in
-                    man.conf and the user's environment
+                    显示 $MANPATH 或（如果未设置 $MANPATH）基于用户环境中 man.conf 中的合适的搜索路径的内容
                   </p>
                 </td>
               </tr>
@@ -674,10 +648,8 @@
                 </td>
                 <td>
                   <p>
-                    Searches the <span class=
-                    "command"><strong>whatis</strong></span> database and
-                    displays the short descriptions of system commands that
-                    contain the given keyword as a separate word
+                    搜索 <span class=
+                    "command"><strong>whatis</strong></span> 数据库并显示含所查找独立关键词的系统命令的简述
                   </p>
                 </td>
               </tr>
@@ -690,8 +662,8 @@
                 </td>
                 <td>
                   <p>
-                    Contains run-time support for <span class=
-                    "command"><strong>man</strong></span>
+                    包含 <span class=
+                    "command"><strong>man</strong></span>命令的运行时支持
                   </p>
                 </td>
               </tr>
@@ -704,8 +676,8 @@
                 </td>
                 <td>
                   <p>
-                    Contains run-time support for <span class=
-                    "command"><strong>man</strong></span>
+                    包含 <span class=
+                    "command"><strong>man</strong></span>命令的运行时支持
                   </p>
                 </td>
               </tr>
@@ -718,24 +690,24 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="util-linux.html" title=
-          "Util-linux-2.29.1">Prev</a>
+          "Util-linux-2.29.1">上一页</a>
           <p>
             Util-linux-2.29.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="tar.html" title="Tar-1.29">Next</a>
+          <a accesskey="n" href="tar.html" title="Tar-1.29">下一页</a>
           <p>
             Tar-1.29
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

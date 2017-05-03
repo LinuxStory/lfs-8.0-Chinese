@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.71.&nbsp;Stripping Again
+      6.72.&nbsp;再次清理
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -13,72 +13,61 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-8.0-systemd">
+  <body class="lfs" id="lfs-8.0">
     <div class="navheader">
       <h4>
-        Linux From Scratch - Version 8.0-systemd
+        Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="aboutdebug.html" title=
-          "About Debugging Symbols">Prev</a>
+          "关于调试标志">上一页</a>
           <p>
-            About Debugging Symbols
+            关于调试标志
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="revisedchroot.html" title=
-          "Cleaning Up">Next</a>
+          "清理">下一页</a>
           <p>
-            Cleaning Up
+            清理
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-system-strippingagain" name=
-        "ch-system-strippingagain"></a>6.71. Stripping Again
+        "ch-system-strippingagain"></a>6.72. 再次清理
       </h1>
       <p>
-        If the intended user is not a programmer and does not plan to do any
-        debugging on the system software, the system size can be decreased by
-        about 90 MB by removing the debugging symbols from binaries and
-        libraries. This causes no inconvenience other than not being able to
-        debug the software fully anymore.
+        如果目标客户不是程序员或不会对系统软件做任何调试，则可以通过移除二进制文件和库的调试标志来减少大约 90MB 的系统空间。除了无法完全调试软件之外，这不会造成任何不便。
       </p>
       <p>
-        Most people who use the command mentioned below do not experience any
-        difficulties. However, it is easy to make a typo and render the new
-        system unusable, so before running the <span class=
-        "command"><strong>strip</strong></span> command, it is a good idea to
-        make a backup of the LFS system in its current state.
+        大部分使用下面提及的命令的人不会遇到任何困难。但这很容易出现打字错误导致新系统不可用，所以在运行 <span class=
+        "command"><strong>strip</strong></span> 命令前，为目前的 LFS 系统做一个备份是个好主意。
       </p>
       <p>
-        Before performing the stripping, take special care to ensure that
-        none of the binaries that are about to be stripped are running. If
-        unsure whether the user entered chroot with the command given in
-        <a class="xref" href="chroot.html" title=
-        "6.4.&nbsp;Entering the Chroot Environment">Section&nbsp;6.4,
-        &ldquo;Entering the Chroot Environment,&rdquo;</a> first exit from
-        chroot:
+        在执行清理之前，请特别注意需要清理的二进制文件没有在运行。如果不确定用户是否通过<a class="xref" href="chroot.html" title=
+        "6.4.&nbsp;进入 Chroot 环境">第&nbsp;6.4 节
+        &ldquo;进入 Chroot 环境&rdquo;</a> 给出的命令进入了 chroot ，请先退出 chroot：
       </p>
       <pre class="userinput">
 <kbd class="command">logout</kbd>
 </pre>
       <p>
-        Then reenter it with:
+        然后通过以下命令重新进入：
       </p>
       <pre class="userinput">
 <kbd class="command">chroot $LFS /tools/bin/env -i            \
@@ -87,7 +76,7 @@
     /tools/bin/bash --login</kbd>
 </pre>
       <p>
-        Now the binaries and libraries can be safely stripped:
+        现在二进制文件和库可以被安全清理：
       </p>
       <pre class="userinput">
 <kbd class="command">/tools/bin/find /usr/lib -type f -name \*.a \
@@ -100,34 +89,32 @@
     -exec /tools/bin/strip --strip-all {} ';'</kbd>
 </pre>
       <p>
-        A large number of files will be reported as having their file format
-        not recognized. These warnings can be safely ignored. These warnings
-        indicate that those files are scripts instead of binaries.
+        大量文件会被报告它们的文件格式不能被识别。可以安全地忽略这些警告。这些警告指出这些文件是脚本而不是二进制文件。
       </p>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="aboutdebug.html" title=
-          "About Debugging Symbols">Prev</a>
+          "关于调试标志">上一页</a>
           <p>
-            About Debugging Symbols
+            关于调试标志
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="revisedchroot.html" title=
-          "Cleaning Up">Next</a>
+          "清理">下一页</a>
           <p>
-            Cleaning Up
+            清理
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件 ">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
