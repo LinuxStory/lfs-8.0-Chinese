@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.6.&nbsp;Creating Essential Files and Symlinks
+      6.6. 创建必须文件和符号链接
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,43 +19,40 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="creatingdirs.html" title=
-          "Creating Directories">Prev</a>
+          "创建目录">上一页</a>
           <p>
-            Creating Directories
+            创建目录
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="linux-headers.html" title=
-          "Linux-4.9.9 API Headers">Next</a>
+          "Linux-4.9.9 API 头文件">下一页</a>
           <p>
-            Linux-4.9.9 API Headers
+            Linux-4.9.9 API 头文件
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-system-createfiles" name="ch-system-createfiles"></a>6.6.
-        Creating Essential Files and Symlinks
+        创建必需文件和符号链接
       </h1>
       <p>
-        Some programs use hard-wired paths to programs which do not exist
-        yet. In order to satisfy these programs, create a number of symbolic
-        links which will be replaced by real files throughout the course of
-        this chapter after the software has been installed:
+        有些程序里会使用写死的路径调用其它暂时还未安装的程序。为了满足这些程序的需要，这些软件会安装好后，我们将创建一些符号链接，并替代贯穿本章教程的实际文件：
       </p>
       <pre class="userinput">
 <kbd class="command">ln -sv /tools/bin/{bash,cat,echo,pwd,stty} /bin
@@ -67,7 +64,7 @@ ln -sv bash /bin/sh</kbd>
 </pre>
       <div class="variablelist">
         <p class="title">
-          <strong>The purpose of each link:</strong>
+          <strong>每个链接的目的：</strong>
         </p>
         <dl class="variablelist">
           <dt>
@@ -76,8 +73,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              Many <span class="command"><strong>bash</strong></span> scripts
-              specify <code class="filename">/bin/bash</code>.
+              许多 <span class="command"><strong>bash</strong></span> 脚本指定了 <code class="filename">/bin/bash</code>.
             </p>
           </dd>
           <dt>
@@ -86,7 +82,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              This pathname is hard-coded into Glibc's configure script.
+              这个路径名在 Glibc 配置脚本中是被写死的。
             </p>
           </dd>
           <dt>
@@ -95,8 +91,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              This is to satisfy one of the tests in Glibc's test suite,
-              which expects <code class="filename">/bin/echo</code>.
+              这个是为了满足 Glibc 测试套件里的一个测试用例，它会检测 <code class="filename">/bin/echo</code>.
             </p>
           </dd>
           <dt>
@@ -105,8 +100,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              Some <span class="command"><strong>configure</strong></span>
-              scripts, particularly Glibc's, have this pathname hard-coded.
+              一些 <span class="command"><strong>configure</strong></span> 脚本, 特别是 Glibc 的，写死了这个路径.
             </p>
           </dd>
           <dt>
@@ -115,8 +109,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              This pathname is hard-coded into Expect, therefore it is needed
-              for Binutils and GCC test suites to pass.
+              这个路径名在 Expect 中也是固定的，因此在 Binutils 和 GCC 测试套件中需要它。
             </p>
           </dd>
           <dt>
@@ -125,8 +118,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              Many Perl scripts hard-code this path to the <span class=
-              "command"><strong>perl</strong></span> program.
+              许多 Perl 脚本写死了这个调用 perl 执行程序的路径。
             </p>
           </dd>
           <dt>
@@ -135,7 +127,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              Glibc needs this for the pthreads library to work.
+              Glibc 需要这个让 pthreads 库正常工作。
             </p>
           </dd>
           <dt>
@@ -144,8 +136,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              This is needed by several tests in Glibc's test suite, as well
-              as for C++ support in GMP.
+              在 Glibc 的一些测试套件中需要这个，而且在 GMP 的 C++ 支持中也会需要。
             </p>
           </dd>
           <dt>
@@ -154,9 +145,7 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              This prevents a <code class="filename">/tools</code> reference
-              that would otherwise be in <code class=
-              "filename">/usr/lib/libstdc++.la</code> after GCC is installed.
+              这可以防止在安装 GCC 之后 <code class="filename">/usr/lib/libstdc++.la</code> 中对 <code class="filename">/tools</code> 的引用。
             </p>
           </dd>
           <dt>
@@ -165,33 +154,24 @@ ln -sv bash /bin/sh</kbd>
           </dt>
           <dd>
             <p>
-              Many shell scripts hard-code <code class=
+              许多 shell 脚本写死了 <code class=
               "filename">/bin/sh</code>.
             </p>
           </dd>
         </dl>
       </div>
       <p>
-        Historically, Linux maintains a list of the mounted file systems in
-        the file <code class="filename">/etc/mtab</code>. Modern kernels
-        maintain this list internally and exposes it to the user via the
-        <code class="filename">/proc</code> filesystem. To satisfy utilities
-        that expect the presence of <code class="filename">/etc/mtab</code>,
-        create the following symbolic link:
+        历史上，Linux 在 <code class="filename">/etc/mtab</code> 文件中保存挂载文件系统的列表。而现代内核在内部维护此列表，并通过 <code class="filename">/proc</code> 文件系统将其公开给用户。为了满足一些依赖 <code class="filename">/etc/mtab</code> 的应用程序，需要创建以下符号链接：
       </p>
       <pre class="userinput">
 <kbd class="command">ln -sv /proc/self/mounts /etc/mtab</kbd>
 </pre>
       <p>
-        In order for user <code class="systemitem">root</code> to be able to
-        login and for the name <span class="quote">&ldquo;<span class=
-        "quote">root</span>&rdquo;</span> to be recognized, there must be
-        relevant entries in the <code class="filename">/etc/passwd</code> and
-        <code class="filename">/etc/group</code> files.
+        为了使用户 <code class="systemitem">root</code> 能够登录，并且名称<span class="quote">&ldquo;<span class=
+        "quote">root</span>&rdquo;</span>能被识别，必需在 <code class="filename">/etc/passwd</code> 和 <code class="filename">/etc/group</code> 文件中写入相关条目。
       </p>
       <p>
-        Create the <code class="filename">/etc/passwd</code> file by running
-        the following command:
+        运行下面的命令创建 <code class="filename">/etc/passwd</code> 文件：
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; /etc/passwd &lt;&lt; "EOF"
@@ -203,13 +183,10 @@ nobody:x:99:99:Unprivileged User:/dev/null:/bin/false</code>
 EOF</kbd>
 </pre>
       <p>
-        The actual password for <code class="systemitem">root</code> (the
-        <span class="quote">&ldquo;<span class="quote">x</span>&rdquo;</span>
-        used here is just a placeholder) will be set later.
+        <code class="systemitem">root</code> 用户的实际密码（这里的 <span class="quote">&ldquo;<span class="quote">x</span>&rdquo;</span> 只是占位符）将在后面创建。
       </p>
       <p>
-        Create the <code class="filename">/etc/group</code> file by running
-        the following command:
+        运行下面的命令创建 <code class="filename">/etc/group</code> 文件：
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; /etc/group &lt;&lt; "EOF"
@@ -239,52 +216,19 @@ users:x:999:</code>
 EOF</kbd>
 </pre>
       <p>
-        The created groups are not part of any standard&mdash;they are groups
-        decided on in part by the requirements of the Udev configuration in
-        this chapter, and in part by common convention employed by a number
-        of existing Linux distributions. In addition, some test suites rely
-        on specific users or groups. The Linux Standard Base (LSB, available
-        at <a class="ulink" href=
-        "http://www.linuxbase.org">http://www.linuxbase.org</a>) recommends
-        only that, besides the group <code class="systemitem">root</code>
-        with a Group ID (GID) of 0, a group <code class=
-        "systemitem">bin</code> with a GID of 1 be present. All other group
-        names and GIDs can be chosen freely by the system administrator since
-        well-written programs do not depend on GID numbers, but rather use
-        the group's name.
+        这里创建的组用户没有参照任何标准 &mdash;&mdash; 它们部分是由本章中Udev配置的要求部分决定的，部分由多个现有Linux发行版使用的常规约定组成。 另外，一些测试套件依赖于特定的用户或组。Linux 标准库（LSB，参见 <a class="ulink" href="http://www.linuxbase.org">http://www.linuxbase.org</a>）建议，除组ID（GID）为 0 的组 <code class="systemitem">root</code> 外，还提供 GID 为 1 的组 <code class="systemitem">bin</code>。所有其他组名和 GID 可由系统管理员自由选择，因为好的程序不依赖于 GID，而是使用组的名称。
       </p>
       <p>
-        To remove the <span class="quote">&ldquo;<span class="quote">I have
-        no name!</span>&rdquo;</span> prompt, start a new shell. Since a full
-        Glibc was installed in <a class="xref" href=
-        "../chapter05/chapter05.html" title=
-        "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Chapter 5</a>
-        and the <code class="filename">/etc/passwd</code> and <code class=
-        "filename">/etc/group</code> files have been created, user name and
-        group name resolution will now work:
+        为了移除 <span class="quote">&ldquo;<span class="quote">I have no name!</span>&rdquo;</span> 的提示符，可以打开一个新 shell。由于在<a class="xref" href="../chapter05/chapter05.html" title="第五章 构建临时系统">第五章</a>已经安装了完整的 Glibc，而且已经创建好了 <code class="filename">/etc/passwd</code> 和 <code class="filename">/etc/group</code> 文件，用户名和组名就可以正常解析了：
       </p>
       <pre class="userinput">
 <kbd class="command">exec /tools/bin/bash --login +h</kbd>
 </pre>
       <p>
-        Note the use of the <em class="parameter"><code>+h</code></em>
-        directive. This tells <span class=
-        "command"><strong>bash</strong></span> not to use its internal path
-        hashing. Without this directive, <span class=
-        "command"><strong>bash</strong></span> would remember the paths to
-        binaries it has executed. To ensure the use of the newly compiled
-        binaries as soon as they are installed, the <em class=
-        "parameter"><code>+h</code></em> directive will be used for the
-        duration of this chapter.
+        注意这里使用了 <em class="parameter"><code>+h</code></em> 参数。这样会告诉 <span class="command"><strong>bash</strong></span> 不要使用它内建的路径哈希功能。如果不加这个参数的话， <span class="command"><strong>bash</strong></span> 将会记住曾经执行过程序的路径。为了在新编译安装好程序后就能马上使用，参数 <em class="parameter"><code>+h</code></em> 将在本章中一直使用。
       </p>
       <p>
-        The <span class="command"><strong>login</strong></span>, <span class=
-        "command"><strong>agetty</strong></span>, and <span class=
-        "command"><strong>init</strong></span> programs (and others) use a
-        number of log files to record information such as who was logged into
-        the system and when. However, these programs will not write to the
-        log files if they do not already exist. Initialize the log files and
-        give them proper permissions:
+        <span class="command"><strong>login</strong></span>，<span class="command"><strong>agetty</strong></span>，<span class="command"><strong>init</strong></span> 等程序会使用一些日志文件来记录信息，比如谁在什么时候登录了系统。不过，在日志文件不存在的时候这些程序一般不会写入。下面初始化一下日志文件并加上合适的权限：
       </p>
       <pre class="userinput">
 <kbd class="command">touch /var/log/{btmp,lastlog,faillog,wtmp}
@@ -293,12 +237,7 @@ chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp</kbd>
 </pre>
       <p>
-        The <code class="filename">/var/log/wtmp</code> file records all
-        logins and logouts. The <code class=
-        "filename">/var/log/lastlog</code> file records when each user last
-        logged in. The <code class="filename">/var/log/faillog</code> file
-        records failed login attempts. The <code class=
-        "filename">/var/log/btmp</code> file records the bad login attempts.
+        <code class="filename">/var/log/wtmp</code> 文件会记录所有登录和注销信息。<code class="filename">/var/log/lastlog</code> 文件记录每个用户上次登录的时间。<code class="filename">/var/log/faillog</code> 文件记录失败的登录尝试。<code class="filename">/var/log/wtmp</code> 文件记录错误登录尝试。
       </p>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
@@ -306,9 +245,7 @@ chmod -v 600  /var/log/btmp</kbd>
           Note
         </h3>
         <p>
-          The <code class="filename">/run/utmp</code> file records the users
-          that are currently logged in. This file is created dynamically in
-          the boot scripts.
+          <code class="filename">/run/utmp</code> 文件会记录当当前已登录的用户信息。这个文件在启动脚本中动态创建。
         </p>
       </div>
     </div>
@@ -316,25 +253,25 @@ chmod -v 600  /var/log/btmp</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="creatingdirs.html" title=
-          "Creating Directories">Prev</a>
+          "创建目录">上一页</a>
           <p>
-            Creating Directories
+            创建目录
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="linux-headers.html" title=
-          "Linux-4.9.9 API Headers">Next</a>
+          "Linux-4.9.9 API 头文件">下一页</a>
           <p>
-            Linux-4.9.9 API Headers
+            Linux-4.9.9 API 头文件
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
