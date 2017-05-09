@@ -211,24 +211,6 @@ make DESTDIR=/usr/pkg/libfoo/1.1 install</kbd>
           6.3.3. 在多系统上部署 LFS
         </h2>
         <p>
-          One of the advantages of an LFS system is that there are no files
-          that depend on the position of files on a disk system. Cloning an
-          LFS build to another computer with the same architecture as the
-          base system is as simple as using <span class=
-          "command"><strong>tar</strong></span> on the LFS partition that
-          contains the root directory (about 250MB uncompressed for a base
-          LFS build), copying that file via network transfer or CD-ROM to the
-          new system and expanding it. From that point, a few configuration
-          files will have to be changed. Configuration files that may need to
-          be updated include: <code class="filename">/etc/hosts</code>,
-          <code class="filename">/etc/fstab</code>, <code class=
-          "filename">/etc/passwd</code>, <code class=
-          "filename">/etc/group</code>, <span class="phrase"><code class=
-          "filename">/etc/shadow</code>, <code class=
-          "filename">/etc/ld.so.conf</code>, <code class=
-          "filename">/etc/sysconfig/rc.site</code>, <code class=
-          "filename">/etc/sysconfig/network</code>, and <code class=
-          "filename">/etc/sysconfig/ifconfig.eth0</code>.</span>
           LFS 系统的优点之一是没有文件依赖于磁盘系统上文件的位置。将 LFS 克隆到与基础系统架构相同的另一台计算机上，简单到只需在包含根目录的 LFS 分区（大约 250MB 未压缩的基本 LFS 构建）上使用 tar 命令打包，然后通过网络传输或 CD-ROM 拷贝到新系统并解包。此后，还必须更改一些配置文件。可能需要更新的配置文件包括：<code class="filename">/etc/hosts</code>，<code class="filename">/etc/fstab</code>，<code class="filename">/etc/passwd</code>，<code class="filename">/etc/group</code>，<span class="phrase"><code class="filename">/etc/shadow</code>，<code class="filename">/etc/ld.so.conf</code>，<code class="filename">/etc/sysconfig/rc.site</code>，<code class="filename">/etc/sysconfig/network</code> 和 <code class="filename">/etc/sysconfig/ifconfig.eth0</code>。</span>
         </p>
         <p>
