@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      6.4.&nbsp;Entering the Chroot Environment
+      6.4. 进入 Chroot 环境
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,44 +19,40 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        第六章 安装基本系统软件
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="pkgmgt.html" title=
-          "Package Management">Prev</a>
+          "软件包管理">上一页</a>
           <p>
-            Package Management
+            软件包管理
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="creatingdirs.html" title=
-          "Creating Directories">Next</a>
+          "创建目录">下一页</a>
           <p>
-            Creating Directories
+            创建目录
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">主页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-system-chroot" name="ch-system-chroot"></a>6.4. Entering
-        the Chroot Environment
+        <a id="ch-system-chroot" name="ch-system-chroot"></a>6.4.
+        进入 Chroot 环境
       </h1>
       <p>
-        It is time to enter the chroot environment to begin building and
-        installing the final LFS system. As user <code class=
-        "systemitem">root</code>, run the following command to enter the
-        realm that is, at the moment, populated with only the temporary
-        tools:
+        现在是时候进入 chroot 环境开始构建和安装最终的 LFS 系统了。以 <code class="systemitem">root</code> 用户运行以下命令进入现在只含有一些临时工具的“空间”：
       </p>
       <pre class="userinput">
 <kbd class="command">chroot "$LFS" /tools/bin/env -i \
@@ -67,63 +63,26 @@
     /tools/bin/bash --login +h</kbd>
 </pre>
       <p>
-        The <em class="parameter"><code>-i</code></em> option given to the
-        <span class="command"><strong>env</strong></span> command will clear
-        all variables of the chroot environment. After that, only the
-        <code class="envar">HOME</code>, <code class="envar">TERM</code>,
-        <code class="envar">PS1</code>, and <code class="envar">PATH</code>
-        variables are set again. The <em class=
-        "parameter"><code>TERM=$TERM</code></em> construct will set the
-        <code class="envar">TERM</code> variable inside chroot to the same
-        value as outside chroot. This variable is needed for programs like
-        <span class="command"><strong>vim</strong></span> and <span class=
-        "command"><strong>less</strong></span> to operate properly. If other
-        variables are needed, such as <code class="envar">CFLAGS</code> or
-        <code class="envar">CXXFLAGS</code>, this is a good place to set them
-        again.
+        <span class="command"><strong>env</strong></span> 命令的 <em class="parameter"><code>-i</code></em> 选项将清除 chroot 环境的所有变量。随后，只有 <code class="envar">HOME</code>，<code class="envar">TERM</code>，<code class=
+        "envar">PS1</code> 和 <code class="envar">PATH</code> 变量会被重新设置。<em class="parameter"><code>TERM=$TERM</code></em> 语句将会把 chroot 内的 TERM 变量的值设置为与外部 chroot 相同。对于像 <span class="command"><strong>vim</strong></span> 和 <span class="command"><strong>less</strong></span> 这样的程序，需要这个变量以保证其正常运行。如果需要其他变量，如 <code class="envar">CFLAGS</code> 或
+        <code class="envar">CXXFLAGS</code>，就在这个地方设置会比较好。
       </p>
       <p>
-        From this point on, there is no need to use the <code class=
-        "envar">LFS</code> variable anymore, because all work will be
-        restricted to the LFS file system. This is because the Bash shell is
-        told that <code class="filename">$LFS</code> is now the root
-        (<code class="filename">/</code>) directory.
+        从这里以后，就不再需要 <code class="envar">LFS</code> 变量了，因为所有的工作都将被限制在 LFS 文件系统中。这是因为我们已经告诉 Bash shell <code class="filename">$LFS</code> 现在是根（<code class="filename">/</code>）目录。
       </p>
       <p>
-        Notice that <code class="filename">/tools/bin</code> comes last in
-        the <code class="envar">PATH</code>. This means that a temporary tool
-        will no longer be used once its final version is installed. This
-        occurs when the shell does not <span class=
-        "quote">&ldquo;<span class="quote">remember</span>&rdquo;</span> the
-        locations of executed binaries&mdash;for this reason, hashing is
-        switched off by passing the <em class=
-        "parameter"><code>+h</code></em> option to <span class=
-        "command"><strong>bash</strong></span>.
+        注意 <code class="filename">/tools/bin</code> 放在了 <code class="envar">PATH</code> 中的最后。这意味着一旦安装了最终版本，就不再使用临时工具。当 shell 没有<span class="quote">&ldquo;<span class="quote">记住</span>&rdquo;</span>执行的二进制文件的位置时，就会发生这种情况。因此，需要给 <span class="command"><strong>bash</strong></span> 加上 <em class="parameter"><code>+h</code></em> 参数，以关闭哈希功能。
       </p>
       <p>
-        Note that the <span class="command"><strong>bash</strong></span>
-        prompt will say <code class="computeroutput">I have no name!</code>
-        This is normal because the <code class="filename">/etc/passwd</code>
-        file has not been created yet.
+        还需注意 <span class="command"><strong>bash</strong></span> 会提示 <code class="computeroutput">I have no name!</code> 这通常是因为没有创建 <code class="filename">/etc/passwd</code> 文件。
       </p>
       <div class="admon note">
         <img alt="[Note]" src="../images/note.png" />
         <h3>
-          Note
+          注意
         </h3>
         <p>
-          It is important that all the commands throughout the remainder of
-          this chapter and the following chapters are run from within the
-          chroot environment. If you leave this environment for any reason
-          (rebooting for example), ensure that the virtual kernel filesystems
-          are mounted as explained in <a class="xref" href=
-          "kernfs.html#ch-system-bindmount" title=
-          "6.2.2.&nbsp;Mounting and Populating /dev">Section&nbsp;6.2.2,
-          &ldquo;Mounting and Populating /dev&rdquo;</a> and <a class="xref"
-          href="kernfs.html#ch-system-kernfsmount" title=
-          "6.2.3.&nbsp;Mounting Virtual Kernel File Systems">Section&nbsp;6.2.3,
-          &ldquo;Mounting Virtual Kernel File Systems&rdquo;</a> and enter
-          chroot again before continuing with the installation.
+          需要重视，本章从这以后的命令，以及后续章节里的命令都要在 chroot 环境下运行。如果因为某种原因（比如说重启）离开了这个环境，请保证要按照 <a class="xref" href="kernfs.html#ch-system-bindmount" title="6.2.2.&nbsp;Mounting and Populating /dev">6.2.2,&ldquo;挂载和激活 /dev&rdquo;</a> 和 <a class="xref" href="kernfs.html#ch-system-kernfsmount" title="6.2.3.&nbsp;Mounting Virtual Kernel File Systems">6.2.3,&ldquo;挂载虚拟内核文件系统&rdquo;</a> 里所说的那样挂载虚拟内核文件系统，然后在继续构建之前重新运行 chroot 进入环境。
         </p>
       </div>
     </div>
@@ -131,25 +90,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="pkgmgt.html" title=
-          "Package Management">Prev</a>
+          "软件包管理">上一页</a>
           <p>
-            Package Management
+            软件包管理
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="creatingdirs.html" title=
-          "Creating Directories">Next</a>
+          "创建目录">下一页</a>
           <p>
-            Creating Directories
+            创建目录
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+          "第六章 安装基本系统软件">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">主页</a>
         </li>
       </ul>
     </div>
