@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       5.8.&nbsp;Libstdc++-6.3.0
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章 构建临时系统
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="glibc.html" title="Glibc-2.25">Prev</a>
+          <a accesskey="p" href="glibc.html" title="Glibc-2.25">上一页</a>
           <p>
             Glibc-2.25
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="binutils-pass2.html" title=
-          "Binutils-2.27 - Pass 2">Next</a>
+          "Binutils-2.27 - Pass 2">下一页</a>
           <p>
-            Binutils-2.27 - Pass 2
+            Binutils-2.27 - 第二遍
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
@@ -52,17 +52,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          Libstdc++ is the standard C++ library. It is needed for the correct
-          operation of the g++ compiler.
+          Libstdc++ 是标准的 C++ 库，g++ 编译器正确运行需要它。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">898 MB</span>
             </div>
           </div>
@@ -70,28 +69,27 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          5.8.1. Installation of Target Libstdc++
+          5.8.1. 安装目标 Libstdc++ 
         </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
-            Note
+            注意
           </h3>
           <p>
-            <span class="application">Libstdc++</span> is part of the GCC
-            sources. You should first unpack the GCC tarball and change to
-            the <code class="filename">gcc-6.3.0</code> directory.
+            <span class="application">Libstdc++</span> 是 GCC 源文件的一部分。
+            你首先应该解压 GCC 的压缩包，然后进入 <code class="filename">gcc-6.3.0</code> 文件夹。
           </p>
         </div>
         <p>
-          Create a separate build directory for Libstdc++ and enter it:
+          创建一个专门的 build 目录，并进入：
         </p>
         <pre class="userinput">
 <kbd class="command">mkdir -v build
 cd       build</kbd>
 </pre>
         <p>
-          Prepare Libstdc++ for compilation:
+          准备编译 Libstdc++ ：
         </p>
         <pre class="userinput">
 <kbd class="command">../libstdc++-v3/configure           \
@@ -105,7 +103,7 @@ cd       build</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure options:</strong>
+            <strong>配置选项的含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -114,8 +112,7 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Indicates to use the cross compiler we have just built
-                instead of the one in <code class="filename">/usr/bin</code>.
+                指示使用我们刚才编译的交叉编译器，而不是 <code class="filename">/usr/bin</code> 中的。
               </p>
             </dd>
             <dt>
@@ -124,8 +121,7 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                Since we have not yet built the C threads library, the C++
-                one cannot be built either.
+                由于我们还没有编译 C 线程库，C++ 的也还不能编译。
               </p>
             </dd>
             <dt>
@@ -134,8 +130,7 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                This switch prevents the installation of precompiled include
-                files, which are not needed at this stage.
+                此选项防止安装预编译文件，此步骤并不需要。
               </p>
             </dd>
             <dt>
@@ -144,24 +139,21 @@ cd       build</kbd>
             </dt>
             <dd>
               <p>
-                This is the location where the standard include files are
-                searched by the C++ compiler. In a normal build, this
-                information is automatically passed to the Libstdc++
+                这是 C++ 编译器搜索标准 include 文件的位置。在一般的编译中，这个信息自动从顶层目录中传入 Libstdc++
                 <span class="command"><strong>configure</strong></span>
-                options from the top level directory. In our case, this
-                information must be explicitly given.
+                选项。在我们的例子中，必须显式给出这个信息。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile libstdc++ by running:
+          编译 libstdc++ ：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Install the library:
+          安装库：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -169,7 +161,7 @@ cd       build</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <p>
-          Details on this package are located in <a class="xref" href=
+          该软件包的详细信息在 <a class="xref" href=
           "../chapter06/gcc.html#contents-gcc" title=
           "6.17.2.&nbsp;Contents of GCC">Section&nbsp;6.17.2, &ldquo;Contents
           of GCC.&rdquo;</a>
@@ -179,25 +171,25 @@ cd       build</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="glibc.html" title="Glibc-2.25">Prev</a>
+          <a accesskey="p" href="glibc.html" title="Glibc-2.25">上一页</a>
           <p>
             Glibc-2.25
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="binutils-pass2.html" title=
-          "Binutils-2.27 - Pass 2">Next</a>
+          "Binutils-2.27 - Pass 2">下一页</a>
           <p>
-            Binutils-2.27 - Pass 2
+            Binutils-2.27 - 第二遍
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

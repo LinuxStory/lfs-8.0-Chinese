@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       5.11.&nbsp;Tcl-core-8.6.6
     </title>
@@ -19,29 +19,29 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章 构建临时系统
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="gcc-pass2.html" title=
-          "GCC-6.3.0 - Pass 2">Prev</a>
+          "GCC-6.3.0 - Pass 2">上一页</a>
           <p>
-            GCC-6.3.0 - Pass 2
+            GCC-6.3.0 - 第二遍
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="expect.html" title="Expect-5.45">Next</a>
+          <a accesskey="n" href="expect.html" title="Expect-5.45">下一页</a>
           <p>
             Expect-5.45
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">首页</a>
         </li>
       </ul>
     </div>
@@ -51,16 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Tcl package contains the Tool Command Language.
+         Tcl 软件包包含工具命令语言（Tool Command Language）相关程序。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">40 MB</span>
             </div>
           </div>
@@ -68,83 +68,67 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          5.11.1. Installation of Tcl-core
+          5.11.1. 安装 Tcl-core
         </h2>
         <p>
-          This package and the next three (Expect, DejaGNU, and Check) are
-          installed to support running the test suites for GCC and Binutils
-          and other packages. Installing four packages for testing purposes
-          may seem excessive, but it is very reassuring, if not essential, to
-          know that the most important tools are working properly. Even if
-          the test suites are not run in this chapter (they are not
-          mandatory), these packages are required to run the test suites in
-          <a class="xref" href="../chapter06/chapter06.html" title=
+          此软件包和后面三个包（Expect，DejaGNU 和 Check）用来为 GCC 和 Binutils 还有其他的一些软件包提供测试套件的。
+          安装四个软件包用于测试的目的看起来可能过于奢侈，但是如果不是有紧急情况的话，知道重要的工具能正常工作是非常令人放心的。
+          即使在本章中并没有执行测试套件（并不做要求），但是在 <a class="xref" href="../chapter06/chapter06.html" title=
           "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
-          6</a>.
+          6</a> 中都要求执行这些软件包自带的测试套件。
         </p>
         <p>
-          Note that the Tcl package used here is a minimal version needed to
-          run the LFS tests. For the full package, see the <a class="ulink"
-          href=
-          "http://www.linuxfromscratch.org/blfs/view/8.0/general/tcl.html">BLFS
-          Tcl procedures</a>.
+          注意这里使用的 Tcl 软件包是一个满足 LFS 的测试的最小化的版本。对于完整版，请访问：<a class="ulink"
+          href="http://www.linuxfromscratch.org/blfs/view/8.0/general/tcl.html">BLFS Tcl procedures</a>
         </p>
         <p>
-          Prepare Tcl for compilation:
+          准备编译 Tcl：
         </p>
         <pre class="userinput">
 <kbd class="command">cd unix
 ./configure --prefix=/tools</kbd>
 </pre>
         <p>
-          Build the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make</kbd>
 </pre>
         <p>
-          Compilation is now complete. As discussed earlier, running the test
-          suite is not mandatory for the temporary tools here in this
-          chapter. To run the Tcl test suite anyway, issue the following
-          command:
+          现在编译已经完成。之前说过，不强求为本章中所构建的临时工具运行测试套件。
+          不过你仍然要测试 Tcl 的话可以用下面的命令：
         </p>
         <pre class="userinput">
 <kbd class="command">TZ=UTC make test</kbd>
 </pre>
         <p>
-          The Tcl test suite may experience failures under certain host
-          conditions that are not fully understood. Therefore, test suite
-          failures here are not surprising, and are not considered critical.
-          The <em class="parameter"><code>TZ=UTC</code></em> parameter sets
-          the time zone to Coordinated Universal Time (UTC), but only for the
-          duration of the test suite run. This ensures that the clock tests
-          are exercised correctly. Details on the <code class=
-          "envar">TZ</code> environment variable are provided in <a class=
+          Tcl 测试套件在宿主机某些特定条件下会失败，原因很难推测。 不过测试套件失败并不奇怪，也不是什么严重的错误。
+          <em class="parameter"><code>TZ=UTC</code></em> 参数设定了时区和相应的世界标准时间（UTC），
+          但是只在测试套件运行期间才有效。这个可以保证时钟测试能正常运行。 关于 <code class=
+          "envar">TZ</code>环境变量的细节请参阅<a class=
           "xref" href="../chapter07/chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Chapter 7</a>.
+          "Chapter&nbsp;7.&nbsp;System Configuration">Chapter 7</a>。
         </p>
         <p>
-          Install the package:
+          安装：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
 </pre>
         <p>
-          Make the installed library writable so debugging symbols can be
-          removed later:
+          让安装的库文件可写，这样之后可以删除调试符号：
         </p>
         <pre class="userinput">
 <kbd class="command">chmod -v u+w /tools/lib/libtcl8.6.so</kbd>
 </pre>
         <p>
-          Install Tcl's headers. The next package, Expect, requires them to
-          build.
+          安装 Tcl 的头文件。后面的 Expect 软件包会用的到。 
         </p>
         <pre class="userinput">
 <kbd class="command">make install-private-headers</kbd>
 </pre>
         <p>
-          Now make a necessary symbolic link:
+          现在创建一个必要的软链接：
         </p>
         <pre class="userinput">
 <kbd class="command">ln -sv tclsh8.6 /tools/bin/tclsh</kbd>
@@ -152,25 +136,24 @@
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-tcl" name="contents-tcl"></a>5.11.2. Contents of
-          Tcl-core
+          <a id="contents-tcl" name="contents-tcl"></a>5.11.2. Tcl-core 软件包内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">tclsh (link to tclsh8.6) and
+              <strong class="segtitle">安装的程序：</strong>
+              <span class="segbody">tclsh (指向 tclsh8.6) 和
               tclsh8.6</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed library:</strong>
+              <strong class="segtitle">安装的库：</strong>
               <span class="segbody">libtcl8.6.so, libtclstub8.6.a</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简介
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -188,7 +171,7 @@
                 </td>
                 <td>
                   <p>
-                    The Tcl command shell
+                    Tcl 命令行
                   </p>
                 </td>
               </tr>
@@ -202,7 +185,7 @@
                 </td>
                 <td>
                   <p>
-                    A link to tclsh8.6
+                    指向 tclsh8.6 的软链接
                   </p>
                 </td>
               </tr>
@@ -215,7 +198,7 @@
                 </td>
                 <td>
                   <p>
-                    The Tcl library
+                    Tcl 库
                   </p>
                 </td>
               </tr>
@@ -229,7 +212,7 @@
                 </td>
                 <td>
                   <p>
-                    The Tcl Stub library
+                    Tcl Stub 库
                   </p>
                 </td>
               </tr>
@@ -242,26 +225,27 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="gcc-pass2.html" title=
-          "GCC-6.3.0 - Pass 2">Prev</a>
+          "GCC-6.3.0 - Pass 2">上一页</a>
           <p>
-            GCC-6.3.0 - Pass 2
+            GCC-6.3.0 - 第二遍
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="expect.html" title="Expect-5.45">Next</a>
+          <a accesskey="n" href="expect.html" title="Expect-5.45">下一页</a>
           <p>
             Expect-5.45
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">首页</a>
         </li>
       </ul>
     </div>
   </body>
 </html>
+
