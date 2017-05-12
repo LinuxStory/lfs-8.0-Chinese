@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      7.4.&nbsp;Managing Devices
+      7.4. 管理设备
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,78 +19,53 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;7.&nbsp;System Configuration
+        第七章 系统配置
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="udev.html" title=
-          "Overview of Device and Module Handling">Prev</a>
+          "设备及模块管理综述">上一页</a>
           <p>
-            Overview of Device and Module Handling
+            设备及模块管理综述
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="clock.html" title=
-          "Configuring the system clock">Next</a>
+          "配置系统时钟">下一页</a>
           <p>
-            Configuring the system clock
+            配置系统时钟
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-scripts-symlinks" name="ch-scripts-symlinks"></a>7.4.
-        Managing Devices
+        <a id="ch-scripts-symlinks" name="ch-scripts-symlinks"></a>7.4. 管理设备
       </h1>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.4.1. Dealing with duplicate devices
+          7.4.1. 重复设备的处理
         </h2>
         <p>
-          As explained in <a class="xref" href="udev.html" title=
-          "7.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;7.3,
-          &ldquo;Overview of Device and Module Handling&rdquo;</a>, the order
-          in which devices with the same function appear in <code class=
-          "filename">/dev</code> is essentially random. E.g., if you have a
-          USB web camera and a TV tuner, sometimes <code class=
-          "filename">/dev/video0</code> refers to the camera and <code class=
-          "filename">/dev/video1</code> refers to the tuner, and sometimes
-          after a reboot the order changes to the opposite one. For all
-          classes of hardware except sound cards and network cards, this is
-          fixable by creating Udev rules for custom persistent symlinks. The
-          case of network cards is covered separately in <a class="xref"
-          href="network.html" title=
-          "7.2.&nbsp;General Network Configuration">Section&nbsp;7.2,
-          &ldquo;General Network Configuration&rdquo;</a>, and sound card
-          configuration can be found in <a class="ulink" href=
-          "http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/devices.html">
-          BLFS</a>.
+          如 <a class="xref" href="udev.html" title=
+          "7.3 &ldquo;设备及模块管理综述&rdquo;">7.3 &ldquo;设备及模块管理综述&rdquo;</a> 中所述，<code class="filename">/dev</code> 中显示的具有相同功能的设备的顺序基本上是随机的。例如，如果您有 USB 网络摄像机和电视调谐器，有时 <code class="filename">/dev/video0</code> 指摄像机同时 <code class="filename">/dev/video1</code> 指调谐器，有时在重新启动后，顺序变为相反的。对于除了声卡和网卡的所有类别的硬件，可以通过自定义持久性符号链接创建 Udev 规则来修复。网卡的情况将在 <a class="xref" href="network.html" title="7.5 &ldquo;通用网络配置&rdquo;"> 7.5 &ldquo;通用网络配置&rdquo;</a> 中谈到，声卡配置可以在 <a class="ulink" href="http://www.linuxfromscratch.org/blfs/view/8.0/postlfs/devices.html">BLFS</a> 中找到。
         </p>
         <p>
-          For each of your devices that is likely to have this problem (even
-          if the problem doesn't exist in your current Linux distribution),
-          find the corresponding directory under <code class=
-          "filename">/sys/class</code> or <code class=
-          "filename">/sys/block</code>. For video devices, this may be
-          <code class="filename">/sys/class/video4linux/video<em class=
-          "replaceable"><code>X</code></em></code>. Figure out the attributes
-          that identify the device uniquely (usually, vendor and product IDs
-          and/or serial numbers work):
+          对于每个可能出现此问题的设备（即使您当前的 Linux 发行版中不存在问题），请在 <code class="filename">/sys/class</code> 或 <code class="filename">/sys/block</code> 下找到相应的目录。对于视频设备，目录可能是 <code class="filename">/sys/class/video4linux/video<em class="replaceable"><code>X</code></em></code>。找出能够唯一标识设备的属性（通常，供应商和产品 ID 和/或序列号是有用的）：
         </p>
         <pre class="userinput">
 <kbd class="command">udevadm info -a -p /sys/class/video4linux/video0</kbd>
 </pre>
         <p>
-          Then write rules that create the symlinks, e.g.:
+          然后编写创建符号链接的规则，例如：
         </p>
         <pre class="userinput">
 <kbd class=
@@ -105,13 +80,7 @@ KERNEL=="video*", ATTRS{device}=="0x036f", ATTRS{vendor}=="0x109e", \
 EOF</kbd>
 </pre>
         <p>
-          The result is that <code class="filename">/dev/video0</code> and
-          <code class="filename">/dev/video1</code> devices still refer
-          randomly to the tuner and the web camera (and thus should never be
-          used directly), but there are symlinks <code class=
-          "filename">/dev/tvtuner</code> and <code class=
-          "filename">/dev/webcam</code> that always point to the correct
-          device.
+          以上操作的结果是 <code class="filename">/dev/video0</code> 和 <code class="filename">/dev/video1</code> 设备仍然可能随机指向到调谐器和网络摄像机（因此不应该直接使用），但是符号链接 <code class="filename">/dev/tvtuner</code> 与 <code class="filename">/dev/webcam</code> 总是指向到正确的设备。
         </p>
       </div>
     </div>
@@ -119,25 +88,25 @@ EOF</kbd>
       <ul>
         <li class="prev">
           <a accesskey="p" href="udev.html" title=
-          "Overview of Device and Module Handling">Prev</a>
+          "设备及模块管理综述">上一页</a>
           <p>
-            Overview of Device and Module Handling
+            设备及模块管理综述
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="clock.html" title=
-          "Configuring the system clock">Next</a>
+          "配置系统时钟">下一页</a>
           <p>
-            Configuring the system clock
+            配置系统时钟
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">首页</a>
         </li>
       </ul>
     </div>
