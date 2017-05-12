@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       5.24.&nbsp;Gettext-0.19.8.1
     </title>
@@ -19,28 +19,28 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        第五章 构建临时系统
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">Prev</a>
+          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">上一页</a>
           <p>
             Gawk-4.1.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <a accesskey="n" href="grep.html" title="Grep-3.0">下一页</a>
           <p>
             Grep-3.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">首页</a>
         </li>
       </ul>
     </div>
@@ -51,19 +51,16 @@
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Gettext package contains utilities for internationalization and
-          localization. These allow programs to be compiled with NLS (Native
-          Language Support), enabling them to output messages in the user's
-          native language.
+          Gettext 软件包包含了国际化和本地化的相关应用。它支持程序使用 NLS（本地语言支持）编译，允许程序用用户的母语输出信息。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
+              <strong class="segtitle">大概编译时间：</strong>
               <span class="segbody">0.9 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">164 MB</span>
             </div>
           </div>
@@ -71,14 +68,13 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          5.24.1. Installation of Gettext
+          5.24.1. 安装 Gettext
         </h2>
         <p>
-          For our temporary set of tools, we only need to build and install
-          three programs from Gettext.
+          对于我们这次用到的临时工具集，我们只需要编译安装 Gettext 软件包里的3个程序。
         </p>
         <p>
-          Prepare Gettext for compilation:
+          准备编译 Gettext：
         </p>
         <pre class="userinput">
 <kbd class="command">cd gettext-tools
@@ -86,7 +82,7 @@ EMACS="no" ./configure --prefix=/tools --disable-shared</kbd>
 </pre>
         <div class="variablelist">
           <p class="title">
-            <strong>The meaning of the configure option:</strong>
+            <strong>配置选项含义：</strong>
           </p>
           <dl class="variablelist">
             <dt>
@@ -95,9 +91,7 @@ EMACS="no" ./configure --prefix=/tools --disable-shared</kbd>
             </dt>
             <dd>
               <p>
-                This prevents the configure script from determining where to
-                install Emacs Lisp files as the test is known to hang on some
-                hosts.
+                这个选项会禁止配置脚本侦测安装 Emacs Lisp 文件的位置，已知会挂起某些系统。
               </p>
             </dd>
             <dt>
@@ -106,14 +100,13 @@ EMACS="no" ./configure --prefix=/tools --disable-shared</kbd>
             </dt>
             <dd>
               <p>
-                We do not need to install any of the shared Gettext libraries
-                at this time, therefore there is no need to build them.
+                这次我们不需要安装任何的 Gettext 的动态库，所以不需要编译。
               </p>
             </dd>
           </dl>
         </div>
         <p>
-          Compile the package:
+          编译软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make -C gnulib-lib
@@ -123,15 +116,12 @@ make -C src msgmerge
 make -C src xgettext</kbd>
 </pre>
         <p>
-          As only three programs have been compiled, it is not possible to
-          run the test suite without compiling additional support libraries
-          from the Gettext package. It is therefore not recommended to
-          attempt to run the test suite at this stage.
+          因为只编译了三个程序，不编译 Gettext 的额外支持库的话测试套件不可能成功运行。所以在这个阶段不建议尝试运行测试套件。
         </p>
         <p>
-          Install the <span class="command"><strong>msgfmt</strong></span>,
-          <span class="command"><strong>msgmerge</strong></span> and
-          <span class="command"><strong>xgettext</strong></span> programs:
+          安装 <span class="command"><strong>msgfmt</strong></span>,
+          <span class="command"><strong>msgmerge</strong></span> 和
+          <span class="command"><strong>xgettext</strong></span> ：
         </p>
         <pre class="userinput">
 <kbd class="command">cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin</kbd>
@@ -139,7 +129,7 @@ make -C src xgettext</kbd>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <p>
-          Details on this package are located in <a class="xref" href=
+          该软件包的详细信息在 <a class="xref" href=
           "../chapter06/gettext.html#contents-gettext" title=
           "6.47.2.&nbsp;Contents of Gettext">Section&nbsp;6.47.2,
           &ldquo;Contents of Gettext.&rdquo;</a>
@@ -149,26 +139,27 @@ make -C src xgettext</kbd>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">Prev</a>
+          <a accesskey="p" href="gawk.html" title="Gawk-4.1.4">上一页</a>
           <p>
             Gawk-4.1.4
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="grep.html" title="Grep-3.0">Next</a>
+          <a accesskey="n" href="grep.html" title="Grep-3.0">下一页</a>
           <p>
             Grep-3.0
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter05.html" title=
-          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd ">首页</a>
         </li>
       </ul>
     </div>
   </body>
 </html>
+
