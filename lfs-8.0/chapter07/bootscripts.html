@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      7.2.&nbsp;LFS-Bootscripts-20150222
+      7.2. LFS-引导脚本-20150222
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,53 +19,49 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;7.&nbsp;System Configuration
+        第七章 系统配置
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "Introduction">Prev</a>
+          "引言">上一页</a>
           <p>
-            Introduction
+            引言
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="udev.html" title=
-          "Overview of Device and Module Handling">Next</a>
+          "设备及模块管理综述">下一页</a>
           <p>
-            Overview of Device and Module Handling
+            设备及模块管理综述
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="wrap" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-scripts-bootscripts" name="ch-scripts-bootscripts"></a>7.2.
-        LFS-Bootscripts-20150222
+        <a id="ch-scripts-bootscripts" name="ch-scripts-bootscripts"></a>7.2. LFS-引导脚本-20150222
       </h1>
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The LFS-Bootscripts package contains a set of scripts to start/stop
-          the LFS system at bootup/shutdown. The configuration files and
-          procedures needed to customize the boot process are described in
-          the following sections.
+          LFS 引导脚本软件包包括一系列用于在启动或关机过程中启动或停止 LFS 系统的脚本。以下部分将会介绍自定义引导过程所需的配置文件和过程。
         </p>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">less than 0.1 SBU</span>
+              <strong class="segtitle">预计构建时间：</strong>
+              <span class="segbody">小于 0.1 SBU</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
+              <strong class="segtitle">所需磁盘空间：</strong>
               <span class="segbody">244 KB</span>
             </div>
           </div>
@@ -73,10 +69,10 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.2.1. Installation of LFS-Bootscripts
+          7.2.1. LFS 引导脚本的安装
         </h2>
         <p>
-          Install the package:
+          安装软件包：
         </p>
         <pre class="userinput">
 <kbd class="command">make install</kbd>
@@ -85,27 +81,27 @@
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="contents-bootscripts" name="contents-bootscripts"></a>7.2.2.
-          Contents of LFS-Bootscripts
+          LFS 引导脚本的内容
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed scripts:</strong>
+              <strong class="segtitle">所安装的脚本：</strong>
               <span class="segbody">checkfs, cleanfs, console, functions,
               halt, ifdown, ifup, localnet, modules, mountfs, mountvirtfs,
               network, rc, reboot, sendsignals, setclock, ipv4-static, swap,
               sysctl, sysklogd, template, udev, and udev_retry</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed directories:</strong>
-              <span class="segbody">/etc/rc.d, /etc/init.d (symbolic link),
-              /etc/sysconfig, /lib/services, /lib/lsb (symbolic link)</span>
+              <strong class="segtitle">所安装的目录：</strong>
+              <span class="segbody">/etc/rc.d, /etc/init.d （符号链接）,
+              /etc/sysconfig, /lib/services, /lib/lsb （符号链接）</span>
             </div>
           </div>
         </div>
         <div class="variablelist">
           <h3>
-            Short Descriptions
+            简要描述
           </h3>
           <table border="0" class="variablelist">
             <colgroup>
@@ -123,9 +119,7 @@
                 </td>
                 <td>
                   <p>
-                    Checks the integrity of the file systems before they are
-                    mounted (with the exception of journal and network based
-                    file systems)
+					文件系统挂载前检查文件系统的完整性（基于日志和网络的文件系统除外）
                   </p>
                 </td>
               </tr>
@@ -139,14 +133,7 @@
                 </td>
                 <td>
                   <p>
-                    Removes files that should not be preserved between
-                    reboots, such as those in <code class=
-                    "filename">/var/run/</code> and <code class=
-                    "filename">/var/lock/</code>; it re-creates <code class=
-                    "filename">/var/run/utmp</code> and removes the possibly
-                    present <code class="filename">/etc/nologin</code>,
-                    <code class="filename">/fastboot</code>, and <code class=
-                    "filename">/forcefsck</code> files
+					删除在重新启动之间不应该保留的文件，例如 <code class="filename">/var/run/</code> 和 <code class="filename">/var/lock/</code> 中的文件；重新创建 <code class="filename">/var/run/utmp</code> 并删除可能存在的 <code class="filename">/etc/nologin</code>、<code class="filename">/fastboot</code> 以及 <code class="filename">/forcefsck</code> 文件
                   </p>
                 </td>
               </tr>
@@ -160,8 +147,7 @@
                 </td>
                 <td>
                   <p>
-                    Loads the correct keymap table for the desired keyboard
-                    layout; it also sets the screen font
+                    加载所需键盘布局的正确键位表；同时设置屏幕字体
                   </p>
                 </td>
               </tr>
@@ -176,8 +162,7 @@
                 </td>
                 <td>
                   <p>
-                    Contains common functions, such as error and status
-                    checking, that are used by several bootscripts
+					包含几个引导脚本所使用的常见功能，如错误和状态检查
                   </p>
                 </td>
               </tr>
@@ -191,7 +176,7 @@
                 </td>
                 <td>
                   <p>
-                    Halts the system
+                    停止系统
                   </p>
                 </td>
               </tr>
@@ -205,7 +190,7 @@
                 </td>
                 <td>
                   <p>
-                    Stops a network device
+                    停止网络设备
                   </p>
                 </td>
               </tr>
@@ -219,7 +204,7 @@
                 </td>
                 <td>
                   <p>
-                    Initializes a network device
+                    初始化网络设备
                   </p>
                 </td>
               </tr>
@@ -233,7 +218,7 @@
                 </td>
                 <td>
                   <p>
-                    Sets up the system's hostname and local loopback device
+                    设置系统的主机名和本地环回设备
                   </p>
                 </td>
               </tr>
@@ -247,9 +232,7 @@
                 </td>
                 <td>
                   <p>
-                    Loads kernel modules listed in <code class=
-                    "filename">/etc/sysconfig/modules</code>, using arguments
-                    that are also given there
+					加载 <code class="filename">/etc/sysconfig/modules</code> 中列出的内核模块，使用其中给出的参数
                   </p>
                 </td>
               </tr>
@@ -263,9 +246,7 @@
                 </td>
                 <td>
                   <p>
-                    Mounts all file systems, except ones that are marked
-                    <span class="emphasis"><em>noauto</em></span> or are
-                    network based
+					挂载所有文件系统，除了标记为 <span class="emphasis"><em>noauto</em></span> 或基于网络的文件系统
                   </p>
                 </td>
               </tr>
@@ -280,8 +261,7 @@
                 </td>
                 <td>
                   <p>
-                    Mounts virtual kernel file systems, such as <code class=
-                    "systemitem">proc</code>
+					挂载虚拟内核文件系统，如 <code class="systemitem">proc</code>
                   </p>
                 </td>
               </tr>
@@ -295,8 +275,7 @@
                 </td>
                 <td>
                   <p>
-                    Sets up network interfaces, such as network cards, and
-                    sets up the default gateway (where applicable)
+                    设置网络接口（例如网卡），并在适用的时候设置默认网关
                   </p>
                 </td>
               </tr>
@@ -310,10 +289,7 @@
                 </td>
                 <td>
                   <p>
-                    The master run-level control script; it is responsible
-                    for running all the other bootscripts one-by-one, in a
-                    sequence determined by the name of the symbolic links
-                    being processed
+					主运行级别控制脚本；它负责按照正在处理的符号链接的名称的顺序，依次运行所有其他引导文件
                   </p>
                 </td>
               </tr>
@@ -327,7 +303,7 @@
                 </td>
                 <td>
                   <p>
-                    Reboots the system
+                    重新启动系统
                   </p>
                 </td>
               </tr>
@@ -342,8 +318,7 @@
                 </td>
                 <td>
                   <p>
-                    Makes sure every process is terminated before the system
-                    reboots or halts
+					确保所有进程在系统重新启动或停止之前已经终止
                   </p>
                 </td>
               </tr>
@@ -357,8 +332,7 @@
                 </td>
                 <td>
                   <p>
-                    Resets the kernel clock to local time in case the
-                    hardware clock is not set to UTC time
+					将内核时钟重置为本地时间，以避免硬件时钟未设置为 UTC 时间的情况发生
                   </p>
                 </td>
               </tr>
@@ -373,8 +347,7 @@
                 </td>
                 <td>
                   <p>
-                    Provides the functionality needed to assign a static
-                    Internet Protocol (IP) address to a network interface
+					提供为网络接口分配静态 IP 地址所需的功能
                   </p>
                 </td>
               </tr>
@@ -388,7 +361,7 @@
                 </td>
                 <td>
                   <p>
-                    Enables and disables swap files and partitions
+                    启用和禁用交换文件和分区
                   </p>
                 </td>
               </tr>
@@ -402,9 +375,7 @@
                 </td>
                 <td>
                   <p>
-                    Loads system configuration values from <code class=
-                    "filename">/etc/sysctl.conf</code>, if that file exists,
-                    into the running kernel
+					将系统配置值从 <code class="filename">/etc/sysctl.conf</code>（如果该文件存在）加载到正在运行的内核中
                   </p>
                 </td>
               </tr>
@@ -418,7 +389,7 @@
                 </td>
                 <td>
                   <p>
-                    Starts and stops the system and kernel log daemons
+                    启动和停止系统和内核日志守护进程
                   </p>
                 </td>
               </tr>
@@ -432,7 +403,7 @@
                 </td>
                 <td>
                   <p>
-                    A template to create custom bootscripts for other daemons
+					为其他守护进程创建自定义引导脚本的模板
                   </p>
                 </td>
               </tr>
@@ -446,8 +417,7 @@
                 </td>
                 <td>
                   <p>
-                    Prepares the <code class="filename">/dev</code> directory
-                    and starts Udev
+					准备 <code class="filename">/dev</code> 目录并启动 Udev
                   </p>
                 </td>
               </tr>
@@ -462,10 +432,7 @@
                 </td>
                 <td>
                   <p>
-                    Retries failed udev uevents, and copies generated rules
-                    files from <code class="filename">/run/udev</code> to
-                    <code class="filename">/etc/udev/rules.d</code> if
-                    required
+					重试失败的 udev uevents，并在需要的情况下将生成的规则文件从 <code class="filename">/run/udev</code> 复制到 <code class="filename">/etc/udev/rules.d</code>
                   </p>
                 </td>
               </tr>
@@ -478,25 +445,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="introduction.html" title=
-          "Introduction">Prev</a>
+          "引言">上一页</a>
           <p>
-            Introduction
+            引言
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="udev.html" title=
-          "Overview of Device and Module Handling">Next</a>
+          "设备及模块管理综述">下一页</a>
           <p>
-            Overview of Device and Module Handling
+            设备及模块管理综述
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

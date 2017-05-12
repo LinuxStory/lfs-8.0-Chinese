@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      7.3.&nbsp;Overview of Device and Module Handling
+      7.3. 设备及模块管理综述
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,425 +19,203 @@
         Linux From Scratch - Version 8.0
       </h4>
       <h3>
-        Chapter&nbsp;7.&nbsp;System Configuration
+        第七章 系统配置
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="bootscripts.html" title=
-          "LFS-Bootscripts-20150222">Prev</a>
+          "LFS-引导脚本-20150222">上一页</a>
           <p>
-            LFS-Bootscripts-20150222
+            LFS-引导脚本-20150222
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="symlinks.html" title=
-          "Managing Devices">Next</a>
+          "管理设备">下一页</a>
           <p>
-            Managing Devices
+            管理设备
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
-        <a id="ch-scripts-udev" name="ch-scripts-udev"></a>7.3. Overview of
-        Device and Module Handling
+        <a id="ch-scripts-udev" name="ch-scripts-udev"></a>7.3. 设备及模块管理综述
       </h1>
       <p>
-        In <a class="xref" href="../chapter06/chapter06.html" title=
-        "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Chapter
-        6</a>, we installed the Udev package when <span class=
-        "phrase">eudev</span> was built. Before we go into the details
-        regarding how this works, a brief history of previous methods of
-        handling devices is in order.
+        在<a class="xref" href="../chapter06/chapter06.html" title=
+        "第六章：安装基本系统软件">第六章</a>中，我们在 eudev 构建之后安装了 Udev 包。在我们详细了解它是如何工作之前，先简要介绍一下先前方法是如何进行设备管理的。
       </p>
-      <p>
-        Linux systems in general traditionally used a static device creation
-        method, whereby a great many device nodes were created under
-        <code class="filename">/dev</code> (sometimes literally thousands of
-        nodes), regardless of whether the corresponding hardware devices
-        actually existed. This was typically done via a <span class=
-        "command"><strong>MAKEDEV</strong></span> script, which contains a
-        number of calls to the <span class=
-        "command"><strong>mknod</strong></span> program with the relevant
-        major and minor device numbers for every possible device that might
-        exist in the world.
+      <p>通常来说，Linux 系统使用静态设备创建方法，由此在 <code class="filename">/dev</code> 目录创建了大量的设备节点（有时甚至达到数千个），而不管相应的硬件设备是否实际存在。这通常由 <span class="command"><strong>MAKEDEV</strong></span> 脚本完成，该脚本包括若干对 <span class="command"><strong>mknod</strong></span> 程序的调用，其中包含任何可能存在于世界中的大大小小的设备的编号。
       </p>
-      <p>
-        Using the Udev method, only those devices which are detected by the
-        kernel get device nodes created for them. Because these device nodes
-        will be created each time the system boots, they will be stored on a
-        <code class="systemitem">devtmpfs</code> file system (a virtual file
-        system that resides entirely in system memory). Device nodes do not
-        require much space, so the memory that is used is negligible.
+      <p>通过使用 Udev 方法，只有那些被内核检测到的设备才能创建设备节点。由于这些设备节点在系统引导时创建，因此它们将被存储于 <code class="systemitem">devtmpfs</code> 文件系统（一个完全位于系统内存中的虚拟文件系统）中。设备节点不需要太多空间，因此使用的内存可以忽略不计。
       </p>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.3.1. History
+          7.3.1. 历史
         </h2>
-        <p>
-          In February 2000, a new filesystem called <code class=
-          "systemitem">devfs</code> was merged into the 2.3.46 kernel and was
-          made available during the 2.4 series of stable kernels. Although it
-          was present in the kernel source itself, this method of creating
-          devices dynamically never received overwhelming support from the
-          core kernel developers.
+        <p>2000 年 2 月，一个名为 <code class="systemitem">devfs</code> 的新文件系统被合并到 2.3.46 内核中，并且在 2.4 系列稳定内核中可用。尽管相关的内核源代码本身存在，但这种动态创建设备的方法从未得到核心内核开发者的广泛支持。
         </p>
-        <p>
-          The main problem with the approach adopted by <code class=
-          "systemitem">devfs</code> was the way it handled device detection,
-          creation, and naming. The latter issue, that of device node naming,
-          was perhaps the most critical. It is generally accepted that if
-          device names are allowed to be configurable, then the device naming
-          policy should be up to a system administrator, not imposed on them
-          by any particular developer(s). The <code class=
-          "systemitem">devfs</code> file system also suffered from race
-          conditions that were inherent in its design and could not be fixed
-          without a substantial revision to the kernel. It was marked as
-          deprecated for a long period &ndash; due to a lack of maintenance
-          &ndash; and was finally removed from the kernel in June, 2006.
+        <p> 采用 <code class="systemitem">devfs</code> 方法的主要问题是处理设备检测、创建和命名的方式。后一个问题，即设备节点命名，也许是最关键的问题。通常得到认可的是如果允许对设备名称进行配置，那么设备命名策略应由系统管理员决定，而不是由任何特定的开发人员施加。<code class= "systemitem">devfs</code> 文件系统也遭受其设计中固有的竞争条件的影响，如果不对内核进行大量修改，就无法得到修复。由于缺乏维护，它被长时间标记为被淘汰状态，并最终于 2006 年 6 月从内核中删除。
         </p>
-        <p>
-          With the development of the unstable 2.5 kernel tree, later
-          released as the 2.6 series of stable kernels, a new virtual
-          filesystem called <code class="systemitem">sysfs</code> came to be.
-          The job of <code class="systemitem">sysfs</code> is to export a
-          view of the system's hardware configuration to userspace processes.
-          With this userspace-visible representation, the possibility of
-          developing a userspace replacement for <code class=
-          "systemitem">devfs</code> became much more realistic.
+        <p> 经过不稳定的 2.5 内核树的发展，之后发布的 2.6 系列稳定内核中，诞生了一个称为 <code class="systemitem">sysfs</code> 的新的虚拟文件系统。<code class="systemitem">sysfs</code> 的任务是将系统的硬件配置视图导出到用户空间进程。通过用户空间的可视化表示，开发一个用户空间进程以替换 <code class="systemitem">devfs</code> 变得更加现实。
         </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.3.2. Udev Implementation
+          7.3.2. Udev 实现
         </h2>
         <div class="sect3">
           <h3 class="sect3">
             7.3.2.1. Sysfs
           </h3>
-          <p>
-            The <code class="systemitem">sysfs</code> filesystem was
-            mentioned briefly above. One may wonder how <code class=
-            "systemitem">sysfs</code> knows about the devices present on a
-            system and what device numbers should be used for them. Drivers
-            that have been compiled into the kernel directly register their
-            objects with a <code class="systemitem">sysfs</code> (devtmpfs
-            internally) as they are detected by the kernel. For drivers
-            compiled as modules, this registration will happen when the
-            module is loaded. Once the <code class="systemitem">sysfs</code>
-            filesystem is mounted (on /sys), data which the drivers register
-            with <code class="systemitem">sysfs</code> are available to
-            userspace processes and to udevd for processing (including
-            modifications to device nodes).
+          <p>上文简要介绍了 <code class="systemitem">sysfs</code> 文件系统。大家可能想知道 <code class="systemitem">sysfs</code> 如何知道系统上存在的设备以及应该使用哪些设备号。对于已经编译到内核中的驱动程序，当被内核检测时，直接通过 <code class="systemitem">sysfs</code>（位于 <code class="systemitem">devtmpfs</code> 内部）来注册对象。对于编译为模块的驱动程序，当注册模块加载时，会发生注册。一旦挂载了 <code class="systemitem">sysfs</code> 文件系统（位于 <code class="filename">/sys</code>），驱动程序使用 <code class="systemitem">sysfs</code> 注册的数据可用于用户空间进程和 <span class="command"><strong>udevd</strong></span> 以进行处理（包括对设备节点的修改）。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.2.2. Device Node Creation
+            7.3.2.2. 设备节点的创建
           </h3>
-          <p>
-            Device files are created by the kernel by the <code class=
-            "systemitem">devtmpfs</code> filesystem. Any driver that wishes
-            to register a device node will go through the <code class=
-            "systemitem">devtmpfs</code> (via the driver core) to do it. When
-            a <code class="systemitem">devtmpfs</code> instance is mounted on
-            <code class="filename">/dev</code>, the device node will
-            initially be created with a fixed name, permissions, and owner.
+          <p>设备文件由内核通过 <code class="systemitem">devtmpfs</code> 文件系统创建。任何希望注册设备节点的驱动程序都将通过 <code class="systemitem">devtmpfs</code> （由驱动程序核心）来完成。当 <code class="systemitem">devtmpfs</code> 实例挂载在 <code class="filename">/dev</code> 上时，设备节点将以固定的名称、权限和所有者初始创建。
           </p>
-          <p>
-            A short time later, the kernel will send a uevent to <span class=
-            "command"><strong>udevd</strong></span>. Based on the rules
-            specified in the files within the <code class=
-            "filename">/etc/udev/rules.d</code>, <code class=
-            "filename">/lib/udev/rules.d</code>, and <code class=
-            "filename">/run/udev/rules.d</code> directories, <span class=
-            "command"><strong>udevd</strong></span> will create additional
-            symlinks to the device node, or change its permissions, owner, or
-            group, or modify the internal <span class=
-            "command"><strong>udevd</strong></span> database entry (name) for
-            that object.
+          <p>不久之后，内核将向 <span class="command"><strong>udevd</strong></span> 发送一个 uevent。根据 <code class="filename">/etc/udev/rules.d</code>，<code class="filename">/lib/udev/rules.d</code> 和 <code class="filename">/run/udev/rules.d</code> 目录中的文件中指定的规则，<span class="command"><strong>udevd</strong></span> 将为设备节点创建其他符号链接，或更改其权限、所有者或组，或修改该对象的内部 <span class="command"><strong>udevd</strong></span> 数据库条目（名称）。
           </p>
-          <p>
-            The rules in these three directories are numbered and all three
-            directories are merged together. If <span class=
-            "command"><strong>udevd</strong></span> can't find a rule for the
-            device it is creating, it will leave the permissions and
-            ownership at whatever <code class="systemitem">devtmpfs</code>
-            used initially.
+          <p>这三个目录中的规则被编号，并且这三个目录被合并在一起。如果 <span class="command"><strong>udevd</strong></span> 找不到正在创建的设备的规则，那么会将其权限和所有权指定为 <code class="systemitem">devtmpfs</code> 最初所使用的。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.2.3. Module Loading
+            7.3.2.3. 模块的加载
           </h3>
-          <p>
-            Device drivers compiled as modules may have aliases built into
-            them. Aliases are visible in the output of the <span class=
-            "command"><strong>modinfo</strong></span> program and are usually
-            related to the bus-specific identifiers of devices supported by a
-            module. For example, the <span class=
-            "emphasis"><em>snd-fm801</em></span> driver supports PCI devices
-            with vendor ID 0x1319 and device ID 0x0801, and has an alias of
-            <span class="quote">&ldquo;<span class=
-            "quote">pci:v00001319d00000801sv*sd*bc04sc01i*</span>&rdquo;</span>.
-            For most devices, the bus driver exports the alias of the driver
-            that would handle the device via <code class=
-            "systemitem">sysfs</code>. E.g., the <code class=
-            "filename">/sys/bus/pci/devices/0000:00:0d.0/modalias</code> file
-            might contain the string <span class="quote">&ldquo;<span class=
-            "quote">pci:v00001319d00000801sv00001319sd00001319bc04sc01i00</span>&rdquo;</span>.
-            The default rules provided with Udev will cause <span class=
-            "command"><strong>udevd</strong></span> to call out to
-            <span class="command"><strong>/sbin/modprobe</strong></span> with
-            the contents of the <code class="envar">MODALIAS</code> uevent
-            environment variable (which should be the same as the contents of
-            the <code class="filename">modalias</code> file in sysfs), thus
-            loading all modules whose aliases match this string after
-            wildcard expansion.
+          <p>编译为模块的设备驱动程序可能会在其中内置别名。别名在 <span class="command"><strong>modinfo</strong></span> 程序的输出中可见，通常与模块支持的设备的总线特定标识符相关。例如，<span class=
+            "emphasis"><em>snd-fm801</em></span> 驱动程序支持供应商 ID 为 0x1319、设备 ID 为 0x0801 的 PCI 设备，并具有 <span class="quote">&ldquo;<span class="quote">pci:v00001319d00000801sv*sd*bc04sc01i*</span>&rdquo;</span> 的别名。对于大多数设备，总线驱动程序通过 <code class="systemitem">sysfs</code> 导出所处理设备的驱动程序的别名。例如，<code class="filename">/sys/bus/pci/devices/0000:00:0d.0/modalias</code> 文件可能包含字符串 <span class="quote">&ldquo;<span class="quote">pci:v00001319d00000801sv00001319sd00001319bc04sc01i00</span>&rdquo;</span>。Udev 提供的默认规则将引起 <span class="command"><strong>udevd</strong></span> 与 <code class="envar">MODALIAS</code> uevent 环境变量的内容（它们应与 <code class="systemitem">sysfs</code> 中的 <code class="filename">modalias</code> 文件的内容相同）调用 <span class="command"><strong>/sbin/modprobe</strong></span>，从而加载别名与经过通配符扩展的字符串相匹配的所有模块。
           </p>
-          <p>
-            In this example, this means that, in addition to <span class=
-            "emphasis"><em>snd-fm801</em></span>, the obsolete (and unwanted)
-            <span class="emphasis"><em>forte</em></span> driver will be
-            loaded if it is available. See below for ways in which the
-            loading of unwanted drivers can be prevented.
+          <p>在这个例子中，这就意味着除了 <span class="emphasis"><em>snd-fm801</em></span> 之外，过时的（和不需要的）<span class="emphasis"><em>forte</em></span> 驱动程序将被加载（如果可用的话）。请参阅下文了解如何防止加载不需要的驱动程序。
           </p>
-          <p>
-            The kernel itself is also able to load modules for network
-            protocols, filesystems and NLS support on demand.
+          <p>内核本身也可以根据需要加载网络协议、文件系统和 NLS 支持模块。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.2.4. Handling Hotpluggable/Dynamic Devices
+            7.3.2.4. 热插拔/动态设备的处理
           </h3>
-          <p>
-            When you plug in a device, such as a Universal Serial Bus (USB)
-            MP3 player, the kernel recognizes that the device is now
-            connected and generates a uevent. This uevent is then handled by
-            <span class="command"><strong>udevd</strong></span> as described
-            above.
+          <p>当插入设备，例如通用串行总线（USB）MP3 播放器时，内核会识别设备已连接，并生成 uevent。这个 uevent 之后由 <span class="command"><strong>udevd</strong></span> 做如前所述的处理。
           </p>
         </div>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.3.3. Problems with Loading Modules and Creating Devices
+          7.3.3. 关于加载模块和创建设备的问题
         </h2>
         <p>
-          There are a few possible problems when it comes to automatically
-          creating device nodes.
+          在自动创建设备节点时可能会出现一些问题。
         </p>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.1. A kernel module is not loaded automatically
+            7.3.3.1. 内核模块未自动加载
           </h3>
-          <p>
-            Udev will only load a module if it has a bus-specific alias and
-            the bus driver properly exports the necessary aliases to
-            <code class="systemitem">sysfs</code>. In other cases, one should
-            arrange module loading by other means. With Linux-4.9.9, Udev is
-            known to load properly-written drivers for INPUT, IDE, PCI, USB,
-            SCSI, SERIO, and FireWire devices.
+          <p>如果 Udev 具有总线特定的别名，并且总线驱动程序正确地将必需的别名导出到 <code class="systemitem">sysfs</code>，那么 Udev 将仅加载内核模块。在其他情况下，应通过其他方式安排模块的加载。使用 Linux-4.9.9，Udev 可以为 INPUT，IDE，PCI，USB，SCSI，SERIO 和 FireWire 设备加载正确写入的驱动程序。
           </p>
-          <p>
-            To determine if the device driver you require has the necessary
-            support for Udev, run <span class=
-            "command"><strong>modinfo</strong></span> with the module name as
-            the argument. Now try locating the device directory under
-            <code class="filename">/sys/bus</code> and check whether there is
-            a <code class="filename">modalias</code> file there.
+          <p>要确定需要的设备驱动程序是否具有对 Udev 的必要支持，请以模块名称作为参数运行 <span class="command"><strong>modinfo</strong></span>。尝试将设备目录定位在 <code class="filename">/sys/bus</code> 下，检查是否存在 <code class="filename">modalias</code> 文件。
           </p>
-          <p>
-            If the <code class="filename">modalias</code> file exists in
-            <code class="systemitem">sysfs</code>, the driver supports the
-            device and can talk to it directly, but doesn't have the alias,
-            it is a bug in the driver. Load the driver without the help from
-            Udev and expect the issue to be fixed later.
+          <p>如果在 <code class="filename">modalias</code> 中存在 <code class="systemitem">sysfs</code> 文件，则驱动程序支持该设备，并可直接与该设备进行通信，但不具有别名，这是驱动程序中的错误。在没有 Udev 帮助的情况下加载驱动程序，并期望问题在以后修复。
           </p>
-          <p>
-            If there is no <code class="filename">modalias</code> file in the
-            relevant directory under <code class="filename">/sys/bus</code>,
-            this means that the kernel developers have not yet added modalias
-            support to this bus type. With Linux-4.9.9, this is the case with
-            ISA busses. Expect this issue to be fixed in later kernel
-            versions.
+          <p>如果在 <code class="filename">/sys/bus</code> 下的相关目录中没有 <code class="filename">modalias</code> 文件，这意味着内核开发人员尚未向此总线类型添加 <code class="filename">modalias</code> 支持。在 Linux-4.9.9 中，这是 ISA 总线存在的情况。期望在以后的内核版本中修复此问题。
           </p>
-          <p>
-            Udev is not intended to load <span class=
-            "quote">&ldquo;<span class="quote">wrapper</span>&rdquo;</span>
-            drivers such as <span class=
-            "emphasis"><em>snd-pcm-oss</em></span> and non-hardware drivers
-            such as <span class="emphasis"><em>loop</em></span> at all.
+          <p>Udev 不会加载“封装”（<span class=
+            "quote">&ldquo;<span class="quote">wrapper</span>&rdquo;</span>）的驱动程序，如 <span class="emphasis"><em>snd-pcm-oss</em></span>，以及非硬件驱动程序，如 <span class="emphasis"><em>loop</em></span>。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.2. A kernel module is not loaded automatically, and Udev is
-            not intended to load it
+            7.3.3.2. 内核模块未自动加载，且 Udev 不会进行加载
           </h3>
-          <p>
-            If the <span class="quote">&ldquo;<span class=
-            "quote">wrapper</span>&rdquo;</span> module only enhances the
-            functionality provided by some other module (e.g., <span class=
-            "emphasis"><em>snd-pcm-oss</em></span> enhances the functionality
-            of <span class="emphasis"><em>snd-pcm</em></span> by making the
-            sound cards available to OSS applications), configure
-            <span class="command"><strong>modprobe</strong></span> to load
-            the wrapper after Udev loads the wrapped module. To do this, add
-            a <span class="quote">&ldquo;<span class=
-            "quote">softdep</span>&rdquo;</span> line in any <code class=
-            "filename">/etc/modprobe.d/<em class=
-            "replaceable"><code>&lt;filename&gt;</code></em>.conf</code>
-            file. For example:
+          <p>如果“封装”（<span class="quote">&ldquo;<span class=
+            "quote">wrapper</span>&rdquo;</span>）模块仅增强了某些其他模块提供的功能（例如，<span class=
+            "emphasis"><em>snd-pcm-oss</em></span> 通过使声卡可用于 OSS 应用程序来增强 <span class="emphasis"><em>snd-pcm</em></span> 的功能），请在 Udev 加载后配置 <span class="command"><strong>modprobe</strong></span> 以加载封装的模块。为此，请在任何 <code class="filename">/etc/modprobe.d/<em class="replaceable"><code>&lt;filename&gt;</code></em>.conf</code> 文件中添加 <span class="quote">&ldquo;<span class=
+            "quote">softdep</span>&rdquo;</span> 行。例如：
           </p>
           <pre class="screen">
 <code class="literal">softdep snd-pcm post: snd-pcm-oss</code>
 </pre>
-          <p>
-            Note that the <span class="quote">&ldquo;<span class=
-            "quote">softdep</span>&rdquo;</span> command also allows
-            <code class="literal">pre:</code> dependencies, or a mixture of
-            both <code class="literal">pre:</code> and <code class=
-            "literal">post:</code>. See the <code class=
-            "filename">modprobe.d(5)</code> manual page for more information
-            on <span class="quote">&ldquo;<span class=
-            "quote">softdep</span>&rdquo;</span> syntax and capabilities.
+          <p>请注意，<span class="quote">&ldquo;<span class="quote">softdep</span>&rdquo;</span> 命令还允许 <code class="literal">pre:</code> 依赖，或 <code class="literal">pre:</code> 和 <code class=
+            "literal">post:</code> 之间的混合。有关 <span class="quote">&ldquo;<span class="quote">softdep</span>&rdquo;</span> 语法和功能的更多信息，请参阅 <code class="filename">modprobe.d(5)</code> 手册页。
           </p>
-          <p>
-            If the module in question is not a wrapper and is useful by
-            itself, configure the <span class=
-            "command"><strong>modules</strong></span> bootscript to load this
-            module on system boot. To do this, add the module name to the
-            <code class="filename">/etc/sysconfig/modules</code> file on a
-            separate line. This works for wrapper modules too, but is
-            suboptimal in that case.
+          <p>如果所涉及的模块不是封装模块，并且本身很有用，请配置 <span class="command"><strong>modules</strong></span> 引导脚本以在系统启动时加载该模块。为此，请将模块名称添加到 <code class="filename">/etc/sysconfig/modules</code> 文件中。这对于封装模块也是如此，但在这种情况下并不是最佳的解决方案。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.3. Udev loads some unwanted module
+            7.3.3.3. Udev 加载了一些不需要的模块
           </h3>
-          <p>
-            Either don't build the module, or blacklist it in a <code class=
-            "filename">/etc/modprobe.d/blacklist.conf</code> file as done
-            with the <span class="emphasis"><em>forte</em></span> module in
-            the example below:
+          <p>不要在 <code class="filename">/etc/modprobe.d/blacklist.conf</code> 文件中构建模块，或将其列入黑名单。如以下示例中的 <span class="emphasis"><em>forte</em></span> 模块：
           </p>
           <pre class="screen">
 <code class="literal">blacklist forte</code>
 </pre>
-          <p>
-            Blacklisted modules can still be loaded manually with the
-            explicit <span class="command"><strong>modprobe</strong></span>
-            command.
+          <p> 黑名单模块仍然可以使用显式的 <span class="command"><strong>modprobe</strong></span> 命令手动加载。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.4. Udev creates a device incorrectly, or makes a wrong
-            symlink
+            7.3.3.4. Udev 创建设备不正确，或创建了错误的符号链接
           </h3>
-          <p>
-            This usually happens if a rule unexpectedly matches a device. For
-            example, a poorly-written rule can match both a SCSI disk (as
-            desired) and the corresponding SCSI generic device (incorrectly)
-            by vendor. Find the offending rule and make it more specific,
-            with the help of the <span class="command"><strong>udevadm
-            info</strong></span> command.
+          <p>如果规则意外匹配了设备，则通常会发生这种情况。例如，写得不好的规则可以同时匹配供应商的 SCSI 磁盘（本应匹配）和相应的 SCSI 通用设备（不应匹配）。在 <span class="command"><strong>udevadm info</strong></span> 命令的帮助下，查找违规的规则并使其更具体化。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.5. Udev rule works unreliably
+            7.3.3.5. Udev 规则工作不可靠
           </h3>
-          <p>
-            This may be another manifestation of the previous problem. If
-            not, and your rule uses <code class="systemitem">sysfs</code>
-            attributes, it may be a kernel timing issue, to be fixed in later
-            kernels. For now, you can work around it by creating a rule that
-            waits for the used <code class="systemitem">sysfs</code>
-            attribute and appending it to the <code class=
-            "filename">/etc/udev/rules.d/10-wait_for_sysfs.rules</code> file
-            (create this file if it does not exist). Please notify the LFS
-            Development list if you do so and it helps.
+          <p>这可能是之前的问题的另一个表现。如果不是，并且您的规则使用 <code class="systemitem">sysfs</code> 属性，则可能是内核计时问题，这将在后来的内核中修复。对于目前来说，可以通过创建一个等待使用的 <code class="systemitem">sysfs</code> 属性并将其附加到 <code class="filename">/etc/udev/rules.d/10-wait_for_sysfs.rules</code> 文件的规则来解决（如果不存在，那么创建此文件）。如果这样做有帮助，请通知 LFS 开发列表。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.6. Udev does not create a device
+            7.3.3.6. Udev 未创建设备
           </h3>
-          <p>
-            Further text assumes that the driver is built statically into the
-            kernel or already loaded as a module, and that you have already
-            checked that Udev doesn't create a misnamed device.
+          <p>下面的内容假定驱动程序静态构建到内核中或已经作为模块加载，并且已经检查过 Udev 不会创建错误的设备。
           </p>
-          <p>
-            Udev has no information needed to create a device node if a
-            kernel driver does not export its data to <code class=
-            "systemitem">sysfs</code>. This is most common with third party
-            drivers from outside the kernel tree. Create a static device node
-            in <code class="filename">/lib/udev/devices</code> with the
-            appropriate major/minor numbers (see the file <code class=
-            "filename">devices.txt</code> inside the kernel documentation or
-            the documentation provided by the third party driver vendor). The
-            static device node will be copied to <code class=
-            "filename">/dev</code> by <span class=
-            "command"><strong>udev</strong></span>.
+          <p>如果内核驱动程序没有将其数据导出到 <code class="systemitem">sysfs</code>，那么 Udev 无需创建设备节点所需的信息。这在内核树以外的第三方驱动程序中最常见。可以在 <code class="filename">/lib/udev/devices</code> 中创建一个具有适合的主要/次要编号的静态设备节点（请参阅内核文档中的 <code class="filename">devices.txt</code> 文件或第三方驱动程序供应商提供的文档）。静态设备节点将被 <code class="filename">/dev</code> 复制到 <code class="filename">/dev</code>。
           </p>
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            7.3.3.7. Device naming order changes randomly after rebooting
+            7.3.3.7. 设备命名顺序在重新启动后随机更改
           </h3>
-          <p>
-            This is due to the fact that Udev, by design, handles uevents and
-            loads modules in parallel, and thus in an unpredictable order.
-            This will never be <span class="quote">&ldquo;<span class=
-            "quote">fixed</span>&rdquo;</span>. You should not rely upon the
-            kernel device names being stable. Instead, create your own rules
-            that make symlinks with stable names based on some stable
-            attributes of the device, such as a serial number or the output
-            of various *_id utilities installed by Udev. See <a class="xref"
-            href="symlinks.html" title=
-            "7.4.&nbsp;Managing Devices">Section&nbsp;7.4, &ldquo;Managing
-            Devices&rdquo;</a> and <a class="xref" href="network.html" title=
-            "7.5.&nbsp;General Network Configuration">Section&nbsp;7.5,
-            &ldquo;General Network Configuration&rdquo;</a> for examples.
+          <p>这是因为 Udev 在设计上是并行地处理 uevents 并且加载模块的，因此会出现不可预测的顺序。这永远不会 <span class="quote">&ldquo;<span class=
+            "quote">固定</span>&rdquo;</span>。因此不应该依赖内核设备名称是稳定的。相反，根据设备的某些稳定属性（如序列号或 Udev 安装的各种 *_id 程序的输出）创建自己的规则，以创建具有稳定名称的符号链接。有关示例请参见 <a class="xref" href="symlinks.html" title="7.4. &ldquo;管理设备&rdquo;">7.4. &ldquo;管理设备&rdquo;</a> 和 <a class="xref" href="network.html" title=
+            "7.5. &ldquo;通用网络设置&rdquo;">7.5. &ldquo;通用网络设置&rdquo;</a>。
           </p>
         </div>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.3.4. Useful Reading
+          7.3.4. 有用的阅读资料
         </h2>
         <p>
-          Additional helpful documentation is available at the following
-          sites:
+          以下站点提供其他有用的资料：
         </p>
         <div class="itemizedlist">
           <ul>
             <li class="listitem">
               <p>
-                A Userspace Implementation of <code class=
-                "systemitem">devfs</code> <a class="ulink" href=
+                <code class="systemitem">devfs</code> 的用户空间实现 <a class="ulink" href=
                 "http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf">
                 http://www.kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf</a>
               </p>
             </li>
             <li class="listitem">
               <p>
-                The <code class="systemitem">sysfs</code> Filesystem
-                <a class="ulink" href=
+                <code class="systemitem">sysfs</code> 文件系统 <a class="ulink" href=
                 "http://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf">
                 http://www.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf</a>
               </p>
@@ -450,25 +228,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="bootscripts.html" title=
-          "LFS-Bootscripts-20150222">Prev</a>
+          "LFS-引导脚本-20150222">上一页</a>
           <p>
-            LFS-Bootscripts-20150222
+            LFS-引导脚本-20150222
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="symlinks.html" title=
-          "Managing Devices">Next</a>
+          "管理设备">下一页</a>
           <p>
-            Managing Devices
+            管理设备
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0 ">Home</a>
+          "Linux From Scratch - Version 8.0 ">首页</a>
         </li>
       </ul>
     </div>

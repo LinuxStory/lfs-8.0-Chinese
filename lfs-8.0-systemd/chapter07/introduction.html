@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
-      7.1.&nbsp;Introduction
+      7.1. 引言
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -19,142 +19,129 @@
         Linux From Scratch - Version 8.0-systemd
       </h4>
       <h3>
-        Chapter&nbsp;7.&nbsp;System Configuration
+        第七章 系统配置
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter07.html" title=
-          "System Configuration">Prev</a>
+          "System Configuration">上一页</a>
           <p>
-            System Configuration
+            系统配置
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="network.html" title=
-          "General Network Configuration">Next</a>
+          "通用网络配置">下一页</a>
           <p>
-            General Network Configuration
+            通用网络配置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "C第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">首页</a>
         </li>
       </ul>
     </div>
     <div class="sect1" lang="en" xml:lang="en">
       <h1 class="sect1">
         <a id="ch-scripts-introduction" name=
-        "ch-scripts-introduction"></a>7.1. Introduction
+        "ch-scripts-introduction"></a>7.1. 引言
       </h1>
       <p>
-        This chapter discusses configuration files and systemd services.
-        First, the general configuration files needed to set up networking
-        are presented.
+        本章讨论了配置文件及 systemd 服务。首先是设置网络所需的通用配置文件。
       </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
               <a class="xref" href="network.html" title=
-              "7.2.&nbsp;General Network Configuration">Section&nbsp;7.2,
-              &ldquo;General Network Configuration.&rdquo;</a>
+              "7.2. 通用网络配置">7.2. &ldquo;通用网络配置&rdquo;</a>
             </p>
           </li>
           <li class="listitem">
             <p>
               <a class="xref" href="network.html#ch-scripts-hostname" title=
-              "7.2.3.&nbsp;Configuring the system hostname">Section&nbsp;7.2.3,
-              &ldquo;Configuring the system hostname.&rdquo;</a>
+              "7.2.3. 配置系统主机名">7.2.3. &ldquo;配置系统主机名&rdquo;</a>
             </p>
           </li>
           <li class="listitem">
             <p>
               <a class="xref" href="network.html#ch-scripts-hosts" title=
-              "7.2.4.&nbsp;Customizing the /etc/hosts File">Section&nbsp;7.2.4,
-              &ldquo;Customizing the /etc/hosts File.&rdquo;</a>
+              "7.2.4. 定制 /etc/hosts 文件">7.2.4. &ldquo;定制 /etc/hosts 文件&rdquo;</a>
             </p>
           </li>
         </ul>
       </div>
       <p>
-        Second, issues that affect the proper setup of devices are discussed.
+        其次讨论了影响设备正确设置的问题。
       </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
               <a class="xref" href="udev.html" title=
-              "7.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;7.3,
-              &ldquo;Overview of Device and Module Handling.&rdquo;</a>
+              "7.3. 设备及模块管理综述">7.3. &ldquo;设备及模块管理综述&rdquo;</a>
             </p>
           </li>
           <li class="listitem">
             <p>
               <a class="xref" href="symlinks.html" title=
-              "7.4.&nbsp;Managing Devices">Section&nbsp;7.4, &ldquo;Managing
-              Devices.&rdquo;</a>
+              "7.4. 管理设备">7.4. &ldquo;管理设备&rdquo;</a>
             </p>
           </li>
         </ul>
       </div>
       <p>
-        Third, configuring the system clock and keyboard layout.
+        第三，配置系统时钟和键盘布局。
       </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
               <a class="xref" href="clock.html" title=
-              "7.5.&nbsp;Configuring the system clock">Section&nbsp;7.5,
-              &ldquo;Configuring the system clock.&rdquo;</a>
+              "7.5. 配置系统时钟">7.5. &ldquo;配置系统时钟&rdquo;</a>
             </p>
           </li>
           <li class="listitem">
             <p>
               <a class="xref" href="console.html" title=
-              "7.6.&nbsp;Configuring the Linux Console">Section&nbsp;7.6,
-              &ldquo;Configuring the Linux Console.&rdquo;</a>
+              "7.6. 配置 Linux 终端">7.6. &ldquo;配置 Linux 终端&rdquo;</a>
             </p>
           </li>
         </ul>
       </div>
       <p>
-        Fourth, a brief introduction to the scripts and configuration files
-        used when the user logs into the system.
+        第四，简要介绍用户登录系统时使用的脚本和配置文件。
       </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
               <a class="xref" href="locale.html" title=
-              "7.7.&nbsp;Configuring the System Locale">Section&nbsp;7.7,
-              &ldquo;Configuring the System Locale.&rdquo;</a>
+              "7.7. 配置系统区域">7.7. &ldquo;配置系统区域&rdquo;</a>
             </p>
           </li>
           <li class="listitem">
             <p>
               <a class="xref" href="inputrc.html" title=
-              "7.8.&nbsp;Creating the /etc/inputrc File">Section&nbsp;7.8,
-              &ldquo;Creating the /etc/inputrc File.&rdquo;</a>
+              "7.8. 创建 /etc/inputrc 文件">7.8. &ldquo;创建 /etc/inputrc 文件&rdquo;</a>
             </p>
           </li>
         </ul>
       </div>
       <p>
-        And finally, configuring the systemd behavior.
+        最后，配置 systemd 的行为。
       </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
               <a class="xref" href="systemd-custom.html" title=
-              "7.10.&nbsp;Systemd Usage and Configuration">Section&nbsp;7.10,
-              &ldquo;Systemd Usage and Configuration.&rdquo;</a>
+              "7.10. Systemd 使用和配置">7.10. &ldquo;Systemd 使用和配置&rdquo;</a>
             </p>
           </li>
         </ul>
@@ -164,25 +151,25 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="chapter07.html" title=
-          "System Configuration">Prev</a>
+          "系统配置">上一页</a>
           <p>
-            System Configuration
+            系统配置
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="network.html" title=
-          "General Network Configuration">Next</a>
+          "通用网络配置">下一页</a>
           <p>
-            General Network Configuration
+            通用网络配置
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
-          "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          "第七章 系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Linux From Scratch - Version 8.0-systemd">Home</a>
+          "Linux From Scratch - Version 8.0-systemd">首页</a>
         </li>
       </ul>
     </div>
