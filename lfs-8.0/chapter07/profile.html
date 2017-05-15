@@ -3,9 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=UTF-8" />
     <title>
       7.7.&nbsp;The Bash Shell Startup Files
+    </title>
+    <title>
+      7.7.&nbsp;Bash Shell 启动文件
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -21,28 +24,45 @@
       <h3>
         Chapter&nbsp;7.&nbsp;System Configuration
       </h3>
+      <h3>
+        第七章&nbsp;系统配置
+      </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="usage.html" title=
           "System V Bootscript Usage and Configuration">Prev</a>
+          <a accesskey="p" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">上一页</a>
           <p>
             System V Bootscript Usage and Configuration
+          </p>
+          <p>
+            System V 启动脚本用法和配置 
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="inputrc.html" title=
           "Creating the /etc/inputrc File">Next</a>
+          <a accesskey="n" href="inputrc.html" title=
+          "Creating /etc/inputrc File">下一页</a>
           <p>
             Creating the /etc/inputrc File
+          </p>
+          <p>
+	    创建 /etc/inputrc 文件
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0 ">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>
@@ -50,6 +70,8 @@
       <h1 class="sect1">
         <a id="ch-scripts-profile" name="ch-scripts-profile"></a>7.7. The
         Bash Shell Startup Files
+        <a id="ch-scripts-profile" name="ch-scripts-profile"></a>7.7. 
+      	Bash Shell 启动文件
       </h1>
       <p>
         The shell program <span class=
@@ -63,6 +85,13 @@
         it may override the global settings.
       </p>
       <p>
+        Shell 程序<span class=
+        "command"><strong>/bin/bash</strong></span> (后文称为
+        <span class="quote">&ldquo;<span class="quote">
+        shell</span>&rdquo;</span>) 使用一些启动文件来创建其运行环境。每个文件都有特别的用处，并对登录和交互环境产生不同的影响。
+	<code class="filename">/etc</code> 中的文件提供全局设置。如果家目录存在相同的文件，该文件将覆盖全局设置。
+      </p>
+      <p>
         An interactive login shell is started after a successful login, using
         <span class="command"><strong>/bin/login</strong></span>, by reading
         the <code class="filename">/etc/passwd</code> file. An interactive
@@ -74,25 +103,46 @@
         user input between commands.
       </p>
       <p>
+      <span class="command"><strong>/bin/login</strong></span>通过读取<code class="filename">/etc/passwd</code> 文件登录成功后，即可启动交互式登录shell。
+      在命令行启动交互式非登录shell（例如<code class=
+        "prompt">[prompt]$</code><span class=
+        "command"><strong>/bin/bash</strong></span>）。 
+      shell 脚本运行时通常会出现非交式shell。它是非交互式的，
+      因为它正在处理脚本而不等待命令之间的用户输入。
+      </p>
+      <p>
         For more information, see <span class="command"><strong>info
         bash</strong></span> under the <span class="emphasis"><em>Bash
         Startup Files and Interactive Shells</em></span> section.
       </p>
       <p>
-        The files <code class="filename">/etc/profile</code> and <code class=
-        "filename">~/.bash_profile</code> are read when the shell is invoked
+        查找更多信息，查看 <span class="emphasis"><em>Bash 启动文件和 Shell 交互章节
+		</em></span> 下的 <span class="command"><strong>info bash</strong></span>。 
+      </p>
+      <p>
+      The files <code class="filename">/etc/profile</code> and <code class=
+      "filename">~/.bash_profile</code> are read when the shell is invoked
         as an interactive login shell.
+      </p>
+      <p>
+      <code class="filename">/etc/profile</code> 和 <code class=
+      "filename">~/.bash_profile</code> 文件在 Shell 作为交互登录 shell 启动时被读取。
       </p>
       <p>
         The base <code class="filename">/etc/profile</code> below sets some
         environment variables necessary for native language support. Setting
         them properly results in:
       </p>
+        下文中的<code class="filename">/etc/profile</code> 文件针对区域设置设置一些必要环境变量，合适的设置如下：
+      </p>
       <div class="itemizedlist">
         <ul>
           <li class="listitem">
             <p>
               The output of programs translated into the native language
+            </p>
+            <p>
+              译成区域设置的程序输出 
             </p>
           </li>
           <li class="listitem">
@@ -102,20 +152,34 @@
               "command"><strong>bash</strong></span> to properly accept
               non-ASCII characters in command lines in non-English locales
             </p>
+            <p>
+              正确的字母，小数点和其他种类的字符分类。这对<span class=
+              "command"><strong>bash</strong></span> 在非英语环境的命令行中处理非 ASCII 字符是必要的。
+            </p>
           </li>
           <li class="listitem">
             <p>
               The correct alphabetical sorting order for the country
             </p>
+            <p>
+              正确的国别字母排序
+            </p>
+          </li>
           </li>
           <li class="listitem">
             <p>
               Appropriate default paper size
             </p>
+            <p>
+              合适的默认页面大小
+            </p>
           </li>
           <li class="listitem">
             <p>
               Correct formatting of monetary, time, and date values
+            </p>
+            <p>
+              正确的货币，时间和日期格式
             </p>
           </li>
         </ul>
@@ -133,8 +197,22 @@
         "quote">@euro</span>&rdquo;</span> may also be present.
       </p>
       <p>
+        用语言代码替换<em class="replaceable"><code>&lt;ll&gt;</code></em> below
+         (比如, <span class=
+        "quote">&ldquo;<span class="quote">en</span>&rdquo;</span>)用国家代码替换 
+        <em class="replaceable"><code>&lt;CC&gt;</code></em> 
+        (比如, <span class=
+        "quote">&ldquo;<span class="quote">GB</span>&rdquo;</span>)。用选择的区域设置的合适字符映射表替换
+        <em class="replaceable"><code>&lt;charmap&gt;</code></em>
+        可选的参数有<span class="quote">&ldquo;<span class=
+        "quote">@euro</span>&rdquo;</span>。 
+      </p>
+      <p>
         The list of all locales supported by Glibc can be obtained by running
         the following command:
+      </p>
+      <p>
+        Glibc 所支持的所有区域设置列表可以通过下列命令获取:
       </p>
       <pre class="userinput">
 <kbd class="command">locale -a</kbd>
@@ -158,6 +236,24 @@
         your preferred locale (<span class="quote">&ldquo;<span class=
         "quote">en_GB.iso88591</span>&rdquo;</span> in our example).
       </p>
+      <p>
+        字符映射表可以有一些别名，比如<span class=
+        "quote">&ldquo;<span class="quote">ISO-8859-1</span>&rdquo;</span> is
+        可以指向 <span class="quote">&ldquo;<span class=
+        "quote">iso8859-1</span>&rdquo;</span> 和 <span class=
+        "quote">&ldquo;<span class="quote">iso88591</span>&rdquo;</span>.
+        一些程序无法正确地处理多个同义别名(比如,
+        <span class="quote">&ldquo;<span class=
+        "quote">UTF-8</span>&rdquo;</span> 要写成 <span class=
+        "quote">&ldquo;<span class="quote">UTF-8</span>&rdquo;</span>, 而不是
+        <span class="quote">&ldquo;<span class=
+        "quote">utf8</span>&rdquo;</span>), 所以大多数情况下最安全的方式是选择区域设置的经典名。
+        可通过下列命令确定经典区域设置名<em class=
+        "replaceable"><code>&lt;locale name&gt;</code></em> 是
+        <span class="command"><strong>locale -a</strong></span> 针对你的偏好语言给出的结果
+        (<span class="quote">&ldquo; 在我们的例子中是<span class=
+        "quote">en_GB.iso88591</span>&rdquo;</span>).
+      </p>
       <pre class="userinput">
 <kbd class="command">LC_ALL=<em class=
 "replaceable"><code>&lt;locale name&gt;</code></em> locale charmap</kbd>
@@ -166,6 +262,10 @@
         For the <span class="quote">&ldquo;<span class=
         "quote">en_GB.iso88591</span>&rdquo;</span> locale, the above command
         will print:
+      </p>
+      <p>
+        对于 <span class="quote">&ldquo;<span class=
+        "quote">en_GB.iso88591</span>&rdquo;</span> 区域设置，下列命令输出：
       </p>
       <pre class="screen">
 <code class="computeroutput">ISO-8859-1</code>
@@ -176,6 +276,12 @@
         "quote">en_GB.ISO-8859-1</span>&rdquo;</span>. It is important that
         the locale found using the heuristic above is tested prior to it
         being added to the Bash startup files:
+      </p>
+      <p>
+        这是<span class=
+        "quote">&ldquo;<span class=
+        "quote">en_GB.ISO-8859-1</span>&rdquo;</span>区域设置最终设置，
+        使用上文设置的区域设置在加入 Bash 启动文件之前必须要经过测试。
       </p>
       <pre class="userinput">
 <kbd class="command">LC_ALL=&lt;locale name&gt; locale language
@@ -191,6 +297,10 @@ LC_ALL=&lt;locale name&gt; locale int_prefix</kbd>
         shown below, this means that your locale was either not installed in
         Chapter 6 or is not supported by the default installation of Glibc.
       </p>
+      <p>
+        上面的命令会打印语言名，区域设置使用的字符编码，货币和拨号前缀。如果上列的任何一个命令出现
+	以下相同错误就说明你的区域设置未在第六章安装或者不被默认安装的 Glibc 支持。
+      </p>
       <pre class="screen">
 <code class=
 "computeroutput">locale: Cannot set LC_* to default locale: No such file or directory</code>
@@ -202,10 +312,18 @@ LC_ALL=&lt;locale name&gt; locale int_prefix</kbd>
         that there are no such error messages from Glibc.
       </p>
       <p>
+        如果发生上述的情况，你应当用<span class="command"><strong>localedef</strong></span> 安装所需的区域设置或者
+	考虑换一个不同的区域设置，进一步说明假设没有来自 Glibc 的错误消息。
+      </p>
+      <p>
         Some packages beyond LFS may also lack support for your chosen
         locale. One example is the X library (part of the X Window System),
         which outputs the following error message if the locale does not
         exactly match one of the character map names in its internal files:
+      </p>
+      <p>
+      LFS之外的一些软件包也可能不支持您选择的区域设置。一个例子是X库（X Window System的一部分），如果区域设置
+      与其内部文件中的一个字符映射名称不完全匹配，则会输出以下错误消息：
       </p>
       <pre class="screen">
 <code class=
@@ -223,6 +341,12 @@ LC_ALL=&lt;locale name&gt; locale int_prefix</kbd>
         recognized by Xlib.
       </p>
       <p>
+        在某些情况下，Xlib 希望字符映射将以标准破折号的大写表示法列出。例如，“ISO-8859-1”而不是“iso88591”。
+	还可以通过删除语言环境规范的字符映射部分来找到适当的规范。这可以通过在两种语言环境中运行
+	<span class="command"><strong>locale charmap</strong></span>命令进行检查。
+	例如，为了获得Xlib所识别的本地区域，必须将“de_DE.ISO-8859-15@euro”更改为“de_DE@euro”。
+      </p>
+      <p>
         Other packages can also function incorrectly (but may not necessarily
         display any error messages) if the locale name does not meet their
         expectations. In those cases, investigating how other Linux
@@ -230,8 +354,16 @@ LC_ALL=&lt;locale name&gt; locale int_prefix</kbd>
         information.
       </p>
       <p>
+        如果区域名称不符合要求，其他包也可能不正确地运行（但可能不会显示任何错误消息）。
+	在这些情况下，查阅其他Linux发行版如何支持您的区域设置可能会提供一些有用的信息。
+      </p>
+      <p>
         Once the proper locale settings have been determined, create the
         <code class="filename">/etc/profile</code> file:
+      </p>
+      <p>
+        一旦确定合适的区域设置，创建
+        <code class="filename">/etc/profile</code> 文件:
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; /etc/profile &lt;&lt; "EOF"
@@ -262,8 +394,26 @@ EOF</kbd>
         characters.
       </p>
       <p>
+        <span class="quote">&ldquo;<span class=
+        "quote">C</span>&rdquo;</span> (默认) 和 <span class=
+        "quote">&ldquo;<span class="quote">en_US</span>&rdquo;</span> (
+        美式英语用户推荐) 区域设置是不同的。<span class="quote">&ldquo;<span class=
+        "quote">C</span>&rdquo;</span> 使用 US-ASCII 7-bit 字符集，并且把高位视为无效字符。
+        这就是例如 <span class="command"><strong>ls</strong></span>命令在区域设置中用问号替代它们。
+	此外，尝试使用Mutt或Pine发送带有此类字符的邮件会导致发送不符合RFC的消息(发送邮件中的字符集表示为
+         <span class="quote">&ldquo;<span class=
+        "quote">unknown 8-bit</span>&rdquo;</span>). 所以你只有在确定不使用 8-bit 字符时使用
+        <span class="quote">&ldquo;<span class="quote">C</span>&rdquo;</span>
+	该区域设置。
+      </p>
+      <p>
         UTF-8 based locales are not supported well by some programs. Work is
         in progress to document and, if possible, fix such problems, see
+        <a class="ulink" href=
+        "http://www.linuxfromscratch.org/blfs/view/8.0/introduction/locale-issues.html">
+        http://www.linuxfromscratch.org/blfs/view/8.0/introduction/locale-issues.html</a>.
+      <p>
+        一些程序基于 UTF-8 的本地化支持并不完善，文档的修复工作正在进行中。查看 
         <a class="ulink" href=
         "http://www.linuxfromscratch.org/blfs/view/8.0/introduction/locale-issues.html">
         http://www.linuxfromscratch.org/blfs/view/8.0/introduction/locale-issues.html</a>.
@@ -274,24 +424,37 @@ EOF</kbd>
         <li class="prev">
           <a accesskey="p" href="usage.html" title=
           "System V Bootscript Usage and Configuration">Prev</a>
+          <a accesskey="p" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">上一页</a>
           <p>
             System V Bootscript Usage and Configuration
+          </p>
+          <p>
+           System V 启动脚本用法配置 
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="inputrc.html" title=
           "Creating the /etc/inputrc File">Next</a>
+          <a accesskey="n" href="inputrc.html" title=
+          "Creating the /etc/inputrc File">下一页</a>
           <p>
             Creating the /etc/inputrc File
           </p>
+          <p>
+            创建 /etc/inputrc 文件
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0 ">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0 ">主页</a>
         </li>
       </ul>
     </div>

@@ -3,9 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content=
-    "application/xhtml+xml; charset=iso-8859-1" />
+    "application/xhtml+xml; charset=utf-8" />
     <title>
       7.6.&nbsp;Configuring the Linux Console
+    </title>
+    <title>
+      7.6.&nbsp; 配置 Linux 控制台
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
@@ -21,28 +24,45 @@
       <h3>
         Chapter&nbsp;7.&nbsp;System Configuration
       </h3>
+      <h3>
+        第七章&nbsp; 系统配置
+      </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="clock.html" title=
           "Configuring the system clock">Prev</a>
+          <a accesskey="p" href="clock.html" title=
+          "配置系统时钟">上一页</a>
           <p>
             Configuring the system clock
+          </p>
+          <p>
+            配置系统时钟 
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="locale.html" title=
           "Configuring the System Locale">Next</a>
+          <a accesskey="n" href="locale.html" title=
+          "配置系统区域设置">下一页</a>
           <p>
             Configuring the System Locale
+          </p>
+          <p>
+           配置系统区域设置 
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "第七章&nbsp;系统配置">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0-systemd">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">主页</a>
         </li>
       </ul>
     </div>
@@ -50,12 +70,18 @@
       <h1 class="sect1">
         <a id="ch-scripts-console" name="ch-scripts-console"></a>7.6.
         Configuring the Linux Console
+        <a id="ch-scripts-console" name="ch-scripts-console"></a>7.6.
+	配置 Linux 控制台
       </h1>
       <p>
         This section discusses how to configure the <span class=
         "command"><strong>systemd-vconsole-setup</strong></span> system
         service, which configures the virtual console font and console
         keymap.
+      </p>
+      <p>
+        本节讨论如何配置设置虚拟控制台字体和字符映射的系统服务 <span class=
+        "command"><strong>systemd-vconsole-setup</strong></span>
       </p>
       <p>
         The <span class=
@@ -72,9 +98,19 @@
         fonts.
       </p>
       <p>
+      <span class="command"><strong>systemd-vconsole-setup</strong></span>
+      服务读取<code class="filename">/etc/vconsole.conf</code>文件以获取配置信息, 决定使用哪个键盘映射和屏幕字体。
+      各种语言特定的 HOWTO 可以参见<a class="ulink" href="http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html">
+	      http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html</a>，测试<span class="command"><strong>localectl list-keymaps</strong></span>获取有效的控制台字符映射表。
+      在<code class="filename">/usr/share/consolefonts</code>目录中查看有效的屏幕字体。
+      </p>
+      <p>
         The <code class="filename">/etc/vconsole.conf</code> file should
         contain lines of the form: VARIABLE="value". The following variables
         are recognized:
+      </p>
+      <p>
+        <code class="filename">/etc/vconsole.conf</code> 文件中应该包含 VARIABLE="value" 这种形式的语句，以下是可识别变量:
       </p>
       <div class="variablelist">
         <dl class="variablelist">
@@ -86,6 +122,9 @@
               This variable specifies the key mapping table for the keyboard.
               If unset, it defaults to <code class="literal">us</code>.
             </p>
+            <p>
+              该变量决定键盘映射表，缺省为 <code class="literal">us</code>.
+            </p>
           </dd>
           <dt>
             <span class="term">KEYMAP_TOGGLE</span>
@@ -95,6 +134,9 @@
               This variable can be used to configure a second toggle keymap
               and is unset by default.
             </p>
+            <p>
+              该变量用于设置第二切换键盘映射，默认不设置。
+            </p>
           </dd>
           <dt>
             <span class="term">FONT</span>
@@ -103,6 +145,9 @@
             <p>
               This variable specifies the font used by the virtual console.
             </p>
+	    <p>
+	     该变量确定虚拟控制台字体。
+	    </p>
           </dd>
           <dt>
             <span class="term">FONT_MAP</span>
@@ -111,6 +156,9 @@
             <p>
               This variable specifies the console map to be used.
             </p>
+	    <p>
+	    该变量确定控制台字体映射。
+	    </p>
           </dd>
           <dt>
             <span class="term">FONT_UNIMAP</span>
@@ -119,11 +167,17 @@
             <p>
               This variable specifies the Unicode font map.
             </p>
+	    <p>
+	    该变量确定 Unicode 字体映射。
+	    </p>
           </dd>
         </dl>
       </div>
       <p>
         An example for a German keyboard and console is given below:
+      </p>
+      <p>
+      下面是一个德国键盘和控制台实例：
       </p>
       <pre class="userinput">
 <kbd class="command">cat &gt; /etc/vconsole.conf &lt;&lt; "EOF"
@@ -134,6 +188,9 @@ EOF</kbd>
       <p>
         You can change KEYMAP value at runtime by using the <span class=
         "command"><strong>localectl</strong></span> utility:
+      </p>
+      <p>
+       你可以使用<span class="command"><strong>localectl</strong></span>工具更改 KEYMAP 运行时的值：
       </p>
       <pre class="userinput">
 <kbd class="command">localectl set-keymap MAP</kbd>
@@ -148,12 +205,18 @@ EOF</kbd>
           "command"><strong>localectl</strong></span> command can be used
           only on a system booted with systemd.
         </p>
+	<p>
+	注意<span class="command"><strong>localectl</strong></span>命令只能在用 systemd 启动的系统上使用。
+	</p>
       </div>
       <p>
         You can also use <span class=
         "command"><strong>localectl</strong></span> utility with the
         corresponding parameters to change X11 keyboard layout, model,
         variant and options:
+      </p>
+      <p>
+      你可以用 <span class="command"><strong>localectl</strong></span> 工具通过对应的参数改变 X11 布局，模式，变量和设置：
       </p>
       <pre class="userinput">
 <kbd class=
@@ -165,6 +228,9 @@ EOF</kbd>
         "command"><strong>localectl</strong></span> with parameters listed
         below:
       </p>
+      <p>
+      获取<span class="command"><strong>localectl set-x11-keymap</strong></span>的参数，可带以下参数运行<span class="command"><strong>localectl</strong></span>：
+      </p>
       <div class="variablelist">
         <dl class="variablelist">
           <dt>
@@ -174,6 +240,9 @@ EOF</kbd>
             <p>
               Show known X11 keyboard mapping models.
             </p>
+	    <p>
+	    显示已知 X11 键盘映射模式。
+	    </p>
           </dd>
           <dt>
             <span class="term">list-x11-keymap-layouts</span>
@@ -182,6 +251,9 @@ EOF</kbd>
             <p>
               Show known X11 keyboard mapping layouts.
             </p>
+	    <p>
+	    显示 X11 键盘映射布局。
+	    </p>
           </dd>
           <dt>
             <span class="term">list-x11-keymap-variants</span>
@@ -190,6 +262,9 @@ EOF</kbd>
             <p>
               Show known X11 keyboard mapping variants.
             </p>
+	    <p>
+	    显示 X11 键盘映射变量。
+	    </p>
           </dd>
           <dt>
             <span class="term">list-x11-keymap-options</span>
@@ -198,6 +273,9 @@ EOF</kbd>
             <p>
               Show known X11 keyboard mapping options.
             </p>
+	    <p>
+	    显示 X11 键盘映射设置。
+	    </p>
           </dd>
         </dl>
       </div>
@@ -210,6 +288,9 @@ EOF</kbd>
           Using any of the parameters listed above requires XKeyboard Config
           package from BLFS.
         </p>
+	<p>
+	使用上述参数需要 BLFS 里的 Xkeyboard Config 包。
+	</p>
       </div>
     </div>
     <div class="navfooter">
@@ -217,24 +298,38 @@ EOF</kbd>
         <li class="prev">
           <a accesskey="p" href="clock.html" title=
           "Configuring the system clock">Prev</a>
+	  <a accesskey="p" href="clock.html" title=
+          "Configuring the system clock">上一页</a>
           <p>
             Configuring the system clock
           </p>
+	  <p>
+	  配置系统时钟
+	  </p>
         </li>
         <li class="next">
           <a accesskey="n" href="locale.html" title=
           "Configuring the System Locale">Next</a>
+          <a accesskey="n" href="locale.html" title=
+          "Configuring the System Locale">下一页</a>
           <p>
             Configuring the System Locale
           </p>
+	  <p>
+	  配置系统区域设置
+	  </p>
         </li>
         <li class="up">
           <a accesskey="u" href="chapter07.html" title=
           "Chapter&nbsp;7.&nbsp;System Configuration">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;System Configuration">返回</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
           "Linux From Scratch - Version 8.0-systemd">Home</a>
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 8.0-systemd">主页</a>
         </li>
       </ul>
     </div>
